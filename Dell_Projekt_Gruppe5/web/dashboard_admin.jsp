@@ -15,7 +15,7 @@ html>
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <!------------------- NAV ------------------->
+        <!------------------- NAV ------------------ -->
         <div class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
