@@ -7,23 +7,45 @@ and open the template in the editor.
     Created on : 31-03-2015, 23:25:55
     Author     : EmilGras
 */
+body {
+    background-color: whitesmoke;
+}
 
 .tile {
-    padding-top: 20px;
     background-color: gainsboro;
     height: 220px;
+}
+
+.tile:hover {
+    -moz-box-shadow: 0 0 20px #ccc; 
+    -webkit-box-shadow: 0 0 20px #ccc; 
+    box-shadow: 0 0 20px #ccc;
+    opacity: .8;
+    cursor:pointer;
+}
+
+.marginTop {
+    margin-top: 20px;
+}
+
+.marginBottom {
+    margin-bottom: 50px;
 }
 
 .tileHeader {
     color: #337ab7;
 }
 
-.tileImage1 {
+#tileImage1 {
     background-image: url("picture1.png");
 }
 
-.tileImage2 {
+#tileImage2 {
     background-image: url("picture2.png");
+}
+
+#logoutBtn {
+    margin-top: 8px;
 }
 
 

@@ -16,7 +16,7 @@
     </head>
     <body>
         <!------------------- NAV ------------------ -->
-        <div class="navbar navbar-default">
+        <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
                     <a href="" class="navbar-brand">Admin Website</a>
@@ -32,7 +32,7 @@
                         <li><a href="">Page 2</a></li>
                         <!-- <li><a href="">Page 3</a></li> -->
                     </ul>
-                    <button type="submit" class="btn btn-warning btn-lg navbar-right">Log out</button>          
+                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>
             </div>
         </div>  
@@ -42,27 +42,27 @@
                 
                 <div class="col-md-6 marginTop">
                     <div><h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Create partner</h3></div>
-                    <div class="tile tileImage1">
+                    <div id="tileImage1" class="tile">
 
                     </div>
                 </div>
                 
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Track projects</h3></div>
-                    <div class="tile tileImage2">
+                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Track projects</h3></div>
+                    <div id="tileImage2" class="tile">
                         
                     </div>
                 </div>
                 
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Partners</h3></div>
-                    <div class="tile tileImage2">
+                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Partners</h3></div>
+                    <div id="tileImage2" class="tile">
                         
                     </div>
                 </div>
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Campaigns</h3></div>
-                    <div class="tile tileImage1">
+                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-earphone"></span> Campaigns</h3></div>
+                    <div id="tileImage1" class="tile">
                         
                     </div>
                 </div>
