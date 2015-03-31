@@ -8,3 +8,22 @@ and open the template in the editor.
     Author     : EmilGras
 */
 
+.tile {
+    padding-top: 20px;
+    background-color: gainsboro;
+    height: 220px;
+}
+
+.tileHeader {
+    color: #337ab7;
+}
+
+.tileImage1 {
+    background-image: url("picture1.png");
+}
+
+.tileImage2 {
+    background-image: url("picture2.png");
+}
+
+
