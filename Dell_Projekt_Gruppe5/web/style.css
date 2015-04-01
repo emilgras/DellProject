@@ -12,8 +12,8 @@ body {
 }
 
 .tile {
-    background-color: gainsboro;
-    height: 220px;
+    //background-color: gainsboro;
+    //height: 220px;
 }
 
 .tile:hover {
@@ -37,11 +37,12 @@ body {
 }
 
 #tileImage1 {
-    background-image: url("picture1.png");
+    //background-image: url("picture1.png");
+    
 }
 
 #tileImage2 {
-    background-image: url("picture2.png");
+    //background-image: url("picture2.png");
 }
 
 #logoutBtn {

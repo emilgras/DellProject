@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="">Dashboard</a></li>
-                        <li><a href="">Page 2</a></li>
+                        <li><a href=""><!-- <img src="addpartner.png"> --></a></li>
                         <!-- <li><a href="">Page 3</a></li> -->
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
@@ -41,29 +41,39 @@
             <div class="row center">  
                 
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Create partner</h3></div>
-                    <div id="tileImage1" class="tile">
-
+                    
+                    <div class="tile">
+                        <div>
+                            <img src="addpartner.png">
+                            <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Add new partner</h3>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Track projects</h3></div>
-                    <div id="tileImage2" class="tile">
-                        
+                    <div class="tile">
+                        <div>
+                            <img src="money.png">
+                            <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Track projects</h3>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Partners</h3></div>
                     <div id="tileImage2" class="tile">
-                        
+                        <div>
+                            <img src="partners.png">
+                            <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> View all partners</h3>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="col-md-6 marginTop">
-                    <div><h3 class="tileHeader"><span class="glyphicon glyphicon-earphone"></span> Campaigns</h3></div>
                     <div id="tileImage1" class="tile">
-                        
+                        <div>
+                            <img src="campains.png">
+                            <h3 class="tileHeader"><span class="glyphicon glyphicon-earphone"></span> View campaigns</h3>
+                        </div>
                     </div>
                 </div>
             </div>
