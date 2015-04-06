@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="MyServlet?action=dashboard" class="navbar-brand">Admin Website</a>
+                    <a href="AdminServlet?action=dashboard" class="navbar-brand">Admin Website</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -29,9 +29,9 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
-                        <li><a href="MyServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>
-                        <li><a href="MyServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li>
-                        <li><a href="MyServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>     
+                        <li><a href="AdminServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>
+                        <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li>
+                        <li><a href="AdminServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>     
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>

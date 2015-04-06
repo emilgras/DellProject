@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author EmilGras
- */
-@WebServlet(name = "MyServlet", urlPatterns = {"/MyServlet"})
-public class MyServlet extends HttpServlet {
+@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
+public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,26 +23,21 @@ public class MyServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
+
             case "dashboard":
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "addpartner":
-                request.getRequestDispatcher("addpartner.jsp").forward(request, response);
-                break;
             case "campaigns":
-                request.getRequestDispatcher("campaigns.jsp").forward(request, response);
+                request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
             case "statistics":
-                request.getRequestDispatcher("statistics.jsp").forward(request, response);
+                request.getRequestDispatcher("statistics_admin.jsp").forward(request, response);
                 break;
             case "partners":
-                request.getRequestDispatcher("partners.jsp").forward(request, response);
+                request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
-            case "signup":
-                request.getRequestDispatcher("signup.jsp").forward(request, response);
-                break;
-            case "index":
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+            case "login":
+                request.getRequestDispatcher("login_admin.jsp").forward(request, response);
                 break;
         }
     }
@@ -58,16 +49,10 @@ public class MyServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "loginForm":
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
 
-                System.out.println("username: " + username);
-                System.out.println("password: " + password);
-                break;
-            case "signupForm":
-                //String email = request.getParameter("email");
-                //String password = request.getParameter("password");
+            case "adminLogin":
+                // VALIDATE
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
         }
     }

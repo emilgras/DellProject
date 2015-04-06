@@ -28,10 +28,10 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="MyServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>
+                        <li><a href="AdminServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>
                         <li class="active"><a href=""><img src="img/campaigns24.png"> Campaigns</a></li>
-                        <li><a href="MyServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li>
-                        <li><a href="MyServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>
+                        <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li>
+                        <li><a href="AdminServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>

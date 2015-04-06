@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="MyServlet?action=index" class="navbar-brand">Dell Business</a>
+                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a></div>
                 </div>
             </div>
         </div>
@@ -28,13 +28,13 @@
         <div class="container contentContainer">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4" id="topRow">
-                    <h1 class="">Welcome to Dell Business</h1>
-                    <p class="lead">Right here we can put one of Dells slogans...</p>
+                    <img src="img/logo128px.png">
+                    <p class="lead">The power to do more</p>
                     <p class="bold marginTop">If you are already registered then log in below otherwise click on the 'Become partner' button to join us now</p>
                     
                     <!---------- Log in ---------->
-                    <form class="marginTop" action="MyServlet" method="POST">
-                        <input type="hidden" name="action" value="loginForm">
+                    <form class="marginTop" action="PartnerServlet" method="POST">
+                        <input type="hidden" name="action" value="partnerLogin">
                         <div class="input-group-lg ">
                             <input type="text" name="username" class="form-control marginTop" placeholder="Your username" />
                         </div>
@@ -48,7 +48,7 @@
                     
                     <!---------- Sign up ---------->
                     <div class="input-group-lg">
-                        <a href="MyServlet?action=signup" id="signupBtn"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
+                        <a href="PartnerServlet?action=signup" id="signupBtn"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
                     </div>
                 </div>
             </div>

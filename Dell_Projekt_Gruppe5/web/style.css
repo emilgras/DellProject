@@ -27,11 +27,9 @@ body {
     cursor:pointer;
 }
 
-#topContainer {
-      //background-image:url("img/background.png");
-      //height:400px;
-      //width:100%;
-      //background-size:cover;
+.logo {
+    width: 50px;
+    height: 100px;
 }
 
 .marginTop {

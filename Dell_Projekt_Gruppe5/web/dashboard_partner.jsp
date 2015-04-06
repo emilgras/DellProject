@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard_user
-    Created on : 06-04-2015, 14:27:18
+    Document   : dashboard_partner
+    Created on : 06-04-2015, 19:58:50
     Author     : EmilGras
 --%>
 
@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="MyServlet?action=dashboard" class="navbar-brand">User Website</a>
+                    <a href="PartnerServlet?action=dashboard" class="navbar-brand">User Website</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
-                        <li><a href="MyServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>    
+                        <li><a href="PartnerServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>    
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>

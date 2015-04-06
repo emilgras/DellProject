@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="MyServlet?action=index" class="navbar-brand">Dell Business Admin</a>
+                    <a href="AdminServlet?action=login" class="navbar-brand">Dell Business Admin</a>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
         <div class="container contentContainer">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4" id="topRow">
-                    <h1 class="">Welcome to Dell Business</h1>
-                    <p class="lead">Right here we can put one of Dells slogans...</p>        
+                    <img src="img/logo128px.png">
+                    <p class="lead">The power to do more</p>     
                     
                     <!---------- Log in ---------->
                     <form class="marginTop" action="AdminServlet" method="POST">
