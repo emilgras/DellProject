@@ -42,6 +42,12 @@ public class MyServlet extends HttpServlet {
             case "partners":
                 request.getRequestDispatcher("partners.jsp").forward(request, response);
                 break;
+            case "signup":
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
+                break;
+            case "index":
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
         }
     }
 
@@ -49,5 +55,20 @@ public class MyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "loginForm":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+
+                System.out.println("username: " + username);
+                System.out.println("password: " + password);
+                break;
+            case "signupForm":
+                //String email = request.getParameter("email");
+                //String password = request.getParameter("password");
+                break;
+        }
     }
 }

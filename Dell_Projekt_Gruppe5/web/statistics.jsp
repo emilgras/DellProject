@@ -38,9 +38,10 @@
             </div>
         </div>  
 
-        <div class="container contentContainer marginBottom" id="topContainer">
+        <div class="container contentContainer marginBottom">
+            <h1 class="tileHeader">Statistics</h1>
             <div class="row center">  
-                <h1 class="tileHeader">Statistics</h1>
+                
                 <!------------------- TABLE ------------------->
                 <br/>
                 <table class="table table-striped table-bordered">
