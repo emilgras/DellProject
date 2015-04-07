@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="MyServlet?action=dashboard" class="navbar-brand">Admin Website</a>
+                    <a href="AdminServlet?action=dashboard" class="navbar-brand">Admin Website</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -33,7 +33,9 @@
                         <!-- <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li> -->
                         <li><a href="AdminServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="AdminServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>
+                    </a>
                 </div>
             </div>
         </div>  

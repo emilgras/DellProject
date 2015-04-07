@@ -31,7 +31,9 @@
                         <li><a href="PartnerServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>                   
                         <li class="active"><a href="PartnerServlet?action=newcampaign"><img src="img/newcampaign24.png"> New Campaign</a></li>   
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="PartnerServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button> 
+                    </a>
                 </div>
             </div>
         </div>  

@@ -33,7 +33,9 @@
                         <li class="active"><a href=""><img src="img/money24.png"> Statistics</a></li>
                         <li><a href="AdminServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="AdminServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>
+                    </a>
                 </div>
             </div>
         </div>  
