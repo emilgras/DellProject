@@ -31,12 +31,16 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
             /*case "statistics":
-                request.getRequestDispatcher("statistics_admin.jsp").forward(request, response);
-                break;*/
+             request.getRequestDispatcher("statistics_admin.jsp").forward(request, response);
+             break;*/
             case "partners":
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
             case "login":
+                request.getRequestDispatcher("login_admin.jsp").forward(request, response);
+                break;
+            case "logout":
+                // currentUser = null;
                 request.getRequestDispatcher("login_admin.jsp").forward(request, response);
                 break;
         }

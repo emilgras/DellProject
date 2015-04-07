@@ -36,6 +36,10 @@ public class PartnerServlet extends HttpServlet {
             case "signup":
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
+            case "logout":
+                //currentUser = null;
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
         }
     }
 
