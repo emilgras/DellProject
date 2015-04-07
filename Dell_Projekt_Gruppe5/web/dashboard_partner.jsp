@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
-                        <li><a href="PartnerServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>    
+                        <!-- <li><a href="PartnerServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li> -->
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>

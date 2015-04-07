@@ -30,9 +30,9 @@ public class AdminServlet extends HttpServlet {
             case "campaigns":
                 request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
-            case "statistics":
+            /*case "statistics":
                 request.getRequestDispatcher("statistics_admin.jsp").forward(request, response);
-                break;
+                break;*/
             case "partners":
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
