@@ -12,6 +12,7 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
         <title>JSP Pageeeeee</title>
+        <title>JSP Pagee</title>
     </head>
     <body>
         
@@ -19,10 +20,11 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a></div>
+                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a>
+                </div>
                 </div>
             </div>
-        </div>
+        
         
         <!---------- Middle content ---------->
         <div class="container contentContainer">
