@@ -31,30 +31,33 @@
     </div>
 
     <!---------- Middle content ---------->
+    <div id ="wrapper">
     <div class="container contentContainer marginBottom">
         <h1 class="tileHeader">Signup</h1>
-        <div class="row center">  
-
-        </div>
+        <!--<div class="row center">  
+         
+        </div> -->
     </div>
 
 
     <form role="form">
         <div class="form-group">
+            
             <label for="email">Company:</label>
             <input type="email" class="form-control" id="partnerName" placeholder="Enter your company name">
-        </div>
-         <button type="submit" class="btn btn-default">Submit</button>   
+            </div> 
+        
+          
     </form>
-    <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
+    
    <div class="bfh-datepicker">
+       <label for="date" >Campaign Start:</label>
        <input type="date" class="form-control" id="date">
+       
 </div> 
-   
-
+        
+   <button type="submit" id="submitBtn" class="btn btn-default">Submit</button>  
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
