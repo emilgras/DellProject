@@ -49,7 +49,7 @@
                     
                     <!---------- Sign up ---------->
                     <div class="input-group-lg">
-                        <a href="PartnerServlet?action=signup" id="signupBtn"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
+                        <a href="PartnerServlet?action=signup" id="textDecorationNone"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
-                        <!-- <li><a href="PartnerServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li> -->
+                        <li><a href="PartnerServlet?action=newcampaign"><img src="img/newcampaign24.png"> New campaign</a></li>
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>
@@ -40,13 +40,14 @@
             <h1 class="tileHeader">Dashboard</h1>
             <div class="row center">  
                 <div class="col-md-6 marginTop">
-
-                    <div class="tile">
-                        <div>
-                            <img src="img/addpartner.png">
-                            <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Start new campaign</h3>
+                    <a href="PartnerServlet?action=newcampaign" id="textDecorationNone">
+                        <div class="tile">
+                            <div>
+                                <img src="img/addpartner.png">
+                                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Start new campaign</h3>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 marginTop">

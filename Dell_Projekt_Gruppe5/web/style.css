@@ -52,12 +52,12 @@ body {
 /**************** Index.jsp ****************/
 
 #topRow {
-      //margin-top:70px;
-      text-align:center;
+    //margin-top:70px;
+    text-align:center;
 }
 
 #emailSignup {
-      margin-top:50px;
+    margin-top:50px;
 }
 
 .marginTop {
@@ -73,7 +73,7 @@ body {
     font-size:300%;
 }
 
-#signupBtn {
+#textDecorationNone {
     text-decoration: none;
 }
 

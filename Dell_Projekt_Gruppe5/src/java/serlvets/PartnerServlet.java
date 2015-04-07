@@ -27,8 +27,8 @@ public class PartnerServlet extends HttpServlet {
             case "dashboard":
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
-            case "campaigns":
-                request.getRequestDispatcher("campaigns_partner.jsp").forward(request, response);
+            case "newcampaign":
+                request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
             case "index":
                 request.getRequestDispatcher("index.jsp").forward(request, response);
