@@ -56,12 +56,12 @@
                         <div>
                             <img src="img/money.png">
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Track projects</h3>
-                            <!-- <table class="table table-striped table-bordered">
+                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Name</th><th>Age</th><th>Image</th><th>Progress</th><th>Status</th><th>View case</th></tr>
                                 <tr><td>Emil</td><td>23</td><td>image.png</td><td>88%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>  
                                 <tr><td>Hellen</td><td>27</td><td>image.png</td><td>100%</td><td class="success">Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
                                 <tr><td>Rob</td><td>35</td><td>image.png</td><td>12%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
-                            </table> -->
+                            </table>
                         </div>
                     </div>
                 </div>
