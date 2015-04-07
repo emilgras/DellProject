@@ -19,10 +19,11 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a></div>
+                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a>
+                </div>
                 </div>
             </div>
-        </div>
+        
         
         <!---------- Middle content ---------->
         <div class="container contentContainer">
