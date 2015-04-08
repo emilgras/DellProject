@@ -59,6 +59,9 @@ public class PartnerServlet extends HttpServlet {
                 // VALIDATE
                 // Forward to partner dashboard
                 break;
+            case "sendcampaign":
+                // Forward to partner dashboard
+                break;
         }
     }
 }

@@ -38,10 +38,32 @@
             </div>
         </div>  
 
-        <div class="container contentContainer marginBottom">
-            <h1 class="tileHeader">New campaign</h1>
-            <div class="row center">  
-
+        <!---------------- Formular ---------------->
+        <div class="container">
+            <div class="col-md-6  col-md-offset-3">
+                <h1 class="tileHeader">New campaign</h1>
+                <form class="form-group marginTop" action="PartnerServlet" method="post">
+                    <div class="form-group">
+                        <label for="date" >Campaign start:</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="date" >Campaign end:</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="left-align">Price estimate:</label>
+                        <input type="number" class="form-control" name="username"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Description:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                    <div class="form-group marginTop">
+                        <input type="submit" name="login" value="Send" class="btn btn-info btn-block"/>
+                    </div>
+                    <input type="hidden" name="action" value="sendcampaign">
+                </form>
             </div>
         </div>
 
