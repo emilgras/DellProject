@@ -30,21 +30,23 @@
                     <ul class="nav navbar-nav">
                         <li><a href="AdminServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>
                         <li><a href="AdminServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>
-                        <!-- <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li> -->
                         <li class="active"><a href=""><img src="img/partners24.png"> All partners</a></li>
                     </ul>
                     <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
                 </div>
             </div>
         </div>  
-        
-        <div class="container contentContainer marginBottom">
-            <h1 class="tileHeader">All partners</h1>
+
+        <div class="container">
+            <h1 class="tileHeader marginBottom">Applicants</h1>
             <div class="row center">  
-                
+                <table class="table table-striped table-bordered">
+                    <tr class="active"><th>Number</th><th>CVR</th><th>Name</th><th>Description</th><th>Start est.</th><th>End est.</th><th>Price</th><th>Action</th></tr>
+                    <tr><td>Number</td><td>CVR</td><td>Name</td><td>Description</td><td>Beginning est</td><td>End est</td><td>Price</td><td><a href="AdminServlet?action=acceptapplication&id= ..... ">  <!-- send number med til AdminServlet -->   <button type="button" class="btn btn-info">Send acceptance</button></a></td></tr>  
+                </table>
             </div>
         </div>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
