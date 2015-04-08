@@ -77,3 +77,14 @@ body {
     text-decoration: none;
 }
 
+#wrapper{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    
+}
+
+#submitBtn{
+    margin-top: 130px;
+    
+}
