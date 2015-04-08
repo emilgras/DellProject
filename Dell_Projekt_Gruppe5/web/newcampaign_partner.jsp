@@ -52,7 +52,7 @@
                         <input type="date" class="form-control" id="date">
                     </div>
                     <div class="form-group">
-                        <label for="username" class="left-align">Price estimate:</label>
+                        <label for="username" class="left-align">Price estimate DKK:</label>
                         <input type="number" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">

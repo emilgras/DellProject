@@ -27,35 +27,38 @@
         <h1 class="tileHeader">Signup</h1>
     </div>
     <div id ="wrapper">
-        <div class="form-group">
-            <label for="text">Username:</label>
-            <input type="text" class="form-control" id="usertxt">
-            <input type="hidden" name="signup_action" value="signupUsername">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-            <input type="hidden" name="signup_action" value="signupPassword">
-        </div> 
-        <div class="form-group">
-            <label for="conpwd">Confirm Password:</label>
-            <input type="password" class="form-control" id="conpwd">
-            <input type="hidden" name="signup_action" value="signupConfirmPassword">
-        </div>
         <form role="form">
+            
+            <div class="form-group">
+                <label for="text">Username:</label>
+                <input type="text" name="username" class="form-control" id="usertxt">
+            </div>
+            
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" name="password" class="form-control" id="pwd">
+            </div> 
+            
+            <div class="form-group">
+                <label for="conpwd">Confirm Password:</label>
+                <input type="password" name="confirmpassword" class="form-control" id="conpwd">
+            </div>
+
             <div class="form-group">
                 <label for="text">Company:</label>
-                <input type="text" class="form-control" id="partnerName" placeholder="Enter your company name">
+                <input type="text" name="company" class="form-control" id="partnerName" placeholder="Enter your company name">
                 <input type="hidden" name="signup_action" value="signupCompany">
             </div>
+
+            <div class="form-group">
+                <label for="cvr">CVR:</label>
+                <input type="text" name="cvr" class="form-control" id="cvr" placeholder="Enter your CVR number">
+            </div>
+            
+            <button type="submit" id="submitBtn" class="btn btn-default">Submit</button> 
         </form>
-        <div class="form-group">
-            <label for="cvr">CVR:</label>
-            <input type="text" class="form-control" id="cvr" placeholder="Enter your CVR number">
-            <input type="hidden" name="signup_action" value="signupCVR">
-        </div>
-        <button type="submit" id="submitBtn" class="btn btn-default">Submit</button> 
     </div>
+
     <script src="https://ajax.googleapis.com/…/l…/jquery/1.11.2/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </html>

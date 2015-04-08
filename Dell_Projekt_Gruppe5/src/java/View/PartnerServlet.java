@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serlvets;
+package View;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,6 +56,14 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "partnerSignup":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String confirmPassword = request.getParameter("confirmpassword");
+                String company = request.getParameter("company");
+                String cvr = request.getParameter("cvr");
+
+                
+                
                 // VALIDATE
                 // Forward to partner dashboard
                 break;
