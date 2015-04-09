@@ -45,6 +45,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("company", "");
                 request.setAttribute("cvr", "");
                 request.setAttribute("signupErrorMessage", "");
+                request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
             case "logout":
@@ -81,15 +82,22 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("company", name);
                 request.setAttribute("cvr", cvr);
                 
-                String errorMessage = Validate.signupErrorMessage(partner, confirmPass);
+                String validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass);
+                String dbErrorMessage = Validate.signupErrorMessage(partner, confirmPass);
                 
-                if (!errorMessage.equals("")) {
+                if (!validationErrorMessage.equals("")) {
                     // Fejl i signup formular
-                    request.setAttribute("signupErrorMessage", errorMessage);
+                    request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
-                    // Yes du kan oprettes
-                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                    if (!partnerFacade.createPartner(partner).equals("")) {
+                        // Kunne ikke oprette i DB
+                        request.setAttribute("dbErrorMessage", validationErrorMessage);
+                        request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
+                    } else {
+                        // Yay - du er oprettet i DB
+                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                    } 
                 }
 
                 
