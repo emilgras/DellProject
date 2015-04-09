@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,9 +30,6 @@ public class AdminServlet extends HttpServlet {
             case "campaigns":
                 request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
-            /*case "statistics":
-             request.getRequestDispatcher("statistics_admin.jsp").forward(request, response);
-             break;*/
             case "partners":
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;

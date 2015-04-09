@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Control;
 
+import Model.AdminFacade;
+import Model.PartnerFacade;
+import Utils.Validate;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
-
+    
+    PartnerFacade partnerFacade;
+    AdminFacade adminFacade;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +51,9 @@ public class PartnerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        partnerFacade = new PartnerFacade();
+        
         String action = request.getParameter("action");
 
         switch (action) {
@@ -56,11 +63,18 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "partnerSignup":
-                String username = request.getParameter("username");
+                String user = request.getParameter("username");
                 String password = request.getParameter("password");
                 String confirmPassword = request.getParameter("confirmpassword");
                 String company = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
+                
+                if (!Validate.signupErrorMessage(user, cvr, company, cvr, cvr).equals("")) {
+                    // Fejl i signup formular
+                    
+                } else {
+                    // Yes du kan oprettes
+                }
 
                 
                 
