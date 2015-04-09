@@ -37,7 +37,7 @@
                     <form class="marginTop" action="PartnerServlet" method="POST">
                         <input type="hidden" name="action" value="partnerLogin">
                         <div class="input-group-lg ">
-                            <input type="text" name="username" class="form-control marginTop" placeholder="Your username" />
+                            <input type="text" name="username" value="<%= request.getAttribute("username")%>" class="form-control marginTop" placeholder="Your username" />
                         </div>
                         <div class="input-group-lg ">
                             <input type="password" name="password" class="form-control marginTop" placeholder="Your password" />

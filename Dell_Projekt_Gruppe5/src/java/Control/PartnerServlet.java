@@ -66,7 +66,11 @@ public class PartnerServlet extends HttpServlet {
         switch (action) {
 
             case "partnerLogin":
-                // VALIDATE
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                
+                request.setAttribute("username", username);
+                
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "partnerSignup":
@@ -85,7 +89,7 @@ public class PartnerServlet extends HttpServlet {
                 String validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass);
                 String dbErrorMessage = Validate.signupErrorMessage(partner, confirmPass);
                 
-                if (!validationErrorMessage.equals("")) {
+                if (/*!validationErrorMessage.equals("")*/false) {
                     // Fejl i signup formular
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);

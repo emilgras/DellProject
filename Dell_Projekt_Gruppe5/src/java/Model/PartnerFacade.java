@@ -22,11 +22,12 @@ public class PartnerFacade {
 		  om 	= new PartnerMapper();
 		  con 	= dbcon.getConnection();
 	  }
+          
 	  public static PartnerFacade getInstance()
 	  {
-		  if(instance == null)
-			  instance = new PartnerFacade();
-		  return instance;
+		if(instance == null)
+		instance = new PartnerFacade();
+		return instance;
 	  }
 	  //== Singleton end
           
