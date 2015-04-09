@@ -30,6 +30,17 @@ public class Campaign {
         this.pris = pris;
         this.pno = pno;
     }
+
+    public Campaign(String beskrivelse, String status, Date oprettelse_dato, Date start_dato, Date slut_dato, int pris) {
+        this.beskrivelse = beskrivelse;
+        this.status = status;
+        this.oprettelse_dato = oprettelse_dato;
+        this.start_dato = start_dato;
+        this.slut_dato = slut_dato;
+        this.pris = pris;
+    }
+    
+    
     
     public Campaign(Campaign camp){
         this.kno = camp.getKno();

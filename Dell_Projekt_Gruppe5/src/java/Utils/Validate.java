@@ -8,7 +8,7 @@ public class Validate {
         
         String errorMessage = "";
         
-        if (partner.getUsername().equals("")) errorMessage = "Please, remember to fill out the userfield";
+        if (partner.getUsername().equals("")) errorMessage = "Please, remember to fill out the username field";
         if (partner.getPassword().equals("")) errorMessage = "Please, remember to fill out the password field";
         if (confirmPass.equals("")) errorMessage = "Please, remember to fill out the confirm password field";
         if (partner.getName().equals("")) errorMessage = "Please, remember to fill out the company name field";
@@ -33,4 +33,13 @@ public class Validate {
         return errorMessage;
     }
     
+    public static String campaignErrorMessage(String campaignStart, String campaignEnd, float price, String description) {
+        
+        String errorMessage = "";
+        
+        // Content
+        
+        return errorMessage;
+        
+    }
 }
