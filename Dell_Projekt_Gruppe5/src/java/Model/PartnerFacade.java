@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataSourceLayer;
+package Model;
+
+import java.sql.Connection;
 
 /**
  *
  * @author ABjergfelt
  */
-public class PartnerMapper {
+public class PartnerFacade {
+    
+    public void savePartner(Partner partner) {
+        
+    }
     
 }

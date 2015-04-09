@@ -3,21 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataSourceLayer;
-
-import java.sql.Connection;
+package Model;
 
 /**
  *
  * @author ABjergfelt
  */
-public class DBFacade {
+public class PartnerMapper {
     
-    private Connection con;
-
-  
-   
-
-  
- 
 }
