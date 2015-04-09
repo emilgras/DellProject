@@ -20,6 +20,7 @@ public class TestInsertPartner {
 
         String sql = "INSERT INTO partner (cvr, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?)";
 
+
         String user = partner.getUsername();
         String pass = partner.getPassword();
         String name = partner.getName();

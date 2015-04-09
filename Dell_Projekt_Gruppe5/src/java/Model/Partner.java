@@ -13,33 +13,30 @@ import java.sql.Date;
  */
 public class Partner {
 
+
    
     private String name;
     private String role;
+
     private String cvr;
     private Date date;
     private String username;
     private String password;
     private int pno;
 
-    public Partner(String user, String pass, String name, String role, String cvr, Date date, String username, String password, int pno) {
-        
+
+    public Partner(String username, String password, String name, String cvr, Date date) {
+     
+
         this.name = name;
         this.cvr = cvr;
         this.date = date;
         this.username = username;
         this.password = password;
-        this.pno = pno;
+        
     }
 
-    public Partner(String name, String cvr, String username, String password, Date date) {
-        this.name = name;
-       
-        this.cvr = cvr;
-        this.username = username;
-        this.password = password;
-        this.date = date;
-    }
+    
     
     
 
@@ -90,6 +87,7 @@ public class Partner {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public String getCvr() {
