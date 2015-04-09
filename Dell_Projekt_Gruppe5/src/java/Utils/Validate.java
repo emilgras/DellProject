@@ -22,4 +22,15 @@ public class Validate {
         
     }
     
+    public static String loginErrorMessage(String username, String password) {
+        
+        String errorMessage = "";
+        
+        if (username.equals("") && password.equals("")) errorMessage = "Please, fill out your username and password";
+        if (username.equals("")) errorMessage = "Please, fill out your username";
+        if (password.equals("")) errorMessage = "Please, fill out your password";
+        
+        return errorMessage;
+    }
+    
 }
