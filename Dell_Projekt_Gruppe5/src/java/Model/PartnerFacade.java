@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataSourceLayer;
+package Model;
 
 import java.sql.Connection;
 
@@ -11,17 +11,10 @@ import java.sql.Connection;
  *
  * @author ABjergfelt
  */
-public class DBFacade {
+public class PartnerFacade {
     
-    private Connection con;
-
-  
-   
-
-    private DBFacade()
-    {
+    public void savePartner(Partner partner) {
         
     }
-
- 
+    
 }
