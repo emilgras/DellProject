@@ -18,13 +18,13 @@ import java.util.logging.Logger;
  */
 public class PartnerMapper {
     int count = 0;
-    String message = "";
+    String message = "logged in";
     public String getLogin(String username, String password, Connection con){
         Partner p = null;
         String SQLString1 =       
           "select * " +
           "from partner " +
-          "where brugernavn and password = ?,?";
+          "where brugernavn = ? and password = ?";
         
         PreparedStatement statement= null;
         
@@ -37,9 +37,8 @@ public class PartnerMapper {
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             rs.next();
-
-          count = rs.getInt(5);
-          
+            
+            count = rs.getInt(5);
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,7 +55,7 @@ public class PartnerMapper {
             message = "Invalid username or password";
             
         }
-        
+        System.out.println(count);
       return message;                         
        
       
