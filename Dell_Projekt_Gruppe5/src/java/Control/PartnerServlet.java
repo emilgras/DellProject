@@ -59,7 +59,7 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        partnerFacade = new PartnerFacade();
+        
         
         String action = request.getParameter("action");
 
@@ -90,11 +90,14 @@ public class PartnerServlet extends HttpServlet {
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
+                    System.out.println("teeeeeeest");
+                    System.out.println(partnerFacade.createPartner(partner));
                     if (!partnerFacade.createPartner(partner).equals("")) {
                         // Kunne ikke oprette i DB
                         request.setAttribute("dbErrorMessage", validationErrorMessage);
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
+                        System.out.println("teest");
                         // Yay - du er oprettet i DB
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     } 
