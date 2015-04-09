@@ -12,44 +12,49 @@ import java.sql.Date;
  * @author ABjergfelt
  */
 public class Partner {
-    private String user;
-    private String pass; 
-    private String name; 
+
+   
+    private String name;
     private String role;
     private String cvr;
     private Date date;
+    private String username;
+    private String password;
+    private int pno;
 
-    public Partner(String user, String pass, String name, String role, String cvr, Date date) {
-        this.user = user;
-        this.pass = pass;
+    public Partner(String user, String pass, String name, String role, String cvr, Date date, String username, String password, int pno) {
+        
         this.name = name;
         this.role = role;
         this.cvr = cvr;
         this.date = date;
+        this.username = username;
+        this.password = password;
+        this.pno = pno;
     }
 
-    public String getUser() {
-        return user;
+    public Partner() {
+    }
+    
+    public Partner(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public String getUsername() {
+        return username;
     }
 
-    public String getPass() {
-        return pass;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public String getPassword() {
+        return password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
@@ -58,6 +63,23 @@ public class Partner {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getPno() {
+        return pno;
+    }
+
+    public void setPno(int pno) {
+        this.pno = pno;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCvr() {
@@ -76,7 +98,4 @@ public class Partner {
         this.date = date;
     }
 
-
-    
-    
 }
