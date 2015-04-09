@@ -20,7 +20,7 @@ public class DBConnector
     
     private Connection con;
     
-    private DBConnector()
+    public DBConnector()
     {
         try
         {
