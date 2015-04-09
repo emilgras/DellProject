@@ -15,15 +15,13 @@ public class Partner {
     private String user;
     private String pass; 
     private String name; 
-    private String role;
     private String cvr;
     private Date date;
 
-    public Partner(String user, String pass, String name, String role, String cvr, Date date) {
+    public Partner(String user, String pass, String name, String cvr, Date date) {
         this.user = user;
         this.pass = pass;
         this.name = name;
-        this.role = role;
         this.cvr = cvr;
         this.date = date;
     }
@@ -50,14 +48,6 @@ public class Partner {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getCvr() {

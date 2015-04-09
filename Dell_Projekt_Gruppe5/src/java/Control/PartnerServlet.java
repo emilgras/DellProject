@@ -6,6 +6,7 @@
 package Control;
 
 import Model.AdminFacade;
+import Model.Partner;
 import Model.PartnerFacade;
 import Utils.Validate;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.runtime.regexp.RegExpFactory.validate;
 
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
@@ -39,6 +41,10 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             case "signup":
+                request.setAttribute("username", "");
+                request.setAttribute("company", "");
+                request.setAttribute("cvr", "");
+                request.setAttribute("signupErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
             case "logout":
@@ -64,16 +70,21 @@ public class PartnerServlet extends HttpServlet {
                 break;
             case "partnerSignup":
                 String user = request.getParameter("username");
-                String password = request.getParameter("password");
-                String confirmPassword = request.getParameter("confirmpassword");
-                String company = request.getParameter("company");
+                String pass = request.getParameter("password");
+                String confirmPass = request.getParameter("confirmpassword");
+                String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 
-                if (!Validate.signupErrorMessage(user, cvr, company, cvr, cvr).equals("")) {
+                Partner partner = new Partner(user, pass, name, cvr, null);
+                String errorMessage = Validate.signupErrorMessage(partner, confirmPass);
+                
+                if (!errorMessage.equals("")) {
                     // Fejl i signup formular
-                    
+                    request.setAttribute("signupErrorMessage", errorMessage);
+                    request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
                     // Yes du kan oprettes
+                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 }
 
                 
