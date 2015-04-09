@@ -25,13 +25,14 @@
     <!-- Middle content -->
     <div class="container" id="header">
         <h1 class="tileHeader">Signup</h1>
+        <h3 style="color: indianred"><%= request.getAttribute("signupErrorMessage")%></h3>
     </div>
     <div id ="wrapper">
-        <form role="form">
+        <form role="form" action="PartnerServlet" method="post">
             
             <div class="form-group">
                 <label for="text">Username:</label>
-                <input type="text" name="username" class="form-control" id="usertxt">
+                <input type="text" name="username" value="<%= request.getAttribute("username") %>" class="form-control" id="usertxt">
             </div>
             
             <div class="form-group">
@@ -46,16 +47,16 @@
 
             <div class="form-group">
                 <label for="text">Company:</label>
-                <input type="text" name="company" class="form-control" id="partnerName" placeholder="Enter your company name">
-                <input type="hidden" name="signup_action" value="signupCompany">
+                <input type="text" name="company" value="<%= request.getAttribute("company") %>" class="form-control" id="partnerName" placeholder="Enter your company name">
             </div>
 
             <div class="form-group">
                 <label for="cvr">CVR:</label>
-                <input type="text" name="cvr" class="form-control" id="cvr" placeholder="Enter your CVR number">
+                <input type="text" name="cvr" value="<%= request.getAttribute("cvr") %>" class="form-control" id="cvr" placeholder="Enter your CVR number">
             </div>
             
-            <button type="submit" id="submitBtn" class="btn btn-default">Submit</button> 
+            <input type="hidden" name="action" value="partnerSignup">
+            <button type="submit" id="submitBtn" class="btn btn-default">Submit</button>
         </form>
     </div>
 
