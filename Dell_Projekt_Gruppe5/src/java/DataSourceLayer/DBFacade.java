@@ -18,10 +18,6 @@ public class DBFacade {
   
    
 
-    private DBFacade()
-    {
-        
-    }
-
+  
  
 }

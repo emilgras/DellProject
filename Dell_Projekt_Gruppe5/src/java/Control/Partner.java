@@ -23,6 +23,8 @@ public class Partner {
         this.name = name;
         this.date = date;
     }
+    
+    public Partner(){}
 
     public int getPno() {
         return pno;
