@@ -20,6 +20,7 @@ public class Test {
     public static void main(String[] args) {
         DBConnector db = new DBConnector();
         Connection con = db.getConnection();
+        
 //        CampaignMapper cm = new CampaignMapper();
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
@@ -40,8 +41,9 @@ public class Test {
         
         
         
-//        PartnerMapper pm = new PartnerMapper();
-//        System.out.println(pm.getLogin("hans", "haans", con));
+        PartnerMapper pm = new PartnerMapper();
+        pm.createPartner(new Partner(1234, "jeppe", "jeppe", "jeppe", "88888888", sqldate), con);
+        //System.out.println(pm.getLogin("hans", "haans", con));
         
         
         try {
