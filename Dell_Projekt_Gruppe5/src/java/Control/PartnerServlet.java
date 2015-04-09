@@ -76,6 +76,11 @@ public class PartnerServlet extends HttpServlet {
                 String cvr = request.getParameter("cvr");
                 
                 Partner partner = new Partner(user, pass, name, cvr, null);
+                
+                request.setAttribute("username", user);
+                request.setAttribute("company", name);
+                request.setAttribute("cvr", cvr);
+                
                 String errorMessage = Validate.signupErrorMessage(partner, confirmPass);
                 
                 if (!errorMessage.equals("")) {

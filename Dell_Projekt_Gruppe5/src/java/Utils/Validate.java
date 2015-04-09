@@ -15,6 +15,7 @@ public class Validate {
         if (partner.getCvr().equals("")) errorMessage = "Please, remember to fill out the cvr field";
         if (partner.getUser().length() < 6) errorMessage = "Username must be more at least 6 characters";
         if (!partner.getPass().equals(confirmPass)) errorMessage = "Confirm password does not match password";
+        if (partner.getPass().length() < 8) errorMessage = "Password must be at least 8 characters";
         if (partner.getCvr().length() != 8) errorMessage = "You must enter valid CVR number";
         
         return errorMessage;
