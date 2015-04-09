@@ -75,7 +75,7 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 
-                Partner partner = new Partner(user, pass, name, cvr, null);
+                Partner partner = new Partner(11, user, pass, name, cvr, null);
                 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);

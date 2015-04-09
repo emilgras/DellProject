@@ -7,6 +7,7 @@ package test;
 import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
+import Model.Partner;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class Test {
         DBConnector db = new DBConnector();
         Connection con = db.getConnection();
 //        CampaignMapper cm = new CampaignMapper();
-//        java.util.Date date = new java.util.Date();
-//        java.sql.Date sqldate = new java.sql.Date(date.getTime());
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqldate = new java.sql.Date(date.getTime());
 //        Campaign camp = new Campaign(12345,"Hans Service", "det kører", sqldate,sqldate,sqldate,20000,1234);
 //        ArrayList<Campaign> list = new ArrayList<Campaign>();
 //        list.add(camp);
@@ -36,8 +37,13 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
-        PartnerMapper pm = new PartnerMapper();
-        System.out.println(pm.getLogin("hans", "hans", con));
+        
+        
+        
+//        PartnerMapper pm = new PartnerMapper();
+//        System.out.println(pm.getLogin("hans", "haans", con));
+        
+        
         try {
             con.close();
         } catch (Exception e) {
