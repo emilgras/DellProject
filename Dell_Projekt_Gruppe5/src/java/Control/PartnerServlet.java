@@ -59,7 +59,6 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        partnerFacade = new PartnerFacade();
         
         String action = request.getParameter("action");
 
