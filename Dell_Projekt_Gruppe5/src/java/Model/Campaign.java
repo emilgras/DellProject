@@ -14,13 +14,13 @@ public class Campaign {
     int kno;
     String beskrivelse;
     String status;
-    Date oprettelse_dato;
-    Date start_dato;
-    Date slut_dato;
-    int pris;
+    String oprettelse_dato;
+    String start_dato;
+    String slut_dato;
+    float pris;
     int pno;
 
-    public Campaign(int kno, String beskrivelse, String status, Date oprettelse_dato, Date start_dato, Date slut_dato, int pris, int pno) {
+    public Campaign(int kno, String beskrivelse, String status, String oprettelse_dato, String start_dato, String slut_dato, float pris, int pno) {
         this.kno = kno;
         this.beskrivelse = beskrivelse;
         this.status = status;
@@ -31,26 +31,11 @@ public class Campaign {
         this.pno = pno;
     }
 
-    public Campaign(String beskrivelse, String status, Date oprettelse_dato, Date start_dato, Date slut_dato, int pris) {
+    public Campaign(String start_dato, String slut_dato, float pris, String beskrivelse) {
         this.beskrivelse = beskrivelse;
-        this.status = status;
-        this.oprettelse_dato = oprettelse_dato;
         this.start_dato = start_dato;
         this.slut_dato = slut_dato;
         this.pris = pris;
-    }
-    
-    
-    
-    public Campaign(Campaign camp){
-        this.kno = camp.getKno();
-        this.beskrivelse = camp.getBeskrivelse();
-        this.status = camp.getStatus();
-        this.oprettelse_dato = camp.getOprettelse_dato();
-        this.start_dato = camp.getStart_dato();
-        this.slut_dato = camp.getSlut_dato();
-        this.pris = camp.getPris();
-        this.pno = camp.getPno();
     }
 
     public int getKno() {
@@ -77,35 +62,35 @@ public class Campaign {
         this.status = status;
     }
 
-    public Date getOprettelse_dato() {
+    public String getOprettelse_dato() {
         return oprettelse_dato;
     }
 
-    public void setOprettelse_dato(Date oprettelse_dato) {
+    public void setOprettelse_dato(String oprettelse_dato) {
         this.oprettelse_dato = oprettelse_dato;
     }
 
-    public Date getStart_dato() {
+    public String getStart_dato() {
         return start_dato;
     }
 
-    public void setStart_dato(Date start_dato) {
+    public void setStart_dato(String start_dato) {
         this.start_dato = start_dato;
     }
 
-    public Date getSlut_dato() {
+    public String getSlut_dato() {
         return slut_dato;
     }
 
-    public void setSlut_dato(Date slut_dato) {
+    public void setSlut_dato(String slut_dato) {
         this.slut_dato = slut_dato;
     }
 
-    public int getPris() {
+    public float getPris() {
         return pris;
     }
 
-    public void setPris(int pris) {
+    public void setPris(float pris) {
         this.pris = pris;
     }
 
@@ -116,7 +101,7 @@ public class Campaign {
     public void setPno(int pno) {
         this.pno = pno;
     }
-    
+
     
     
 }

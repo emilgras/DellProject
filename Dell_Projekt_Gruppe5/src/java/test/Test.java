@@ -21,11 +21,11 @@ public class Test {
     public static void main(String[] args) {
         DBConnector db = new DBConnector();
         Connection con = db.getConnection();
+        CampaignMapper cm = new CampaignMapper();
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqldate = new java.sql.Date(date.getTime());
         
-//        CampaignMapper cm = new CampaignMapper();
-//        java.util.Date date = new java.util.Date();
-//        java.sql.Date sqldate = new java.sql.Date(date.getTime());
-//        Campaign camp = new Campaign(12345,"Hans Service", "det kører", sqldate,sqldate,sqldate,20000,1234);
+        Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
 //        ArrayList<Campaign> list = new ArrayList<Campaign>();
 //        list.add(camp);
 //        try {
@@ -47,13 +47,16 @@ public class Test {
         
         
 //        PartnerMapper pm = new PartnerMapper();
-//        //pm.createPartner(new Partner(2345, "hans", "hans", "hans", "22222222", sqldate), con);
-//        System.out.println(pm.getLogin("haaans", "hans", con));
-        
-        
+//        System.out.println(pm.getLogin("hans", "haans", con));
+        try {
+            cm.insertCampaign(camp, con);
+        } catch (Exception e) {
+            System.out.println("første ups");
+        }
         try {
             con.close();
         } catch (Exception e) {
+            System.out.println("ups");
         }
         
         
