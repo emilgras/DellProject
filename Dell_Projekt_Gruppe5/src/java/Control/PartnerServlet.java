@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    PartnerFacade partnerFacade;
+    PartnerFacade partnerFacade = PartnerFacade.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -65,7 +65,7 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PartnerFacade facade = partnerFacade.getInstance();
+      
         
         String action = request.getParameter("action");
         String validationErrorMessage;
@@ -79,14 +79,14 @@ public class PartnerServlet extends HttpServlet {
 
                 request.setAttribute("username", username);
 
-                if ((validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
+                if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
 
                     // Succes ved login form
-                    if ((dbErrorMessage = facade.getLogin(username, password)).equals("")) {
+                    if (!(dbErrorMessage = partnerFacade.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -108,19 +108,19 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
 
-                Partner partner = new Partner(11, user, pass, name, cvr, null);
+                Partner partner = new Partner(user, pass, name, cvr, null);
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
                 request.setAttribute("cvr", cvr);
 
-                if ((validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
+                if (!(validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
 
-                    if ((dbErrorMessage = partnerFacade.createPartner(partner)).equals("")) {
+                    if (!(dbErrorMessage = partnerFacade.createPartner(partner)).equals("")) {
                         // Kunne ikke oprettes i DB
                         request.setAttribute("signupErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);

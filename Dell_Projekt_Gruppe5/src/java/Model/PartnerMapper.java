@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class PartnerMapper {
     int count = 0;
-    String message = "logged in";
+    String message = "";
     
     
     public String getLogin(String username, String password, Connection con){
@@ -43,15 +43,15 @@ public class PartnerMapper {
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally														// must close statement
-      {
-    	  try {
-			statement.close();
-		} catch (SQLException e) {
-			System.out.println("Fail");
-			System.out.println(e.getMessage());
-		}  
-      }
+//        finally														// must close statement
+//      {
+//    	  try {
+//			statement.close();
+//		} catch (SQLException e) {
+//			System.out.println("Fail");
+//			System.out.println(e.getMessage());
+//		}  
+//      }
         if (count == 0) {
             message = "Invalid username or password";
             
@@ -68,8 +68,10 @@ public class PartnerMapper {
         String errorMessage = "";
 
         String sql = "INSERT INTO partner (pno, cvr, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?,?)";
-
-        int pno = partner.getPno();
+        String SQLString1 = 
+        "select pno_increment.nextval  " +
+        "from dual" ;
+        
         String user = partner.getUsername();
         String pass = partner.getPassword();
         String name = partner.getName();
@@ -77,9 +79,15 @@ public class PartnerMapper {
         Date date = partner.getDate();
 
         try {
-            PreparedStatement insertStatement = conn.prepareStatement(sql);
             
-            insertStatement.setInt(1, pno);
+         PreparedStatement  insertStatement = conn.prepareStatement(SQLString1);
+        ResultSet rs  = insertStatement.executeQuery();
+        if (rs.next())
+        {
+          partner.setPno(rs.getInt(1));
+        } 
+        insertStatement = conn.prepareStatement(sql);
+            insertStatement.setInt(1,partner.getPno());
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, name);
             insertStatement.setDate(4, date);
@@ -93,11 +101,11 @@ public class PartnerMapper {
             System.err.println(ex.getMessage());
             errorMessage = "Not able to create user at the moment, please try again.";
         }
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         return errorMessage;
     }
