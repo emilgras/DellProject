@@ -78,18 +78,14 @@ public class PartnerServlet extends HttpServlet {
 
                 request.setAttribute("username", username);
 
-                validationErrorMessage = Validate.loginErrorMessage(username, password);
-
-                if (!validationErrorMessage.equals("")) {
+                if ((validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
 
-                    dbErrorMessage = facade.getLogin(username, password);
-
                     // Succes ved login form
-                    if (!dbErrorMessage.equals("")) {
+                    if ((dbErrorMessage = facade.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -117,19 +113,13 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("company", name);
                 request.setAttribute("cvr", cvr);
 
-                // Tjekker om brugeren har udftldt formularen korrekt
-                validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass);
-
-                if (!validationErrorMessage.equals("")) {
+                if ((validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
 
-                    // Tjekker om partneren kan oprettes i databasen
-                    dbErrorMessage = partnerFacade.createPartner(partner);
-
-                    if (!dbErrorMessage.equals("")) {
+                    if ((dbErrorMessage = partnerFacade.createPartner(partner)).equals("")) {
                         // Kunne ikke oprettes i DB
                         request.setAttribute("signupErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
@@ -153,9 +143,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
 
-                validationErrorMessage = Validate.campaignErrorMessage(campaignStart, campaignEnd, price, description);
-
-                /*if (!validationErrorMessage.equals("")) {
+                /*if ((validationErrorMessage = Validate.campaignErrorMessage(campaignStart, campaignEnd, price, description)).equals("")) {
                     // Fejl i login form
                     request.setAttribute("campaignErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
