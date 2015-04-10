@@ -41,7 +41,7 @@ public class PartnerFacade {
         return pm.getLogin(username, password, con);
     }
     
-    public String getPno(String username) {
+    public int getPno(String username) {
         return pm.getPno(username, con);
     }
 
@@ -49,8 +49,8 @@ public class PartnerFacade {
         return pm.createPartner(partner, con);
     }
 
-    public boolean createCampaign(Campaign campaign) {
-        return cm.insertCampaign(campaign, con);
+    public boolean createCampaign(Campaign campaign, int pno) {
+        return cm.insertCampaign(campaign, pno, con);
     }
     
     public void test() {

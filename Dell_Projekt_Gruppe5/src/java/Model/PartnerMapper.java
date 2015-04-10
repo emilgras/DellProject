@@ -41,14 +41,14 @@ public class PartnerMapper {
             count = rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally // must close statement
-//        {
-//            try {
-//                statement.close();
-//            } catch (SQLException e) {
-//                System.out.println("Fail");
-//                System.out.println(e.getMessage());
-//            }
+        } finally // must close statement
+        {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                System.out.println("Fail");
+                System.out.println(e.getMessage());
+            }
         }
         if (count == 0) {
             message = "Invalid username or password";
@@ -59,7 +59,8 @@ public class PartnerMapper {
 
     }
 
-    public String getPno(String username, Connection con) {
+    public int getPno(String username, Connection con) {
+        int pno = 0;
         String sqlString = "select pno from partner where brugernavn = ?";
         PreparedStatement statement = null;
         try {
@@ -68,14 +69,13 @@ public class PartnerMapper {
             ResultSet rs = statement.executeQuery();
             String status = "noget gik galt";
             if (rs.next()) {
-                status = rs.getString(1);
+                pno = Integer.parseInt(rs.getString(1));
             }
-            return status;
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("ups");
         }
-        return "noget gik galt";
+        return pno;
     }
 
     public String createPartner(Partner partner, Connection conn) {

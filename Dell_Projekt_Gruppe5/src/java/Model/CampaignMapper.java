@@ -20,7 +20,7 @@ public class CampaignMapper {
 
     static boolean testRun = true;
 
-    public boolean insertCampaign(Campaign camp, Connection con) {
+    public boolean insertCampaign(Campaign camp, int pno, Connection con) {
         int rowsInserted = 0;
         String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
         String primary = "select kno_increment.nextval from dual";
@@ -43,7 +43,7 @@ public class CampaignMapper {
             statement.setString(5, camp.getStart_dato());
             statement.setString(6, camp.getSlut_dato());
             statement.setFloat(7, camp.getPris());
-            statement.setInt(8, camp.getPno());
+            statement.setInt(8, pno);
             rowsInserted += statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);

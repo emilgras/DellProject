@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PartnerServlet extends HttpServlet {
 
     PartnerFacade partnerFacade = PartnerFacade.getInstance();
-    //String currentPno = "";
+    int currentPno = 0;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -98,8 +98,8 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         System.out.println("4");
                         // Oprettelse lykkedes
-                        //currentPno = partnerFacade.getPno(username);
-                        //System.out.println("PNO: " + currentPno);
+                        currentPno = partnerFacade.getPno(username);
+                        System.out.println("PNO: " + currentPno);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -148,8 +148,6 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
-
-
                
                 if (!(validationErrorMessage = Validate.campaignErrorMessage(campaign)).equals("")) {
                     // Fejl i login form
@@ -158,9 +156,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
                 } else {
 
-                    if (!partnerFacade.createCampaign(campaign)) {
-
-                        System.out.println("DB: " + partnerFacade.createCampaign(campaign));
+                    if (!partnerFacade.createCampaign(campaign, currentPno)) {
                         // Kunne ikke oprette kampagne i database
                         dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
