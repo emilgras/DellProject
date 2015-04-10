@@ -36,6 +36,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("campaignend", "");
                 request.setAttribute("price", "");
                 request.setAttribute("description", "");
+                request.setAttribute("validationErrorMessage", "");
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
