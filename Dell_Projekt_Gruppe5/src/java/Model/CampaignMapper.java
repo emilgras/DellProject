@@ -30,9 +30,9 @@ public class CampaignMapper {
             statement.setString(2, list.get(i).getBeskrivelse());
             statement.setString(3, list.get(i).getStatus());
             statement.setDate(4, list.get(i).getOprettelse_dato());
-            statement.setDate(5, list.get(i).getStart_dato());
-            statement.setDate(6, list.get(i).getSlut_dato());
-            statement.setInt(7, list.get(i).getPris());
+            //statement.setDate(5, list.get(i).getStart_dato());
+            //statement.setDate(6, list.get(i).getSlut_dato());
+            //statement.setInt(7, list.get(i).getPris());
             statement.setInt(8, list.get(i).getPno());
             rowsInserted += statement.executeUpdate();
         }
