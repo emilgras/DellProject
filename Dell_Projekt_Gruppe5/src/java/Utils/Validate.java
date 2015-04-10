@@ -1,5 +1,6 @@
 package Utils;
 
+import Model.Campaign;
 import Model.Partner;
 
 public class Validate {
@@ -33,14 +34,14 @@ public class Validate {
         return errorMessage;
     }
     
-    public static String campaignErrorMessage(String campaignStart, String campaignEnd, float price, String description) {
+    public static String campaignErrorMessage(Campaign campaign) {
         
         String errorMessage = "";
         
-        if (campaignStart.equals("")) errorMessage = "Please, remember to enter the estimated start date";
-        if (campaignEnd.equals("")) errorMessage = "Please, remember to enter the estimated end date";
-        if (price == 0.0) errorMessage = "Please, remember to enter the estimated price";
-        if (description.equals("")) errorMessage = "Please, remember to enter a full campaign description";
+        if (campaign.getStart_dato().equals("")) errorMessage = "Please, remember to enter the estimated start date";
+        if (campaign.getSlut_dato().equals("")) errorMessage = "Please, remember to enter the estimated end date";
+        if (campaign.getPris() == 0.0) errorMessage = "Please, remember to enter the estimated price";
+        if (campaign.getBeskrivelse().equals("")) errorMessage = "Please, remember to enter a full campaign description";
         
         return errorMessage;
         

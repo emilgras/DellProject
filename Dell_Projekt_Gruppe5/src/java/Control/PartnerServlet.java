@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class PartnerServlet extends HttpServlet {
 
     PartnerFacade partnerFacade = PartnerFacade.getInstance();
-
+    //String currentPno = "";
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -79,6 +80,7 @@ public class PartnerServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 
                 request.setAttribute("username", username);
+                
                 System.out.println("0");
                 if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
@@ -86,7 +88,7 @@ public class PartnerServlet extends HttpServlet {
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                System.out.println("2");
+                    System.out.println("2");
                     // Succes ved login form
                     if (!(dbErrorMessage = partnerFacade.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
@@ -94,8 +96,10 @@ public class PartnerServlet extends HttpServlet {
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
-                        // Oprettelse lykkedes
                         System.out.println("4");
+                        // Oprettelse lykkedes
+                        //currentPno = partnerFacade.getPno(username);
+                        //System.out.println("PNO: " + currentPno);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -108,7 +112,7 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
 
-                Partner partner = new Partner(889, user, pass, name, cvr, null);
+                Partner partner = new Partner(user, pass, name, cvr, null);
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
@@ -145,17 +149,24 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
 
-                if ((validationErrorMessage = Validate.campaignErrorMessage(campaignStart, campaignEnd, price, description)).equals("")) {
+
+               
+                if (!(validationErrorMessage = Validate.campaignErrorMessage(campaign)).equals("")) {
                     // Fejl i login form
+                    System.out.println("Message: " + validationErrorMessage);
                     request.setAttribute("campaignErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
                 } else {
+
                     if (!partnerFacade.createCampaign(campaign)) {
+
+                        System.out.println("DB: " + partnerFacade.createCampaign(campaign));
                         // Kunne ikke oprette kampagne i database
                         dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
+
                         // Success!
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }

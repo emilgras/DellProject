@@ -25,6 +25,7 @@ public class PartnerFacade {
     
     private PartnerFacade() {
         pm = new PartnerMapper();
+        cm = new CampaignMapper();
         con = dbcon.getConnection();
     }
 
@@ -39,14 +40,17 @@ public class PartnerFacade {
     public String getLogin(String username, String password) {
         return pm.getLogin(username, password, con);
     }
+    
+    public String getPno(String username) {
+        return pm.getPno(username, con);
+    }
 
     public String createPartner(Partner partner) {
         return pm.createPartner(partner, con);
     }
 
     public boolean createCampaign(Campaign campaign) {
-        //return cm.insertCampaign(campaign, con);
-        return true;
+        return cm.insertCampaign(campaign, con);
     }
     
     public void test() {

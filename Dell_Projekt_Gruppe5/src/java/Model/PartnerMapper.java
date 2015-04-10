@@ -18,51 +18,66 @@ import java.util.logging.Logger;
  * @author ABjergfelt
  */
 public class PartnerMapper {
+
     int count = 0;
     String message = "";
-    
-    
-    public String getLogin(String username, String password, Connection con){
+
+    public String getLogin(String username, String password, Connection con) {
         Partner p = null;
-        String SQLString1 =       
-          "select count(*) as count from partner where brugernavn = ? and password = ?";
-        
-        PreparedStatement statement= null;
-        
-        try
-        {
+        String SQLString1
+                = "select count(*) as count from partner where brugernavn = ? and password = ?";
+
+        PreparedStatement statement = null;
+
+        try {
             // get login
             statement = con.prepareStatement(SQLString1);
-            
-            statement.setString(1,username);
+
+            statement.setString(1, username);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            
+
             count = rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally // must close statement
+//        {
+//            try {
+//                statement.close();
+//            } catch (SQLException e) {
+//                System.out.println("Fail");
+//                System.out.println(e.getMessage());
+//            }
         }
-        finally														// must close statement
-      {
-    	  try {
-			statement.close();
-		} catch (SQLException e) {
-			System.out.println("Fail");
-			System.out.println(e.getMessage());
-		}  
-      }
         if (count == 0) {
             message = "Invalid username or password";
-            
+
         }
         System.out.println(count);
-      return message;                         
-       
-      
-        
+        return message;
+
     }
-    
+
+    public String getPno(String username, Connection con) {
+        String sqlString = "select pno from partner where brugernavn = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            String status = "noget gik galt";
+            if (rs.next()) {
+                status = rs.getString(1);
+            }
+            return status;
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("ups");
+        }
+        return "noget gik galt";
+    }
+
     public String createPartner(Partner partner, Connection conn) {
 
         String errorMessage = "";
@@ -78,7 +93,7 @@ public class PartnerMapper {
 
         try {
             PreparedStatement insertStatement = conn.prepareStatement(sql);
-            
+
             insertStatement.setInt(1, pno);
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, name);
@@ -102,5 +117,3 @@ public class PartnerMapper {
         return errorMessage;
     }
 }
-    
-
