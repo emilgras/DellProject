@@ -64,6 +64,8 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        PartnerFacade facade = partnerFacade.getInstance();
+        
         String action = request.getParameter("action");
         String validationErrorMessage;
         String dbErrorMessage;
@@ -84,7 +86,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
 
-                    dbErrorMessage = partnerFacade.getLogin(username, password);
+                    dbErrorMessage = facade.getLogin(username, password);
 
                     // Succes ved login form
                     if (!dbErrorMessage.equals("")) {
@@ -101,6 +103,8 @@ public class PartnerServlet extends HttpServlet {
                 break;
 
             case "partnerSignup":
+                System.out.println("JATAK");
+                
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
                 String confirmPass = request.getParameter("confirmpassword");
@@ -118,7 +122,6 @@ public class PartnerServlet extends HttpServlet {
 
                 if (!validationErrorMessage.equals("")) {
                     // Fejl i signup formular
-                    validationErrorMessage = "";
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {

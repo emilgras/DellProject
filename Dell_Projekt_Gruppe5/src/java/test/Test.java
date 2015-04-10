@@ -8,6 +8,7 @@ import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
 import Model.Partner;
+import Model.PartnerFacade;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class Test {
         Connection con = db.getConnection();
         
 //        CampaignMapper cm = new CampaignMapper();
-        java.util.Date date = new java.util.Date();
-        java.sql.Date sqldate = new java.sql.Date(date.getTime());
+//        java.util.Date date = new java.util.Date();
+//        java.sql.Date sqldate = new java.sql.Date(date.getTime());
 //        Campaign camp = new Campaign(12345,"Hans Service", "det kører", sqldate,sqldate,sqldate,20000,1234);
 //        ArrayList<Campaign> list = new ArrayList<Campaign>();
 //        list.add(camp);
@@ -38,12 +39,16 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
+        PartnerFacade.getInstance().test();
+        
+        //PartnerFacade facade = PartnerFacade.getInstance();
+        //System.out.println("Test: " + facade.getLogin("hans", "hans"));
+
         
         
-        
-        PartnerMapper pm = new PartnerMapper();
-        pm.createPartner(new Partner(1234, "jeppe", "jeppe", "jeppe", "88888888", sqldate), con);
-        //System.out.println(pm.getLogin("hans", "haans", con));
+//        PartnerMapper pm = new PartnerMapper();
+//        //pm.createPartner(new Partner(2345, "hans", "hans", "hans", "22222222", sqldate), con);
+//        System.out.println(pm.getLogin("haaans", "hans", con));
         
         
         try {
