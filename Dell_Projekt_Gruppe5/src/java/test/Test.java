@@ -8,6 +8,7 @@ import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
 import Model.Partner;
+import Model.PartnerFacade;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -37,7 +38,11 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
+        PartnerFacade.getInstance().test();
         
+        //PartnerFacade facade = PartnerFacade.getInstance();
+        //System.out.println("Test: " + facade.getLogin("hans", "hans"));
+
         
         
 //        PartnerMapper pm = new PartnerMapper();

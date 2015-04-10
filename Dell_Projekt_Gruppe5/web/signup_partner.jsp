@@ -29,7 +29,6 @@
     </div>
     <div id ="wrapper">
         <form role="form" action="PartnerServlet" method="post">
-            
             <div class="form-group">
                 <label for="text">Username:</label>
                 <input type="text" name="username" value="<%= request.getAttribute("username") %>" class="form-control" id="usertxt">

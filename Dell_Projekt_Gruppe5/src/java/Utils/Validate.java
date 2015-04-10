@@ -8,7 +8,7 @@ public class Validate {
         
         String errorMessage = "";
         
-        if (partner.getUsername().equals("")) errorMessage = "Please, remember to fill out the userfield";
+        if (partner.getUsername().equals("")) errorMessage = "Please, remember to fill out the username field";
         if (partner.getPassword().equals("")) errorMessage = "Please, remember to fill out the password field";
         if (confirmPass.equals("")) errorMessage = "Please, remember to fill out the confirm password field";
         if (partner.getName().equals("")) errorMessage = "Please, remember to fill out the company name field";
@@ -22,4 +22,27 @@ public class Validate {
         
     }
     
+    public static String loginErrorMessage(String username, String password) {
+        
+        String errorMessage = "";
+        
+        if (username.equals("") && password.equals("")) errorMessage = "Please, fill out your username and password";
+        if (username.equals("")) errorMessage = "Please, fill out your username";
+        if (password.equals("")) errorMessage = "Please, fill out your password";
+        
+        return errorMessage;
+    }
+    
+    public static String campaignErrorMessage(String campaignStart, String campaignEnd, float price, String description) {
+        
+        String errorMessage = "";
+        
+        if (campaignStart.equals("")) errorMessage = "Please, remember to enter the estimated start date";
+        if (campaignEnd.equals("")) errorMessage = "Please, remember to enter the estimated end date";
+        if (price == 0.0) errorMessage = "Please, remember to enter the estimated price";
+        if (description.equals("")) errorMessage = "Please, remember to enter a full campaign description";
+        
+        return errorMessage;
+        
+    }
 }

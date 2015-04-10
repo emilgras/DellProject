@@ -5,7 +5,6 @@
  */
 package Control;
 
-import Model.AdminFacade;
 import Model.Partner;
 import Model.PartnerFacade;
 import Utils.Validate;
@@ -15,14 +14,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static jdk.nashorn.internal.runtime.regexp.RegExpFactory.validate;
 
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
-    
+
     PartnerFacade partnerFacade;
-    AdminFacade adminFacade;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,9 +32,18 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "newcampaign":
+                request.setAttribute("campaignstart", "");
+                request.setAttribute("campaignend", "");
+                request.setAttribute("price", "");
+                request.setAttribute("description", "");
+                request.setAttribute("validationErrorMessage", "");
+                request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
             case "index":
+                request.setAttribute("username", "");
+                request.setAttribute("signupErrorMessage", "");
+                request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             case "signup":
@@ -45,6 +51,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("company", "");
                 request.setAttribute("cvr", "");
                 request.setAttribute("signupErrorMessage", "");
+                request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
             case "logout":
@@ -57,48 +64,101 @@ public class PartnerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        partnerFacade = new PartnerFacade();
+
+        PartnerFacade facade = partnerFacade.getInstance();
         
         String action = request.getParameter("action");
+        String validationErrorMessage;
+        String dbErrorMessage;
 
         switch (action) {
 
             case "partnerLogin":
-                // VALIDATE
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+
+                request.setAttribute("username", username);
+
+                if ((validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
+                    // Fejl i login form
+                    request.setAttribute("loginErrorMessage", validationErrorMessage);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+
+                    // Succes ved login form
+                    if ((dbErrorMessage = facade.getLogin(username, password)).equals("")) {
+                        // Fejl ved oprettelse i DB
+                        request.setAttribute("loginErrorMessage", dbErrorMessage);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    } else {
+                        // Oprettelse lykkedes
+                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                    }
+                }
+
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
+
             case "partnerSignup":
+                System.out.println("JATAK");
+                
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
                 String confirmPass = request.getParameter("confirmpassword");
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
-                
+
                 Partner partner = new Partner(11, user, pass, name, cvr, null);
-                
+
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
                 request.setAttribute("cvr", cvr);
-                
-                String errorMessage = Validate.signupErrorMessage(partner, confirmPass);
-                
-                if (!errorMessage.equals("")) {
+
+                if ((validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
-                    request.setAttribute("signupErrorMessage", errorMessage);
+                    request.setAttribute("signupErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
-                    // Yes du kan oprettes
-                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                }
 
-                
-                
-                // VALIDATE
-                // Forward to partner dashboard
+                    if ((dbErrorMessage = partnerFacade.createPartner(partner)).equals("")) {
+                        // Kunne ikke oprettes i DB
+                        request.setAttribute("signupErrorMessage", dbErrorMessage);
+                        request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
+                    } else {
+                        // Yay - du er oprettet i DB
+                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                    }
+                }
                 break;
+
             case "sendcampaign":
-                // Forward to partner dashboard
+                String campaignStart = request.getParameter("campaignstart");   /// Lav streng om til sql date
+                String campaignEnd = request.getParameter("campaignend");       /// Lav streng om til sql date
+                String priceString = request.getParameter("price");
+                float price = Float.parseFloat(priceString);
+                String description = request.getParameter("description");
+
+                // Campaign campaign = new Campaign(description, ".....II.....", null, campaignStart, campaignEnd, price);
+                request.setAttribute("campaignstart", campaignStart);
+                request.setAttribute("campaignend", campaignEnd);
+                request.setAttribute("price", price);
+                request.setAttribute("description", description);
+
+                /*if ((validationErrorMessage = Validate.campaignErrorMessage(campaignStart, campaignEnd, price, description)).equals("")) {
+                    // Fejl i login form
+                    request.setAttribute("campaignErrorMessage", validationErrorMessage);
+                    request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
+                } else {
+                    if (!partnerFacade.createCampaign(campaign)) {
+                        // Kunne ikke oprette kampagne i database
+                        dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
+                        request.setAttribute("campaignErrorMessage", dbErrorMessage);
+                        request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
+                    } else {
+                        // Success!
+                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                    }
+                }*/
                 break;
         }
     }

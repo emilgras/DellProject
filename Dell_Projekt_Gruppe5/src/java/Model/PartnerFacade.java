@@ -12,9 +12,46 @@ import java.sql.Connection;
  * @author ABjergfelt
  */
 public class PartnerFacade {
+
+    private PartnerMapper pm;
+    private CampaignMapper cm;
     
-    public void savePartner(Partner partner) {
-        
+    private DBConnector dbcon;
+    private Connection con = null;
+    
+//== Singleton start
+    
+    private static PartnerFacade instance = null;
+    
+    private PartnerFacade() {
+        pm = new PartnerMapper();
+        cm = new CampaignMapper();
+        con = dbcon.getConnection();
+    }
+
+    public static PartnerFacade getInstance() {
+        if (instance == null) {
+            instance = new PartnerFacade();
+        }
+        return instance;
+    }
+	  //== Singleton end
+
+    public String getLogin(String username, String password) {
+        return pm.getLogin(username, password, con);
+    }
+
+    public String createPartner(Partner partner) {
+        return pm.createPartner(partner, con);
+    }
+
+    public String createCampaign(Campaign campaign) {
+        /* return cm.insertCampaign(campaign, con);  Hvorfor skal den tage imod en liste og ikke bare et Campaign object? */
+        return "";
     }
     
+    public void test() {
+        System.out.println("VIRK FOR HELVED!!!");
+    }
+
 }
