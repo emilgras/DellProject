@@ -102,8 +102,6 @@ public class PartnerServlet extends HttpServlet {
                 break;
 
             case "partnerSignup":
-                System.out.println("JATAK");
-                
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
                 String confirmPass = request.getParameter("confirmpassword");
