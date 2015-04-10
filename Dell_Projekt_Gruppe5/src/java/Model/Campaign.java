@@ -15,9 +15,9 @@ public class Campaign {
     String beskrivelse;
     String status;
     Date oprettelse_dato;
-    Date start_dato;
-    Date slut_dato;
-    int pris;
+    String start_dato;
+    String slut_dato;
+    float pris;
     int pno;
 
     public Campaign(int kno, String beskrivelse, String status, Date oprettelse_dato, Date start_dato, Date slut_dato, int pris, int pno) {
@@ -25,16 +25,14 @@ public class Campaign {
         this.beskrivelse = beskrivelse;
         this.status = status;
         this.oprettelse_dato = oprettelse_dato;
-        this.start_dato = start_dato;
-        this.slut_dato = slut_dato;
+        //this.start_dato = start_dato;
+        //this.slut_dato = slut_dato;
         this.pris = pris;
         this.pno = pno;
     }
 
-    public Campaign(String beskrivelse, String status, Date oprettelse_dato, Date start_dato, Date slut_dato, int pris) {
+    public Campaign(String start_dato, String slut_dato, float pris, String beskrivelse) {
         this.beskrivelse = beskrivelse;
-        this.status = status;
-        this.oprettelse_dato = oprettelse_dato;
         this.start_dato = start_dato;
         this.slut_dato = slut_dato;
         this.pris = pris;
@@ -47,9 +45,9 @@ public class Campaign {
         this.beskrivelse = camp.getBeskrivelse();
         this.status = camp.getStatus();
         this.oprettelse_dato = camp.getOprettelse_dato();
-        this.start_dato = camp.getStart_dato();
-        this.slut_dato = camp.getSlut_dato();
-        this.pris = camp.getPris();
+        //this.start_dato = camp.getStart_dato();
+        //this.slut_dato = camp.getSlut_dato();
+        //this.pris = camp.getPris();
         this.pno = camp.getPno();
     }
 
@@ -83,26 +81,6 @@ public class Campaign {
 
     public void setOprettelse_dato(Date oprettelse_dato) {
         this.oprettelse_dato = oprettelse_dato;
-    }
-
-    public Date getStart_dato() {
-        return start_dato;
-    }
-
-    public void setStart_dato(Date start_dato) {
-        this.start_dato = start_dato;
-    }
-
-    public Date getSlut_dato() {
-        return slut_dato;
-    }
-
-    public void setSlut_dato(Date slut_dato) {
-        this.slut_dato = slut_dato;
-    }
-
-    public int getPris() {
-        return pris;
     }
 
     public void setPris(int pris) {

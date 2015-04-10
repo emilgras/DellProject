@@ -16,7 +16,7 @@ public class PartnerFacade {
     private PartnerMapper pm;
     private CampaignMapper cm;
     
-    private DBConnector dbcon;
+    private DBConnector  dbcon = new DBConnector();
     private Connection con = null;
     
 //== Singleton start
@@ -25,7 +25,6 @@ public class PartnerFacade {
     
     private PartnerFacade() {
         pm = new PartnerMapper();
-        cm = new CampaignMapper();
         con = dbcon.getConnection();
     }
 
@@ -45,9 +44,9 @@ public class PartnerFacade {
         return pm.createPartner(partner, con);
     }
 
-    public String createCampaign(Campaign campaign) {
-        /* return cm.insertCampaign(campaign, con);  Hvorfor skal den tage imod en liste og ikke bare et Campaign object? */
-        return "";
+    public boolean createCampaign(Campaign campaign) {
+        //return cm.insertCampaign(campaign, con);
+        return true;
     }
     
     public void test() {
