@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -27,11 +30,11 @@ public class CampaignMapper {
 
         statement.setInt(1, camp.getKno());
         statement.setString(2, camp.getBeskrivelse());
-        statement.setString(3, camp.getStatus());
-        statement.setDate(4, camp.getOprettelse_dato());
-        statement.setDate(5, camp.getStart_dato());
-        statement.setDate(6, camp.getSlut_dato());
-        statement.setInt(7, camp.getPris());
+        statement.setString(3, "Pending");
+        statement.setString(4, "Pending");
+        statement.setString(5, camp.getStart_dato());
+        statement.setString(6, camp.getSlut_dato());
+        statement.setFloat(7, camp.getPris());
         statement.setInt(8, camp.getPno());
         rowsInserted += statement.executeUpdate();
 
