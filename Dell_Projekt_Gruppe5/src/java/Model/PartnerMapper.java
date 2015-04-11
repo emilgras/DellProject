@@ -63,7 +63,7 @@ public class PartnerMapper {
         
     }
     
-    public String createPartner(Partner partner, Connection conn) {
+    public String createPartner(Partner partner, Connection con) {
 
         String errorMessage = "";
 
@@ -80,13 +80,13 @@ public class PartnerMapper {
 
         try {
             
-         PreparedStatement  insertStatement = conn.prepareStatement(SQLString1);
+         PreparedStatement  insertStatement = con.prepareStatement(SQLString1);
         ResultSet rs  = insertStatement.executeQuery();
         if (rs.next())
         {
           partner.setPno(rs.getInt(1));
         } 
-        insertStatement = conn.prepareStatement(sql);
+        insertStatement = con.prepareStatement(sql);
             insertStatement.setInt(1,partner.getPno());
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, name);
@@ -108,6 +108,32 @@ public class PartnerMapper {
 //        }
 
         return errorMessage;
+    }
+    
+    public boolean updatePartnerStatus(int pno, Connection con) throws SQLException{
+        
+        
+        String sqlString2 = "update partner set dato = ? where pno = ?";
+        
+        PreparedStatement  statement = con.prepareStatement(sqlString2);
+        try {
+             java.util.Date date = new java.util.Date();
+            java.sql.Date sqldate = new java.sql.Date(date.getTime());
+            statement = con.prepareStatement(sqlString2);
+            statement.setInt(2,pno);
+            statement.setDate(1, sqldate);
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+          
+        }
+       
+      
+            statement.close();
+        
+        return true;
     }
 }
     
