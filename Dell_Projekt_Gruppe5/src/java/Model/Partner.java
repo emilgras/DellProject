@@ -26,7 +26,7 @@ public class Partner {
 
 
     public Partner(String username, String password, String name, String cvr, Date date) {
-     
+        
         //this.pno = pno;
         this.name = name;
         this.cvr = cvr;

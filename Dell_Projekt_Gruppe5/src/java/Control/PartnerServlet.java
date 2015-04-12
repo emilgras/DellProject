@@ -112,7 +112,11 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
 
+
                 Partner partner = new Partner(user, pass, name, cvr, null);
+
+
+
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
@@ -130,6 +134,7 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
+                        currentPno = partnerFacade.getPno(user);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
