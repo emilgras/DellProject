@@ -9,10 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,67 +20,84 @@ public class CampaignMapper {
 
     static boolean testRun = true;
 
-    public boolean insertCampaign(Campaign camp, Connection con) throws SQLException {
+    public boolean insertCampaign(Campaign camp, int pno, Connection con) {
         int rowsInserted = 0;
         String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
+        String primary = "select kno_increment.nextval from dual";
+        
         PreparedStatement statement = null;
-        statement = con.prepareStatement(sqlString);
+        try {
+            
+            PreparedStatement stmt = con.prepareStatement(primary);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                camp.setKno(rs.getInt(1));
+            }
+            
+            statement = con.prepareStatement(sqlString);
 
-        statement.setInt(1, camp.getKno());
-        statement.setString(2, camp.getBeskrivelse());
-        statement.setString(3, "Pending");
-        statement.setString(4, "Pending");
-        statement.setString(5, camp.getStart_dato());
-        statement.setString(6, camp.getSlut_dato());
-        statement.setFloat(7, camp.getPris());
-        statement.setInt(8, camp.getPno());
-        rowsInserted += statement.executeUpdate();
+            statement.setInt(1, camp.getKno());
+            statement.setString(2, camp.getBeskrivelse());
+            statement.setString(3, "Pending");
+            statement.setString(4, "Pending");
+            statement.setString(5, camp.getStart_dato());
+            statement.setString(6, camp.getSlut_dato());
+            statement.setFloat(7, camp.getPris());
+            statement.setInt(8, pno);
+            rowsInserted += statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (testRun) {
             System.out.println("insertCampaign(): " + (rowsInserted == 1)); // for test
         }
-        statement.close();
+//        try {
+//            statement.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         return (rowsInserted == 1);
     }
 
-    public boolean updateCampaign(int kno, Connection con) throws SQLException{
-        int rowsUpdated= 0;
+    public boolean updateCampaign(int kno, Connection con) throws SQLException {
+        int rowsUpdated = 0;
         String sqlString = "update kampagne set status = ? where kno = ?";
         PreparedStatement statement = null;
         statement = con.prepareStatement(sqlString);
         String status = getCampaignStatus(kno, con);
         status = status.toLowerCase();
-        switch(status){
+        switch (status) {
             case "pending":
                 statement.setInt(2, kno);
                 statement.setString(1, "In-Progress");
                 break;
-            
+
             case "in-progress":
                 statement.setInt(2, kno);
                 statement.setString(1, "POE Pending");
                 break;
-            
+
             case "poe pending":
                 statement.setInt(2, kno);
                 statement.setString(1, "POE Accepted");
                 break;
-            
+
             case "poe accepted":
                 statement.setInt(2, kno);
                 statement.setString(1, "Invoice Pending");
                 break;
-            
+
             case "invoice pending":
                 statement.setInt(2, kno);
                 statement.setString(1, "Complete");
                 break;
-            
+
             case "complete":
                 statement.setInt(2, kno);
                 statement.setString(1, "Complete");
                 break;
-            
+
             default:
                 statement.setInt(2, kno);
                 statement.setString(1, "Noget gik galt");
@@ -90,11 +105,11 @@ public class CampaignMapper {
         }
         statement.executeUpdate();
         statement.close();
-        
+
         return !status.equals(getCampaignStatus(kno, con));
     }
-    
-    public String getCampaignStatus(int kno, Connection con) throws SQLException{
+
+    public String getCampaignStatus(int kno, Connection con) throws SQLException {
         String sqlString = "select status from kampagne where kno = ?";
         PreparedStatement statement = null;
         try {
@@ -102,7 +117,7 @@ public class CampaignMapper {
             statement.setInt(1, kno);
             ResultSet rs = statement.executeQuery();
             String status = "noget gik galt";
-            if(rs.next()){
+            if (rs.next()) {
                 status = rs.getString(1);
             }
             return status;
@@ -112,5 +127,5 @@ public class CampaignMapper {
         }
         return "noget gik galt";
     }
-    
+
 }

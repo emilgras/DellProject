@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -189,6 +190,26 @@ public class PartnerMapper {
    
     }
 
-}
+
     
 
+
+    public int getPno(String username, Connection con) {
+        int pno = 0;
+        String sqlString = "select pno from partner where brugernavn = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            String status = "noget gik galt";
+            if (rs.next()) {
+                pno = Integer.parseInt(rs.getString(1));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("ups");
+        }
+        return pno;
+    }
+}

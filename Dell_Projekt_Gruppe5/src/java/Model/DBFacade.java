@@ -6,13 +6,12 @@
 package Model;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  *
  * @author ABjergfelt
  */
-public class PartnerFacade {
+public class DBFacade {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
@@ -22,16 +21,17 @@ public class PartnerFacade {
     
 //== Singleton start
     
-    private static PartnerFacade instance = null;
+    private static DBFacade instance = null;
     
-    private PartnerFacade() {
+    private DBFacade() {
         pm = new PartnerMapper();
+        cm = new CampaignMapper();
         con = dbcon.getConnection();
     }
 
-    public static PartnerFacade getInstance() {
+    public static DBFacade getInstance() {
         if (instance == null) {
-            instance = new PartnerFacade();
+            instance = new DBFacade();
         }
         return instance;
     }
@@ -40,25 +40,21 @@ public class PartnerFacade {
     public String getLogin(String username, String password) {
         return pm.getLogin(username, password, con);
     }
+    
+    public int getPno(String username) {
+        return pm.getPno(username, con);
+    }
 
     public String createPartner(Partner partner) {
         return pm.createPartner(partner, con);
     }
 
-    public boolean createCampaign(Campaign campaign) {
-        //return cm.insertCampaign(campaign, con);
-        return true;
+    public boolean createCampaign(Campaign campaign, int pno) {
+        return cm.insertCampaign(campaign, pno, con);
     }
     
     public void test() {
         System.out.println("VIRK FOR HELVED!!!");
     }
-    
-   public String getPartnerName() throws SQLException{
-       return pm.showPartnerName(con);
-   }
-    public String getPartnerCVR() throws SQLException{
-       return pm.showPartnerCVR(con);
-   }
 
 }

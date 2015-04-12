@@ -13,10 +13,12 @@ import java.sql.DriverManager;
 public class DBConnector
 {
 
-    private static String driver = "oracle.jdbc.driver.OracleDriver";
-    private static String URL = "jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:dat";
-    private static String id = "cphab207";			
-    private static String pw = "cphab207";
+    private static final String driver = "oracle.jdbc.driver.OracleDriver";
+    private static final String URL = "jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:dat";
+
+    private static final String id = "cpheg23";			
+    private static final String pw = "cpheg23";
+
     
     private Connection con;
     

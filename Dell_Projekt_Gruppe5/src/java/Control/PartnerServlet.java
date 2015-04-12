@@ -7,7 +7,7 @@ package Control;
 
 import Model.Campaign;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import Utils.Validate;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    PartnerFacade partnerFacade = PartnerFacade.getInstance();
-
+    DBFacade partnerFacade = DBFacade.getInstance();
+    int currentPno = 0;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,7 +87,7 @@ public class PartnerServlet extends HttpServlet {
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                System.out.println("2");
+                    System.out.println("2");
                     // Succes ved login form
                     if (!(dbErrorMessage = partnerFacade.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
@@ -94,8 +95,10 @@ public class PartnerServlet extends HttpServlet {
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
-                        // Oprettelse lykkedes
                         System.out.println("4");
+                        // Oprettelse lykkedes
+                        currentPno = partnerFacade.getPno(username);
+                        System.out.println("PNO: " + currentPno);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -110,7 +113,6 @@ public class PartnerServlet extends HttpServlet {
 
 
                 Partner partner = new Partner(user, pass, name, cvr, null);
-
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
@@ -128,6 +130,7 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
+                        currentPno = partnerFacade.getPno(user);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -146,18 +149,21 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
-
-                if ((validationErrorMessage = Validate.campaignErrorMessage(campaignStart, campaignEnd, price, description)).equals("")) {
+               
+                if (!(validationErrorMessage = Validate.campaignErrorMessage(campaign)).equals("")) {
                     // Fejl i login form
+                    System.out.println("Message: " + validationErrorMessage);
                     request.setAttribute("campaignErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
                 } else {
-                    if (!partnerFacade.createCampaign(campaign)) {
+
+                    if (!partnerFacade.createCampaign(campaign, currentPno)) {
                         // Kunne ikke oprette kampagne i database
                         dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
+
                         // Success!
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
