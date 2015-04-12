@@ -80,8 +80,7 @@ public class PartnerServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 
                 request.setAttribute("username", username);
-                
-                System.out.println("0");
+
                 if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
                     System.out.println("1");
@@ -114,9 +113,6 @@ public class PartnerServlet extends HttpServlet {
 
 
                 Partner partner = new Partner(user, pass, name, cvr, null);
-
-
-
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
