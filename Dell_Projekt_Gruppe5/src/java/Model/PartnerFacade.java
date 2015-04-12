@@ -16,7 +16,7 @@ public class PartnerFacade {
     private PartnerMapper pm;
     private CampaignMapper cm;
     
-    private DBConnector  dbcon = new DBConnector();
+    private DBConnector dbcon = new DBConnector();
     private Connection con = null;
     
 //== Singleton start
