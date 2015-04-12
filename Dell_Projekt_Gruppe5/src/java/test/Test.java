@@ -26,8 +26,9 @@ public class Test {
         PartnerMapper pm = new PartnerMapper();
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
-        
-        pm.updatePartnerStatus(5, con);
+        PartnerFacade pf = PartnerFacade.getInstance();
+        pf.getPartnerName();
+        //pm.updatePartnerStatus(5, con);
         
         
         //Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);

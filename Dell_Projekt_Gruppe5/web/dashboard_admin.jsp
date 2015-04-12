@@ -3,6 +3,7 @@
     Created on : 31-03-2015, 23:25:41
     Author     : EmilGras
 --%>
+<%@page import="Model.PartnerFacade"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +16,8 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
+        <% PartnerFacade pf = PartnerFacade.getInstance();%>
+
         <!------------------- NAV ------------------ -->
         <div class="navbar navbar-inverse">
             <div class="container">
@@ -46,8 +49,14 @@
 
                     <div class="tile">
                         <div>
-                            <img src="img/addpartner.png">
+                            <!--<img src="img/addpartner.png">-->
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
+                                <tr><td><% pf.getPartnerName();%> </td><td><% pf.getPartnerCVR();%>  </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>  
+
+
+                            </table> 
                         </div>
                     </div>
                 </div>
@@ -56,14 +65,15 @@
                     <a href="AdminServlet?action=campaigns" id="textDecorationNone">
                         <div class="tile">
                             <div>
-                                <img src="img/money.png">
+                                <!--<img src="img/money.png">-->
+
                                 <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3>
-                                <!-- <table class="table table-striped table-bordered">
+                                <table class="table table-striped table-bordered">
                                     <tr class="active"><th>Name</th><th>Age</th><th>Image</th><th>Progress</th><th>Status</th><th>View case</th></tr>
                                     <tr><td>Emil</td><td>23</td><td>image.png</td><td>88%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>  
                                     <tr><td>Hellen</td><td>27</td><td>image.png</td><td>100%</td><td class="success">Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
                                     <tr><td>Rob</td><td>35</td><td>image.png</td><td>12%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
-                                </table> -->
+                                </table> 
                             </div>
                         </div>
                     </a>
@@ -91,6 +101,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+     
     </body>
 </html>
 

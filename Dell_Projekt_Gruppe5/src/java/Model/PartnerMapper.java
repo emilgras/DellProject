@@ -135,6 +135,60 @@ public class PartnerMapper {
         
         return true;
     }
+    
+    public String showPartnerName(Connection con) throws SQLException{
+        String partnerName = "";
+        String sqlString = "select navn from partner where dato is NULL";
+        PreparedStatement statement = con.prepareStatement(sqlString);
+        
+        try{
+            ResultSet rs  = statement.executeQuery();
+            while (rs.next())
+          {
+            
+                 partnerName = rs.getString(1);
+                 System.out.println(partnerName); 
+          }   
+            
+           
+            
+        }catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return partnerName; 
+    }
+    
+    public String showPartnerCVR(Connection con) throws SQLException{
+        String partnerCVR = "";
+        String sqlString = "select CVR from partner where dato is NULL";
+        PreparedStatement statement =null;
+        
+        try{
+            statement = con.prepareStatement(sqlString);
+            ResultSet rs  = statement.executeQuery();
+            while (rs.next())
+          {
+            
+                partnerCVR = rs.getString(1);
+                  System.out.println(partnerCVR);
+                //return partnerCVR;   
+       
+//                partnerCVR = rs.getString(1);
+//                return partnerCVR;
+         }   
+           
+            
+           
+            
+        }catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return partnerCVR;
+    
+   
+    }
+
 }
     
 

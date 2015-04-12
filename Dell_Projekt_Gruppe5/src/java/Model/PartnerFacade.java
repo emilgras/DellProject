@@ -6,6 +6,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -52,5 +53,12 @@ public class PartnerFacade {
     public void test() {
         System.out.println("VIRK FOR HELVED!!!");
     }
+    
+   public String getPartnerName() throws SQLException{
+       return pm.showPartnerName(con);
+   }
+    public String getPartnerCVR() throws SQLException{
+       return pm.showPartnerCVR(con);
+   }
 
 }
