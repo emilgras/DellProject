@@ -8,7 +8,7 @@ import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -46,7 +46,7 @@ public class Test {
 //        }
         //PartnerFacade.getInstance().test();
         
-        //PartnerFacade facade = PartnerFacade.getInstance();
+        //PartnerFacade facade = DBFacade.getInstance();
         //System.out.println("Test: " + facade.getLogin("hans", "hans"));
 
         

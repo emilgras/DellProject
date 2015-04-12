@@ -7,7 +7,7 @@ package Control;
 
 import Model.Campaign;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import Utils.Validate;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    PartnerFacade partnerFacade = PartnerFacade.getInstance();
+    DBFacade partnerFacade = DBFacade.getInstance();
     int currentPno = 0;
     
     @Override

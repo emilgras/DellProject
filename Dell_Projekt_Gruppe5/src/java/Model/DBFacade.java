@@ -11,7 +11,7 @@ import java.sql.Connection;
  *
  * @author ABjergfelt
  */
-public class PartnerFacade {
+public class DBFacade {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
@@ -21,17 +21,17 @@ public class PartnerFacade {
     
 //== Singleton start
     
-    private static PartnerFacade instance = null;
+    private static DBFacade instance = null;
     
-    private PartnerFacade() {
+    private DBFacade() {
         pm = new PartnerMapper();
         cm = new CampaignMapper();
         con = dbcon.getConnection();
     }
 
-    public static PartnerFacade getInstance() {
+    public static DBFacade getInstance() {
         if (instance == null) {
-            instance = new PartnerFacade();
+            instance = new DBFacade();
         }
         return instance;
     }
