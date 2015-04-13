@@ -70,7 +70,7 @@
                                 <tr class="active"><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
 
                                 <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
-                                    <tr><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><button class="btn btn-info">View more</button></td></tr>
+                                    <tr class="tablerow"><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><button class="btn btn-info">View more</button></td></tr>
                                 </c:forEach>
 
 
@@ -104,7 +104,6 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
 
-
                                         // Denne metode giver hver række et unikt id startende med 0
                                         $('#newestCampaigns tr').each(function (idx) {
                                             $(this).children().first().html(idx);
@@ -119,16 +118,10 @@
                                             });
                                         });
 
-                                        
+
                                         ​
 
-                                                /*var $row = $(this).closest("tr"), // Finds the closest row <tr> 
-                                                 $tds = $row.find("td");             // Finds all children <td> elements
-                                                 
-                                                 $.each($tds, function () {               // Visits every single <td> element
-                                                 console.log($(this).text());        // Prints out the text within the <td>
-                                                 });*/
-
+                                            
         </script>
     </body>
 </html>
