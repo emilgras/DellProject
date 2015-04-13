@@ -68,4 +68,7 @@ public class DBFacade {
         return pm.updatePartnerStatus(cvr, con);
     }
    
+    public ArrayList<Campaign> getAllCampaigns() {
+        return cm.getAllCampaigns(con);
+    }
 }

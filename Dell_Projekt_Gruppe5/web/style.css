@@ -42,6 +42,8 @@ body {
 
 .tileHeader {
     color: #337ab7;
+    text-align: left;
+    margin-bottom: 30px;
 }
 
 #logoutBtn {

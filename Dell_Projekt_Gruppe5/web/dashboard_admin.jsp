@@ -14,7 +14,7 @@
     </head>
     <body>
         <%DBFacade pf = DBFacade.getInstance();%>           
-        
+
         <!------------------- NAV ------------------ -->
         <div class="navbar navbar-inverse">
             <div class="container">
@@ -46,16 +46,16 @@
 
                     <div class="tile">
                         <div>
-                           
+
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                <c:forEach items ="${pnl}" var = "current">
-                                <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction()" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                </c:forEach>
-                                    <tr><td>${current.name} </td></c:forEach><td> </td><td> </td> <td><a href=""<button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                
-                                
+                                        <c:forEach items ="${pnl}" var = "current">
+                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction()" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                            </c:forEach>
+
+
+
 
                             </table> 
                         </div>
@@ -70,10 +70,13 @@
 
                                 <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3>
                                 <table class="table table-striped table-bordered">
-                                    <tr class="active"><th>Name</th><th>Age</th><th>Image</th><th>Progress</th><th>Status</th><th>View case</th></tr>
-                                    <tr><td>Emil</td><td>23</td><td>image.png</td><td>88%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>  
-                                    <tr><td>Hellen</td><td>27</td><td>image.png</td><td>100%</td><td class="success">Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
-                                    <tr><td>Rob</td><td>35</td><td>image.png</td><td>12%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
+                                    <tr class="active"><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
+
+                                    <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
+                                        <tr><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><button class="btn btn-info">View more</button></td></tr>
+                                    </c:forEach>
+
+                                    
                                 </table> 
                             </div>
                         </div>
@@ -102,11 +105,11 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script>
-function myFunction() {
-    document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-</script>
+        <script>
+                                          function myFunction() {
+                                              document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+                                          }
+        </script>
     </body>
 </html>
 

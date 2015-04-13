@@ -50,14 +50,14 @@ DBFacade partnerFacade = DBFacade.getInstance();
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
 
         switch (action) {
 
             case "adminLogin":
                 // VALIDATE
                 
-                request.setAttribute("pnl", partnerFacade.showPartnerName());
-                System.out.println(partnerFacade.showPartnerName().get(0).getName());
+                session.setAttribute("newestCampaigns", partnerFacade.getAllCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 
                 break;
