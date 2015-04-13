@@ -70,7 +70,7 @@
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
 
                                 <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input  type="button" class="btn btn-info" value="View more"></td></tr>
+                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input type="button" class="btn btn-info" value="View more"></td></tr>
                                         </c:forEach>
 
 
@@ -103,21 +103,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
-            
-            
+
+
         </script>
-        
+
         <script>
-             // Denne metode giver hver række et unikt id startende med 1
+            // Denne metode giver hver række et unikt id startende med 1
             $('.tablerow').each(function (i) {
-                $("td:first", this).html(i+1);
+                $("td:first", this).html(i + 1);
             });
             
-           // Denne metode printer række index nummeret
-            $("table tr input").on('click', function (e) {
-                var row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
+            // Denne sender række index med via url til servletten
+            $("table tr input").on('click', function() {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=dashboardcampaigns&id=" + row;
             });
+            
         </script>
     </body>
 </html>
