@@ -154,6 +154,7 @@ public class PartnerMapper {
                 count++;
                 System.out.println(count);
             }
+            
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
