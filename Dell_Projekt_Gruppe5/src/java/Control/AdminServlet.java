@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package Control;
-
+import Model.Partner;
+import Model.PartnerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
-
+PartnerFacade partnerFacade = PartnerFacade.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,4 +60,6 @@ public class AdminServlet extends HttpServlet {
                 break;
         }
     }
+    
+    
 }

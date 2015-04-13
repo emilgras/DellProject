@@ -11,26 +11,27 @@ import java.sql.Connection;
  *
  * @author ABjergfelt
  */
-public class PartnerFacade {
+public class DBFacade {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
     
-    private DBConnector  dbcon = new DBConnector();
+    private DBConnector dbcon = new DBConnector();
     private Connection con = null;
     
 //== Singleton start
     
-    private static PartnerFacade instance = null;
+    private static DBFacade instance = null;
     
-    private PartnerFacade() {
+    private DBFacade() {
         pm = new PartnerMapper();
+        cm = new CampaignMapper();
         con = dbcon.getConnection();
     }
 
-    public static PartnerFacade getInstance() {
+    public static DBFacade getInstance() {
         if (instance == null) {
-            instance = new PartnerFacade();
+            instance = new DBFacade();
         }
         return instance;
     }
@@ -39,14 +40,17 @@ public class PartnerFacade {
     public String getLogin(String username, String password) {
         return pm.getLogin(username, password, con);
     }
+    
+    public int getPno(String username) {
+        return pm.getPno(username, con);
+    }
 
     public String createPartner(Partner partner) {
         return pm.createPartner(partner, con);
     }
 
-    public boolean createCampaign(Campaign campaign) {
-        //return cm.insertCampaign(campaign, con);
-        return true;
+    public boolean createCampaign(Campaign campaign, int pno) {
+        return cm.insertCampaign(campaign, pno, con);
     }
     
     public void test() {

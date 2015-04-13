@@ -13,7 +13,8 @@
         <link href="style.css" rel="stylesheet">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body>  
+        
         
         <!---------- Nav bar ---------->
         <div class="navbar navbar-inverse">
