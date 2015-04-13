@@ -53,6 +53,8 @@
                                 <c:forEach items ="${pnl}" var = "current">
                                 <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction()" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                 </c:forEach>
+                                    <tr><td>${current.name} </td></c:forEach><td> </td><td> </td> <td><a href=""<button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                
                                 
 
                             </table> 
