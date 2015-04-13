@@ -28,8 +28,8 @@ public class Test {
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
         DBFacade pf = DBFacade.getInstance();
         //pf.getPartnerName();
-        //pm.updatePartnerStatus(5, con);
-       
+     
+       pf.showPartnerName();
         
         //Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
 //        ArrayList<Campaign> list = new ArrayList<Campaign>();

@@ -109,27 +109,26 @@ public class PartnerMapper {
         return errorMessage;
     }
 
-    public boolean updatePartnerStatus(int pno, Connection con) throws SQLException {
+    public boolean updatePartnerStatus(String cvr, Connection con) {
 
-        String sqlString2 = "update partner set dato = ? where pno = ?";
+        String sqlString2 = "update partner set dato = ? where cvr = ?";
 
-        PreparedStatement statement = con.prepareStatement(sqlString2);
+        
         try {
+            PreparedStatement statement = con.prepareStatement(sqlString2);
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
-            statement.setInt(2, pno);
+            statement.setString(2,cvr );
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
-            return true;
+            statement.close();
+            return true; 
+            
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-
         }
-
-        statement.close();
-
         return true;
     }
 
@@ -141,6 +140,7 @@ public class PartnerMapper {
         try {
             PreparedStatement statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
+            int count = 0;
             while (rs.next()) {
 
                 String partnerName = rs.getString(1);
@@ -149,14 +149,16 @@ public class PartnerMapper {
                 Partner p = new Partner(partnerName, partnerCVR);
                 p.setName(partnerName);
                 p.setCvr(partnerCVR);
-                pArray.add(p); System.out.println(pArray.isEmpty());
-                System.out.println(pArray.get(0).getName());
-                //System.out.println(pArray.get(0).getCvr());
+                pArray.add(p); 
+                System.out.println(pArray.get(count).getName());
+                count++;
+                System.out.println(count);
             }
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        
         return pArray;
         
     }

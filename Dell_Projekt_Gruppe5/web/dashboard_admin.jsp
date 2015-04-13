@@ -46,13 +46,13 @@
 
                     <div class="tile">
                         <div>
-                            <!--<img src="img/addpartner.png">-->
+                           
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
                                 <c:forEach items ="${pnl}" var = "current">
-                                <tr><td>${current.name} </td></c:forEach><td> </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                
+                                <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction()" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                </c:forEach>
                                 
 
                             </table> 
@@ -100,7 +100,11 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-     
+  <script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+}
+</script>
     </body>
 </html>
 

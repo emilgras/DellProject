@@ -63,5 +63,9 @@ public class DBFacade {
        
         return pm.showPartnerName(con);
     }
+    
+    public boolean updatePartnerStatus(String cvr){
+        return pm.updatePartnerStatus(cvr, con);
+    }
    
 }
