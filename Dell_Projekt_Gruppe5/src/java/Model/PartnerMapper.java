@@ -151,8 +151,9 @@ public class PartnerMapper {
                 p.setCvr(partnerCVR);
                 pArray.add(p); System.out.println(pArray.isEmpty());
                 System.out.println(pArray.get(0).getName());
-                //System.out.println(pArray.get(0).getCvr());
+                System.out.println(pArray.get(0).getCvr());
             }
+            
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
