@@ -101,7 +101,7 @@ public class CampaignMapper {
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, kno);
             ResultSet rs = statement.executeQuery();
-            String status = "noget gik galt";
+            String status = "tom";
             if(rs.next()){
                 status = rs.getString(1);
             }
@@ -111,6 +111,23 @@ public class CampaignMapper {
             System.out.println("ups");
         }
         return "noget gik galt";
+    }
+    
+    public ArrayList<Campaign> getAllCampaigns(Connection con) throws SQLException{
+        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                Campaign tmp = new Campaign(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getFloat(7),rs.getInt(8),rs.getString(9),rs.getString(10));
+                list.add(tmp);
+            }
+            
+        } catch (Exception e) {
+        }
+        return list;
     }
     
 }

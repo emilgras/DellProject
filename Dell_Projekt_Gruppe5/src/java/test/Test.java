@@ -49,7 +49,11 @@ public class Test {
 //        PartnerMapper pm = new PartnerMapper();
 //        System.out.println(pm.getLogin("hans", "haans", con));
         try {
-            cm.insertCampaign(camp, con);
+            ArrayList<Campaign> list = new ArrayList<Campaign>();
+            list = cm.getAllCampaigns(con);
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.get(i).toString());
+            }
         } catch (Exception e) {
             System.out.println("første ups");
         }

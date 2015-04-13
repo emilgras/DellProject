@@ -19,6 +19,8 @@ public class Campaign {
     String slut_dato;
     float pris;
     int pno;
+    String navn;
+    String cvr;
 
     public Campaign(int kno, String beskrivelse, String status, String oprettelse_dato, String start_dato, String slut_dato, float pris, int pno) {
         this.kno = kno;
@@ -38,6 +40,19 @@ public class Campaign {
         this.pris = pris;
     }
 
+    public Campaign(int kno, String beskrivelse, String status, String oprettelse_dato, String start_dato, String slut_dato, float pris, int pno, String navn, String cvr) {
+        this.kno = kno;
+        this.beskrivelse = beskrivelse;
+        this.status = status;
+        this.oprettelse_dato = oprettelse_dato;
+        this.start_dato = start_dato;
+        this.slut_dato = slut_dato;
+        this.pris = pris;
+        this.pno = pno;
+        this.navn = navn;
+        this.cvr = cvr;
+    }
+    
     public int getKno() {
         return kno;
     }
@@ -102,6 +117,27 @@ public class Campaign {
         this.pno = pno;
     }
 
+    public String getNavn() {
+        return navn;
+    }
+
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
+
+    public String getCvr() {
+        return cvr;
+    }
+
+    public void setCvr(String cvr) {
+        this.cvr = cvr;
+    }
+
+    @Override
+    public String toString() {
+        return "Campaign{" + "kno=" + kno + ", beskrivelse=" + beskrivelse + ", status=" + status + ", oprettelse_dato=" + oprettelse_dato + ", start_dato=" + start_dato + ", slut_dato=" + slut_dato + ", pris=" + pris + ", pno=" + pno + ", navn=" + navn + ", cvr=" + cvr + '}';
+    }
+    
     
     
 }
