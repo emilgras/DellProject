@@ -51,7 +51,7 @@
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
                                         <c:forEach items ="${pnl}" var = "current">
-                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction()" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction(this)" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                             </c:forEach>
 
 
@@ -63,24 +63,21 @@
                 </div>
 
                 <div class="col-md-6 marginTop">
-                    <a href="AdminServlet?action=campaigns" id="textDecorationNone">
-                        <div class="tile">
-                            <div>
-                                <!--<img src="img/money.png">-->
+                    <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3> </a>
+                    <div class="tile">
+                        <div>
+                            <table class="table table-striped table-bordered" id="newestCampaigns">
+                                <tr class="active"><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
 
-                                <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3>
-                                <table class="table table-striped table-bordered">
-                                    <tr class="active"><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
+                                <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
+                                    <tr><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><button class="btn btn-info">View more</button></td></tr>
+                                </c:forEach>
 
-                                    <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
-                                        <tr><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><button class="btn btn-info">View more</button></td></tr>
-                                    </c:forEach>
 
-                                    
-                                </table> 
-                            </div>
+                            </table> 
                         </div>
-                    </a>
+                    </div>
+
                 </div>
 
                 <div class="col-md-12 marginTop">
@@ -106,9 +103,32 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
-                                          function myFunction() {
-                                              document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-                                          }
+
+
+                                        // Denne metode giver hver række et unikt id startende med 0
+                                        $('#newestCampaigns tr').each(function (idx) {
+                                            $(this).children().first().html(idx);
+                                        });
+
+                                        // Denne metode printer række index nummeret
+                                        $(function () {
+                                            $('#newestCampaigns tr').click(function () {
+                                                var $tr = $(this).closest('tr');
+                                                var myRow = $tr.index();
+                                                alert(myRow);
+                                            });
+                                        });
+
+                                        
+                                        ​
+
+                                                /*var $row = $(this).closest("tr"), // Finds the closest row <tr> 
+                                                 $tds = $row.find("td");             // Finds all children <td> elements
+                                                 
+                                                 $.each($tds, function () {               // Visits every single <td> element
+                                                 console.log($(this).text());        // Prints out the text within the <td>
+                                                 });*/
+
         </script>
     </body>
 </html>

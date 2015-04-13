@@ -95,3 +95,7 @@ body {
     margin-right: auto;
     width: 525px;
 }
+
+.leftAlign {
+    text-align: right;
+}
