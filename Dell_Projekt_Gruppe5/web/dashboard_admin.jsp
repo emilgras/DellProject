@@ -3,8 +3,8 @@
     Created on : 31-03-2015, 23:25:41
     Author     : EmilGras
 --%>
-<%@page import="Model.PartnerFacade"%>
-
+<%@page import="Model.DBFacade"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,10 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <% PartnerFacade pf = PartnerFacade.getInstance();%>
+        <% DBFacade pf = DBFacade.getInstance();%>
+        
+
+        
 
         <!------------------- NAV ------------------ -->
         <div class="navbar navbar-inverse">
@@ -53,8 +56,10 @@
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                <tr><td><% pf.getPartnerName();%> </td><td><% pf.getPartnerCVR();%>  </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>  
-
+                                <c:forEach var="partner" items="${list}">
+                                    
+                                <tr><td> ${partner.name} </td><td> </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>  
+                                </c:forEach>
 
                             </table> 
                         </div>

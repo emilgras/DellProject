@@ -33,7 +33,7 @@ public class Campaign {
         this.pno = pno;
     }
 
-    public Campaign(String start_dato, String slut_dato, float pris, String beskrivelse) {
+    public Campaign(String start_dato, String slut_dato, float pris, String beskrivelse, int pno) {
         this.beskrivelse = beskrivelse;
         this.start_dato = start_dato;
         this.slut_dato = slut_dato;
