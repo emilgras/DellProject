@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ public class CampaignMapper {
 
     static boolean testRun = true;
 
-    public boolean insertCampaign(Campaign camp, int pno, Connection con) {
+    public boolean insertCampaign(Campaign camp, Connection con) {
         int rowsInserted = 0;
         String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
         String primary = "select kno_increment.nextval from dual";
@@ -43,7 +44,7 @@ public class CampaignMapper {
             statement.setString(5, camp.getStart_dato());
             statement.setString(6, camp.getSlut_dato());
             statement.setFloat(7, camp.getPris());
-            statement.setInt(8, pno);
+            statement.setInt(8, camp.getPno());
             rowsInserted += statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,7 +117,8 @@ public class CampaignMapper {
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, kno);
             ResultSet rs = statement.executeQuery();
-            String status = "noget gik galt";
+
+            String status = "tom";
             if (rs.next()) {
                 status = rs.getString(1);
             }
@@ -128,4 +130,22 @@ public class CampaignMapper {
         return "noget gik galt";
     }
 
+    
+    public ArrayList<Campaign> getAllCampaigns(Connection con) throws SQLException{
+        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                Campaign tmp = new Campaign(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getFloat(7),rs.getInt(8),rs.getString(9),rs.getString(10));
+                list.add(tmp);
+            }
+            
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
 }

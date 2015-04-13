@@ -143,7 +143,7 @@ public class PartnerServlet extends HttpServlet {
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
 
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description);
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description,currentPno);
                 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
@@ -157,7 +157,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
                 } else {
 
-                    if (!partnerFacade.createCampaign(campaign, currentPno)) {
+                    if (!partnerFacade.createCampaign(campaign)) {
                         // Kunne ikke oprette kampagne i database
                         dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);

@@ -27,7 +27,7 @@ public class Test {
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
         DBFacade pf = DBFacade.getInstance();
-        pm.showPartnerName(con);
+        //pf.getPartnerName();
         //pm.updatePartnerStatus(5, con);
        
         
@@ -54,8 +54,20 @@ public class Test {
         
 //        PartnerMapper pm = new PartnerMapper();
 //        System.out.println(pm.getLogin("hans", "haans", con));
-        //try {
-          
+        try {
+            ArrayList<Campaign> list = new ArrayList<Campaign>();
+            list = cm.getAllCampaigns(con);
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.get(i).toString());
+            }
+        } catch (Exception e) {
+            System.out.println("første ups");
+        }
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.out.println("ups");
+        }
         
         
     }

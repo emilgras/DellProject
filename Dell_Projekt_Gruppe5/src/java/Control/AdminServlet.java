@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package Control;
+
 import Model.Partner;
 import Model.DBFacade;
+
+import Model.DBFacade;
+import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +22,12 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
+
+    
 DBFacade partnerFacade = DBFacade.getInstance();
+
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,8 +65,14 @@ DBFacade partnerFacade = DBFacade.getInstance();
 
             case "adminLogin":
                 // VALIDATE
+
                 request.setAttribute("pnl", partnerFacade.showPartnerName());
                 System.out.println(partnerFacade.showPartnerName().get(0).getName());
+
+                ArrayList list = new ArrayList();
+               
+                session.setAttribute("list", list);
+
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 
                 break;
