@@ -51,9 +51,9 @@ public class Partner {
     public Partner() {
     }
     
-    public Partner(String username, String password){
-        this.username = username;
-        this.password = password;
+    public Partner(String name, String cvr){
+        this.username = name;
+        this.password = cvr;
     }
 
     public String getUsername() {

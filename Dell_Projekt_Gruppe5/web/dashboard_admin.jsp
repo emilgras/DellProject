@@ -1,11 +1,8 @@
-<%-- 
-    Document   : dashboard_admin
-    Created on : 31-03-2015, 23:25:41
-    Author     : EmilGras
---%>
-<%@page import="Model.PartnerFacade"%>
+
+<%@page import="Model.DBFacade"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,8 +13,8 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <% PartnerFacade pf = PartnerFacade.getInstance();%>
-
+        <%DBFacade pf = DBFacade.getInstance();%>           
+        
         <!------------------- NAV ------------------ -->
         <div class="navbar navbar-inverse">
             <div class="container">
@@ -53,8 +50,10 @@
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                <tr><td><% pf.getPartnerName();%> </td><td><% pf.getPartnerCVR();%>  </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>  
-
+                                <c:forEach items ="${pnl}" var = "current">
+                                <tr><td>${current.name} </td></c:forEach><td> </td><td> </td> <td><button type="button" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                
+                                
 
                             </table> 
                         </div>

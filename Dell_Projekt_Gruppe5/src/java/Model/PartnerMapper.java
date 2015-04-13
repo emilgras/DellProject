@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,27 +21,26 @@ import java.util.logging.Logger;
  * @author ABjergfelt
  */
 public class PartnerMapper {
+
     int count = 0;
     String message = "";
-    
-    
-    public String getLogin(String username, String password, Connection con){
+
+    public String getLogin(String username, String password, Connection con) {
         Partner p = null;
-        String SQLString1 =       
-          "select count(*) as count from partner where brugernavn = ? and password = ?";
-        
-        PreparedStatement statement= null;
-        
-        try
-        {
+        String SQLString1
+                = "select count(*) as count from partner where brugernavn = ? and password = ?";
+
+        PreparedStatement statement = null;
+
+        try {
             // get login
             statement = con.prepareStatement(SQLString1);
-            
-            statement.setString(1,username);
+
+            statement.setString(1, username);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            
+
             count = rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,24 +56,22 @@ public class PartnerMapper {
 //      }
         if (count == 0) {
             message = "Invalid username or password";
-            
+
         }
         System.out.println(count);
-      return message;                         
-       
-      
-        
+        return message;
+
     }
-    
+
     public String createPartner(Partner partner, Connection con) {
 
         String errorMessage = "";
 
         String sql = "INSERT INTO partner (pno, cvr, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?,?)";
-        String SQLString1 = 
-        "select pno_increment.nextval  " +
-        "from dual" ;
-        
+        String SQLString1
+                = "select pno_increment.nextval  "
+                + "from dual";
+
         String user = partner.getUsername();
         String pass = partner.getPassword();
         String name = partner.getName();
@@ -80,15 +79,14 @@ public class PartnerMapper {
         Date date = partner.getDate();
 
         try {
-            
-         PreparedStatement  insertStatement = con.prepareStatement(SQLString1);
-        ResultSet rs  = insertStatement.executeQuery();
-        if (rs.next())
-        {
-          partner.setPno(rs.getInt(1));
-        } 
-        insertStatement = con.prepareStatement(sql);
-            insertStatement.setInt(1,partner.getPno());
+
+            PreparedStatement insertStatement = con.prepareStatement(SQLString1);
+            ResultSet rs = insertStatement.executeQuery();
+            if (rs.next()) {
+                partner.setPno(rs.getInt(1));
+            }
+            insertStatement = con.prepareStatement(sql);
+            insertStatement.setInt(1, partner.getPno());
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, name);
             insertStatement.setDate(4, date);
@@ -110,90 +108,89 @@ public class PartnerMapper {
 
         return errorMessage;
     }
-    
-    public boolean updatePartnerStatus(int pno, Connection con) throws SQLException{
-        
-        
+
+    public boolean updatePartnerStatus(int pno, Connection con) throws SQLException {
+
         String sqlString2 = "update partner set dato = ? where pno = ?";
-        
-        PreparedStatement  statement = con.prepareStatement(sqlString2);
+
+        PreparedStatement statement = con.prepareStatement(sqlString2);
         try {
-             java.util.Date date = new java.util.Date();
+            java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
-            statement.setInt(2,pno);
+            statement.setInt(2, pno);
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-          
+
         }
-       
-      
-            statement.close();
-        
+
+        statement.close();
+
         return true;
     }
-    
-    public String showPartnerName(Connection con) throws SQLException{
-        String partnerName = "";
-        String sqlString = "select navn from partner where dato is NULL";
-        PreparedStatement statement = con.prepareStatement(sqlString);
-        
-        try{
-            ResultSet rs  = statement.executeQuery();
-            while (rs.next())
-          {
-            
-                 partnerName = rs.getString(1);
-                 System.out.println(partnerName); 
-          }   
-            
-           
-            
-        }catch(SQLException ex){
-            System.err.println(ex.getMessage());
-        }
-        return partnerName; 
-    }
-    
-    public String showPartnerCVR(Connection con) throws SQLException{
-        String partnerCVR = "";
-        String sqlString = "select CVR from partner where dato is NULL";
-        PreparedStatement statement =null;
-        
-        try{
-            statement = con.prepareStatement(sqlString);
-            ResultSet rs  = statement.executeQuery();
-            while (rs.next())
-          {
-            
-                partnerCVR = rs.getString(1);
-                  System.out.println(partnerCVR);
-                //return partnerCVR;   
+
+    public ArrayList<Partner> showPartnerName(Connection con) {
        
-//                partnerCVR = rs.getString(1);
-//                return partnerCVR;
-         }   
-           
-            
-           
-            
-        }catch(SQLException ex){
+        String sqlString = "select navn,cvr from partner where dato is NULL";
+        ArrayList<Partner> pArray = new ArrayList<>();
+        
+        try {
+            PreparedStatement statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+
+                String partnerName = rs.getString(1);
+                String partnerCVR = rs.getString(2);
+                
+                Partner p = new Partner(partnerName, partnerCVR);
+                p.setName(partnerName);
+                p.setCvr(partnerCVR);
+                pArray.add(p); System.out.println(pArray.isEmpty());
+                System.out.println(pArray.get(0).getName());
+                //System.out.println(pArray.get(0).getCvr());
+            }
+
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        return pArray;
         
-        return partnerCVR;
-    
-   
     }
 
-
-    
-
-
+//    public String showPartnerCVR(Connection con){
+//        String partnerCVR = "";
+//        String sqlString = "select CVR from partner where dato is NULL";
+//        PreparedStatement statement =null;
+//        
+//        try{
+//            statement = con.prepareStatement(sqlString);
+//            ResultSet rs  = statement.executeQuery();
+//            while (rs.next())
+//          {
+//            
+//                partnerCVR = rs.getString(1);
+//                  System.out.println(partnerCVR);
+//                //return partnerCVR;   
+//       
+////                partnerCVR = rs.getString(1);
+////                return partnerCVR;
+//         }   
+//           
+//            
+//           
+//            
+//        }catch(SQLException ex){
+//            System.err.println(ex.getMessage());
+//        }
+//        
+//        return partnerCVR;
+//    
+//   
+//    }
     public int getPno(String username, Connection con) {
         int pno = 0;
         String sqlString = "select pno from partner where brugernavn = ?";

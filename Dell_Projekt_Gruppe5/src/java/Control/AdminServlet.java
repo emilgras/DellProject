@@ -5,7 +5,7 @@
  */
 package Control;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,10 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
-PartnerFacade partnerFacade = PartnerFacade.getInstance();
+DBFacade partnerFacade = DBFacade.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,14 +50,17 @@ PartnerFacade partnerFacade = PartnerFacade.getInstance();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
 
         switch (action) {
 
             case "adminLogin":
                 // VALIDATE
+                request.setAttribute("pnl", partnerFacade.showPartnerName());
+                System.out.println(partnerFacade.showPartnerName().get(0).getName());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
+                
                 break;
         }
     }

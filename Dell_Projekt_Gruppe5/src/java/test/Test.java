@@ -8,7 +8,7 @@ import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,10 +26,10 @@ public class Test {
         PartnerMapper pm = new PartnerMapper();
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
-        PartnerFacade pf = PartnerFacade.getInstance();
-        pf.getPartnerName();
+        DBFacade pf = DBFacade.getInstance();
+        pm.showPartnerName(con);
         //pm.updatePartnerStatus(5, con);
-        
+       
         
         //Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
 //        ArrayList<Campaign> list = new ArrayList<Campaign>();

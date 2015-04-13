@@ -6,6 +6,8 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -56,5 +58,10 @@ public class DBFacade {
     public void test() {
         System.out.println("VIRK FOR HELVED!!!");
     }
-
+    
+    public ArrayList<Partner> showPartnerName(){
+       
+        return pm.showPartnerName(con);
+    }
+   
 }
