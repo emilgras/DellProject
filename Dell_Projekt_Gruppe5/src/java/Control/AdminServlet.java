@@ -5,7 +5,7 @@
  */
 package Control;
 import Model.Partner;
-import Model.PartnerFacade;
+import Model.DBFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
-PartnerFacade partnerFacade = PartnerFacade.getInstance();
+DBFacade partnerFacade = DBFacade.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
