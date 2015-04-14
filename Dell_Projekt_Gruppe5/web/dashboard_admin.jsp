@@ -51,7 +51,7 @@
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
                                         <c:forEach items ="${pnl}" var = "current">
-                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button" onclick ="myFunction(this)" id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button"  id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                             </c:forEach>
 
 
@@ -117,6 +117,11 @@
             $("table tr input").on('click', function() {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=dashboardcampaigns&id=" + row;
+            });
+            
+            $("table tr #btn").on('click', function() {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=dashboardpartners&id=" + row;
             });
             
         </script>
