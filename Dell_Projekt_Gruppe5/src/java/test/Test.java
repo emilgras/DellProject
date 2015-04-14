@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package test;
+import Control.Controller;
 import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
@@ -28,11 +29,12 @@ public class Test {
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
         DBFacade pf = DBFacade.getInstance();
         //pf.getPartnerName();
-     
+        Controller cont = new Controller();
        pf.showPartnerName();
         
-        //Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
-//        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
+        cont.createCampaign(camp);
+       
 //        list.add(camp);
 //        try {
 //            cm.insertCampaign(list, con);
@@ -54,15 +56,15 @@ public class Test {
         
 //        PartnerMapper pm = new PartnerMapper();
 //        System.out.println(pm.getLogin("hans", "haans", con));
-        try {
-            ArrayList<Campaign> list = new ArrayList<Campaign>();
-            list = cm.getAllCampaigns(con);
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).toString());
-            }
-        } catch (Exception e) {
-            System.out.println("første ups");
-        }
+//        try {
+//            ArrayList<Campaign> list = new ArrayList<Campaign>();
+//            list = cm.getAllCampaigns(con);
+//            for (int i = 0; i < list.size(); i++) {
+//                System.out.println(list.get(i).toString());
+//            }
+//        } catch (Exception e) {
+//            System.out.println("første ups");
+//        }
         try {
             con.close();
         } catch (Exception e) {

@@ -26,7 +26,7 @@ public class CampaignMapper {
         String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
         String primary = "select kno_increment.nextval from dual";
         
-        PreparedStatement statement = null;
+       PreparedStatement statement = null;
         try {
             
             PreparedStatement stmt = con.prepareStatement(primary);
@@ -45,7 +45,9 @@ public class CampaignMapper {
             statement.setString(6, camp.getSlut_dato());
             statement.setFloat(7, camp.getPris());
             statement.setInt(8, camp.getPno());
+            
             rowsInserted += statement.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
