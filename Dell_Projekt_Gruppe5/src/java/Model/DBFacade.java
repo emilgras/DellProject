@@ -51,19 +51,32 @@ public class DBFacade {
         return cm.insertCampaign(campaign, con);
     }
     
-   
+    /*** Dashboard view ***/
     
-    public ArrayList<Partner> showPartnerName(){
-
-        return pm.showNewPartners(con);
-
+    public ArrayList<Partner> getAllPendingPartners(){
+        return pm.getAllPendingPartners(con);
     }
     
-    public boolean updatePartnerStatus(String cvr){
-        return pm.updatePartnerStatus(cvr, con);
+    public ArrayList<Campaign> getAllPendingCampaigns() {
+       return cm.getAllPendingCampaigns(con);
     }
    
-    public ArrayList<Campaign> getAllCampaigns() {
-        return cm.getAllCampaigns(con);
+    public ArrayList<Campaign> getAllNewestCampaigns() {
+        return cm.getAllNewestCampaigns(con);
+    }
+
+    /*** Dashboard button interaction ***/
+    
+    public boolean acceptPartner(String cvr){
+        return pm.acceptPartner(cvr, con);
+    }
+    
+    public boolean acceptCampaign(int kno) {
+        System.out.println("DBFacade: " + cm.acceptCampaign(kno, con));
+        return cm.acceptCampaign(kno, con);
+    }
+    
+    public boolean updateCampaign(int kno) {
+        return cm.updateCampaign(kno, con);
     }
 }

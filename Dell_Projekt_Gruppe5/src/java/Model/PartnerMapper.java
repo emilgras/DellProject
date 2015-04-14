@@ -109,11 +109,10 @@ public class PartnerMapper {
         return errorMessage;
     }
 
-    public boolean updatePartnerStatus(String cvr, Connection con) {
+    public boolean acceptPartner(String cvr, Connection con) {
 
         String sqlString2 = "update partner set dato = ? where cvr = ?";
 
-        
         try {
             PreparedStatement statement = con.prepareStatement(sqlString2);
             java.util.Date date = new java.util.Date();
@@ -131,8 +130,8 @@ public class PartnerMapper {
         }
         return true;
     }
-
-    public ArrayList<Partner> showNewPartners(Connection con) {
+    
+    public ArrayList<Partner> getAllPendingPartners(Connection con) {
        
         String sqlString = "select navn,cvr from partner where dato is NULL";
         ArrayList<Partner> pArray = new ArrayList<>();

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
@@ -68,11 +69,11 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-      
-        
+
         String action = request.getParameter("action");
         String validationErrorMessage;
         String dbErrorMessage;
+        HttpSession session = request.getSession();
 
         switch (action) {
 
@@ -84,22 +85,20 @@ public class PartnerServlet extends HttpServlet {
 
                 if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
-                    System.out.println("1");
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                    System.out.println("2");
+
                     // Succes ved login form
                     if (!(dbErrorMessage = partnerFacade.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
-                        System.out.println("3");
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
-                        System.out.println("4");
-                        // Oprettelse lykkedes
-                        currentPno = partnerFacade.getPno(username);
-                        System.out.println("PNO: " + currentPno);
+                        
+                        currentPno = partnerFacade.getPno(username);        
+                        
+                        // Sender brugeren videre til dashboard
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }

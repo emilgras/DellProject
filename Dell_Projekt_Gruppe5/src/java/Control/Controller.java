@@ -9,23 +9,27 @@ import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
+
 /**
  *
  * @author AndersBjergfelt
  */
 public class Controller implements ControlInterface {
+
+    DBFacade facade = DBFacade.getInstance();
     
-    ArrayList <Partner> newPartnerArray = new ArrayList<>();
-    ArrayList <Campaign> newCampaignArray = new ArrayList<>();
-    
+    ArrayList<Partner> pendingPartners = new ArrayList<>();
+    ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
+    ArrayList<Campaign> newestPartners = new ArrayList<>();
+
     @Override
     public String getLogin(String username, String password) {
-     return   getInstance().getLogin(username, password);
+        return getInstance().getLogin(username, password);
     }
 
     @Override
     public int getPno(String username) {
-       return getInstance().getPno(username);
+        return getInstance().getPno(username);
     }
 
     @Override
@@ -38,47 +42,94 @@ public class Controller implements ControlInterface {
         return getInstance().createCampaign(campaign);
     }
 
-    @Override
-    public ArrayList<Partner> showAllNewPartners() {
-       newPartnerArray = getInstance().showPartnerName();
-        return getInstance().showPartnerName();
-    }
+    
 
-    @Override
-    public boolean updatePartnerStatus(String cvr) {
-        return getInstance().updatePartnerStatus(cvr);
-    }
+    
 
     @Override
     public ArrayList<Campaign> showAllNewCampaigns() {
-        
-        return getInstance().getAllCampaigns();
-        
+
+        return getInstance().getAllNewestCampaigns();
+
     }
 
-    @Override
-    public ArrayList<Campaign> getAllPendingCampaigns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public ArrayList<Partner> getNewPartnerArrayList(int id) {
-       String partnerCVR = newPartnerArray.get(id).getCvr();
-        getInstance().updatePartnerStatus(partnerCVR);
-        System.out.println(newPartnerArray.get(id).getCvr());
-        return newPartnerArray;
+        String partnerCVR = pendingPartners.get(id).getCvr();
+        //getInstance().updatePartnerStatus(partnerCVR);
+        System.out.println(pendingPartners.get(id).getCvr());
+        return pendingPartners;
     }
 
     @Override
     public ArrayList<Campaign> getNewCampaignArrayList() {
-        
-        return newCampaignArray;
+
+        return pendingCampaigns;
+    }
+
+    @Override
+    public DBFacade getInstance() {
+        DBFacade dbf = DBFacade.getInstance();
+        return dbf;
     }
     
-    @Override 
-    public DBFacade getInstance(){
-        DBFacade dbf = DBFacade.getInstance();
-        return dbf ;
+    /*** Dashboard view ***/
+    
+    @Override
+    public ArrayList<Partner> getAllPendingPartners() {
+        pendingPartners = getInstance().getAllPendingPartners();
+        return pendingPartners;
     }
+    
+    @Override
+    public ArrayList<Campaign> getAllPendingCampaigns() {
+        pendingCampaigns = getInstance().getAllPendingCampaigns();
+        return pendingCampaigns;
+    }
+    
+    @Override
+    public ArrayList<Campaign> getAllNewestCampaigns() {
+        newestPartners = getInstance().getAllNewestCampaigns();
+        return newestPartners;
+    }
+    
+    /*** Dashboard button interaction ***/
+
+    @Override
+    public boolean acceptPartner(int id) {
+        boolean success = true;
+        String cvr = pendingPartners.get(id).getCvr();
+        if (getInstance().acceptPartner(cvr)) {
+            pendingPartners.remove(id);
+        } else {
+            success = false;
+        }
+        return success;
+    }
+    
+    @Override
+    public boolean acceptCampaign(int id) {
+        boolean success = true;
+        int kno = pendingCampaigns.get(id).getKno();
+        System.out.println("KNO: " + kno);
+        if (getInstance().acceptCampaign(kno)) {
+            System.out.println("SUCCESS...");
+            pendingCampaigns.remove(id);
+            updateCampaign(kno);
+        } else {
+            success = false;
+        }
+        return success;
+    }
+
+    @Override
+    public boolean updateCampaign(int kno) {
+        return getInstance().updateCampaign(kno);
+    }
+    
+    
+
     
 }

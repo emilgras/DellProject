@@ -42,54 +42,64 @@
         <div class="container marginBottom">
             <h1 class="tileHeader">Dashboard</h1>
             <div class="row center">  
-                <div class="col-md-6 marginTop">
 
+                <!------------ PENDING PARTNERS ------------>
+                <div class="col-md-6 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
                     <div class="tile">
                         <div>
-
-                            <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> New Applicants</h3>
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach items ="${pnl}" var = "current">
-                                    <tr><td>${current.name} </td><td>${current.cvr} </td><td> </td> <td><button type="button"  id="btn" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Accept</th><th>Decline</th></tr>
+                                        <c:forEach var="partner" items="${pendingPartners}">
+                                    <tr><td>${partner.name} </td><td>${partner.cvr} </td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                             </c:forEach>
-
-
-
-
                             </table> 
                         </div>
                     </div>
                 </div>
 
+                <!------------ NEWEST CAMPAIGNS ------------>
                 <div class="col-md-6 marginTop">
                     <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3> </a>
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered" id="newestCampaigns">
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
-
-                                <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="test" type="button" class="btn btn-info" value="View more"></td></tr>
+                                        <c:forEach var="campaign" items="${newestCampaigns}">
+                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View more"></td></tr>
                                         </c:forEach>
-
-
                             </table> 
                         </div>
                     </div>
-
                 </div>
 
-                <div class="col-md-12 marginTop">
-                    <div id="tileImage2" class="tile">
-                        <div>
-                            <img src="img/partners.png">
-                            <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Statistics</h3>
+                <!------------ PENDING CAMPAIGNS ------------>
+                <div class="col-md-6 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                    <div class="tile">
+                        <div>                     
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Price</th><th>Accept</th><th>Decline</th></tr>
+                                        <c:forEach var="campaign" items="${pendingCampaigns}">
+                                    <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.pris} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                            </c:forEach>
+                            </table> 
                         </div>
                     </div>
                 </div>
 
-                
+
+
+                <div class="col-md-12 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Statistics</h3>
+                    <div id="tileImage2" class="tile">
+                        <div>
+                            <img src="img/partners.png">
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
@@ -106,17 +116,26 @@
                 $("td:first", this).html(i + 1);
             });
             
-            // Denne sender række index med via url til servletten
-            $("table tr #test").on('click', function() {
+            // PendingPartners
+            $("table tr #pendingPartners").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=dashboardcampaigns&id=" + row;
+                location.href = "AdminServlet?action=acceptpartner&id=" + row;
+            });
+
+            // NewestCampaigns
+            $("table tr #newestCampaigns").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=viewCampaign&id=" + row;
             });
             
-            $("table tr #btn").on('click', function() {
+            // PendingCampaigns
+            $("table tr #pendingCampaigns").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=dashboardpartners&id=" + row;
+                location.href = "AdminServlet?action=acceptcampaign&id=" + row;
             });
-            
+
+
+
         </script>
     </body>
 </html>

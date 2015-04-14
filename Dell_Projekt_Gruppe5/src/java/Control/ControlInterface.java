@@ -10,36 +10,44 @@ import Model.DBFacade;
 import Model.Partner;
 import java.util.ArrayList;
 
-/**
- *
- * @author AndersBjergfelt
- */
 public interface ControlInterface {
-//PARTER STUUF
+
+    /**
+     * * Dashboard **
+     */
+    ArrayList<Campaign> getAllPendingCampaigns();
+
+    ArrayList<Campaign> getAllNewestCampaigns();
+
+    ArrayList<Partner> getAllPendingPartners();
+
+    //PARTER STUUF
     String getLogin(String username, String password);
 
     int getPno(String username);
 
     String createPartner(Partner partner);
-        
+
     boolean createCampaign(Campaign campaign);
 
-    ArrayList<Partner> showAllNewPartners();
-       
-    boolean updatePartnerStatus(String cvr);
-    
-    
+  
 
-// ADMIN STUUF
+    // ADMIN STUUF
     ArrayList<Campaign> showAllNewCampaigns();
-    
-    ArrayList<Campaign> getAllPendingCampaigns();
-    
+
     ArrayList<Partner> getNewPartnerArrayList(int id);
-        
+
     ArrayList<Campaign> getNewCampaignArrayList();
-    
+
     DBFacade getInstance();
     
     
+    /*** Dashboard interaction ***/
+    
+    boolean acceptCampaign(int id);
+    
+    boolean updateCampaign(int id);
+    
+    boolean acceptPartner(int id);
+
 }

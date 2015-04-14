@@ -5,10 +5,10 @@
  */
 package View;
 
-import Model.Partner;
+import Control.ControlInterface;
+import Control.Controller;
 import Model.DBFacade;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +19,14 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
-    DBFacade partnerFacade = DBFacade.getInstance();
+    //DBFacade partnerFacade = DBFacade.getInstance();
+    ControlInterface control = new Controller();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        
         String action = request.getParameter("action");
 
         switch (action) {
@@ -41,9 +43,26 @@ public class AdminServlet extends HttpServlet {
             case "login":
                 request.getRequestDispatcher("login_admin.jsp").forward(request, response);
                 break;
-            case "dashboardcampaigns":
-                String id = request.getParameter("id");
-                request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
+            case "acceptpartner":
+                String stringId = request.getParameter("id");
+                int intId = Integer.parseInt(stringId);
+                control.acceptPartner(intId - 1);
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
+                break;
+            case "acceptcampaign":
+                String cId = request.getParameter("id");
+                int intcId = Integer.parseInt(cId);
+                System.out.println("ROW ID: " + intcId);
+                control.acceptCampaign(intcId - 1);
+
+                //getNewestPartners
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
+                break;
+            case "viewCampaign":
+                String vId = request.getParameter("id");
+                //request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
             case "logout":
                 // currentUser = null;
@@ -62,11 +81,19 @@ public class AdminServlet extends HttpServlet {
         switch (action) {
 
             case "adminLogin":
-                // VALIDATE
-                
-                session.setAttribute("newestCampaigns", partnerFacade.getAllCampaigns());
+                // VALIDATION
+
+                //getPendingPartners
+                session.setAttribute("pendingPartners", control.getAllPendingPartners());
+
+                //getPendingCampaigns
+                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+
+                //getNewestPartners
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+
+                // Sender brugeren videre til dashboard
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
-                
 
                 break;
         }
