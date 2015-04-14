@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Control;
+package View;
 
 import Model.Campaign;
 import Model.Partner;
@@ -111,7 +111,6 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
 
-
                 Partner partner = new Partner(user, pass, name, cvr, null);
 
                 request.setAttribute("username", user);
@@ -131,6 +130,7 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         // Yay - du er oprettet i DB
                         currentPno = partnerFacade.getPno(user);
+                        System.out.println("PNO: " + currentPno);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -142,8 +142,8 @@ public class PartnerServlet extends HttpServlet {
                 String priceString = request.getParameter("price");
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
-
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description,currentPno);
+                
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, currentPno);
                 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
@@ -163,7 +163,8 @@ public class PartnerServlet extends HttpServlet {
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
-
+                        System.out.println("TEEST PNO: " + campaign.getPno());
+                        System.out.println("TEEST price: " + campaign.getPris());
                         // Success!
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }

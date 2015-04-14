@@ -9,10 +9,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author ABjergfelt
- */
 public class DBFacade {
 
     private PartnerMapper pm;
@@ -56,7 +52,6 @@ public class DBFacade {
     }
 
     public ArrayList<Partner> showPartnerName(){
-       
         return pm.showPartnerName(con);
     }
     

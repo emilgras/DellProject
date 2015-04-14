@@ -25,7 +25,7 @@ public class CampaignMapper {
         int rowsInserted = 0;
         String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
         String primary = "select kno_increment.nextval from dual";
-        
+        System.out.println("CM: " + camp.getPno());
         PreparedStatement statement = null;
         try {
             
