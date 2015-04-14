@@ -55,13 +55,11 @@ public class DBFacade {
         return cm.insertCampaign(campaign, con);
     }
     
-    public void test() {
-        System.out.println("VIRK FOR HELVED!!!");
-    }
+   
     
     public ArrayList<Partner> showPartnerName(){
        
-        return pm.showPartnerName(con);
+        return pm.showNewPartners(con);
     }
     
     public boolean updatePartnerStatus(String cvr){
