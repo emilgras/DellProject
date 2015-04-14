@@ -50,9 +50,13 @@ public class DBFacade {
     public boolean createCampaign(Campaign campaign) {
         return cm.insertCampaign(campaign, con);
     }
-
+    
+   
+    
     public ArrayList<Partner> showPartnerName(){
-        return pm.showPartnerName(con);
+
+        return pm.showNewPartners(con);
+
     }
     
     public boolean updatePartnerStatus(String cvr){

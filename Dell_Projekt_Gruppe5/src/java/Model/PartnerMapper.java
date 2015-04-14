@@ -132,7 +132,7 @@ public class PartnerMapper {
         return true;
     }
 
-    public ArrayList<Partner> showPartnerName(Connection con) {
+    public ArrayList<Partner> showNewPartners(Connection con) {
        
         String sqlString = "select navn,cvr from partner where dato is NULL";
         ArrayList<Partner> pArray = new ArrayList<>();
@@ -153,9 +153,8 @@ public class PartnerMapper {
                 System.out.println(pArray.get(count).getName());
                 count++;
                 System.out.println(count);
-                pArray.add(p); System.out.println(pArray.isEmpty());
-                System.out.println(pArray.get(0).getName());
-                System.out.println(pArray.get(0).getCvr());
+               
+                
             }
             
 

@@ -67,6 +67,7 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("newestCampaigns", partnerFacade.getAllCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 
+
                 break;
         }
 

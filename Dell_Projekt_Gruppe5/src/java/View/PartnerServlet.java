@@ -5,6 +5,7 @@
  */
 package View;
 
+
 import Model.Campaign;
 import Model.Partner;
 import Model.DBFacade;
@@ -165,6 +166,7 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         System.out.println("TEEST PNO: " + campaign.getPno());
                         System.out.println("TEEST price: " + campaign.getPris());
+
                         // Success!
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
