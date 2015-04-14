@@ -54,11 +54,7 @@ public class DBFacade {
     public boolean createCampaign(Campaign campaign) {
         return cm.insertCampaign(campaign, con);
     }
-    
-    public void test() {
-        System.out.println("VIRK FOR HELVED!!!");
-    }
-    
+
     public ArrayList<Partner> showPartnerName(){
        
         return pm.showPartnerName(con);

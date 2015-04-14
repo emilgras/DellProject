@@ -63,10 +63,10 @@ public class AdminServlet extends HttpServlet {
 
             case "adminLogin":
                 // VALIDATE
-
+                
                 session.setAttribute("newestCampaigns", partnerFacade.getAllCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
-
+                
                 break;
         }
 

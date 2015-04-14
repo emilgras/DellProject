@@ -70,7 +70,7 @@
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
 
                                 <c:forEach var = "campaign" items ="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input type="button" class="btn btn-info" value="View more"></td></tr>
+                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="test" type="button" class="btn btn-info" value="View more"></td></tr>
                                         </c:forEach>
 
 
@@ -89,14 +89,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md- marginTop">
-                    <div id="tileImage1" class="tile">
-                        <div>
-                            <img src="img/campains.png">
-                            <h3 class="tileHeader"><span class="glyphicon glyphicon-earphone"></span> View campaigns</h3>
-                        </div>
-                    </div>
-                </div> -->
+                
             </div>
         </div>
 
@@ -114,10 +107,14 @@
             });
             
             // Denne sender række index med via url til servletten
-            $("table tr input").on('click', function() {
+            $("table tr #test").on('click', function() {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=dashboardcampaigns&id=" + row;
             });
+            
+            
+            
+            
             
         </script>
     </body>
