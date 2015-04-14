@@ -7,7 +7,7 @@ package View;
 
 import Control.ControlInterface;
 import Control.Controller;
-import Model.DBFacade;
+import Model.Campaign;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,7 +52,6 @@ public class AdminServlet extends HttpServlet {
             case "acceptcampaign":
                 String cId = request.getParameter("id");
                 int intcId = Integer.parseInt(cId);
-                System.out.println("ROW ID: " + intcId);
                 control.acceptCampaign(intcId - 1);
 
                 //getNewestPartners
@@ -62,7 +61,12 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "viewCampaign":
                 String vId = request.getParameter("id");
-                //request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
+                int intvId = Integer.parseInt(vId);
+                Campaign campaign = control.getCampaignDetail(intvId - 1);
+                
+                session.setAttribute("campaignDetail", campaign);
+                
+                request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
             case "logout":
                 // currentUser = null;

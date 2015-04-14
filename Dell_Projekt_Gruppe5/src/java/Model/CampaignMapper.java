@@ -183,6 +183,7 @@ public class CampaignMapper {
         return list;
     }
 
+    /*** Returnerer alle kampagner sorteret med den nyest oprettet først ***/
     public ArrayList<Campaign> getAllNewestCampaigns(Connection con) {
         ArrayList<Campaign> list = new ArrayList<Campaign>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";

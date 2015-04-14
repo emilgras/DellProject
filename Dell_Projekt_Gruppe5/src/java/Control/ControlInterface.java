@@ -49,5 +49,7 @@ public interface ControlInterface {
     boolean updateCampaign(int id);
     
     boolean acceptPartner(int id);
+    
+    Campaign getCampaignDetail(int id);
 
 }

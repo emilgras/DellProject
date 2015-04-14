@@ -37,14 +37,14 @@
                 </div>
             </div>
         </div>  
-        
+
         <div class="container contentContainer marginBottom">
-            <h1 class="tileHeader">All partners</h1>
-            <div class="row center">  
+            <h1 class="tileHeader">All partners</h1>  
+            <div class="col-md-0 marginTop">
                 
             </div>
         </div>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>

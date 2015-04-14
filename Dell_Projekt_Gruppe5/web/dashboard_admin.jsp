@@ -41,7 +41,6 @@
 
         <div class="container marginBottom">
             <h1 class="tileHeader">Dashboard</h1>
-            <div class="row center">  
 
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
@@ -63,10 +62,10 @@
                     <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3> </a>
                     <div class="tile">
                         <div>
-                            <table class="table table-striped table-bordered" id="newestCampaigns">
+                            <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
-                                        <c:forEach var="campaign" items="${newestCampaigns}">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View more"></td></tr>
+                                        <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
                                         </c:forEach>
                             </table> 
                         </div>
@@ -100,16 +99,10 @@
                 </div>
 
 
-            </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-
-
-        </script>
-
         <script>
             // Denne metode giver hver række et unikt id startende med 1
             $('.tablerow').each(function (i) {

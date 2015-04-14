@@ -20,7 +20,8 @@ public class Controller implements ControlInterface {
     
     ArrayList<Partner> pendingPartners = new ArrayList<>();
     ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
-    ArrayList<Campaign> newestPartners = new ArrayList<>();
+    ArrayList<Campaign> newestCampaigns = new ArrayList<>();
+    ArrayList<Partner> allPartners = new ArrayList<>();
 
     @Override
     public String getLogin(String username, String password) {
@@ -91,8 +92,8 @@ public class Controller implements ControlInterface {
     
     @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        newestPartners = getInstance().getAllNewestCampaigns();
-        return newestPartners;
+        newestCampaigns = getInstance().getAllNewestCampaigns();
+        return newestCampaigns;
     }
     
     /*** Dashboard button interaction ***/
@@ -127,6 +128,11 @@ public class Controller implements ControlInterface {
     @Override
     public boolean updateCampaign(int kno) {
         return getInstance().updateCampaign(kno);
+    }
+
+    @Override
+    public Campaign getCampaignDetail(int id) {
+        return newestCampaigns.get(id);
     }
     
     
