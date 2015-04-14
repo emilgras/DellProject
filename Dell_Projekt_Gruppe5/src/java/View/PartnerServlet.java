@@ -145,6 +145,7 @@ public class PartnerServlet extends HttpServlet {
                 String description = request.getParameter("description");
                 
                 Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, currentPno);
+                campaign.setPno(currentPno);
                 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
