@@ -91,9 +91,20 @@
 
                 <div class="col-md-12 marginTop">
                     <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Statistics</h3>
-                    <div id="tileImage2" class="tile">
-                        <div>
-                            <img src="img/partners.png">
+                    <div class="tile">
+                        <div class="col-md-3 tile">
+                            <h3>Total budget:</h3>
+                            <h1>455.879 dkk</h1>
+                        </div>
+                        <div class="col-md-3 tile">
+                            <h3>Total campaigns:</h3>
+                            <h1>121.110 dkk</h1>
+                        </div>
+                        <div class="col-md-3 tile">
+                            <h3>Hello</h3>
+                        </div>
+                        <div class="col-md-3 tile">
+                            <h3>Hello</h3>
                         </div>
                     </div>
                 </div>
