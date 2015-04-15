@@ -31,9 +31,9 @@ public class Test {
         //pf.getPartnerName();
         Controller cont = new Controller();
        //pf.showPartnerName();
-        
-        Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
-        cont.createCampaign(camp);
+//        
+//        Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);
+//        cont.createCampaign(camp);
        
 //        list.add(camp);
 //        try {
@@ -65,6 +65,8 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
+        Partner p = new Partner("hanshans","hanshans","hans","12345678",null,"danmark");
+        cont.createPartner(p);
         try {
             con.close();
         } catch (Exception e) {

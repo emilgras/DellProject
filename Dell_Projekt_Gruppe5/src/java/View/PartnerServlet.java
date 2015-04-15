@@ -54,6 +54,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("username", "");
                 request.setAttribute("company", "");
                 request.setAttribute("cvr", "");
+                request.setAttribute("country", "");
                 request.setAttribute("signupErrorMessage", "");
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
@@ -110,12 +111,14 @@ public class PartnerServlet extends HttpServlet {
                 String confirmPass = request.getParameter("confirmpassword");
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
+                String country = request.getParameter("country");
 
-                Partner partner = new Partner(user, pass, name, cvr, null);
+                Partner partner = new Partner(user, pass, name, cvr, null, country);
 
                 request.setAttribute("username", user);
                 request.setAttribute("company", name);
                 request.setAttribute("cvr", cvr);
+                request.setAttribute("country", country);
 
                 if (!(validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
