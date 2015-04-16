@@ -142,6 +142,62 @@ public class CampaignMapper {
         
         return !status.equals(getCampaignStatus(kno, con));
     }
+    
+    public boolean rollBackCampaign(int kno, Connection con) {
+        int rowsUpdated = 0;
+        String sqlString = "update kampagne set status = ? where kno = ?";
+        String status = getCampaignStatus(kno, con);
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            
+            status = status.toLowerCase();
+            switch (status) {
+                case "pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Pending");
+                    break;
+
+                case "in-progress":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Pending");
+                    break;
+
+                case "poe pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "In-Progress");
+                    break;
+
+                case "poe accepted":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE Pending");
+                    break;
+
+                case "invoice pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE accepted");
+                    break;
+
+                case "complete":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Invoice Pending");
+                    break;
+
+                default:
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Noget gik galt");
+                    break;
+            }
+            statement.executeUpdate();
+            //statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        
+        return !status.equals(getCampaignStatus(kno, con));
+    }
 
     public String getCampaignStatus(int kno, Connection con) {
         String sqlString = "select status from kampagne where kno = ?";
