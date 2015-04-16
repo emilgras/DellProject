@@ -54,6 +54,11 @@
                 <input type="text" name="cvr" value="<%= request.getAttribute("cvr") %>" class="form-control" id="cvr" placeholder="Enter your CVR number">
             </div>
             
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" name="country" value="<%= request.getAttribute("country") %>" class="form-control" id="country" placeholder="Enter your country here">
+            </div>
+            
             <input type="hidden" name="action" value="partnerSignup">
             <button type="submit" id="submitBtn" class="btn btn-default">Submit</button>
         </form>

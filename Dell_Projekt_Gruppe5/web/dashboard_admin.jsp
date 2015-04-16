@@ -52,9 +52,9 @@
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Accept</th><th>Decline</th></tr>
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Country</th><th>Accept</th><th>Decline</th></tr>
                                         <c:forEach var="partner" items="${pendingPartners}">
-                                    <tr><td>${partner.name} </td><td>${partner.cvr} </td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                    <tr><td>${partner.name} </td><td>${partner.cvr} </td><td>${partner.country}</td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                             </c:forEach>
                             </table> 
                         </div>

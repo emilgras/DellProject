@@ -67,7 +67,7 @@ public class PartnerMapper {
 
         String errorMessage = "";
 
-        String sql = "INSERT INTO partner (pno, cvr, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?,?,?)";
         String SQLString1
                 = "select pno_increment.nextval  "
                 + "from dual";
@@ -76,6 +76,7 @@ public class PartnerMapper {
         String pass = partner.getPassword();
         String name = partner.getName();
         String cvr = partner.getCvr();
+        String country = partner.getCountry();
         Date date = partner.getDate();
 
         try {
@@ -88,11 +89,12 @@ public class PartnerMapper {
             insertStatement = con.prepareStatement(sql);
             insertStatement.setInt(1, partner.getPno());
             insertStatement.setString(2, cvr);
-            insertStatement.setString(3, name);
-            insertStatement.setDate(4, date);
-            insertStatement.setString(5, user);
-            insertStatement.setString(6, pass);
-            insertStatement.setString(7, "Partner");
+            insertStatement.setString(3, country);
+            insertStatement.setString(4, name);
+            insertStatement.setDate(5, date);
+            insertStatement.setString(6, user);
+            insertStatement.setString(7, pass);
+            insertStatement.setString(8, "Partner");
 
             insertStatement.executeUpdate();
 
@@ -133,7 +135,7 @@ public class PartnerMapper {
     
     public ArrayList<Partner> getAllPendingPartners(Connection con) {
        
-        String sqlString = "select navn,cvr from partner where dato is NULL";
+        String sqlString = "select navn,cvr,land from partner where dato is NULL";
         ArrayList<Partner> pArray = new ArrayList<>();
         
         try {
@@ -144,10 +146,10 @@ public class PartnerMapper {
 
                 String partnerName = rs.getString(1);
                 String partnerCVR = rs.getString(2);
+                String partnerCountry = rs.getString(3);
                 
-                Partner p = new Partner(partnerName, partnerCVR);
-                p.setName(partnerName);
-                p.setCvr(partnerCVR);
+                Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
+                
                 pArray.add(p); 
                 System.out.println(pArray.get(count).getName());
                 count++;

@@ -19,13 +19,14 @@ public class Partner {
     private String role;
 
     private String cvr;
+    private String country;
     private Date date;
     private String username;
     private String password;
     private int pno;
 
 
-    public Partner(String username, String password, String name, String cvr, Date date) {
+    public Partner(String username, String password, String name, String cvr, Date date, String country) {
 
         
         //this.pno = pno;
@@ -35,7 +36,7 @@ public class Partner {
         this.date = date;
         this.username = username;
         this.password = password;
-        
+        this.country = country;
     }
     
     public Partner(String name, String CVR, Date date){
@@ -51,9 +52,10 @@ public class Partner {
     public Partner() {
     }
     
-    public Partner(String name, String cvr){
-        this.username = name;
-        this.password = cvr;
+    public Partner(String name, String cvr, String country){
+        this.name = name;
+        this.cvr = cvr;
+        this.country = country;
     }
 
     public String getUsername() {
@@ -114,4 +116,13 @@ public class Partner {
         this.date = date;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    
 }
