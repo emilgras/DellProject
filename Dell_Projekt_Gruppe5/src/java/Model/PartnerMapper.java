@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class PartnerMapper {
 
     int count = 0;
-    String message = "";
+    private String message = "";
 
     public String getLogin(String username, String password, Connection con) {
         Partner p = null;
