@@ -126,8 +126,19 @@ public class Controller implements ControlInterface {
     }
 
     @Override
-    public boolean updateCampaign(int kno) {
-        return getInstance().updateCampaign(kno);
+    public boolean updateCampaign(int id) {
+        boolean succes = true;
+        int kno = pendingCampaigns.get(id).getKno();
+        System.out.println("KNO: " + kno);
+        if (getInstance().updateCampaign(kno)) {
+            System.out.println("SUCCES...");
+            
+        }else{
+            succes = false;
+        }
+        
+      return succes;
+      
     }
 
     @Override

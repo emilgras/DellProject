@@ -3,8 +3,9 @@
     Created on : 06-04-2015, 19:58:50
     Author     : EmilGras
 --%>
-
+<%@page import="Model.DBFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,24 +54,70 @@
                 </div>
 
                 <div class="col-md-6 marginTop">
+              
                     <div class="tile">
                         <div>
-                            <img src="img/money.png">
+
                             <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Ongoing campaigns</h3>
-                            <!-- <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Name</th><th>Age</th><th>Image</th><th>Progress</th><th>Status</th><th>View case</th></tr>
-                                <tr><td>Emil</td><td>23</td><td>image.png</td><td>88%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>  
-                                <tr><td>Hellen</td><td>27</td><td>image.png</td><td>100%</td><td class="success">Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
-                                <tr><td>Rob</td><td>35</td><td>image.png</td><td>12%</td><td class="danger">Not Complete</td><td><button type="button" class="btn btn-default">Show Info</button></td></tr>
-                            </table> -->
+                            <!------------ NEWEST CAMPAIGNS ------------>
+                            <div class="col-md-6 marginTop">
+
+                                <div class="tile">
+                                    <div>
+                                        <table class="table table-striped table-bordered">
+                                            <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+                                            <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                                <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+                                            </c:forEach>
+                                        </table> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                     </div>
+
+                <!------------ PENDING CAMPAIGNS ------------>
+                <div class="col-md-6 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                    <div class="tile">
+                        <div>                     
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Campaign start</th><th>Campaign end</th><th>Price estimate</th><th>Description:</th>
+                                <c:forEach var="campaign" items="${pendingCampaigns}">
+                                    <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
+                                </c:forEach>
+                            </table> 
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+         <script>
+            // Denne metode giver hver række et unikt id startende med 1
+            $('.tablerow').each(function (i) {
+                $("td:first", this).html(i + 1);
+            });
+            
+            
+
+            // NewestCampaigns
+          $("table tr #poe").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "PartnerServlet?action=upload&id=" + row;
+            });
+            
+            
+
+
+
+        </script>
     </body>
 </html>
 

@@ -164,7 +164,7 @@ public class CampaignMapper {
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns(Connection con) {
-        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
         PreparedStatement statement = null;
         try {
@@ -185,7 +185,7 @@ public class CampaignMapper {
 
     /*** Returnerer alle kampagner sorteret med den nyest oprettet først ***/
     public ArrayList<Campaign> getAllNewestCampaigns(Connection con) {
-        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
         PreparedStatement statement = null;
         int count = 0;
@@ -206,6 +206,32 @@ public class CampaignMapper {
         }
 
         return list;
+    }
+    
+    public ArrayList<Campaign> getAllPartnerAcceptedCampaigns(Connection con){
+        ArrayList<Campaign> list = new ArrayList<>();
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
+        PreparedStatement statement = null;
+        int count = 0;
+        try {
+            statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
+                tmp.setKno(rs.getInt(1));
+                if (!tmp.getOprettelse_dato().equals("Pending")) {
+                    list.add(tmp);
+                    count++;
+                }
+            }
+            System.out.println("COUNT: " + count);
+
+        } catch (SQLException e) {
+        }
+
+        return list;
+        
+        
     }
 
 }
