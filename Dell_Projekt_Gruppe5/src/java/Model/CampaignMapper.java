@@ -70,7 +70,7 @@ public class CampaignMapper {
         String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
 
         try {
-            PreparedStatement statement = con.prepareStatement(sqlString2);
+            PreparedStatement statement = null;
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
@@ -133,7 +133,7 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-            statement.close();
+            //statement.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);

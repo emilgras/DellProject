@@ -118,7 +118,7 @@ public class Controller implements ControlInterface {
         if (getInstance().acceptCampaign(kno)) {
             System.out.println("SUCCESS...");
             pendingCampaigns.remove(id);
-            updateCampaign(kno);
+            getInstance().updateCampaign(kno);
         } else {
             success = false;
         }
@@ -128,7 +128,7 @@ public class Controller implements ControlInterface {
     @Override
     public boolean updateCampaign(int id) {
         boolean succes = true;
-        int kno = pendingCampaigns.get(id).getKno();
+        int kno = newestCampaigns.get(id).getKno();
         System.out.println("KNO: " + kno);
         if (getInstance().updateCampaign(kno)) {
             System.out.println("SUCCES...");
