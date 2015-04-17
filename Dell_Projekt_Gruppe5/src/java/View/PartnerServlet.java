@@ -5,11 +5,10 @@
  */
 package View;
 
-
 import Control.Controller;
+import Control.PartnerIF;
 import Model.Campaign;
 import Model.Partner;
-import Model.DBFacade;
 import Utils.Validate;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,9 +21,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    Controller con = new Controller();
+    PartnerIF con = new Controller();
     int currentPno = 0;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,9 +33,7 @@ public class PartnerServlet extends HttpServlet {
         switch (action) {
 
             case "dashboard":
-                
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                
                 break;
             case "newcampaign":
                 request.setAttribute("campaignstart", "");
@@ -47,12 +44,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
-            case "index":
-                request.setAttribute("username", "");
-                request.setAttribute("signupErrorMessage", "");
-                request.setAttribute("dbErrorMessage", "");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
+                
             case "signup":
                 request.setAttribute("username", "");
                 request.setAttribute("company", "");
@@ -66,7 +58,7 @@ public class PartnerServlet extends HttpServlet {
                 //currentUser = null;
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
-                
+
             case "upload":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
@@ -81,7 +73,6 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         String action = request.getParameter("action");
         String validationErrorMessage;
         String dbErrorMessage;
@@ -89,41 +80,7 @@ public class PartnerServlet extends HttpServlet {
 
         switch (action) {
 
-            case "partnerLogin":
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                
-                request.setAttribute("username", username);
-
-                if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
-                    // Fejl i login form
-                    request.setAttribute("loginErrorMessage", validationErrorMessage);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                } else {
-
-                    // Succes ved login form
-                    if (!(dbErrorMessage = con.getLogin(username, password)).equals("")) {
-                        // Fejl ved oprettelse i DB
-                        request.setAttribute("loginErrorMessage", dbErrorMessage);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    } else {
-                        
-                        currentPno = con.getPno(username);        
-                         //getPendingCampaigns
-                session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
-
-                //getNewestPartners
-                session.setAttribute("newestCampaigns", con.getAllNewestCampaigns());
-                
-                        // Sender brugeren videre til dashboard
-                        
-                        
-                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                        
-                    }
-                }
-                break;
-
+            
             case "partnerSignup":
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
@@ -164,15 +121,15 @@ public class PartnerServlet extends HttpServlet {
                 String priceString = request.getParameter("price");
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
-                
+
                 Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, currentPno);
                 campaign.setPno(currentPno);
-                
+
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
-               
+
                 if (!(validationErrorMessage = Validate.campaignErrorMessage(campaign)).equals("")) {
                     // Fejl i login form
                     System.out.println("Message: " + validationErrorMessage);
@@ -190,8 +147,9 @@ public class PartnerServlet extends HttpServlet {
                         System.out.println("TEEST price: " + campaign.getPris());
 
                         // Success!
-                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                         session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
+                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                        
                     }
                 }
                 break;

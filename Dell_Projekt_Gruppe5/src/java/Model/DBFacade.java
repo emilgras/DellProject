@@ -79,4 +79,8 @@ public class DBFacade {
     public boolean updateCampaign(int kno) {
         return cm.updateCampaign(kno, con);
     }
+    
+    public boolean rollBackCampaign(int kno) {
+        return cm.rollBackCampaign(kno, con);
+    }
 }

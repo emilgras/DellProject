@@ -18,11 +18,7 @@ public interface AdminIF {
     
     DBFacade getInstance();
     
-     ArrayList<Campaign> getAllPendingCampaigns();
 
-    ArrayList<Campaign> getAllNewestCampaigns();
-
-    ArrayList<Partner> getAllPendingPartners();
     
     ArrayList<Campaign> showAllNewCampaigns();
 
@@ -35,6 +31,8 @@ public interface AdminIF {
     boolean updateCampaign(int id);
     
     boolean acceptPartner(int id);
+    
+    boolean rollBackCampaign(int id);
     
     Campaign getCampaignDetail(int id);
 }

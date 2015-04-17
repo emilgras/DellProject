@@ -9,12 +9,13 @@ import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
+import java.sql.Connection;
 
 /**
  *
  * @author AndersBjergfelt
  */
-public class Controller implements ControlInterface {
+public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     DBFacade facade = DBFacade.getInstance();
     
@@ -146,7 +147,10 @@ public class Controller implements ControlInterface {
         return newestCampaigns.get(id);
     }
     
-    
+    public boolean rollBackCampaign(int id) {
+        // CONTENT
+        return false;
+    }
 
     
 }

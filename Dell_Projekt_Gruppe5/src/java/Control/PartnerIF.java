@@ -8,6 +8,7 @@ package Control;
 import Model.Campaign;
 import Model.DBFacade;
 import Model.Partner;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,14 +17,16 @@ import Model.Partner;
 public interface PartnerIF {
     
     DBFacade getInstance();
-    
-    String getLogin(String username, String password);
-
-    int getPno(String username);
 
     String createPartner(Partner partner);
 
     boolean createCampaign(Campaign campaign);
     
     boolean updateCampaign(int id);
+    
+    int getPno(String username);
+    
+    ArrayList<Campaign> getAllPendingCampaigns();
+    
+    ArrayList<Campaign> getAllNewestCampaigns();
 }
