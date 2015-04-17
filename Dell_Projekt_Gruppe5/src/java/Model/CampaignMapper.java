@@ -70,7 +70,7 @@ public class CampaignMapper {
         String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
 
         try {
-            PreparedStatement statement = con.prepareStatement(sqlString2);
+            PreparedStatement statement = null;
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
@@ -133,7 +133,63 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-            statement.close();
+            //statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        
+        return !status.equals(getCampaignStatus(kno, con));
+    }
+    
+    public boolean rollBackCampaign(int kno, Connection con) {
+        int rowsUpdated = 0;
+        String sqlString = "update kampagne set status = ? where kno = ?";
+        String status = getCampaignStatus(kno, con);
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            
+            status = status.toLowerCase();
+            switch (status) {
+                case "pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Pending");
+                    break;
+
+                case "in-progress":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Pending");
+                    break;
+
+                case "poe pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "In-Progress");
+                    break;
+
+                case "poe accepted":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE Pending");
+                    break;
+
+                case "invoice pending":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE accepted");
+                    break;
+
+                case "complete":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Invoice Pending");
+                    break;
+
+                default:
+                    statement.setInt(2, kno);
+                    statement.setString(1, "Noget gik galt");
+                    break;
+            }
+            statement.executeUpdate();
+            //statement.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,7 +220,7 @@ public class CampaignMapper {
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns(Connection con) {
-        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
         PreparedStatement statement = null;
         try {
@@ -185,7 +241,7 @@ public class CampaignMapper {
 
     /*** Returnerer alle kampagner sorteret med den nyest oprettet først ***/
     public ArrayList<Campaign> getAllNewestCampaigns(Connection con) {
-        ArrayList<Campaign> list = new ArrayList<Campaign>();
+        ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
         PreparedStatement statement = null;
         int count = 0;
@@ -206,6 +262,32 @@ public class CampaignMapper {
         }
 
         return list;
+    }
+    
+    public ArrayList<Campaign> getAllPartnerAcceptedCampaigns(Connection con){
+        ArrayList<Campaign> list = new ArrayList<>();
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
+        PreparedStatement statement = null;
+        int count = 0;
+        try {
+            statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
+                tmp.setKno(rs.getInt(1));
+                if (!tmp.getOprettelse_dato().equals("Pending")) {
+                    list.add(tmp);
+                    count++;
+                }
+            }
+            System.out.println("COUNT: " + count);
+
+        } catch (SQLException e) {
+        }
+
+        return list;
+        
+        
     }
 
 }

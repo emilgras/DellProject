@@ -30,6 +30,8 @@ public class Test {
         DBFacade pf = DBFacade.getInstance();
         //pf.getPartnerName();
         Controller cont = new Controller();
+        
+       // cm.getAllPartnerAcceptedCampaigns(con);
        //pf.showPartnerName();
 //        
 //        Campaign camp = new Campaign(12346,"Hans Service", "det kører","2015-05-05","2015-05-05","2015-05-05",2000,1234);

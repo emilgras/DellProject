@@ -6,11 +6,13 @@
 package Model;
 
 import java.sql.Date;
+
 /**
  *
  * @author Frederik
  */
 public class Campaign {
+
     int kno;
     String beskrivelse;
     String status;
@@ -40,6 +42,17 @@ public class Campaign {
         this.pris = pris;
     }
 
+    public Campaign(int kno, String beskrivelse, String start_dato, String slut_dato, float pris, int pno) {
+        this.kno = kno;
+        this.beskrivelse = beskrivelse;
+
+        this.start_dato = start_dato;
+        this.slut_dato = slut_dato;
+        this.pris = pris;
+        this.pno = pno;
+
+    }
+
     public Campaign(int kno, String beskrivelse, String status, String oprettelse_dato, String start_dato, String slut_dato, float pris, int pno, String navn, String cvr) {
         this.kno = kno;
         this.beskrivelse = beskrivelse;
@@ -52,7 +65,7 @@ public class Campaign {
         this.navn = navn;
         this.cvr = cvr;
     }
-    
+
     public int getKno() {
         return kno;
     }
@@ -137,7 +150,5 @@ public class Campaign {
     public String toString() {
         return "Campaign{" + "kno=" + kno + ", beskrivelse=" + beskrivelse + ", status=" + status + ", oprettelse_dato=" + oprettelse_dato + ", start_dato=" + start_dato + ", slut_dato=" + slut_dato + ", pris=" + pris + ", pno=" + pno + ", navn=" + navn + ", cvr=" + cvr + '}';
     }
-    
-    
-    
+
 }

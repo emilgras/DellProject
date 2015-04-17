@@ -6,6 +6,7 @@
 package View;
 
 
+import Control.Controller;
 import Model.Campaign;
 import Model.Partner;
 import Model.DBFacade;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    DBFacade partnerFacade = DBFacade.getInstance();
+    Controller con = new Controller();
     int currentPno = 0;
     
     @Override
@@ -29,11 +30,13 @@ public class PartnerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
+        HttpSession session = request.getSession();
         switch (action) {
 
             case "dashboard":
+                
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                
                 break;
             case "newcampaign":
                 request.setAttribute("campaignstart", "");
@@ -63,6 +66,14 @@ public class PartnerServlet extends HttpServlet {
                 //currentUser = null;
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
+                
+            case "upload":
+                String stringId = request.getParameter("id");
+                int intId = Integer.parseInt(stringId);
+                con.updateCampaign(intId - 1);
+                session.setAttribute("newestCampaigns", con.getAllNewestCampaigns());
+                request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                break;
         }
     }
 
@@ -91,16 +102,24 @@ public class PartnerServlet extends HttpServlet {
                 } else {
 
                     // Succes ved login form
-                    if (!(dbErrorMessage = partnerFacade.getLogin(username, password)).equals("")) {
+                    if (!(dbErrorMessage = con.getLogin(username, password)).equals("")) {
                         // Fejl ved oprettelse i DB
                         request.setAttribute("loginErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
                         
-                        currentPno = partnerFacade.getPno(username);        
-                        
+                        currentPno = con.getPno(username);        
+                         //getPendingCampaigns
+                session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
+
+                //getNewestPartners
+                session.setAttribute("newestCampaigns", con.getAllNewestCampaigns());
+                
                         // Sender brugeren videre til dashboard
+                        
+                        
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                        
                     }
                 }
                 break;
@@ -126,13 +145,13 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 } else {
 
-                    if (!(dbErrorMessage = partnerFacade.createPartner(partner)).equals("")) {
+                    if (!(dbErrorMessage = con.createPartner(partner)).equals("")) {
                         // Kunne ikke oprettes i DB
                         request.setAttribute("signupErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
-                        currentPno = partnerFacade.getPno(user);
+                        currentPno = con.getPno(user);
                         System.out.println("PNO: " + currentPno);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
@@ -161,7 +180,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
                 } else {
 
-                    if (!partnerFacade.createCampaign(campaign)) {
+                    if (!con.createCampaign(campaign)) {
                         // Kunne ikke oprette kampagne i database
                         dbErrorMessage = "Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help.";
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
@@ -172,6 +191,7 @@ public class PartnerServlet extends HttpServlet {
 
                         // Success!
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                        session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                     }
                 }
                 break;
