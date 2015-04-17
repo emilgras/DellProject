@@ -67,11 +67,20 @@ public class LoginServlet extends HttpServlet {
                     switch (loginControl) {
                         case "admin":
                             // Register a new admin user
+                            
+                            // Set arraylist containing all current partners campiagns as attribute
+                            
                             request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
                             break;
 
                         case "partner":
                             // Register a new partner user
+                            
+                            // Set arraylists as attributes to be shown in dashboard
+                            session.setAttribute("pendingPartners", control.getAllPendingPartners());
+                            session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+                            session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                            
                             request.getRequestDispatcher("partner_dashboard.jsp").forward(request, response);
                             break;
 

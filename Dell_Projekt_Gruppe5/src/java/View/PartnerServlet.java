@@ -153,6 +153,13 @@ public class PartnerServlet extends HttpServlet {
                     }
                 }
                 break;
+                
+                case "sendPoe":
+                    
+                    // Get all files. For each file save the name (and extension seperatly). 
+                    // Send them to server and save the names in DB
+                    
+                    break;
         }
     }
 }
