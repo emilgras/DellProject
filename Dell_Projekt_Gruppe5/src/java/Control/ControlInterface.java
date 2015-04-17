@@ -30,7 +30,7 @@ public interface ControlInterface {
 
     boolean createCampaign(Campaign campaign);
 
-  
+    
 
     // ADMIN STUUF
     ArrayList<Campaign> showAllNewCampaigns();
@@ -40,6 +40,7 @@ public interface ControlInterface {
     ArrayList<Campaign> getNewCampaignArrayList();
 
     DBFacade getInstance();
+    
     
     
     /*** Dashboard interaction ***/
