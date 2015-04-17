@@ -26,6 +26,12 @@ public interface AdminIF {
 
     ArrayList<Campaign> getNewCampaignArrayList();
     
+    ArrayList<Campaign> getAllPendingCampaigns();
+
+    ArrayList<Campaign> getAllNewestCampaigns();
+
+    ArrayList<Partner> getAllPendingPartners();
+    
     boolean acceptCampaign(int id);
     
     boolean updateCampaign(int id);

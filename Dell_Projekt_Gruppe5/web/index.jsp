@@ -34,7 +34,7 @@
                     <p class="bold marginTop">If you are already registered then log in below otherwise click on the 'Become partner' button to join us now</p>
                     
                     <!---------- Log in ---------->
-                    <form class="marginTop" action="PartnerServlet" method="POST">
+                    <form class="marginTop" action="LoginServlet" method="POST">
                         <input type="hidden" name="action" value="login">
                         <div class="input-group-lg ">
                             <input type="text" name="username" class="form-control marginTop" placeholder="Your username" />
@@ -49,7 +49,7 @@
                     
                     <!---------- Sign up ---------->
                     <div class="input-group-lg">
-                        <a href="PartnerServlet?action=signup" id="textDecorationNone"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
+                        <a href="LoginServlet?action=signupPage" id="textDecorationNone"><input type="submit" value="Become partner" class="btn btn-info btn-lg marginTop btn-block"></a>
                     </div>
                 </div>
             </div>
