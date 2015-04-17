@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
     private int currentPno = 0;
     private String validationErrorMessage;
-    private String dbErrorMessage;
+    private String loginControl;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,8 +27,9 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
-            
+
             case "loginPage":
+                request.setAttribute("loginErrorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
 
@@ -46,60 +47,47 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String action = request.getParameter("action");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
         switch (action) {
 
-            case "loginPartner":    
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
+            case "login":
 
-                request.setAttribute("username", username);
-
+                /********** Form validation **********/
                 if (!(validationErrorMessage = Validate.loginErrorMessage(username, password)).equals("")) {
                     // Fejl i login form
                     request.setAttribute("loginErrorMessage", validationErrorMessage);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
 
-                    // Succes ved login form
-                    if (!(dbErrorMessage = control.getLogin(username, password)).equals("")) {
-                        // Fejl ved oprettelse i DB
-                        request.setAttribute("loginErrorMessage", dbErrorMessage);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    } else {
+                    /********** Check DB for user excistence **********/
+                    loginControl = control.getLogin(username, password);
 
-                        currentPno = control.getPno(username);
-                        //getPendingCampaigns
-                        session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+                    switch (loginControl) {
+                        case "admin":
+                            // Register a new admin user
+                            request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
+                            break;
 
-                        //getNewestPartners
-                        session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                        case "partner":
+                            // Register a new partner user
+                            request.getRequestDispatcher("partner_dashboard.jsp").forward(request, response);
+                            break;
 
-                        // Sender brugeren videre til dashboard
-                        request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                        case "invalid login":
+                            request.setAttribute("loginErrorMessage", loginControl);
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            break;
 
+                        default:
+                            request.setAttribute("loginErrorMessage", "Ups! Something went wrong, please try again.");
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            break;
                     }
+                    break;
+
                 }
-                break;
-
-            case "loginAdmin":
-                // VALIDATION
-
-                //getPendingPartners
-                session.setAttribute("pendingPartners", control.getAllPendingPartners());
-
-                //getPendingCampaigns
-                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
-
-                //getNewestPartners
-                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-
-                // Sender brugeren videre til dashboard
-                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
-
-                break;
         }
-
     }
-
 }

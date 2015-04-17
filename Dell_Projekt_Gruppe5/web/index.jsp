@@ -35,7 +35,7 @@
                     
                     <!---------- Log in ---------->
                     <form class="marginTop" action="PartnerServlet" method="POST">
-                        <input type="hidden" name="action" value="partnerLogin">
+                        <input type="hidden" name="action" value="login">
                         <div class="input-group-lg ">
                             <input type="text" name="username" class="form-control marginTop" placeholder="Your username" />
                         </div>
