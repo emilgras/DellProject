@@ -13,6 +13,7 @@ public class DBFacade {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
+    private LoginMapper lm;
     
     private DBConnector dbcon = new DBConnector();
     private Connection con = null;
@@ -24,6 +25,7 @@ public class DBFacade {
     private DBFacade() {
         pm = new PartnerMapper();
         cm = new CampaignMapper();
+        lm = new LoginMapper();
         con = dbcon.getConnection();
     }
 
@@ -36,7 +38,7 @@ public class DBFacade {
 	  //== Singleton end
 
     public String getLogin(String username, String password) {
-        return pm.getLogin(username, password, con);
+        return lm.getLogin(username, password, con);
     }
     
     public int getPno(String username) {
@@ -80,7 +82,7 @@ public class DBFacade {
         return cm.updateCampaign(kno, con);
     }
     
-    public boolean rollBackCampaign(int kno) {
+     public boolean rollBackCampaign(int kno) {
         return cm.rollBackCampaign(kno, con);
     }
 }

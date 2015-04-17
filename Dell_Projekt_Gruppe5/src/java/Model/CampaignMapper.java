@@ -2,6 +2,10 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Model;
 
@@ -78,7 +82,7 @@ public class CampaignMapper {
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
-            statement.close();
+            //statement.close();
 
         } catch (SQLException ex) {
             status = false;
@@ -289,5 +293,4 @@ public class CampaignMapper {
         
         
     }
-
 }

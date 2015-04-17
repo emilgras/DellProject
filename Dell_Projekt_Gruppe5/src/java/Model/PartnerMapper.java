@@ -66,8 +66,9 @@ public class PartnerMapper {
     public String createPartner(Partner partner, Connection con) {
 
         String errorMessage = "";
-
-        String sql = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn, password, rolle) VALUES (?,?,?,?,?,?,?,?)";
+        
+        String sql1 = "INSERT INTO bruger values (?,?,?)";
+        String sql2 = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn) VALUES (?,?,?,?,?,?)";
         String SQLString1
                 = "select pno_increment.nextval  "
                 + "from dual";
@@ -77,7 +78,7 @@ public class PartnerMapper {
         String name = partner.getName();
         String cvr = partner.getCvr();
         String country = partner.getCountry();
-        Date date = partner.getDate();
+        String date = "NULL";
 
         try {
 
@@ -86,16 +87,20 @@ public class PartnerMapper {
             if (rs.next()) {
                 partner.setPno(rs.getInt(1));
             }
-            insertStatement = con.prepareStatement(sql);
+            
+            insertStatement = con.prepareStatement(sql1);
+            insertStatement.setString(1, user);
+            insertStatement.setString(2, pass);
+            insertStatement.setString(3, "partner");
+            insertStatement.executeUpdate();
+            
+            insertStatement = con.prepareStatement(sql2);
             insertStatement.setInt(1, partner.getPno());
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, country);
             insertStatement.setString(4, name);
-            insertStatement.setDate(5, date);
+            insertStatement.setString(5, date);
             insertStatement.setString(6, user);
-            insertStatement.setString(7, pass);
-            insertStatement.setString(8, "Partner");
-
             insertStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -135,7 +140,7 @@ public class PartnerMapper {
     
     public ArrayList<Partner> getAllPendingPartners(Connection con) {
        
-        String sqlString = "select navn,cvr,land from partner where dato is NULL";
+        String sqlString = "select navn,cvr,land from partner where dato = 'NULL'";
         ArrayList<Partner> pArray = new ArrayList<>();
         
         try {
@@ -216,3 +221,4 @@ public class PartnerMapper {
         return pno;
     }
 }
+
