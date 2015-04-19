@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
-        <script type='text/javascript' src='script.js'></script>
+        
     </head>
     <body>
         <!------------------- NAV ------------------ -->
@@ -65,12 +65,18 @@
 
                                 <div class="tile">
                                     <div>
+                                        
                                         <table class="table table-striped table-bordered">
                                             <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+                                            
                                             <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                                
                                                 <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+                                                
                                             </c:forEach>
-                                        </table> 
+                                               
+                                        </table>
+                                          
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +105,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        
+        <script type='text/javascript' src='scriptPartner.js'></script>
     </body>
 </html>
 
