@@ -34,7 +34,7 @@ public class CampaignMapper {
         PreparedStatement statement = null;
 
         try {
-
+ 
             PreparedStatement stmt = con.prepareStatement(primary);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -53,7 +53,7 @@ public class CampaignMapper {
             statement.setInt(8, camp.getPno());
 
             rowsInserted += statement.executeUpdate();
-
+         //statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,11 +61,7 @@ public class CampaignMapper {
         if (testRun) {
             System.out.println("insertCampaign(): " + (rowsInserted == 1)); // for test
         }
-        try {
-            statement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         return (rowsInserted == 1);
     }
 

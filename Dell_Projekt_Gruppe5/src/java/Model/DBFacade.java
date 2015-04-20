@@ -38,51 +38,51 @@ public class DBFacade {
 	  //== Singleton end
 
     public String getLogin(String username, String password) {
-        return lm.getLogin(username, password, con);
+        return lm.getLogin(username, password, dbcon.getConnection());
     }
     
     public int getPno(String username) {
-        return pm.getPno(username, con);
+        return pm.getPno(username, dbcon.getConnection());
     }
 
     public String createPartner(Partner partner) {
-        return pm.createPartner(partner, con);
+        return pm.createPartner(partner, dbcon.getConnection());
     }
 
     public boolean createCampaign(Campaign campaign) {
-        return cm.insertCampaign(campaign, con);
+        return cm.insertCampaign(campaign, dbcon.getConnection());
     }
     
     /*** Dashboard view ***/
     
     public ArrayList<Partner> getAllPendingPartners(){
-        return pm.getAllPendingPartners(con);
+        return pm.getAllPendingPartners(dbcon.getConnection());
     }
     
     public ArrayList<Campaign> getAllPendingCampaigns() {
-       return cm.getAllPendingCampaigns(con);
+       return cm.getAllPendingCampaigns(dbcon.getConnection());
     }
    
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        return cm.getAllNewestCampaigns(con);
+        return cm.getAllNewestCampaigns(dbcon.getConnection());
     }
 
     /*** Dashboard button interaction ***/
     
     public boolean acceptPartner(String cvr){
-        return pm.acceptPartner(cvr, con);
+        return pm.acceptPartner(cvr, dbcon.getConnection());
     }
     
     public boolean acceptCampaign(int kno) {
-        System.out.println("DBFacade: " + cm.acceptCampaign(kno, con));
-        return cm.acceptCampaign(kno, con);
+        System.out.println("DBFacade: " + cm.acceptCampaign(kno, dbcon.getConnection()));
+        return cm.acceptCampaign(kno, dbcon.getConnection());
     }
     
     public boolean updateCampaign(int kno) {
-        return cm.updateCampaign(kno, con);
+        return cm.updateCampaign(kno, dbcon.getConnection());
     }
     
      public boolean rollBackCampaign(int kno) {
-        return cm.rollBackCampaign(kno, con);
+        return cm.rollBackCampaign(kno, dbcon.getConnection());
     }
 }

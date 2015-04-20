@@ -105,7 +105,7 @@ public class PartnerServlet extends HttpServlet {
                 if (!(validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
-                    request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
+                    request.getRequestDispatcher("signup.jsp").forward(request, response);
                 } else {
 
                     if (!(dbErrorMessage = con.createPartner(partner)).equals("")) {
@@ -188,7 +188,7 @@ public class PartnerServlet extends HttpServlet {
                     }
                 }
                 
-                con.uploadPoe((int)request.getSession().getAttribute("pno"), fileNames);
+                con.uploadPoe((int)request.getSession().getAttribute("PNO"), fileNames);
 
                 // Dave files to server
                 //MultipartRequest mr = new MultipartRequest(request, savePath);

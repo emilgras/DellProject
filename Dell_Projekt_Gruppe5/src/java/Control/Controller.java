@@ -32,9 +32,9 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public int getPno(String username) {
-        //return getInstance().getPno(username);
-        currentPno= getInstance().getPno(username);
-        return currentPno;
+        
+        return getInstance().getPno(username);
+       
     }
 
     @Override

@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                     /********** Check DB for user excistence **********/
                     loginControl = control.getLogin(username, password);
                     currentPno = control.getPno(username);
-                    request.getSession().setAttribute("PNO", currentPno);
+                    session.setAttribute("PNO", currentPno);
                     switch (loginControl) {
                         case "admin":
                             // Register a new admin user
