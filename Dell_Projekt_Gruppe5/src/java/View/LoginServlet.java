@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("pendingPartners", control.getAllPendingPartners());
                             session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-                            control.getPno(username);
+                            session.setAttribute("PNO", control.getPno(username));                            
                             System.out.println(currentPno);
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;

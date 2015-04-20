@@ -32,7 +32,7 @@
                     <img src="img/logo128px.png">
                     <p class="lead">The power to do more</p>
                     <p class="bold marginTop">If you are already registered then log in below otherwise click on the 'Become partner' button to join us now</p>
-                    
+                    <h3 style="color: indianred">${loginErrorMessage}</h3>
                     <!---------- Log in ---------->
                     <form class="marginTop" action="LoginServlet" method="POST">
                         <input type="hidden" name="action" value="login">

@@ -42,6 +42,7 @@
         <div class="container">
             <div class="col-md-6  col-md-offset-3">
                 <h1 class="tileHeader">New campaign</h1>
+                <h3 style="color: indianred">${campaignErrorMessage}</h3>
                 <form class="form-group marginTop" action="PartnerServlet" method="post">
                     <div class="form-group">
                         <label for="date" >Campaign start:</label>

@@ -122,13 +122,14 @@ public class PartnerServlet extends HttpServlet {
 
             case "sendcampaign":
                 int pno = (Integer) (request.getSession().getAttribute("PNO"));
+                System.out.println("PNO: " + pno);
                 String campaignStart = request.getParameter("campaignstart");   /// Lav streng om til sql date
                 String campaignEnd = request.getParameter("campaignend");       /// Lav streng om til sql date
                 String priceString = request.getParameter("price");
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
 
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, (int)request.getSession().getAttribute("pno") );
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno);
 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
