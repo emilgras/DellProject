@@ -23,6 +23,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
     ArrayList<Campaign> newestCampaigns = new ArrayList<>();
     ArrayList<Partner> allPartners = new ArrayList<>();
+    int currentPno = 0;
 
     @Override
     public String getLogin(String username, String password) {
@@ -31,7 +32,9 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public int getPno(String username) {
-        return getInstance().getPno(username);
+        //return getInstance().getPno(username);
+        currentPno= getInstance().getPno(username);
+        return currentPno;
     }
 
     @Override
@@ -129,7 +132,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     @Override
     public boolean updateCampaign(int id) {
         boolean succes = true;
-        int kno = newestCampaigns.get(id).getKno();
+        int kno = getInstance().getAllNewestCampaigns().get(id).getKno();
         System.out.println("KNO: " + kno);
         if (getInstance().updateCampaign(kno)) {
             System.out.println("SUCCES...");

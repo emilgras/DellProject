@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class PartnerServlet extends HttpServlet {
 
     PartnerIF con = new Controller();
-    int currentPno = 0;
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +62,8 @@ public class PartnerServlet extends HttpServlet {
             case "upload":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
-                con.updateCampaign(intId - 1);
+                System.out.println(intId);
+                con.updateCampaign(intId-1);
                 session.setAttribute("newestCampaigns", con.getAllNewestCampaigns());
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
@@ -108,22 +109,23 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
-                        currentPno = con.getPno(user);
-                        System.out.println("PNO: " + currentPno);
+                        con.getPno(user);
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
                 break;
 
             case "sendcampaign":
+                int pno = (Integer) (request.getSession().getAttribute("PNO"));
                 String campaignStart = request.getParameter("campaignstart");   /// Lav streng om til sql date
                 String campaignEnd = request.getParameter("campaignend");       /// Lav streng om til sql date
                 String priceString = request.getParameter("price");
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
-
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, currentPno);
-                campaign.setPno(currentPno);
+               
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno);
+                
+                campaign.setPno(pno);
 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);

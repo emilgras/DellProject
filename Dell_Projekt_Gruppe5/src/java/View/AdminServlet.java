@@ -76,28 +76,10 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        HttpSession session = request.getSession();
+//        String action = request.getParameter("action");
+//        HttpSession session = request.getSession();
 
-       switch (action) {
-
-            case "adminLogin":
-                // VALIDATION
-
-                //getPendingPartners
-                session.setAttribute("pendingPartners", control.getAllPendingPartners());
-
-                //getPendingCampaigns
-                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
-
-                //getNewestPartners
-                //session.setAttribute("newestCampaigns", control.);
-
-                // Sender brugeren videre til dashboard
-                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
-
-                break;
-        }
+   
 
     }
 

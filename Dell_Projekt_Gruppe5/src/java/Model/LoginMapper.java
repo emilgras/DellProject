@@ -46,9 +46,11 @@ public class LoginMapper {
             i = rs.getInt(1);
             j = rs.getInt(2);
             k = rs.getString(3);
+             statement.close();
         } catch (Exception e) {
             message = "invalid login";
         }
+         
         if(i == 1 && j == 1 && k.equals("admin")) message = "admin";
         if(i == 1 && j == 1 && k.equals("partner")) message = "partner";
         return message;

@@ -30,7 +30,7 @@ public class Test {
         DBFacade pf = DBFacade.getInstance();
         //pf.getPartnerName();
         Controller cont = new Controller();
-        
+        System.out.println(cont.updateCampaign(28));
        // cm.getAllPartnerAcceptedCampaigns(con);
        //pf.showPartnerName();
 //        
@@ -67,8 +67,7 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        Partner p = new Partner("hanshans","hanshans","hans","12345678",null,"danmark");
-        cont.createPartner(p);
+        
         try {
             con.close();
         } catch (Exception e) {

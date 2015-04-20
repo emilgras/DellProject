@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
-        
+
     </head>
     <body>
         <!------------------- NAV ------------------ -->
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-md-6 marginTop">
-              
+
                     <div class="tile">
                         <div>
 
@@ -65,47 +65,60 @@
 
                                 <div class="tile">
                                     <div>
-                                        
+
                                         <table class="table table-striped table-bordered">
                                             <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
-                                            
-                                            <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                                    
+                                                        
+                                                         
                                                 
-                                                <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
-                                                
-                                            </c:forEach>
-                                               
-                                        </table>
-                                          
-                                    </div>
+                                                <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                                <c:choose>
+                                                    <c:when test="${campaign.status == 'POE pending'}">     
+                                                    
+                                                        <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input disabled="disabled" id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+
+
+                                                    </c:when> 
+                                                    <c:otherwise>
+                                                         <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+                                                        
+                                                       
+                                                    </c:otherwise>   
+                                                </c:choose>
+                                                   </c:forEach>  
+                                            </table>
+                                                    
+
                                 </div>
                             </div>
                         </div>
-                        </div>
-                     </div>
-
-                <!------------ PENDING CAMPAIGNS ------------>
-                <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
-                    <div class="tile">
-                        <div>                     
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Campaign start</th><th>Campaign end</th><th>Price estimate</th><th>Description:</th>
-                                <c:forEach var="campaign" items="${pendingCampaigns}">
-                                    <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
-                                </c:forEach>
-                            </table> 
-                        </div>
                     </div>
                 </div>
-
-
             </div>
-        </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script type='text/javascript' src='scriptPartner.js'></script>
-    </body>
+            <!------------ PENDING CAMPAIGNS ------------>
+            <div class="col-md-6 marginTop">
+                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                <div class="tile">
+                    <div>                     
+                        <table class="table table-striped table-bordered">
+                            <tr class="active"><th>Campaign start</th><th>Campaign end</th><th>Price estimate</th><th>Description:</th>
+                                    <c:forEach var="campaign" items="${pendingCampaigns}">
+                                <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
+                            </c:forEach>
+                        </table> 
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='scriptPartner.js'></script>
+</body>
 </html>
 

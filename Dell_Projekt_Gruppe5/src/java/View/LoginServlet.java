@@ -63,13 +63,22 @@ public class LoginServlet extends HttpServlet {
 
                     /********** Check DB for user excistence **********/
                     loginControl = control.getLogin(username, password);
-
+                    currentPno = control.getPno(username);
+                    request.getSession().setAttribute("PNO", currentPno);
                     switch (loginControl) {
                         case "admin":
                             // Register a new admin user
                             
                             // Set arraylist containing all current partners campiagns as attribute
-                            
+                            //getPendingPartners
+                session.setAttribute("pendingPartners", control.getAllPendingPartners());
+
+                //getPendingCampaigns
+                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+
+                //getNewestPartners
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
@@ -80,7 +89,8 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("pendingPartners", control.getAllPendingPartners());
                             session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-                            
+                            control.getPno(username);
+                            System.out.println(currentPno);
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;
 
@@ -98,5 +108,11 @@ public class LoginServlet extends HttpServlet {
 
                 }
         }
-    }
+    
+} 
+    
+  
 }
+
+  
+

@@ -33,8 +33,8 @@
                     <p class="lead">The power to do more</p>     
                     
                     <!---------- Log in ---------->
-                    <form class="marginTop" action="AdminServlet" method="POST">
-                        <input type="hidden" name="action" value="adminLogin">
+                    <form class="marginTop" action="LoginServlet" method="POST">
+                        <input type="hidden" name="action" value="login">
                         <div class="input-group-lg ">
                             <input type="text" name="username" class="form-control marginTop" placeholder="Your username" />
                         </div>

@@ -45,15 +45,15 @@ public class PartnerMapper {
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        finally														// must close statement
-//      {
-//    	  try {
-//			statement.close();
-//		} catch (SQLException e) {
-//			System.out.println("Fail");
-//			System.out.println(e.getMessage());
-//		}  
-//      }
+        finally														// must close statement
+      {
+    	  try {
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Fail");
+			System.out.println(e.getMessage());
+		}  
+      }
         if (count == 0) {
             message = "Invalid username or password";
 
@@ -162,7 +162,7 @@ public class PartnerMapper {
                
                 
             }
-            
+             statement.close();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -214,6 +214,7 @@ public class PartnerMapper {
             if (rs.next()) {
                 pno = Integer.parseInt(rs.getString(1));
             }
+             statement.close();
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("ups");

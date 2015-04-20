@@ -61,11 +61,11 @@ public class CampaignMapper {
         if (testRun) {
             System.out.println("insertCampaign(): " + (rowsInserted == 1)); // for test
         }
-//        try {
-//            statement.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return (rowsInserted == 1);
     }
 
@@ -137,7 +137,7 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-            //statement.close();
+            statement.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,7 +193,7 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-            //statement.close();
+            statement.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,7 +215,9 @@ public class CampaignMapper {
             if (rs.next()) {
                 status = rs.getString(1);
             }
+             statement.close();
             return status;
+           
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("ups");
@@ -237,7 +239,7 @@ public class CampaignMapper {
                     list.add(tmp);
                 }
             }
-
+             statement.close();
         } catch (SQLException e) {
         }
         return list;
@@ -260,6 +262,7 @@ public class CampaignMapper {
                     count++;
                 }
             }
+             statement.close();
             System.out.println("COUNT: " + count);
 
         } catch (SQLException e) {
@@ -283,6 +286,7 @@ public class CampaignMapper {
                     list.add(tmp);
                     count++;
                 }
+                 statement.close();
             }
             System.out.println("COUNT: " + count);
 
