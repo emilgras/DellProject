@@ -9,6 +9,8 @@ import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
+import Model.File;
+import java.nio.file.Files;
 import java.sql.Connection;
 
 /**
@@ -150,6 +152,19 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public boolean rollBackCampaign(int id) {
         // CONTENT
         return false;
+    }
+
+    @Override
+    public void uploadPoe(int kno, ArrayList<Files> files) {
+        // content
+    }
+
+    @Override
+    public ArrayList<File> getFiles(int kno) {
+        
+        // content
+        
+        return new ArrayList<File>();
     }
 
     

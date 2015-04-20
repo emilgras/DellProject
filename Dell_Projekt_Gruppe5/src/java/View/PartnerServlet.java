@@ -10,13 +10,20 @@ import Control.PartnerIF;
 import Model.Campaign;
 import Model.Partner;
 import Utils.Validate;
+import com.oreilly.servlet.MultipartRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
@@ -44,7 +51,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
-                
+
             case "signup":
                 request.setAttribute("username", "");
                 request.setAttribute("company", "");
@@ -80,7 +87,6 @@ public class PartnerServlet extends HttpServlet {
 
         switch (action) {
 
-            
             case "partnerSignup":
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
@@ -149,17 +155,31 @@ public class PartnerServlet extends HttpServlet {
                         // Success!
                         session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                        
+
                     }
                 }
                 break;
+
+            case "sendPoe":
+
+                // Dave files to server
+                String savePath = request.getServletContext().getRealPath("/uploads");
                 
-                case "sendPoe":
-                    
-                    // Get all files. For each file save the name (and extension seperatly). 
-                    // Send them to server and save the names in DB
-                    
-                    break;
+                MultipartRequest mr = new MultipartRequest(request, savePath);
+                
+                // Retrieves filenames from jsp page
+                Map<String, String[]> files = new HashMap();
+                
+                String fileName = mr.getFile("files").getName();
+                System.out.println("FILENAME: " + fileName);
+
+                files = request.getParameterMap();
+                System.out.println("MAP SIZE: " + files.size());
+
+                Collection<Part> list = request.getParts();
+                System.out.println("SIIIIZE: " + list.size());
+                
+                break;
         }
     }
 }
