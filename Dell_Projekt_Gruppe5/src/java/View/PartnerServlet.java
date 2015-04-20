@@ -105,7 +105,7 @@ public class PartnerServlet extends HttpServlet {
                 if (!(validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
                     request.setAttribute("signupErrorMessage", validationErrorMessage);
-                    request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
+                    request.getRequestDispatcher("signup.jsp").forward(request, response);
                 } else {
 
                     if (!(dbErrorMessage = con.createPartner(partner)).equals("")) {
@@ -128,8 +128,8 @@ public class PartnerServlet extends HttpServlet {
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
 
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, (int)request.getSession().getAttribute("pno") );
-
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno );
+                campaign.setPno(pno);
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
@@ -187,7 +187,7 @@ public class PartnerServlet extends HttpServlet {
                     }
                 }
                 
-                con.uploadPoe((int)request.getSession().getAttribute("pno"), fileNames);
+                con.uploadPoe((int)request.getSession().getAttribute("PNO"), fileNames);
 
                 // Dave files to server
                 //MultipartRequest mr = new MultipartRequest(request, savePath);

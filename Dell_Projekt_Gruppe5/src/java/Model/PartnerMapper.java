@@ -129,7 +129,7 @@ public class PartnerMapper {
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
-            statement.close();
+            //statement.close();
             return true; 
             
         } catch (SQLException ex) {
@@ -162,7 +162,7 @@ public class PartnerMapper {
                
                 
             }
-             statement.close();
+             //statement.close();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -214,8 +214,8 @@ public class PartnerMapper {
             if (rs.next()) {
                 pno = Integer.parseInt(rs.getString(1));
             }
-             statement.close();
-        } catch (Exception e) {
+             //statement.close();
+        } catch (SQLException | NumberFormatException e) {
             System.out.println(e);
             System.out.println("ups");
         }

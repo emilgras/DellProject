@@ -33,7 +33,7 @@ public class LoginMapper {
             statement.setString(1, username);
             statement.setString(2, password);
             rs = statement.executeQuery();
-            
+            //statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,7 +46,7 @@ public class LoginMapper {
             i = rs.getInt(1);
             j = rs.getInt(2);
             k = rs.getString(3);
-             statement.close();
+            
         } catch (Exception e) {
             message = "invalid login";
         }
