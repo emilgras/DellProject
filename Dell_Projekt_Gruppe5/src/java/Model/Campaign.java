@@ -40,6 +40,7 @@ public class Campaign {
         this.start_dato = start_dato;
         this.slut_dato = slut_dato;
         this.pris = pris;
+        this.pno = pno;
     }
 
     public Campaign(int kno, String beskrivelse, String start_dato, String slut_dato, float pris, int pno) {

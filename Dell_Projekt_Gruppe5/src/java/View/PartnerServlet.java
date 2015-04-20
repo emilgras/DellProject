@@ -114,7 +114,7 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
-
+                        session.setAttribute("PNO", con.getPno(user));
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -122,7 +122,7 @@ public class PartnerServlet extends HttpServlet {
 
             case "sendcampaign":
                 int pno = (Integer) (request.getSession().getAttribute("PNO"));
-                System.out.println("PNO: " + pno);
+                System.out.println("PNO i PARTNERSERVLET: " + pno);
                 String campaignStart = request.getParameter("campaignstart");   /// Lav streng om til sql date
                 String campaignEnd = request.getParameter("campaignend");       /// Lav streng om til sql date
                 String priceString = request.getParameter("price");
@@ -130,7 +130,7 @@ public class PartnerServlet extends HttpServlet {
                 String description = request.getParameter("description");
 
                 Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno);
-
+                
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);

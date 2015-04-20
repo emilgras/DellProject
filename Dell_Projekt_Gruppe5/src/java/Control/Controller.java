@@ -53,9 +53,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public ArrayList<Campaign> showAllNewCampaigns() {
-
         return getInstance().getAllNewestCampaigns();
-
     }
 
     
