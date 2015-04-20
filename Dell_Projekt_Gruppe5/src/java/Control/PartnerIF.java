@@ -6,8 +6,10 @@
 package Control;
 
 import Model.Campaign;
+import Model.CustomFile;
 import Model.DBFacade;
 import Model.Partner;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 /**
@@ -29,4 +31,6 @@ public interface PartnerIF {
     ArrayList<Campaign> getAllPendingCampaigns();
     
     ArrayList<Campaign> getAllNewestCampaigns();
+    
+    void uploadPoe(int kno, ArrayList<CustomFile> files);
 }

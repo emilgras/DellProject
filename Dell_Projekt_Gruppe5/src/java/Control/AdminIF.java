@@ -7,6 +7,7 @@ package Control;
 
 import Model.Campaign;
 import Model.DBFacade;
+import Model.CustomFile;
 import Model.Partner;
 import java.util.ArrayList;
 
@@ -41,4 +42,6 @@ public interface AdminIF {
     boolean rollBackCampaign(int id);
     
     Campaign getCampaignDetail(int id);
+    
+    ArrayList<CustomFile> getFiles(int kno);
 }
