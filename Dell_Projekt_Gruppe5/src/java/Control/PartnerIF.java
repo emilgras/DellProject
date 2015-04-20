@@ -6,6 +6,7 @@
 package Control;
 
 import Model.Campaign;
+import Model.CustomFile;
 import Model.DBFacade;
 import Model.Partner;
 import java.nio.file.Files;
@@ -31,5 +32,5 @@ public interface PartnerIF {
     
     ArrayList<Campaign> getAllNewestCampaigns();
     
-    void uploadPoe(int kno, ArrayList<Files> files);
+    void uploadPoe(int kno, ArrayList<CustomFile> files);
 }

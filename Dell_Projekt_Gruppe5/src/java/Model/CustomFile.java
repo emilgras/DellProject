@@ -9,11 +9,11 @@ package Model;
  *
  * @author EmilGras
  */
-public class File {
+public class CustomFile {
     private String name;
     private String extension;
     
-    public File(String name, String extension) {
+    public CustomFile(String name, String extension) {
         this.name = name;
         this.extension = extension;
     }

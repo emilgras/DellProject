@@ -8,14 +8,12 @@ package View;
 import Control.Controller;
 import Control.PartnerIF;
 import Model.Campaign;
+import Model.CustomFile;
 import Model.Partner;
 import Utils.Validate;
-import com.oreilly.servlet.MultipartRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads", fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
+
 public class PartnerServlet extends HttpServlet {
 
     PartnerIF con = new Controller();
-    int currentPno = 0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +51,6 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 break;
-
             case "signup":
                 request.setAttribute("username", "");
                 request.setAttribute("company", "");
@@ -65,7 +64,6 @@ public class PartnerServlet extends HttpServlet {
                 //currentUser = null;
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
-
             case "upload":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
@@ -114,8 +112,7 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                     } else {
                         // Yay - du er oprettet i DB
-                        currentPno = con.getPno(user);
-                        System.out.println("PNO: " + currentPno);
+
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -128,8 +125,7 @@ public class PartnerServlet extends HttpServlet {
                 float price = Float.parseFloat(priceString);
                 String description = request.getParameter("description");
 
-                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, currentPno);
-                campaign.setPno(currentPno);
+                Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, (int)request.getSession().getAttribute("pno") );
 
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
@@ -162,23 +158,36 @@ public class PartnerServlet extends HttpServlet {
 
             case "sendPoe":
 
+                //String savePath = request.getServletContext().getRealPath("");
+                //System.out.println("PATH: " + savePath);
+                ArrayList<CustomFile> fileNames = new ArrayList();
+
+                // Checks if upload folder excists. If will create one.
+                File file = new File("");
+
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+
+                for (Part part : request.getParts()) {
+                    String fileName = part.getSubmittedFileName();
+                    // Save the file on the server in the specified folder
+                    part.write(fileName);
+                    
+                    // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"
+                    if (fileName != null && fileName.contains(".")) {
+                        String filename = fileName.substring(0, fileName.lastIndexOf('.'));
+                        String fileextension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
+                        CustomFile customFile = new CustomFile(filename, fileextension);
+                        System.out.println("File Name: " + customFile.getFileName());
+                        fileNames.add(customFile);
+                    }
+                }
+                
+                con.uploadPoe((int)request.getSession().getAttribute("pno"), fileNames);
+
                 // Dave files to server
-                String savePath = request.getServletContext().getRealPath("/uploads");
-                
-                MultipartRequest mr = new MultipartRequest(request, savePath);
-                
-                // Retrieves filenames from jsp page
-                Map<String, String[]> files = new HashMap();
-                
-                String fileName = mr.getFile("files").getName();
-                System.out.println("FILENAME: " + fileName);
-
-                files = request.getParameterMap();
-                System.out.println("MAP SIZE: " + files.size());
-
-                Collection<Part> list = request.getParts();
-                System.out.println("SIIIIZE: " + list.size());
-                
+                //MultipartRequest mr = new MultipartRequest(request, savePath);
                 break;
         }
     }

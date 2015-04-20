@@ -9,9 +9,7 @@ import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
-import Model.File;
-import java.nio.file.Files;
-import java.sql.Connection;
+import Model.CustomFile;
 
 /**
  *
@@ -155,16 +153,16 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
-    public void uploadPoe(int kno, ArrayList<Files> files) {
+    public void uploadPoe(int kno, ArrayList<CustomFile> files) {
         // content
     }
 
     @Override
-    public ArrayList<File> getFiles(int kno) {
+    public ArrayList<CustomFile> getFiles(int kno) {
         
         // content
         
-        return new ArrayList<File>();
+        return new ArrayList<CustomFile>();
     }
 
     

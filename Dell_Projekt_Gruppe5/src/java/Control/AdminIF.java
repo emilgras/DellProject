@@ -7,7 +7,7 @@ package Control;
 
 import Model.Campaign;
 import Model.DBFacade;
-import Model.File;
+import Model.CustomFile;
 import Model.Partner;
 import java.util.ArrayList;
 
@@ -43,5 +43,5 @@ public interface AdminIF {
     
     Campaign getCampaignDetail(int id);
     
-    ArrayList<File> getFiles(int kno);
+    ArrayList<CustomFile> getFiles(int kno);
 }
