@@ -214,7 +214,7 @@ public class PartnerMapper {
             if (rs.next()) {
                 pno = Integer.parseInt(rs.getString(1));
             }
-             //statement.close();
+            statement.close();
         } catch (SQLException | NumberFormatException e) {
             System.out.println(e);
             System.out.println("ups");
