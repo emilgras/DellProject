@@ -41,21 +41,33 @@
         </div>  
 
         <div class="container"> 
-            <h1 class="tileHeader">Campaign detail</h1>
-            <div class="col-md-0 marginTop">
-                <a href="AdminServlet?action=dashboard">Tilbage</a>
-                <h3>Id: ${campaignDetail.kno}</h3>
-                <h3>Pris: ${campaignDetail.pris}</h3>
-                <h3>Pris: ${campaignDetail.beskrivelse}</h3>
-                <h3>Forventet start: ${campaignDetail.start_dato}</h3>
-                <h3>Forventet slut ${campaignDetail.slut_dato}</h3>
-                <h3>Firma: ${campaignDetail.navn}</h3>
-                <h3>Firma: ${campaignDetail.cvr}</h3>
-                <h3>Oprettet: ${campaignDetail.oprettelse_dato}</h3>
-                <h3>Status: ${campaignDetail.status}</h3>
-                
-                <!-- kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr -->
-                
+            
+            <!-------- Details --------> 
+            <div class="row marginBottom">
+                <h1 class="tileHeader">Campaign detail</h1>
+                <div class="col-md-0 marginTop">
+                    <a href="AdminServlet?action=dashboard">Tilbage</a>
+                    <h3>Id: ${campaignDetail.kno}</h3>
+                    <h3>Pris: ${campaignDetail.pris}</h3>
+                    <h3>Pris: ${campaignDetail.beskrivelse}</h3>
+                    <h3>Forventet start: ${campaignDetail.start_dato}</h3>
+                    <h3>Forventet slut ${campaignDetail.slut_dato}</h3>
+                    <h3>Firma: ${campaignDetail.navn}</h3>
+                    <h3>Firma: ${campaignDetail.cvr}</h3>
+                    <h3>Oprettet: ${campaignDetail.oprettelse_dato}</h3>
+                    <h3>Status: ${campaignDetail.status}</h3>
+
+                    
+
+                </div>
+            </div>
+
+            <!-------- POE -------->        
+            <div class="row marginTop marginBottom">
+                <c:if test="${campaignDetail.status == 'POE Pending' || campaignDetail.status == 'POE Accepted'}">
+                    <h1 class="tileHeader">Campaign Proof Of Execution</h1>
+                    <h3>Right here i will put ALOT of pictures to you!!! :)</h3>
+                </c:if>
             </div>
         </div>
 

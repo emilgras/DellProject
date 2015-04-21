@@ -11,6 +11,7 @@ import Model.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
 import Model.CustomFile;
+import Model.Poe;
 
 /**
  *
@@ -32,41 +33,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
        
     }
 
-    @Override
-    public String createPartner(Partner partner) {
-        return getInstance().createPartner(partner);
-    }
-
-    @Override
-    public boolean createCampaign(Campaign campaign) {
-        return getInstance().createCampaign(campaign);
-    }
-
-    
-
-    
-
-    @Override
-    public ArrayList<Campaign> showAllNewCampaigns() {
-        return getInstance().getAllNewestCampaigns();
-    }
-
-    
-/*
-    @Override
-    public ArrayList<Partner> getNewPartnerArrayList(int id) {
-        String partnerCVR = pendingPartners.get(id).getCvr();
-        //getInstance().updatePartnerStatus(partnerCVR);
-        System.out.println(pendingPartners.get(id).getCvr());
-        return pendingPartners;
-    }
-
-    @Override
-    public ArrayList<Campaign> getNewCampaignArrayList() {
-
-        return pendingCampaigns;
-    }
-    */
 
     @Override
     public DBFacade getInstance() {
@@ -74,7 +40,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return dbf;
     }
     
-    /*** Dashboard view ***/
+    
+    /*************** Dashboard view ***************/
     
     @Override
     public ArrayList<Partner> getAllPendingPartners() {
@@ -92,12 +59,60 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
     
     @Override
+    public ArrayList<Partner> getPendingPartners() {
+        return facade.getPendingPartners();
+    }
+
+    @Override
+    public ArrayList<Campaign> getPendingCampaigns() {
+        return facade.getPendingCampaigns();
+    }
+
+    @Override
+    public ArrayList<Campaign> getNewestCampaigns() {
+        return facade.getNewestCampaigns();
+    }
+
+    @Override
+    public ArrayList<Campaign> getPartnersCampaigns() {
+        return facade.getPartnersCampaigns();
+    }
+    
+    @Override
+    public Campaign getPendingCampaignDetail(int id) {
+        return facade.getPendingCampaignDetail(id);
+    }
+    
+    @Override
+    public Campaign getNewestCampaignDetail(int id) {
+        return facade.getNewestCampaignDetail(id);
+    }
+    
+    @Override
     public ArrayList<Budget> getAllPrices() {
         return facade.getAllPrices();
     }
     
-    /*** Dashboard button interaction ***/
+    
+    /*************** Campaign ***************/
+    
+    @Override
+    public int getKnoForCampaign(int id) {
+        return facade.getKnoForCampaign(id);
+    }
 
+    @Override
+    public boolean updateCampaignWithKno(int kno) {
+        boolean success = false;
+        if (getInstance().updateCampaign(kno)) {
+            success = true;
+        }        
+      return success;
+    }
+    
+
+    /*************** Admin Dashboard button interaction ***************/
+    
     @Override
     public boolean acceptPartner(int id) {
         return facade.acceptPartner(id);
@@ -123,69 +138,48 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
       
     }
 
+
     @Override
-    public Campaign getCampaignDetail(int id) {
-        return facade.getCampaignDetail(id);
-    }
-    @Override
+
     public boolean rollBackCampaign(int id) {
         
         return facade.rollBackCampaign(id);
     }
+    
+    
+    /****************** POE ********************/
 
     @Override
     public boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files) {
         return facade.uploadPoe(kno, id,  files);
     }
+    
+    @Override
+    public Poe getPoe(int kno) {
+        return facade.getPoe(kno);
+    }
+    
+    
+    /****************** Partner ********************/
+    
+    @Override
+    public String createPartner(Partner partner) {
+        return getInstance().createPartner(partner);
+    }
 
     @Override
-    public ArrayList<CustomFile> getFiles(int kno) {
-        
-        // content
-        
-        return new ArrayList<CustomFile>();
+    public boolean createCampaign(Campaign campaign) {
+        return getInstance().createCampaign(campaign);
     }
+    
+    
+    /************** Partner Dashboard **************/
     
     @Override
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
         return getInstance().getAllOwnPartnerCampaigns(pno);
     }
 
-    @Override
-    public int getKnoForCampaign(int id) {
-        return facade.getKnoForCampaign(id);
-    }
-
-    @Override
-    public boolean updateCampaignWithKno(int kno) {
-        boolean success = false;
-        if (getInstance().updateCampaign(kno)) {
-            success = true;
-        }        
-      return success;
-    }
-    
-    @Override
-    public ArrayList<Partner> getPendingPartners() {
-        return facade.getPendingPartners();
-    }
-
-    @Override
-    public ArrayList<Campaign> getPendingCampaigns() {
-        return facade.getPendingCampaigns();
-    }
-
-    @Override
-    public ArrayList<Campaign> getNewestCampaigns() {
-        return facade.getNewestCampaigns();
-    }
-
-    @Override
-    public ArrayList<Campaign> getPartnersCampaigns() {
-        return facade.getPartnersCampaigns();
-    }
-
     
 
-    
 }

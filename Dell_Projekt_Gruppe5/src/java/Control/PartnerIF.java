@@ -9,6 +9,7 @@ import Model.Campaign;
 import Model.CustomFile;
 import Model.DBFacade;
 import Model.Partner;
+import Model.Poe;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
@@ -33,6 +34,8 @@ public interface PartnerIF {
     ArrayList<Campaign> getAllNewestCampaigns();
     
     boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files);
+    
+    public Poe getPoe(int kno);
     
     ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     

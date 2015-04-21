@@ -13,7 +13,7 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-               
+
 
         <!------------------- NAV ------------------ -->
         <section>
@@ -48,17 +48,43 @@
 
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
-                    <div class="tile">
-                        <div>
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Country</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach var="partner" items="${pendingPartners}">
-                                    <tr><td>${partner.name} </td><td>${partner.cvr} </td><td>${partner.country}</td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                            </c:forEach>
-                            </table> 
+
+                    <div>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
+                        <div class="tile">
+                            <div>
+                                <table class="table table-striped table-bordered">
+                                    <tr class="active"><th>Company</th><th>CVR</th><th>Country</th><th>Accept</th><th>Decline</th></tr>
+                                            <c:forEach var="partner" items="${pendingPartners}">
+                                        <tr><td>${partner.name} </td><td>${partner.cvr} </td><td>${partner.country}</td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                                </c:forEach>
+                                </table> 
+                            </div>
                         </div>
                     </div>
+
+                    <!------------ PENDING CAMPAIGNS ------------>
+                    <div class="topMargin">                  
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                        <div class="tile">
+                            <div>                     
+                                <table class="table table-striped table-bordered">
+                                    <tr class="active"><th>Company</th><th>Status</th><th>Accept</th><th>Decline</th><th>Detail</th></tr>
+                                            <c:forEach var="campaign" items="${pendingCampaigns}">
+                                        <tr>
+                                            <td>${campaign.navn} </td>
+                                            <td>${campaign.status} </td>
+                                            <td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
+                                            <td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                            <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                                        </tr>
+                                             </c:forEach>
+                                </table> 
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!------------ NEWEST CAMPAIGNS ------------>
@@ -67,41 +93,20 @@
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Decline POE</th></tr>
+                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                                         <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow">
-                                            <td></td>
-                                            <td>${campaign.navn}</td>
-                                            <td>${campaign.pris}</td>
-                                            <td>${campaign.oprettelse_dato}</td>
-                                            <td>${campaign.status}</td>
-                                            <td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td>
-                                            <td><c:if test="${campaign.status == 'POE Pending'}" ><input id="declinePoe" type="button" class="btn btn-danger" value="Decline POE"></c:if>
-                                                <c:if test="${campaign.status != 'POE Pending'}"><input  disabled = 'disabled' type="button" class="btn btn-danger" value="Decline POE"></c:if></td>
-                                            </tr>
-                                        </c:forEach>
-                            </table> 
-                            
-                            
-                        </div>
-                    </div>
-                </div>
+                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
 
-                <!------------ PENDING CAMPAIGNS ------------>
-                <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
-                    <div class="tile">
-                        <div>                     
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Price</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach var="campaign" items="${pendingCampaigns}">
-                                    <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.pris} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                            </c:forEach>
+                                </c:forEach>
                             </table> 
+
 
                         </div>
                     </div>
                 </div>
+
+                
+
             </div>
         </section>
 
@@ -109,7 +114,6 @@
         <section class="row statsSection">
             <div class="container marginBottom">
                 <div class="col-md-12 stats">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Statistics</h3>
 
                     <div class="col-md-3 tile center">
                         <h3 class="whiteText">Total budget:</h3>
@@ -150,7 +154,7 @@
             // NewestCampaigns
             $("table tr #newestCampaigns").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=viewCampaign&id=" + row;
+                location.href = "AdminServlet?action=viewNewestCampaignDetail&id=" + row;
             });
 
             // PendingCampaigns
@@ -159,14 +163,38 @@
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
             });
             
-             // DeclinePOE
-            $("table tr #declinePoe").on('click', function () {
+            // PendingCampaignsDetail
+            $("table tr #pendingCampaignsDetail").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=rollbackcampaign&id=" + row;
+                location.href = "AdminServlet?action=viewPendingCampaignsDetail&id=" + row;
             });
 
 
+
         </script>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day']
+            <c:forEach var="item" items="${prices}">
+                        ,['${item.partnerNavn} ${item.pris} EUR', ${item.pris}]
+            </c:forEach>
+                ]);
+
+                var options = {
+                    title: 'My Daily Activities',
+                    is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
     </body>
 </html>
 
