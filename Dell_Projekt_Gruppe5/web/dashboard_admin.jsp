@@ -13,7 +13,7 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-               
+
 
         <!------------------- NAV ------------------ -->
         <section>
@@ -48,17 +48,39 @@
 
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
-                    <div class="tile">
-                        <div>
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Country</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach var="partner" items="${pendingPartners}">
-                                    <tr><td>${partner.name} </td><td>${partner.cvr} </td><td>${partner.country}</td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                            </c:forEach>
-                            </table> 
+
+                    <div>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
+                        <div class="tile">
+                            <div>
+                                <table class="table table-striped table-bordered">
+                                    <tr class="active"><th>Company</th><th>CVR</th><th>Country</th><th>Accept</th><th>Decline</th></tr>
+                                            <c:forEach var="partner" items="${pendingPartners}">
+                                        <tr><td>${partner.name} </td><td>${partner.cvr} </td><td>${partner.country}</td><td><button type="button"  id="pendingPartners" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                                </c:forEach>
+                                </table> 
+                            </div>
                         </div>
                     </div>
+
+                    <!------------ PENDING CAMPAIGNS ------------>
+                    <div class="topMargin">                  
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                        <div class="tile">
+                            <div>                     
+                                <table class="table table-striped table-bordered">
+                                    <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
+                                            <c:forEach var="campaign" items="${pendingCampaigns}">
+
+
+                                        <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.status} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                                </c:forEach>
+                                </table> 
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!------------ NEWEST CAMPAIGNS ------------>
@@ -70,32 +92,17 @@
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                                         <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
                                     <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
-                                            
-                                        </c:forEach>
-                            </table> 
-                            
-                            
-                        </div>
-                    </div>
-                </div>
 
-                <!------------ PENDING CAMPAIGNS ------------>
-                <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
-                    <div class="tile">
-                        <div>                     
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach var="campaign" items="${pendingCampaigns}">
-                                    
-                                    
-                                    <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.status} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                            </c:forEach>
+                                </c:forEach>
                             </table> 
+
 
                         </div>
                     </div>
                 </div>
+
+                
+
             </div>
         </section>
 
@@ -103,7 +110,6 @@
         <section class="row statsSection">
             <div class="container marginBottom">
                 <div class="col-md-12 stats">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-download"></span> Statistics</h3>
 
                     <div class="col-md-3 tile center">
                         <h3 class="whiteText">Total budget:</h3>

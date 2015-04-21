@@ -26,9 +26,10 @@ public class DBFacade {
     ArrayList<Campaign> partnersCampaigns = new ArrayList<>();
 
     private DBConnector dbcon = new DBConnector();
+    
     private Connection con = null;
 
-//== Singleton start
+    //== Singleton start
     private static DBFacade instance = null;
 
     private DBFacade() {
@@ -37,6 +38,23 @@ public class DBFacade {
         lm = new LoginMapper();
         poem = new PoeMapper();
         con = dbcon.getConnection();
+    }
+    
+    /*** ArrayList Getters ***/
+    public ArrayList<Partner> getPendingPartners() {
+        return pendingPartners;
+    }
+
+    public ArrayList<Campaign> getPendingCampaigns() {
+        return pendingCampaigns;
+    }
+
+    public ArrayList<Campaign> getNewestCampaigns() {
+        return newestCampaigns;
+    }
+
+    public ArrayList<Campaign> getPartnersCampaigns() {
+        return partnersCampaigns;
     }
 
     public static DBFacade getInstance() {
@@ -121,9 +139,10 @@ public class DBFacade {
     /**
      * * POE **
      */
-    public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
+    public boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files) {
         boolean success = false;
         if (poem.uploadPoe(kno, files, con)) {
+            pendingCampaigns.add(partnersCampaigns.get(id));
             updateCampaign(kno);
             success = true;
         } 

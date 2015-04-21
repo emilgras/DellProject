@@ -19,7 +19,7 @@ body {
     -moz-box-shadow: 0 0 20px #ccc; 
     -webkit-box-shadow: 0 0 20px #ccc; 
     box-shadow: 0 0 20px #ccc;
-    opacity: .8;
+    //opacity: .8;
 }
 
 .logo {
@@ -29,6 +29,10 @@ body {
 
 .marginTop {
     margin-top: 40px;
+}
+
+.topMargin {
+    margin-top: 50px;
 }
 
 .marginBottom {

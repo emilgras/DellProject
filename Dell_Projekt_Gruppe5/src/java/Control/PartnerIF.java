@@ -32,11 +32,23 @@ public interface PartnerIF {
     
     ArrayList<Campaign> getAllNewestCampaigns();
     
-    boolean uploadPoe(int kno, ArrayList<CustomFile> files);
+    boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files);
     
     ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
     int getKnoForCampaign(int id);
     
     boolean updateCampaignWithKno(int kno);
+    
+    ArrayList<Partner> getPendingPartners();
+        
+
+    ArrayList<Campaign> getPendingCampaigns();
+        
+
+    ArrayList<Campaign> getNewestCampaigns();
+        
+
+    ArrayList<Campaign> getPartnersCampaigns();
+        
 }

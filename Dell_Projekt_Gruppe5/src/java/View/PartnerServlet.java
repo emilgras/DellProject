@@ -160,10 +160,10 @@ public class PartnerServlet extends HttpServlet {
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
-                        System.out.println("TEEST PNO: " + campaign.getPno());
-                        System.out.println("TEEST price: " + campaign.getPris());
-
                         // Success!
+                        
+                        session.setAttribute("pendingPartners", con.getPendingPartners());
+                        
                         session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
 
@@ -199,8 +199,8 @@ public class PartnerServlet extends HttpServlet {
                     }
                 }
 
-                if (con.uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)) {
-                    // updateAndAddToPending(int kno, int id);
+                if (con.uploadPoe((Integer) session.getAttribute("campaignKno"), (Integer) session.getAttribute("partnersCampaignsID"), fileNames)) {
+                    session.setAttribute("pendingPartners", con.getPendingPartners());
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 } else {
                     request.setAttribute("uploadPoeError", "Sorry, not able to upload files. Please, try again");
