@@ -293,4 +293,25 @@ public class CampaignMapper {
         
         
     }
+    
+    public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno,Connection con) {
+        ArrayList<Campaign> list = new ArrayList<>();
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO where kampagne.PNO = ?";
+        PreparedStatement statement = null;
+        try {
+            
+            statement = con.prepareStatement(sqlString);
+            statement.setInt(1, pno);
+            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
+                tmp.setKno(rs.getInt(1));
+                list.add(tmp);
+            }
+             statement.close();
+        } catch (SQLException e) {
+        }
+        return list;
+    }
 }
