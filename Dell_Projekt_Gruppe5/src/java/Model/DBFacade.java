@@ -126,4 +126,8 @@ public class DBFacade {
     public Campaign getCampaignDetail(int id) {
         return newestCampaigns.get(id);
     }
+    
+    public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno){
+        return cm.getAllOwnPartnerCampaigns(pno, con);
+    }
 }

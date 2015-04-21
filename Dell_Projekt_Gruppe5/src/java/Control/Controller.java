@@ -140,6 +140,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         
         return new ArrayList<CustomFile>();
     }
+    
+    @Override
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
+        return getInstance().getAllOwnPartnerCampaigns(pno);
+    }
 
     
 }

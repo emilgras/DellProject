@@ -27,4 +27,5 @@ public interface LoginIF {
     int getPno(String username);
     
     String getLogin(String username, String password);
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
 }

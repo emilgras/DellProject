@@ -33,4 +33,5 @@ public interface PartnerIF {
     ArrayList<Campaign> getAllNewestCampaigns();
     
     void uploadPoe(int kno, ArrayList<CustomFile> files);
+     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
 }
