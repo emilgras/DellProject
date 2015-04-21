@@ -67,10 +67,18 @@
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
+                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Decline POE</th></tr>
                                         <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
-                                            
+                                    <tr class="tablerow">
+                                            <td></td>
+                                            <td>${campaign.navn}</td>
+                                            <td>${campaign.pris}</td>
+                                            <td>${campaign.oprettelse_dato}</td>
+                                            <td>${campaign.status}</td>
+                                            <td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td>
+                                            <td><c:if test="${campaign.status == 'POE Pending'}" ><input id="declinePoe" type="button" class="btn btn-danger" value="Decline POE"></c:if>
+                                                <c:if test="${campaign.status != 'POE Pending'}"><input  disabled = 'disabled' type="button" class="btn btn-danger" value="Decline POE"></c:if></td>
+                                            </tr>
                                         </c:forEach>
                             </table> 
                             
@@ -150,7 +158,12 @@
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
             });
-
+            
+             // DeclinePOE
+            $("table tr #declinePoe").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=rollbackcampaign&id=" + row;
+            });
 
 
         </script>

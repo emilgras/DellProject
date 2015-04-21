@@ -130,4 +130,6 @@ public class DBFacade {
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno){
         return cm.getAllOwnPartnerCampaigns(pno, con);
     }
+    
+    
 }
