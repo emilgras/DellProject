@@ -105,7 +105,9 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns()); ***/
                             session.setAttribute("PNO", control.getPno(username)); 
                             System.out.println("LOGIN PNO: " + control.getPno(username));
-
+                            System.out.println(control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")).isEmpty()+ "du ved det");
+                            session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
+                            
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;
 

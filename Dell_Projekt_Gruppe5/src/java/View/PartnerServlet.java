@@ -112,6 +112,7 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         // Yay - du er oprettet i DB
                         session.setAttribute("PNO", con.getPno(user));
+                        session.setAttribute("pCam", con.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }

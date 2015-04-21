@@ -29,7 +29,8 @@ public interface ControlInterface {
     String createPartner(Partner partner);
 
     boolean createCampaign(Campaign campaign);
-
+     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+      
     
 
     // ADMIN STUUF
