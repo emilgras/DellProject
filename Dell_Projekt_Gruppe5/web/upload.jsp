@@ -50,6 +50,7 @@
         <div class="container contentContainer marginBottom">
             <h1 class="tileHeader marginBottom">Upload POE</h1>
             <h4>This is the place you upload all of your pictures bla bla bla...</h4>
+            <h3 style="color: indianred">${uploadPoeError}</h3>
             <!------------ Upload file content ------------>
             <div class="row">
                 <div class="col-md-0 marginTop">

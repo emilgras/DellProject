@@ -85,7 +85,7 @@
                     <div class="tile">
                         <div>                     
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Price</th><th>Accept</th><th>Decline</th></tr>
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
                                         <c:forEach var="campaign" items="${pendingCampaigns}">
 
 

@@ -72,9 +72,9 @@
                                             <td>${campaign.pris}</td>
                                             <td>${campaign.oprettelse_dato}</td>
                                             <td>${campaign.status}</td>
-                                            <td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td>
+                                            <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                             <td><c:if test="${campaign.status == 'In-Progress'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload picture"></c:if>
-                                                <c:if test="${campaign.status != 'In-Progress'}"><input id="uploadPoe"  disabled = 'disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td>
+                                                <c:if test="${campaign.status != 'In-Progress'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td>
                                             </tr>
 
 
@@ -106,10 +106,21 @@
 
 
         </div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script type='text/javascript' src='scriptPartner.js'></script>
+        <script>
+            $("table tr #uploadPoe").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
+                location.href = "PartnerServlet?action=selectedCampaignForPoeUpload&id=" + row;
+            });
+            
+            $("table tr #viewDetail").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
+                location.href = "PartnerServlet?action=viewDeatil&id=" + row;
+            });
+        </script>
     </body>
 </html>
 

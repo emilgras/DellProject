@@ -135,8 +135,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
-    public void uploadPoe(int kno, ArrayList<CustomFile> files) {
-        facade.uploadPoe(kno, files);
+    public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
+        return facade.uploadPoe(kno, files);
     }
 
     @Override
@@ -150,6 +150,20 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     @Override
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
         return getInstance().getAllOwnPartnerCampaigns(pno);
+    }
+
+    @Override
+    public int getKnoForCampaign(int id) {
+        return facade.getKnoForCampaign(id);
+    }
+
+    @Override
+    public boolean updateCampaignWithKno(int kno) {
+        boolean success = false;
+        if (getInstance().updateCampaign(kno)) {
+            success = true;
+        }        
+      return success;
     }
 
     
