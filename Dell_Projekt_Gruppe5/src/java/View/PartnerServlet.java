@@ -162,9 +162,9 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         // Success!
                         
-                        session.setAttribute("pendingPartners", con.getPendingPartners());
-                        session.setAttribute("pCam", con.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
-                        session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
+                        //session.setAttribute("pendingPartners", con.getPendingPartners());
+                        session.setAttribute("pCam", con.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
+                        //session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
 
                     }
