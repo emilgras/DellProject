@@ -41,11 +41,12 @@
         </div>  
 
         <div class="container"> 
-            
+
             <!-------- Details --------> 
             <div class="row marginBottom">
                 <h1 class="tileHeader">Campaign detail</h1>
                 <div class="col-md-0 marginTop">
+                    <h3 class="tileHeader">Campaign Proof Of Execution</h3>
                     <a href="AdminServlet?action=dashboard">Tilbage</a>
                     <h3>Id: ${campaignDetail.kno}</h3>
                     <h3>Pris: ${campaignDetail.pris}</h3>
@@ -57,7 +58,7 @@
                     <h3>Oprettet: ${campaignDetail.oprettelse_dato}</h3>
                     <h3>Status: ${campaignDetail.status}</h3>
 
-                    
+
 
                 </div>
             </div>
@@ -65,9 +66,13 @@
             <!-------- POE -------->        
             <div class="row marginTop marginBottom">
                 <c:if test="${campaignDetail.status == 'POE Pending' || campaignDetail.status == 'POE Accepted'}">
-                    <h1 class="tileHeader">Campaign Proof Of Execution</h1>
-                    <h3>Right here i will put ALOT of pictures to you!!! :)</h3>
-                </c:if>
+                    <h3 class="tileHeader">Campaign Proof Of Execution</h3>
+                    <div class="col-md-0 marginTop">
+                        <h4>Right here i will put ALOT of pictures to you!!! :)</h4>
+                        <h4>uploads/${poe.imageFiles.get(0).fileName}</h4>
+                        <img src='uploads/${poe.imageFiles.get(0).fileName}'>
+                    </c:if>
+                </div>
             </div>
         </div>
 

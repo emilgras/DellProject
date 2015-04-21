@@ -27,10 +27,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
-    public int getPno(String username) {
-        
+    public int getPno(String username) {     
         return getInstance().getPno(username);
-       
     }
 
 
@@ -154,7 +152,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return facade.uploadPoe(kno, id,  files);
     }
     
-    @Override
     public Poe getPoe(int kno) {
         return facade.getPoe(kno);
     }

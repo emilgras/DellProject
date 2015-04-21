@@ -54,21 +54,23 @@ public class AdminServlet extends HttpServlet {
                 control.acceptCampaign(intcId - 1);
                 break;
                 //getNewestPartners
-                //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+            //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
 
             case "rollbackcampaign":
                 String rId = request.getParameter("id");
-                int intRID =  Integer.parseInt(rId);
+                int intRID = Integer.parseInt(rId);
                 control.rollBackCampaign(intRID);
 
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "viewNewestCampaignDetail":
                 String vId = request.getParameter("id");
-                int intvId = Integer.parseInt(vId);
-                Campaign campaign = control.getNewestCampaignDetail(intvId - 1);
-
+                int intvId = Integer.parseInt(vId) - 1;
+                Campaign campaign = control.getNewestCampaignDetail(intvId);
                 session.setAttribute("campaignDetail", campaign);
+                if (!campaign.getStatus().equals("Pending") || !campaign.getStatus().equals("In Progress")) {
+                    session.setAttribute("poe", control.getPoe(campaign.getKno()));
+                }
 
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
@@ -76,8 +78,10 @@ public class AdminServlet extends HttpServlet {
                 String pendCamId = request.getParameter("id");
                 int pendCamIdInd = Integer.parseInt(pendCamId) - 1;
                 Campaign pendCampaign = control.getPendingCampaignDetail(pendCamIdInd);
-
                 session.setAttribute("campaignDetail", pendCampaign);
+                if (!pendCampaign.getStatus().equals("Pending") || !pendCampaign.getStatus().equals("In Progress")) {
+                    session.setAttribute("poe", control.getPoe(pendCampaign.getKno()));
+                }
 
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;

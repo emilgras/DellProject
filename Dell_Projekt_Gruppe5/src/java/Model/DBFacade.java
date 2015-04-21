@@ -178,5 +178,15 @@ public class DBFacade {
     public Poe getPoe(int kno) {
         return poem.getPoe(kno, con);
     }
+    
+    public Poe getPoeFromNewestCampaigns(int id) {
+        int pno = newestCampaigns.get(id).getPno();
+        return poem.getPoe(pno, con);
+    }
+    
+    public Poe getPoeFromPendingCampaigns(int id) {
+        int pno = pendingCampaigns.get(id).getPno();
+        return poem.getPoe(pno, con);
+    }
 
 }
