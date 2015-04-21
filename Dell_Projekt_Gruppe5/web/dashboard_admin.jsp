@@ -84,6 +84,8 @@
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Company</th><th>CVR</th><th>Price</th><th>Accept</th><th>Decline</th></tr>
                                         <c:forEach var="campaign" items="${pendingCampaigns}">
+                                    
+                                    
                                     <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.pris} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
                                             </c:forEach>
                             </table> 
