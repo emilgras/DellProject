@@ -61,10 +61,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
-            case "logout":
-                //currentUser = null;
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
+          
             case "upload":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);

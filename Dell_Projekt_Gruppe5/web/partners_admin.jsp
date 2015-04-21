@@ -33,7 +33,9 @@
                         <!-- <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li> -->
                         <li class="active"><a href=""><img src="img/partners24.png"> All partners</a></li>
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="LoginServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>   
+                    </a>
                 </div>
             </div>
         </div>  
@@ -41,7 +43,7 @@
         <div class="container contentContainer marginBottom">
             <h1 class="tileHeader">All partners</h1>  
             <div class="col-md-0 marginTop">
-                
+
             </div>
         </div>
 

@@ -13,24 +13,25 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-    
+
     private LoginIF control = new Controller();
     private String validationErrorMessage;
     private String loginControl;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
-        
+
         switch (action) {
-            
+
             case "loginPage":
+                request.setAttribute("username", "");
                 request.setAttribute("loginErrorMessage", "");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
-            
+
             case "signupPage":
                 request.setAttribute("username", "");
                 request.setAttribute("company", "");
@@ -39,23 +40,29 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("signupErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;
+
+            case "logout":
+                // Closes the session, and deletes all attributes in session.
+                request.getSession().invalidate();
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
         }
-        
+
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
-        
+
         String action = request.getParameter("action");
         System.out.println("ACTION: " + action);
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         switch (action) {
-            
+
             case "login":
 
                 /**
@@ -71,7 +78,6 @@ public class LoginServlet extends HttpServlet {
                      * ******** Check DB for user excistence *********
                      */
                     loginControl = control.getLogin(username, password);
-                    
 
                     switch (loginControl) {
                         case "admin":
@@ -86,10 +92,10 @@ public class LoginServlet extends HttpServlet {
 
                             //getNewestPartners
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-                            
+
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
-                        
+
                         case "partner":
                             // Register a new partner user
 
@@ -97,27 +103,27 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("pendingPartners", control.getAllPendingPartners());
                             session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-                            session.setAttribute("PNO", control.getPno(username)); 
+                            session.setAttribute("PNO", control.getPno(username));
                             System.out.println("LOGIN PNO: " + control.getPno(username));
 
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;
-                        
+
                         case "invalid login":
                             request.setAttribute("loginErrorMessage", loginControl);
                             request.getRequestDispatcher("index.jsp").forward(request, response);
                             break;
-                        
+
                         default:
                             request.setAttribute("loginErrorMessage", "Ups! Something went wrong, please try again.");
                             request.getRequestDispatcher("index.jsp").forward(request, response);
                             break;
                     }
                     break;
-                    
+
                 }
         }
-        
-    }    
-    
+
+    }
+
 }

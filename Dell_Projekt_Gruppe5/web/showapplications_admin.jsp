@@ -32,7 +32,9 @@
                         <li><a href="AdminServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>
                         <li class="active"><a href=""><img src="img/partners24.png"> All partners</a></li>
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="LoginServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    </a>
                 </div>
             </div>
         </div>  

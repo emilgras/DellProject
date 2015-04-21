@@ -65,10 +65,6 @@ public class AdminServlet extends HttpServlet {
                 
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
-            case "logout":
-                // currentUser = null;
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
         }
     }
 
