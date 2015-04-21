@@ -18,12 +18,6 @@ import Model.CustomFile;
 public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     DBFacade facade = DBFacade.getInstance();
-    
-    ArrayList<Partner> pendingPartners = new ArrayList<>();
-    ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
-    ArrayList<Campaign> newestCampaigns = new ArrayList<>();
-    ArrayList<Partner> allPartners = new ArrayList<>();
-    int currentPno = 0;
 
     @Override
     public String getLogin(String username, String password) {
@@ -57,7 +51,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     
-
+/*
     @Override
     public ArrayList<Partner> getNewPartnerArrayList(int id) {
         String partnerCVR = pendingPartners.get(id).getCvr();
@@ -71,6 +65,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
         return pendingCampaigns;
     }
+    */
 
     @Override
     public DBFacade getInstance() {
@@ -82,49 +77,29 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     
     @Override
     public ArrayList<Partner> getAllPendingPartners() {
-        pendingPartners = getInstance().getAllPendingPartners();
-        return pendingPartners;
+        return facade.getAllPendingPartners();
     }
     
     @Override
-    public ArrayList<Campaign> getAllPendingCampaigns() {
-        pendingCampaigns = getInstance().getAllPendingCampaigns();
-        return pendingCampaigns;
+    public ArrayList<Campaign> getAllPendingCampaigns() {  
+        return facade.getAllPendingCampaigns();
     }
     
     @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        newestCampaigns = getInstance().getAllNewestCampaigns();
-        return newestCampaigns;
+        return facade.getAllNewestCampaigns();
     }
     
     /*** Dashboard button interaction ***/
 
     @Override
     public boolean acceptPartner(int id) {
-        boolean success = true;
-        String cvr = pendingPartners.get(id).getCvr();
-        if (getInstance().acceptPartner(cvr)) {
-            pendingPartners.remove(id);
-        } else {
-            success = false;
-        }
-        return success;
+        return facade.acceptPartner(id);
     }
     
     @Override
     public boolean acceptCampaign(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();
-        System.out.println("KNO: " + kno);
-        if (getInstance().acceptCampaign(kno)) {
-            System.out.println("SUCCESS...");
-            pendingCampaigns.remove(id);
-            getInstance().updateCampaign(kno);
-        } else {
-            success = false;
-        }
-        return success;
+        return facade.acceptCampaign(id);
     }
 
     @Override
@@ -145,7 +120,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public Campaign getCampaignDetail(int id) {
-        return newestCampaigns.get(id);
+        //
     }
     
     public boolean rollBackCampaign(int id) {

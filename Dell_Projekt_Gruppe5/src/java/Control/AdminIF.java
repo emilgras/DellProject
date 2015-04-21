@@ -23,10 +23,6 @@ public interface AdminIF {
     
     ArrayList<Campaign> showAllNewCampaigns();
 
-    ArrayList<Partner> getNewPartnerArrayList(int id);
-
-    ArrayList<Campaign> getNewCampaignArrayList();
-    
     ArrayList<Campaign> getAllPendingCampaigns();
 
     ArrayList<Campaign> getAllNewestCampaigns();

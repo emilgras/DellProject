@@ -132,6 +132,7 @@
             // PendingPartners
             $("table tr #pendingPartners").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
                 location.href = "AdminServlet?action=acceptpartner&id=" + row;
             });
 

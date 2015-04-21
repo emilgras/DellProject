@@ -25,6 +25,9 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
         HttpSession session = request.getSession();
         
         String action = request.getParameter("action");
@@ -43,6 +46,7 @@ public class AdminServlet extends HttpServlet {
             case "acceptpartner":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
+                System.out.println("ArrayList index: " + (intId - 1));
                 control.acceptPartner(intId - 1);
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;

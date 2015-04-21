@@ -148,7 +148,7 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         System.out.println("TEEST PNO: " + campaign.getPno());
                         System.out.println("TEEST price: " + campaign.getPris());
-
+                        
                         // Success!
                         session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
