@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
-    //DBFacade partnerFacade = DBFacade.getInstance();
+    
     AdminIF control = new Controller();
 
     @Override
@@ -54,9 +54,10 @@ public class AdminServlet extends HttpServlet {
                 String cId = request.getParameter("id");
                 int intcId = Integer.parseInt(cId);
                 control.acceptCampaign(intcId - 1);
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 break;
                 //getNewestPartners
-                //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                
             case "rollbackcampaign":
                 String rId = request.getParameter("id");
                 int intRID =  Integer.parseInt(rId);
