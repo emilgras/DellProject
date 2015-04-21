@@ -16,7 +16,7 @@ $(document).ready(function(){
        
 
             // NewestCampaigns
-          $("table tr #poe").on('click', function () {
+          $("table tr #uploadPoe").on('click', function () {
                //$('#poe').prop( "disabled", true );  
                row = $(this).closest('td').parent()[0].sectionRowIndex;
                

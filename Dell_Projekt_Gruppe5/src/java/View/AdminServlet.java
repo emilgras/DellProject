@@ -52,9 +52,15 @@ public class AdminServlet extends HttpServlet {
                 String cId = request.getParameter("id");
                 int intcId = Integer.parseInt(cId);
                 control.acceptCampaign(intcId - 1);
-
+                break;
                 //getNewestPartners
                 //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+
+            case "rollbackcampaign":
+                String rId = request.getParameter("id");
+                int intRID =  Integer.parseInt(rId);
+                control.rollBackCampaign(intRID);
+
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "viewNewestCampaignDetail":
