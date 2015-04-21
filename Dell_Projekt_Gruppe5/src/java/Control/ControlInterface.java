@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Budget;
 import Model.Campaign;
 import Model.DBFacade;
 import Model.Partner;
@@ -39,7 +40,7 @@ public interface ControlInterface {
     ArrayList<Partner> getNewPartnerArrayList(int id);
 
     ArrayList<Campaign> getNewCampaignArrayList();
-
+    
     DBFacade getInstance();
     
     

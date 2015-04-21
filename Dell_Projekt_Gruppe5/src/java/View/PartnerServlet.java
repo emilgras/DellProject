@@ -30,7 +30,6 @@ import javax.servlet.http.Part;
 public class PartnerServlet extends HttpServlet {
 
     PartnerIF con = new Controller();
-    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,16 +60,30 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
-          
+
             case "upload":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
-                System.out.println(intId);
-                con.updateCampaign(intId-1);
+                con.updateCampaign(intId - 1);
                 session.setAttribute("newestCampaigns", con.getAllNewestCampaigns());
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                break;         
+
+            case "viewDetail":
+               
                 break;
+
+            case "selectedCampaignForPoeUpload":
+                String num = request.getParameter("id");
+                int numInt = Integer.parseInt(num) - 1;
+                int kno = con.getKnoForCampaign(numInt);
+                session.setAttribute("partnersCampaignsID", numInt);
+                session.setAttribute("campaignKno", kno);
+                request.getRequestDispatcher("upload.jsp").forward(request, response);
+                break;
+
         }
+
     }
 
     @Override
@@ -112,7 +125,7 @@ public class PartnerServlet extends HttpServlet {
                     } else {
                         // Yay - du er oprettet i DB
                         session.setAttribute("PNO", con.getPno(user));
-                        session.setAttribute("pCam", con.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
+                        session.setAttribute("pCam", con.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -128,7 +141,7 @@ public class PartnerServlet extends HttpServlet {
                 String description = request.getParameter("description");
 
                 Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno);
-                
+
                 request.setAttribute("campaignstart", campaignStart);
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
@@ -147,10 +160,10 @@ public class PartnerServlet extends HttpServlet {
                         request.setAttribute("campaignErrorMessage", dbErrorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
-                        System.out.println("TEEST PNO: " + campaign.getPno());
-                        System.out.println("TEEST price: " + campaign.getPris());
-                        
                         // Success!
+                        
+                        session.setAttribute("pendingPartners", con.getPendingPartners());
+                        
                         session.setAttribute("pendingCampaigns", con.getAllPendingCampaigns());
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
 
@@ -175,7 +188,7 @@ public class PartnerServlet extends HttpServlet {
                     String fileName = part.getSubmittedFileName();
                     // Save the file on the server in the specified folder
                     part.write(fileName);
-                    
+
                     // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"
                     if (fileName != null && fileName.contains(".")) {
                         String filename = fileName.substring(0, fileName.lastIndexOf('.'));
@@ -185,9 +198,19 @@ public class PartnerServlet extends HttpServlet {
                         fileNames.add(customFile);
                     }
                 }
-                
-                con.uploadPoe((int)request.getSession().getAttribute("PNO"), fileNames);
 
+                if (con.uploadPoe((Integer) session.getAttribute("campaignKno"), (Integer) session.getAttribute("partnersCampaignsID"), fileNames)) {
+                    session.setAttribute("pendingPartners", con.getPendingPartners());
+                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("uploadPoeError", "Sorry, not able to upload files. Please, try again");
+                    request.getRequestDispatcher("upload.jsp").forward(request, response);
+                }
+                //con.updateCampaignWithKno((Integer)session.getAttribute("campaignKno"), (Integer)session.getAttribute("partnersCampaignsID"));
+                
+                
+                
+                
                 break;
         }
     }

@@ -230,8 +230,9 @@ public class CampaignMapper {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
+                System.out.println("PENDING TEST: " + tmp.getStatus());
                 tmp.setKno(rs.getInt(1));
-                if (tmp.getOprettelse_dato().equals("Pending")) {
+                if (tmp.getStatus().equals("Pending") || tmp.getStatus().equals("POE Pending") || tmp.getStatus().equals("Invoice Pending")) {
                     list.add(tmp);
                 }
             }

@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Budget;
 import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
@@ -90,6 +91,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return facade.getAllNewestCampaigns();
     }
     
+    @Override
+    public ArrayList<Budget> getAllPrices() {
+        return facade.getAllPrices();
+    }
+    
     /*** Dashboard button interaction ***/
 
     @Override
@@ -108,7 +114,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         int kno = getInstance().getAllNewestCampaigns().get(id).getKno();
         System.out.println("KNO: " + kno);
         if (getInstance().updateCampaign(kno)) {
-            System.out.println("SUCCES...");
             
         }else{
             succes = false;
@@ -129,8 +134,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
-    public void uploadPoe(int kno, ArrayList<CustomFile> files) {
-        facade.uploadPoe(kno, files);
+    public boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files) {
+        return facade.uploadPoe(kno, id,  files);
     }
 
     @Override
@@ -145,6 +150,42 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
         return getInstance().getAllOwnPartnerCampaigns(pno);
     }
+
+    @Override
+    public int getKnoForCampaign(int id) {
+        return facade.getKnoForCampaign(id);
+    }
+
+    @Override
+    public boolean updateCampaignWithKno(int kno) {
+        boolean success = false;
+        if (getInstance().updateCampaign(kno)) {
+            success = true;
+        }        
+      return success;
+    }
+    
+    @Override
+    public ArrayList<Partner> getPendingPartners() {
+        return facade.getPendingPartners();
+    }
+
+    @Override
+    public ArrayList<Campaign> getPendingCampaigns() {
+        return facade.getPendingCampaigns();
+    }
+
+    @Override
+    public ArrayList<Campaign> getNewestCampaigns() {
+        return facade.getNewestCampaigns();
+    }
+
+    @Override
+    public ArrayList<Campaign> getPartnersCampaigns() {
+        return facade.getPartnersCampaigns();
+    }
+
+    
 
     
 }

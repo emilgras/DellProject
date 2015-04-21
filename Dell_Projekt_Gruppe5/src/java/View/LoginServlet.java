@@ -92,7 +92,10 @@ public class LoginServlet extends HttpServlet {
 
                             //getNewestPartners
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-
+                            
+                            //getAllPrices
+                            session.setAttribute("prices", control.getAllPrices());
+                            
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
@@ -104,8 +107,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns()); ***/
                             session.setAttribute("PNO", control.getPno(username)); 
-                            System.out.println("LOGIN PNO: " + control.getPno(username));
-                            System.out.println(control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")).isEmpty()+ "du ved det");
+                            
                             session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
                             
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
