@@ -16,18 +16,21 @@ import java.util.logging.Logger;
 
 public class PoeMapper {
 
-    public void uploadPoe(int kno, ArrayList<CustomFile> files, Connection con) {
+    public boolean uploadPoe(int kno, ArrayList<CustomFile> files, Connection con) {
+        boolean success = true;
+        
         String sqlPrimary = "select poeNo_increment.nextval from dual";
         String sqlPoe = "insert into poe values (?, ?)";
         String sqlFil = "insert into filer values(?, ?, ?)";
-
+        
+        ResultSet rs = null;
         PreparedStatement statement = null;
 
         try {
 
             /*** Makes POE primary number ***/
             statement = con.prepareStatement(sqlPrimary);
-            ResultSet rs = statement.executeQuery();
+            rs = statement.executeQuery();
             rs.next();
             int poeNo = rs.getInt(1);
 
@@ -49,8 +52,11 @@ public class PoeMapper {
             }
             statement.close();
         } catch (SQLException ex) {
+            success = false;
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return success;
     }
     
     public Poe getPoe(int kno, Connection con) {
