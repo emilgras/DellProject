@@ -120,7 +120,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public Campaign getCampaignDetail(int id) {
-        //
+        return facade.getCampaignDetail(id);
     }
     
     public boolean rollBackCampaign(int id) {

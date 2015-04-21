@@ -96,10 +96,11 @@ public class DBFacade {
     public boolean acceptCampaign(int id) {
         boolean success = true;
         int kno = pendingCampaigns.get(id).getKno();
-        System.out.println("KNO: " + kno);
         if (cm.acceptCampaign(kno, con)) {
             System.out.println("SUCCESS...");
+            newestCampaigns.add(pendingCampaigns.get(id));
             pendingCampaigns.remove(id);
+            
             getInstance().updateCampaign(kno);
         } else {
             success = false;
@@ -120,5 +121,9 @@ public class DBFacade {
      */
     public void uploadPoe(int kno, ArrayList<CustomFile> files) {
         poem.uploadPoe(kno, files, con);
+    }
+    
+    public Campaign getCampaignDetail(int id) {
+        return newestCampaigns.get(id);
     }
 }
