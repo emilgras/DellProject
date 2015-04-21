@@ -11,12 +11,12 @@ package Model;
  */
 public class Budget {
     int kno;
-    String PartnerNavn;
+    String partnerNavn;
     float pris;
     
     public Budget(int kno, String pn, float pris){
         this.kno = kno;
-        this.PartnerNavn = pn;
+        this.partnerNavn = pn;
         this.pris = pris;
     }
 
@@ -29,11 +29,11 @@ public class Budget {
     }
 
     public String getPartnerNavn() {
-        return PartnerNavn;
+        return partnerNavn;
     }
 
     public void setPartnerNavn(String PartnerNavn) {
-        this.PartnerNavn = PartnerNavn;
+        this.partnerNavn = PartnerNavn;
     }
 
     public float getPris() {
@@ -43,5 +43,11 @@ public class Budget {
     public void setPris(float pris) {
         this.pris = pris;
     }
+
+    @Override
+    public String toString() {
+        return "Budget{" + "kno=" + kno + ", partnerNavn=" + partnerNavn + ", pris=" + pris + '}';
+    }
+    
     
 }

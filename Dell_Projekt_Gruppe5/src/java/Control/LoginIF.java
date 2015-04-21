@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Budget;
 import Model.Campaign;
 import Model.DBFacade;
 import Model.Partner;
@@ -23,6 +24,8 @@ public interface LoginIF {
     ArrayList<Campaign> getAllNewestCampaigns();
 
     ArrayList<Partner> getAllPendingPartners();
+    
+    ArrayList<Budget> getAllPrices();
     
     int getPno(String username);
     

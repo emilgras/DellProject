@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Budget;
 import Model.Campaign;
 import Model.DBFacade;
 import Model.CustomFile;
@@ -28,6 +29,8 @@ public interface AdminIF {
     ArrayList<Campaign> getAllNewestCampaigns();
 
     ArrayList<Partner> getAllPendingPartners();
+    
+    ArrayList<Budget> getAllPrices();
     
     boolean acceptCampaign(int id);
     
