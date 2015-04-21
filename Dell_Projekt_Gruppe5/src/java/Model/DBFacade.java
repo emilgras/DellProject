@@ -15,11 +15,13 @@ public class DBFacade {
     private CampaignMapper cm;
     private LoginMapper lm;
     private PoeMapper poem;
+    private BudgetMapper bm;
 
     /*** Admin ***/
     ArrayList<Partner> pendingPartners = new ArrayList<>();
     ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
     ArrayList<Campaign> newestCampaigns = new ArrayList<>();
+    ArrayList<Budget> prices = new ArrayList<>();
     //ArrayList<Partner> allPartners = new ArrayList<>();
     
     /*** Partner ***/
@@ -37,6 +39,7 @@ public class DBFacade {
         cm = new CampaignMapper();
         lm = new LoginMapper();
         poem = new PoeMapper();
+        bm = new BudgetMapper();
         con = dbcon.getConnection();
     }
     
@@ -97,6 +100,11 @@ public class DBFacade {
     public ArrayList<Campaign> getAllNewestCampaigns() {
         newestCampaigns = cm.getAllNewestCampaigns(con);
         return newestCampaigns;
+    }
+    
+    public ArrayList<Budget> getAllPrices(){
+        prices = bm.getAllPrices(con);
+        return prices;
     }
 
     /**

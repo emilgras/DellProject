@@ -18,7 +18,7 @@ public class BudgetMapper {
     
     public ArrayList<Budget> getAllPrices(Connection con){
         ArrayList<Budget> list = new ArrayList<>();
-        String sql = "select kno, navn, pris from partner join kampagne on parter.pno = kampagne.pno";
+        String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno";
         PreparedStatement statement = null;
         try {
             statement = con.prepareStatement(sql);

@@ -5,6 +5,7 @@
  */
 package test;
 import Control.Controller;
+import Model.BudgetMapper;
 import Model.Campaign;
 import Model.CampaignMapper;
 import Model.DBConnector;
@@ -28,9 +29,8 @@ public class Test {
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
         DBFacade pf = DBFacade.getInstance();
+        BudgetMapper bm = new BudgetMapper();
         //pf.getPartnerName();
-        Controller cont = new Controller();
-        System.out.println(cont.updateCampaign(28));
        // cm.getAllPartnerAcceptedCampaigns(con);
        //pf.showPartnerName();
 //        
@@ -67,7 +67,7 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        
+        bm.getAllPrices(con);
         try {
             con.close();
         } catch (Exception e) {

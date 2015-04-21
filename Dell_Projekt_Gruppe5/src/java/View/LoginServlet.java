@@ -92,7 +92,10 @@ public class LoginServlet extends HttpServlet {
 
                             //getNewestPartners
                             session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-
+                            
+                            //getAllPrices
+                            session.setAttribute("prices", control.getAllPrices());
+                            
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 

@@ -101,6 +101,25 @@
                     </div>
                 </div>
 
+                <!------------ PENDING CAMPAIGNS ------------>
+                <div class="col-md-6 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                    <div class="tile">
+                        <div>                     
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
+                                        <c:forEach var="campaign" items="${pendingCampaigns}">
+
+
+                                    <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.pris} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+                                            </c:forEach>
+                            </table> 
+
+
+                        </div>
+                    </div>
+                </div>
+
                 
 
             </div>
@@ -162,6 +181,29 @@
 
 
         </script>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day']
+            <c:forEach var="item" items="${prices}">
+                        ,['${item.partnerNavn} ${item.pris} EUR', ${item.pris}]
+            </c:forEach>
+                ]);
+
+                var options = {
+                    title: 'My Daily Activities',
+                    is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
     </body>
 </html>
 

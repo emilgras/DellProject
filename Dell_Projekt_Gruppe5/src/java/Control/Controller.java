@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Budget;
 import Model.Campaign;
 import Model.Partner;
 import java.util.ArrayList;
@@ -88,6 +89,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
         return facade.getAllNewestCampaigns();
+    }
+    
+    @Override
+    public ArrayList<Budget> getAllPrices() {
+        return facade.getAllPrices();
     }
     
     /*** Dashboard button interaction ***/
@@ -178,6 +184,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public ArrayList<Campaign> getPartnersCampaigns() {
         return facade.getPartnersCampaigns();
     }
+
+    
 
     
 }
