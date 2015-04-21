@@ -187,8 +187,6 @@ public class PartnerServlet extends HttpServlet {
                 
                 con.uploadPoe((int)request.getSession().getAttribute("PNO"), fileNames);
 
-                // Dave files to server
-                //MultipartRequest mr = new MultipartRequest(request, savePath);
                 break;
         }
     }

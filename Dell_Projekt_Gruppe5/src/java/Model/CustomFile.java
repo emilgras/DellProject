@@ -18,6 +18,14 @@ public class CustomFile {
         this.extension = extension;
     }
     
+    public String getName() {
+        return name;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+    
     public String getFileName() {
         return name + "." + extension;
     }

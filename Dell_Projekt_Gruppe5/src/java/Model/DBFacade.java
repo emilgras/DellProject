@@ -14,6 +14,7 @@ public class DBFacade {
     private PartnerMapper pm;
     private CampaignMapper cm;
     private LoginMapper lm;
+    private PoeMapper poem;
     
     private DBConnector dbcon = new DBConnector();
     private Connection con = null;
@@ -26,6 +27,7 @@ public class DBFacade {
         pm = new PartnerMapper();
         cm = new CampaignMapper();
         lm = new LoginMapper();
+        poem = new PoeMapper();
         con = dbcon.getConnection();
     }
 
@@ -84,5 +86,10 @@ public class DBFacade {
     
      public boolean rollBackCampaign(int kno) {
         return cm.rollBackCampaign(kno, dbcon.getConnection());
+    }
+     
+    /*** POE ***/
+    public void uploadPoe(int kno, ArrayList<CustomFile> files) {
+        poem.uploadPoe(kno, files, con);
     }
 }

@@ -53,72 +53,53 @@
                         </div>
                     </a>
                 </div>
+            </div>
 
-                <div class="col-md-6 marginTop">
-
-                    <div class="tile">
-                        <div>
-
-                            <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Ongoing campaigns</h3>
-                            <!------------ NEWEST CAMPAIGNS ------------>
-                            <div class="col-md-6 marginTop">
-
-                                <div class="tile">
-                                    <div>
-
-                                        <table class="table table-striped table-bordered">
-                                            <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
-                                                    
-                                                        
-                                                         
-                                                
-                                                <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
-                                                <c:choose>
-                                                    <c:when test="${campaign.status == 'POE pending'}">     
-                                                    
-                                                        <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input disabled="disabled" id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
-
-
-                                                    </c:when> 
-                                                    <c:otherwise>
-                                                         <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
-                                                        
-                                                       
-                                                    </c:otherwise>   
-                                                </c:choose>
-                                                   </c:forEach>  
-                                            </table>
-                                                    
-
-                                </div>
-                            </div>
+            <div class="col-md-6 marginTop">
+                <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
+                <div class="tile">
+                    <!------------ NEWEST CAMPAIGNS ------------>
+                    <div class="col-md-6 marginTop">
+                        <div class="tile">                    
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+                                        <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
+                                            <c:choose>
+                                                <c:when test="${campaign.status == 'POE pending'}">     
+                                            <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input disabled="disabled" id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+                                                </c:when> 
+                                                <c:otherwise>
+                                            <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td><td><input id="poe" type="button" class="btn btn-info" value="Upload picture"></td></tr>
+                                                </c:otherwise>   
+                                            </c:choose>
+                                        </c:forEach>  
+                            </table>  
                         </div>
                     </div>
                 </div>
             </div>
 
             <!------------ PENDING CAMPAIGNS ------------>
-            <div class="col-md-6 marginTop">
-                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+            <!-- <div class="col-md-6 marginTop">
+                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Test</h3>
                 <div class="tile">
                     <div>                     
                         <table class="table table-striped table-bordered">
                             <tr class="active"><th>Campaign start</th><th>Campaign end</th><th>Price estimate</th><th>Description:</th>
-                                    <c:forEach var="campaign" items="${pendingCampaigns}">
-                                <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
-                            </c:forEach>
-                        </table> 
-                    </div>
-                </div>
-            </div>
+            <c:forEach var="campaign" items="${pendingCampaigns}">
+        <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
+            </c:forEach>
+        </table> 
+    </div>
+</div>
+</div> -->
 
 
         </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script type='text/javascript' src='scriptPartner.js'></script>
-</body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script type='text/javascript' src='scriptPartner.js'></script>
+    </body>
 </html>
 

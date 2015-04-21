@@ -155,7 +155,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
     public void uploadPoe(int kno, ArrayList<CustomFile> files) {
-        // content
+        facade.uploadPoe(kno, files);
     }
 
     @Override
