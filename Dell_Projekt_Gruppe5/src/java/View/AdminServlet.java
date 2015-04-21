@@ -25,11 +25,9 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
+
         HttpSession session = request.getSession();
-        
+
         String action = request.getParameter("action");
 
         switch (action) {
@@ -57,16 +55,24 @@ public class AdminServlet extends HttpServlet {
 
                 //getNewestPartners
                 //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-                
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "viewCampaign":
+            case "viewNewestCampaignDetail":
                 String vId = request.getParameter("id");
                 int intvId = Integer.parseInt(vId);
-                Campaign campaign = control.getCampaignDetail(intvId - 1);
-                
+                Campaign campaign = control.getNewestCampaignDetail(intvId - 1);
+
                 session.setAttribute("campaignDetail", campaign);
-                
+
+                request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
+                break;
+            case "viewPendingCampaignsDetail":
+                String pendCamId = request.getParameter("id");
+                int pendCamIdInd = Integer.parseInt(pendCamId) - 1;
+                Campaign pendCampaign = control.getPendingCampaignDetail(pendCamIdInd);
+
+                session.setAttribute("campaignDetail", pendCampaign);
+
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
         }
@@ -78,9 +84,6 @@ public class AdminServlet extends HttpServlet {
 
 //        String action = request.getParameter("action");
 //        HttpSession session = request.getSession();
-
-   
-
     }
 
 }

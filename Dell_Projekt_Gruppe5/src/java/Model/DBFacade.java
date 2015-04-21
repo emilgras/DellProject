@@ -157,9 +157,6 @@ public class DBFacade {
         return success;
     }
     
-    public Campaign getCampaignDetail(int id) {
-        return newestCampaigns.get(id);
-    }
     
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno){
         partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno, con);
@@ -168,5 +165,17 @@ public class DBFacade {
     
     public int getKnoForCampaign(int id) {
         return partnersCampaigns.get(id).getKno();
+    }
+    
+    public Campaign getNewestCampaignDetail(int id) {
+        return newestCampaigns.get(id);
+    }
+    
+    public Campaign getPendingCampaignDetail(int id) {
+        return pendingCampaigns.get(id);
+    }
+    
+    public Poe getPoe(int kno) {
+        return poem.getPoe(kno, con);
     }
 }

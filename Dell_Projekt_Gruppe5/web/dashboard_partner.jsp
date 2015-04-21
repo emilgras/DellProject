@@ -40,72 +40,35 @@
             </div>
         </div>  
 
-        <div class="container contentContainer marginBottom">
-            <h1 class="tileHeader">Dashboard</h1>
-            <div class="row">  
-
-                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Start new campaign</h3>
-                <div class="col-md-6 marginTop center">
-                    <!-- <a href="PartnerServlet?action=newcampaign" id="textDecorationNone"> -->
-                    <div class="tile">
-                        <div>
-                            <img src="img/addpartner.png">
-                        </div>
-                    </div>
-                    <!-- </a> -->
-                </div>
-
-
-                <div class="col-md-6 marginTop center">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
-                    <div class="tile">
-                        <!------------ NEWEST CAMPAIGNS ------------>
-                        <div class="col-md-6 marginTop">
-                            <div class="tile">                    
-                                <table class="table table-striped table-bordered">
-                                    <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
-                                            <c:forEach var="campaign" items="${pCam}">
-
-                                        <tr class="tablerow">
-                                            <td></td>
-                                            <td>${campaign.navn}</td>
-                                            <td>${campaign.pris}</td>
-                                            <td>${campaign.oprettelse_dato}</td>
-                                            <td>${campaign.status}</td>
-                                            <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
-                                            <td><c:if test="${campaign.status == 'In-Progress'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload picture"></c:if>
-                                                <c:if test="${campaign.status != 'In-Progress'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td>
-                                            </tr>
-
-
-
+        <section class="row">
+            <div class="container marginBottom">
+                <h1 class="tileHeader marginBottom">Dashboard</h1>
+                
+                    
+                    <!------------ NEWEST CAMPAIGNS ------------>
+                    <div class="col-md-0 marginTop">
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
+                        <div class="tile">                    
+                            <table class="table table-striped table-bordered">
+                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+                                    <c:forEach var="campaign" items="${pCam}">
+                                    <tr class="tablerow">
+                                        <td></td>
+                                        <td>${campaign.navn}</td>
+                                        <td>${campaign.pris}</td>
+                                        <td>${campaign.oprettelse_dato}</td>
+                                        <td>${campaign.status}</td>
+                                        <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                                        <td><c:if test="${campaign.status == 'In-Progress'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload picture"></c:if>
+                                            <c:if test="${campaign.status != 'In-Progress'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td></tr>                                       
                                     </c:forEach>  
-                                </table>  
-                            </div>
+                            </table>  
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-
-
-            <!------------ PENDING CAMPAIGNS ------------>
-            <!-- <div class="col-md-6 marginTop">
-                <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Test</h3>
-                <div class="tile">
-                    <div>                     
-                        <table class="table table-striped table-bordered">
-                            <tr class="active"><th>Campaign start</th><th>Campaign end</th><th>Price estimate</th><th>Description:</th>
-            <c:forEach var="campaign" items="${pendingCampaigns}">
-        <tr><td>${campaign.start_dato} </td><td>${campaign.slut_dato} </td><td>${campaign.pris} </td><td>${campaign.beskrivelse} </td></tr>
-            </c:forEach>
-        </table> 
-    </div>
-</div>
-</div> -->
-
-
-        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
@@ -114,7 +77,7 @@
                 alert(row);
                 location.href = "PartnerServlet?action=selectedCampaignForPoeUpload&id=" + row;
             });
-            
+
             $("table tr #viewDetail").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 alert(row);

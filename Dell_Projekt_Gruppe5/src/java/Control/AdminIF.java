@@ -10,6 +10,7 @@ import Model.Campaign;
 import Model.DBFacade;
 import Model.CustomFile;
 import Model.Partner;
+import Model.Poe;
 import java.util.ArrayList;
 
 /**
@@ -18,11 +19,7 @@ import java.util.ArrayList;
  */
 public interface AdminIF {
     
-    DBFacade getInstance();
-    
-
-    
-    ArrayList<Campaign> showAllNewCampaigns();
+    DBFacade getInstance();   
 
     ArrayList<Campaign> getAllPendingCampaigns();
 
@@ -32,6 +29,8 @@ public interface AdminIF {
     
     ArrayList<Budget> getAllPrices();
     
+    Campaign getNewestCampaignDetail(int id);
+    
     boolean acceptCampaign(int id);
     
     boolean updateCampaign(int id);
@@ -40,7 +39,7 @@ public interface AdminIF {
     
     boolean rollBackCampaign(int id);
     
-    Campaign getCampaignDetail(int id);
+    Campaign getPendingCampaignDetail(int id);
     
-    ArrayList<CustomFile> getFiles(int kno);
+    public Poe getPoe(int kno);
 }

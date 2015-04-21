@@ -69,12 +69,16 @@
                         <div class="tile">
                             <div>                     
                                 <table class="table table-striped table-bordered">
-                                    <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
+                                    <tr class="active"><th>Company</th><th>Status</th><th>Accept</th><th>Decline</th><th>Detail</th></tr>
                                             <c:forEach var="campaign" items="${pendingCampaigns}">
-
-
-                                        <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.status} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                                </c:forEach>
+                                        <tr>
+                                            <td>${campaign.navn} </td>
+                                            <td>${campaign.status} </td>
+                                            <td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
+                                            <td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                            <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                                        </tr>
+                                             </c:forEach>
                                 </table> 
 
                             </div>
@@ -94,25 +98,6 @@
                                     <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
 
                                 </c:forEach>
-                            </table> 
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <!------------ PENDING CAMPAIGNS ------------>
-                <div class="col-md-6 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
-                    <div class="tile">
-                        <div>                     
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Company</th><th>CVR</th><th>Status</th><th>Accept</th><th>Decline</th></tr>
-                                        <c:forEach var="campaign" items="${pendingCampaigns}">
-
-
-                                    <tr><td>${campaign.navn} </td><td>${campaign.cvr} </td><td>${campaign.pris} </td><td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td><td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
-                                            </c:forEach>
                             </table> 
 
 
@@ -169,13 +154,19 @@
             // NewestCampaigns
             $("table tr #newestCampaigns").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=viewCampaign&id=" + row;
+                location.href = "AdminServlet?action=viewNewestCampaignDetail&id=" + row;
             });
 
             // PendingCampaigns
             $("table tr #pendingCampaigns").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
+            });
+            
+            // PendingCampaignsDetail
+            $("table tr #pendingCampaignsDetail").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=viewPendingCampaignsDetail&id=" + row;
             });
 
 
