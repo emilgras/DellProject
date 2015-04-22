@@ -78,7 +78,7 @@
                                             <td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
                                             <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                         </tr>
-                                             </c:forEach>
+                                    </c:forEach>
                                 </table> 
 
                             </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                
+
 
             </div>
         </section>
@@ -135,7 +135,19 @@
             </div>
         </section>
 
-
+        <section class="row">
+            <div class="container marginBottom">
+                <div class="col-md-3">
+                    <h3>Starts beløb:  ${startsBelob} EUR</h3>
+                    
+                    <h3>Ca. penge brugt:  ${nuvaerendeBelob} EUR</h3>
+                    
+                    <h3>Ca. penge til rådighed:  ${}</h3>
+                </div>
+                <div class="col-md-9" id="piechart_3d" style="width: 675px; height: 375px;"></div> 
+            </div>
+            
+        </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
@@ -162,7 +174,7 @@
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
             });
-            
+
             // PendingCampaignsDetail
             $("table tr #pendingCampaignsDetail").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
@@ -181,11 +193,12 @@
                 var data = google.visualization.arrayToDataTable([
                     ['Task', 'Hours per Day']
             <c:forEach var="item" items="${prices}">
-                        ,['${item.partnerNavn} ${item.pris} EUR', ${item.pris}]
+                    , ['${item.partnerNavn} ${item.pris} EUR', ${item.pris}]
             </c:forEach>
                 ]);
 
                 var options = {
+                    backgroundColor: 'transparent',
                     title: 'My Daily Activities',
                     is3D: true,
                 };
@@ -194,7 +207,8 @@
                 chart.draw(data, options);
             }
         </script>
-        <div id="piechart_3d" style="width: 675px; height: 375px;"></div>
+
+
     </body>
 </html>
 

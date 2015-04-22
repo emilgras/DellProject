@@ -32,4 +32,9 @@ public interface LoginIF {
     String getLogin(String username, String password);
     
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+    
+    public int getStartsBelob();
+    
+    public int getNuvaerendeBelob();
+    
 }

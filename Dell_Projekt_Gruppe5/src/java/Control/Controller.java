@@ -110,10 +110,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     
     /*************** Budget ***************/
     
-    @Override
-    public boolean updateMoneyUsed(int i) {
-        return facade.updateMoneyUsed(i);
-    }
 
     @Override
     public int getStartsBelob() {

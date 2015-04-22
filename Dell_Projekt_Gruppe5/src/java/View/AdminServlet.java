@@ -51,6 +51,7 @@ public class AdminServlet extends HttpServlet {
                 String cId = request.getParameter("id");
                 int intcId = Integer.parseInt(cId);
                 control.acceptCampaign(intcId - 1);
+                
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
                 //getNewestPartners

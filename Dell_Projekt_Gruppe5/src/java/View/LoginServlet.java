@@ -96,6 +96,12 @@ public class LoginServlet extends HttpServlet {
                             //getAllPrices
                             session.setAttribute("prices", control.getAllPrices());
                             
+                            //getBudget stuff
+                            session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                            session.setAttribute("startsBelob", control.getStartsBelob());
+                            
+                            
+                            
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
