@@ -66,34 +66,18 @@
             <!-------- POE -------->        
             <div class="row marginTop marginBottom">
                 <c:if test="${campaignDetail.status == 'POE Pending' || campaignDetail.status == 'POE Accepted'}">
-
-                    <div class="row col-md-0 marginTop">
-
+                    <div class="col-lg-12">
                         <div class="col-lg-12">
                             <h3 class="tileHeader">Campaign Pictures</h3>
                         </div>
 
                         <ul>
-                            <li class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="#">
-                                    <img class="img-responsive" src="uploads/${poe.imageFiles.get(0).fileName}" alt="">
-                                    <!-- http://placehold.it/400x300 -->
-                                </a>
-                            </li> 
-                            <li class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="#">
-                                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                    <!-- http://placehold.it/400x300 -->
-                                </a>
-                            </li>
-                            <li class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="#">
-                                    <img class="img-responsive" src="uploads/${poe.imageFiles.get(0).fileName}" alt="">
-                                    <!-- http://placehold.it/400x300 -->
-                                </a>
-                            </li>
+                            <c:forEach var="img" items="${poe.imageFiles}">
+                                <li class="col-lg-3 col-md-4 col-xs-6 thumb thumbnail" id="list">                  
+                                    <img class="img-responsive thumbnail" id="image" src="uploads/${img.fileName}" alt="">                            
+                                </li> 
+                            </c:forEach>
                         </ul>
-                                    
                     </c:if>                                                               
                 </div>
             </div>
