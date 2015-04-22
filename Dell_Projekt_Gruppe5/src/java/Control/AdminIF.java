@@ -43,4 +43,8 @@ public interface AdminIF {
     
     public Poe getPoe(int kno);
     
+    public int getStartsBelob();
+    
+    public int getNuvaerendeBelob();
+    
 }
