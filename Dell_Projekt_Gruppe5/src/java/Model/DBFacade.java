@@ -152,15 +152,14 @@ public class DBFacade {
                 newestCampaigns.add(pendingCampaigns.get(id));
                 pendingCampaigns.remove(id);
                 cm.updateCampaign(kno, con);
+                updateMoneyUsed(cm.getPris(kno, con));
             } else {
                 success = false;
             }
         } else {
             cm.updateCampaign(kno, con);
         }
-        if (success) {
-            updateMoneyUsed(kno);
-        }
+        
         return success;
     }
 

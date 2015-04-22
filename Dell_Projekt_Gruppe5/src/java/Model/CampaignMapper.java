@@ -228,6 +228,28 @@ public class CampaignMapper {
         }
         return "noget gik galt";
     }
+    
+    public int getPris(int kno, Connection con){
+        String sqlString = "select pris from kampagne where kno = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sqlString);
+            statement.setInt(1, kno);
+            ResultSet rs = statement.executeQuery();
+
+            int i = 0;
+            if (rs.next()) {
+                i = rs.getInt(1);
+            }
+             statement.close();
+            return i;
+           
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("ups");
+        }
+        return 0;
+    }
 
     public ArrayList<Campaign> getAllPendingCampaigns(Connection con) {
         ArrayList<Campaign> list = new ArrayList<>();
