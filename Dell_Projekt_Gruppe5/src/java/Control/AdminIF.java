@@ -42,4 +42,8 @@ public interface AdminIF {
     Campaign getPendingCampaignDetail(int id);
     
     public Poe getPoe(int kno);
+    
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+    
+    boolean deleteOldPoe(int id);
 }

@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -34,7 +34,7 @@ public class CampaignMapper {
         PreparedStatement statement = null;
 
         try {
- 
+
             PreparedStatement stmt = con.prepareStatement(primary);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -53,7 +53,7 @@ public class CampaignMapper {
             statement.setInt(8, camp.getPno());
 
             rowsInserted += statement.executeUpdate();
-         //statement.close();
+            //statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,7 +61,7 @@ public class CampaignMapper {
         if (testRun) {
             System.out.println("insertCampaign(): " + (rowsInserted == 1)); // for test
         }
-        
+
         return (rowsInserted == 1);
     }
 
@@ -94,8 +94,10 @@ public class CampaignMapper {
         PreparedStatement statement = null;
         try {
             statement = con.prepareStatement(sqlString);
-            
+
             status = status.toLowerCase();
+            System.out.println("HVAD ER STATUS VED UPDATE: " + status);
+            System.out.println("HVAD ER UPDATE KNO: " + kno);
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -106,6 +108,10 @@ public class CampaignMapper {
                     statement.setInt(2, kno);
                     statement.setString(1, "POE Pending");
                     break;
+
+                case "poe declined":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE Pending");
 
                 case "poe pending":
                     statement.setInt(2, kno);
@@ -126,14 +132,10 @@ public class CampaignMapper {
                     statement.setInt(2, kno);
                     statement.setString(1, "Complete");
                     break;
-                    
-                case "poe declined":
-                    statement.setInt(2, kno);
-                    statement.setString(1, "POE Accepted");
 
                 default:
                     statement.setInt(2, kno);
-                    statement.setString(1, "Noget gik galt");
+                    statement.setString(1, "Noget gik update galt");
                     break;
             }
             statement.executeUpdate();
@@ -143,10 +145,10 @@ public class CampaignMapper {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
-        
+
         return !status.equals(getCampaignStatus(kno, con));
     }
-    
+
     public boolean rollBackCampaign(int kno, Connection con) {
         int rowsUpdated = 0;
         String sqlString = "update kampagne set status = ? where kno = ?";
@@ -154,8 +156,9 @@ public class CampaignMapper {
         PreparedStatement statement = null;
         try {
             statement = con.prepareStatement(sqlString);
-            
+
             status = status.toLowerCase();
+            System.out.println("HVAD ER STATUS VED ROLLBACK: " + status);
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -181,9 +184,9 @@ public class CampaignMapper {
                     statement.setInt(2, kno);
                     statement.setString(1, "POE Accepted");
                     break;
-                    
+
                 case "poe declined":
-                    statement.setInt(2,kno);
+                    statement.setInt(2, kno);
                     statement.setString(2, "POE Declined");
 
                 case "complete":
@@ -203,7 +206,7 @@ public class CampaignMapper {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
-        
+
         return !status.equals(getCampaignStatus(kno, con));
     }
 
@@ -219,9 +222,9 @@ public class CampaignMapper {
             if (rs.next()) {
                 status = rs.getString(1);
             }
-             statement.close();
+            statement.close();
             return status;
-           
+
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("ups");
@@ -238,19 +241,22 @@ public class CampaignMapper {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
-                System.out.println("PENDING TEST: " + tmp.getStatus());
+
                 tmp.setKno(rs.getInt(1));
                 if (tmp.getStatus().equals("Pending") || tmp.getStatus().equals("POE Pending") || tmp.getStatus().equals("Invoice Pending")) {
+                    System.out.println("ADDED TO PENDING CAMPIAGNS: " + tmp.getStatus());
                     list.add(tmp);
                 }
             }
-             statement.close();
+            statement.close();
         } catch (SQLException e) {
         }
         return list;
     }
 
-    /*** Returnerer alle kampagner sorteret med den nyest oprettet først ***/
+    /**
+     * * Returnerer alle kampagner sorteret med den nyest oprettet først **
+     */
     public ArrayList<Campaign> getAllNewestCampaigns(Connection con) {
         ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
@@ -267,7 +273,7 @@ public class CampaignMapper {
                     count++;
                 }
             }
-             statement.close();
+            statement.close();
             System.out.println("COUNT: " + count);
 
         } catch (SQLException e) {
@@ -275,8 +281,8 @@ public class CampaignMapper {
 
         return list;
     }
-    
-    public ArrayList<Campaign> getAllPartnerAcceptedCampaigns(Connection con){
+
+    public ArrayList<Campaign> getAllPartnerAcceptedCampaigns(Connection con) {
         ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
         PreparedStatement statement = null;
@@ -291,7 +297,7 @@ public class CampaignMapper {
                     list.add(tmp);
                     count++;
                 }
-                 statement.close();
+                statement.close();
             }
             System.out.println("COUNT: " + count);
 
@@ -299,26 +305,25 @@ public class CampaignMapper {
         }
 
         return list;
-        
-        
+
     }
-    
-    public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno,Connection con) {
+
+    public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno, Connection con) {
         ArrayList<Campaign> list = new ArrayList<>();
         String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO where kampagne.PNO = ?";
         PreparedStatement statement = null;
         try {
-            
+
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, pno);
-            
+
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
                 tmp.setKno(rs.getInt(1));
                 list.add(tmp);
             }
-             statement.close();
+            statement.close();
         } catch (SQLException e) {
         }
         return list;

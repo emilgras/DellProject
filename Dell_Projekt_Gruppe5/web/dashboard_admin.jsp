@@ -74,8 +74,8 @@
                                         <tr>
                                             <td>${campaign.navn} </td>
                                             <td>${campaign.status} </td>
-                                            <td><button type="button"  id="pendingCampaigns" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
-                                            <td><button type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                            <td><button type="button"  id="pendingCampaignsAccept" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
+                                            <td><button type="button" id="pendingCampaignsDecline" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
                                             <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                         </tr>
                                              </c:forEach>
@@ -158,9 +158,15 @@
             });
 
             // PendingCampaigns
-            $("table tr #pendingCampaigns").on('click', function () {
+            $("table tr #pendingCampaignsAccept").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
+            });
+            
+            // PendingCampaigns
+            $("table tr #pendingCampaignsDecline").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=declinecampaign&id=" + row;
             });
             
             // PendingCampaignsDetail

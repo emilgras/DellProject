@@ -59,8 +59,8 @@
                                         <td>${campaign.oprettelse_dato}</td>
                                         <td>${campaign.status}</td>
                                         <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
-                                        <td><c:if test="${campaign.status == 'In-Progress'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload picture"></c:if>
-                                            <c:if test="${campaign.status != 'In-Progress'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td></tr>                                       
+                                        <td><c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload picture"></c:if>
+                                            <c:if test="${campaign.status != 'In-Progress' && campaign.status != 'POE Declined'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for DELL"></c:if></td></tr>                                       
                                     </c:forEach>  
                             </table>  
                         </div>

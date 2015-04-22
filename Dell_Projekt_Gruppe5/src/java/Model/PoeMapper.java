@@ -98,4 +98,47 @@ public class PoeMapper {
         }
         return poe;
     }
+    
+    public boolean deleteOldPoe(int kno, Connection con) {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        boolean success = true;
+        int result = 0;
+        int poeNo = 0;
+        
+        
+        String sql1 = "select POENO from POE join KAMPAGNE on kampagne.kno = poe.KNO where kampagne.kno = ?";
+        String sql2 = "delete from FILER where POENO = ?";
+        String sql3 = "delete from POE where KNO = ?";
+        try {
+            /*** Get PoeNo ***/
+            statement = con.prepareStatement(sql1);
+            statement.setInt(1, kno);
+            rs = statement.executeQuery();           
+            if (rs.next()) {
+               System.out.println("DELETEOLDPOE RESULTSET: " + rs.getInt(1));
+               poeNo = rs.getInt(1);
+            } else {
+                System.out.println("FEJL I RS.NEXT");
+            }
+            
+            
+            /*** Delete Old Poe Files ***/
+            statement = con.prepareStatement(sql2);
+            statement.setInt(1, poeNo);
+            result = statement.executeUpdate(); 
+            
+            /*** Delete Old Poe Files ***/
+            statement = con.prepareStatement(sql3);
+            statement.setInt(1, kno);
+            result = statement.executeUpdate(); 
+            
+            statement.close();
+        } catch (SQLException ex) {
+            success = false;
+            Logger.getLogger(PoeMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return success;
+    }
 }

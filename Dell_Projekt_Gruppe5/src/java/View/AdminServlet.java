@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
+    HttpSession session;
     //DBFacade partnerFacade = DBFacade.getInstance();
     AdminIF control = new Controller();
 
@@ -26,7 +27,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        session = request.getSession();
 
         String action = request.getParameter("action");
 
@@ -45,24 +46,25 @@ public class AdminServlet extends HttpServlet {
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
                 control.acceptPartner(intId - 1);
+                updateSessions();
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "acceptcampaign":
                 String cId = request.getParameter("id");
-                int intcId = Integer.parseInt(cId);
-                control.acceptCampaign(intcId - 1);
+                int intcId = Integer.parseInt(cId) - 1;
+                control.acceptCampaign(intcId);
+                updateSessions();
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-                //getNewestPartners
-            //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-
-            case "rollbackcampaign":
-                String rId = request.getParameter("id");
-                int intRID = Integer.parseInt(rId);
-                control.rollBackCampaign(intRID);
-
+            case "declinecampaign":
+                String dId = request.getParameter("id");
+                int intdId = Integer.parseInt(dId) - 1;
+                control.deleteOldPoe(intdId);
+                control.rollBackCampaign(intdId);
+                updateSessions();
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
+
             case "viewNewestCampaignDetail":
                 String vId = request.getParameter("id");
                 int intvId = Integer.parseInt(vId) - 1;
@@ -92,8 +94,14 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        String action = request.getParameter("action");
-//        HttpSession session = request.getSession();
     }
 
+    private void updateSessions() {
+        session.setAttribute("pendingPartners", control.getAllPendingPartners());
+
+        session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+
+        session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+        
+    }
 }

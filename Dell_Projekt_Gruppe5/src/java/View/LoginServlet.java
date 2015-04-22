@@ -100,12 +100,7 @@ public class LoginServlet extends HttpServlet {
                             break;
 
                         case "partner":
-                            // Register a new partner user
 
-                            // Set arraylists as attributes to be shown in dashboard
-                            /*** session.setAttribute("pendingPartners", control.getAllPendingPartners());
-                            session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
-                            session.setAttribute("newestCampaigns", control.getAllNewestCampaigns()); ***/
                             session.setAttribute("PNO", control.getPno(username)); 
                             
                             session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));

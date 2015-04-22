@@ -33,6 +33,8 @@ public interface PartnerIF {
     
     ArrayList<Campaign> getAllNewestCampaigns();
     
+    ArrayList<Partner> getAllPendingPartners();
+    
     boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files);
     
     public Poe getPoe(int kno);

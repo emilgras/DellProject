@@ -18,7 +18,7 @@ import Model.Poe;
  * @author AndersBjergfelt
  */
 public class Controller implements LoginIF, PartnerIF, AdminIF {
-
+ 
     DBFacade facade = DBFacade.getInstance();
 
     @Override
@@ -139,9 +139,13 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     @Override
 
-    public boolean rollBackCampaign(int id) {
-        
+    public boolean rollBackCampaign(int id) {  
         return facade.rollBackCampaign(id);
+    }
+    
+    @Override
+    public boolean deleteOldPoe(int id) {
+        return facade.deleteOldPoe(id);
     }
     
     
@@ -176,6 +180,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
         return getInstance().getAllOwnPartnerCampaigns(pno);
     }
+
+    
 
     
 
