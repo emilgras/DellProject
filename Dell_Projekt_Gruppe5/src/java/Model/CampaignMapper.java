@@ -126,6 +126,10 @@ public class CampaignMapper {
                     statement.setInt(2, kno);
                     statement.setString(1, "Complete");
                     break;
+                    
+                case "poe declined":
+                    statement.setInt(2, kno);
+                    statement.setString(1, "POE Accepted");
 
                 default:
                     statement.setInt(2, kno);
@@ -165,7 +169,7 @@ public class CampaignMapper {
 
                 case "poe pending":
                     statement.setInt(2, kno);
-                    statement.setString(1, "In-Progress");
+                    statement.setString(1, "POE Declined");
                     break;
 
                 case "poe accepted":
@@ -175,8 +179,12 @@ public class CampaignMapper {
 
                 case "invoice pending":
                     statement.setInt(2, kno);
-                    statement.setString(1, "POE accepted");
+                    statement.setString(1, "POE Accepted");
                     break;
+                    
+                case "poe declined":
+                    statement.setInt(2,kno);
+                    statement.setString(2, "POE Declined");
 
                 case "complete":
                     statement.setInt(2, kno);
