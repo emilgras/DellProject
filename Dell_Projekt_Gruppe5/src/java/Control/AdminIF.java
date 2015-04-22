@@ -42,4 +42,10 @@ public interface AdminIF {
     Campaign getPendingCampaignDetail(int id);
     
     public Poe getPoe(int kno);
+    
+    public boolean updateMoneyUsed(int i);
+    
+    public int getStartsBelob();
+    
+    public int getNuvaerendeBelob();
 }

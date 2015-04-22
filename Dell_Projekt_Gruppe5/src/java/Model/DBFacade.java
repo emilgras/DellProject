@@ -83,6 +83,22 @@ public class DBFacade {
     public boolean createCampaign(Campaign campaign) {
         return cm.insertCampaign(campaign, dbcon.getConnection());
     }
+    
+    /**
+     * * Budget **
+     */
+    
+    public int getNuvaerendeBelob(){
+        return bm.getNuvaerendeBelob(con);
+    }
+    
+    public int getStartsBelob(){
+        return bm.getStartsBelob(con);
+    }
+    
+    public boolean updateMoneyUsed(int i){
+        return bm.updateMoneyUsed(i, con);
+    }
 
     /**
      * * Dashboard view **

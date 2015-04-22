@@ -194,7 +194,7 @@
                 chart.draw(data, options);
             }
         </script>
-        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+        <div id="piechart_3d" style="width: 675px; height: 375px;"></div>
     </body>
 </html>
 

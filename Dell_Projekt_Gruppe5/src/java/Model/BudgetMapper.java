@@ -33,4 +33,46 @@ public class BudgetMapper {
         return list;
     }
     
+    public int getStartsBelob(Connection con){
+        String sql = "select starts_belob from budget";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        int i = 0;
+        try {
+            statement = con.prepareStatement(sql);
+            rs = statement.executeQuery();
+            rs.next();
+            i = rs.getInt(1);
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
+    public int getNuvaerendeBelob(Connection con){
+        String sql = "select nuvaernde_belob from budget";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        int i = 0;
+        try {
+            statement = con.prepareStatement(sql);
+            rs = statement.executeQuery();
+            rs.next();
+            i = rs.getInt(1);
+        } catch (Exception e) {
+        }
+        return i;
+    }
+    
+    public boolean updateMoneyUsed(int i, Connection con){
+        String sql = "update budget set nuvaernde_belob = " + (getNuvaerendeBelob(con) + i) + " where starts_belob = " + getStartsBelob(con);
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            
+        } catch (Exception e) {
+        }
+        return true;
+    }
 }
