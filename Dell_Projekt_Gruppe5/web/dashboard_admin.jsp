@@ -142,7 +142,7 @@
                     
                     <h3>Ca. penge brugt:  ${nuvaerendeBelob} EUR</h3>
                     
-                    <h3>Ca. penge til rådighed:  ${}</h3>
+                    <h3>Ca. penge til rådighed: </h3>
                 </div>
                 <div class="col-md-9" id="piechart_3d" style="width: 675px; height: 375px;"></div> 
             </div>
