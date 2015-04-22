@@ -111,11 +111,12 @@ body {
     color: #fff;
 }
 
-ul li {     
+#list {     
     list-style:none;
-    margin-bottom:25px;           
+    margin-bottom: 30px;
 }
 
-ul li img {
+#image {
     cursor: pointer;
 }
+
