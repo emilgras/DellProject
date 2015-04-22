@@ -44,7 +44,6 @@ public class AdminServlet extends HttpServlet {
             case "acceptpartner":
                 String stringId = request.getParameter("id");
                 int intId = Integer.parseInt(stringId);
-                System.out.println("ArrayList index: " + (intId - 1));
                 control.acceptPartner(intId - 1);
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
@@ -52,6 +51,7 @@ public class AdminServlet extends HttpServlet {
                 String cId = request.getParameter("id");
                 int intcId = Integer.parseInt(cId);
                 control.acceptCampaign(intcId - 1);
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
                 //getNewestPartners
             //session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());

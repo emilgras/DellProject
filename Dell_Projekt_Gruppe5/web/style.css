@@ -87,7 +87,7 @@ body {
 
 #submitBtn{
     margin-top: 20px;
-    
+
 }
 #header{
     margin-left: auto;
@@ -109,4 +109,13 @@ body {
 
 .whiteText {
     color: #fff;
+}
+
+ul li {     
+    list-style:none;
+    margin-bottom:25px;           
+}
+
+ul li img {
+    cursor: pointer;
 }
