@@ -91,6 +91,21 @@ public class DBFacade {
     }
 
     /**
+     * * Budget **
+     */
+    public int getNuvaerendeBelob() {
+        return bm.getNuvaerendeBelob(con);
+    }
+
+    public int getStartsBelob() {
+        return bm.getStartsBelob(con);
+    }
+
+    private boolean updateMoneyUsed(int i) {
+        return bm.updateMoneyUsed(i, con);
+    }
+
+    /**
      * * Dashboard view **
      */
     public ArrayList<Partner> getAllPendingPartners() {

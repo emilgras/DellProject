@@ -108,7 +108,19 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
       return success;
     }
     
+    /*************** Budget ***************/
+    
 
+    @Override
+    public int getStartsBelob() {
+        return facade.getStartsBelob();
+    }
+
+    @Override
+    public int getNuvaerendeBelob() {
+        return facade.getNuvaerendeBelob();
+    }
+    
     /*************** Admin Dashboard button interaction ***************/
     
     @Override

@@ -46,4 +46,8 @@ public interface AdminIF {
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
     boolean deleteOldPoe(int id);
+    public int getStartsBelob();
+    
+    public int getNuvaerendeBelob();
+    
 }

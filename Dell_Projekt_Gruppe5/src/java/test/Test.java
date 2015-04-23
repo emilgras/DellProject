@@ -67,7 +67,10 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        bm.getAllPrices(con);
+        System.out.println(bm.getStartsBelob(con));
+        System.out.println(bm.getNuvaerendeBelob(con));
+        bm.updateMoneyUsed(500, con);
+        System.out.println(bm.getNuvaerendeBelob(con));
         try {
             con.close();
         } catch (Exception e) {
