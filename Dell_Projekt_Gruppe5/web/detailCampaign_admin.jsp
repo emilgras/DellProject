@@ -46,17 +46,17 @@
             <div class="row marginBottom">
                 <div><a href="AdminServlet?action=dashboard"><< Tilbage</a></div>
                 <div><h1 class="tileHeader">Campaign detail</h1></div>     
-                <div class="col-md-0 marginTop">
-                    <h3 class="tileHeader">Campaign Details</h3>              
-                    <h3>Id: ${campaignDetail.kno}</h3>
+                <div class="col-md-0 marginTop">           
+
+                    <h3>Firma: ${campaignDetail.navn}</h3>
+                    <h5>cvr: ${campaignDetail.cvr}</h5>
+                    <h3>Status: ${campaignDetail.status}</h3>
+                    <h3>Describtion: ${campaignDetail.beskrivelse}</h3>
                     <h3>Pris: ${campaignDetail.pris}</h3>
-                    <h3>Pris: ${campaignDetail.beskrivelse}</h3>
                     <h3>Forventet start: ${campaignDetail.start_dato}</h3>
                     <h3>Forventet slut ${campaignDetail.slut_dato}</h3>
-                    <h3>Firma: ${campaignDetail.navn}</h3>
-                    <h3>Firma: ${campaignDetail.cvr}</h3>
                     <h3>Oprettet: ${campaignDetail.oprettelse_dato}</h3>
-                    <h3>Status: ${campaignDetail.status}</h3>
+                    <h3>Id: ${campaignDetail.kno}</h3>
 
 
 

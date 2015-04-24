@@ -13,7 +13,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,12 +73,13 @@ public class CampaignMapper {
         String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
 
         try {
+            DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
             PreparedStatement statement = null;
-            java.util.Date date = new java.util.Date();
-            java.sql.Date sqldate = new java.sql.Date(date.getTime());
+            Date date = new Date();
+            String sdate = (dateFormat.format(date)); 
             statement = con.prepareStatement(sqlString2);
             statement.setInt(2, kno);
-            statement.setDate(1, sqldate);
+            statement.setString(1, sdate);
 
             statement.executeUpdate();
             //statement.close();
@@ -112,6 +116,7 @@ public class CampaignMapper {
                 case "poe declined":
                     statement.setInt(2, kno);
                     statement.setString(1, "POE Pending");
+                    break;
 
                 case "poe pending":
                     statement.setInt(2, kno);
@@ -188,6 +193,7 @@ public class CampaignMapper {
                 case "poe declined":
                     statement.setInt(2, kno);
                     statement.setString(2, "POE Declined");
+                    break;
 
                 case "complete":
                     statement.setInt(2, kno);
@@ -281,7 +287,7 @@ public class CampaignMapper {
      */
     public ArrayList<Campaign> getAllNewestCampaigns(Connection con) {
         ArrayList<Campaign> list = new ArrayList<>();
-        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
+        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato";
         PreparedStatement statement = null;
         int count = 0;
         try {
