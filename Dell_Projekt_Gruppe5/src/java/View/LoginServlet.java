@@ -107,6 +107,8 @@ public class LoginServlet extends HttpServlet {
 
                         case "partner":
 
+                            request.setAttribute("partnerNotAccepted", "You are not able to create any campaigns before Dell has accpeted your partnership");
+                            
                             session.setAttribute("PNO", control.getPno(username)); 
                             
                             session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));

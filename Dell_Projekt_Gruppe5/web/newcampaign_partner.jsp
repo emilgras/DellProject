@@ -61,9 +61,8 @@
                         <textarea name="description" value="<%= request.getAttribute("description")%>" class="form-control" rows="5" id="comment"></textarea>
                     </div>
                     <div class="form-group marginTop">
-                        <input type="submit" name="login" value="Send" class="btn btn-info btn-block"/>
+                        <button type="submit" name="action" value="sendcampaign" class="btn btn-info btn-block">Send</button>
                     </div>
-                    <input type="hidden" name="action" value="sendcampaign">
                 </form>
             </div>
         </div>

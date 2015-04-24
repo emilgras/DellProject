@@ -30,7 +30,7 @@ import javax.servlet.http.Part;
 public class PartnerServlet extends HttpServlet {
 
     HttpSession session;
-    
+    // Flyt session object fra globalt
     PartnerIF control = new Controller();
 
     @Override
@@ -38,22 +38,33 @@ public class PartnerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         session = request.getSession();
-        
+
         String action = request.getParameter("action");
-        
+
         switch (action) {
 
             case "dashboard":
-                request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                if (control.isPartnerAccepted((Integer) session.getAttribute("PNO"))) {
+                    request.setAttribute("partnerNotAccepted", "");
+                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("partnerNotAccepted", "You are not able to create any campaigns before Dell has accpeted your partnership");
+                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                }           
                 break;
             case "newcampaign":
-                request.setAttribute("campaignstart", "");
-                request.setAttribute("campaignend", "");
-                request.setAttribute("price", "");
-                request.setAttribute("description", "");
-                request.setAttribute("validationErrorMessage", "");
-                request.setAttribute("dbErrorMessage", "");
-                request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
+                if (control.isPartnerAccepted((Integer) session.getAttribute("PNO"))) {
+                    request.setAttribute("campaignstart", "");
+                    request.setAttribute("campaignend", "");
+                    request.setAttribute("price", "");
+                    request.setAttribute("description", "");
+                    request.setAttribute("validationErrorMessage", "");
+                    request.setAttribute("dbErrorMessage", "");
+                    request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("partnerNotAccepted", "Your partnership is not yet accepted by Dell");
+                    request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                }
                 break;
             case "signup":
                 request.setAttribute("username", "");
@@ -71,10 +82,10 @@ public class PartnerServlet extends HttpServlet {
                 control.updateCampaign(intId - 1);
                 updateSessions();
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                break;         
+                break;
 
             case "viewDetail":
-               
+
                 break;
 
             case "selectedCampaignForPoeUpload":
@@ -96,10 +107,10 @@ public class PartnerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         session = request.getSession();
-        
+
         String validationErrorMessage;
         String dbErrorMessage;
-        
+
         String action = request.getParameter("action");
 
         switch (action) {
@@ -153,6 +164,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("campaignend", campaignEnd);
                 request.setAttribute("price", price);
                 request.setAttribute("description", description);
+                // sæt campaign som attribut i stedet
 
                 if (!(validationErrorMessage = Validate.campaignErrorMessage(campaign)).equals("")) {
                     // Fejl i login form
@@ -168,7 +180,7 @@ public class PartnerServlet extends HttpServlet {
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
                         // Success!
-                        
+
                         updateSessions();
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
 
@@ -211,16 +223,13 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("upload.jsp").forward(request, response);
                 }
                 //con.updateCampaignWithKno((Integer)session.getAttribute("campaignKno"), (Integer)session.getAttribute("partnersCampaignsID"));
-                
-                
-                
-                
+
                 break;
-        }   
-        
+        }
+
     }
-    
+
     private void updateSessions() {
-        session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
+        session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
     }
 }
