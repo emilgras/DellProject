@@ -43,8 +43,13 @@ public class PoeMapper {
             statement.executeUpdate();
 
             /*** Creates multiple FILE tuples and inserts data ***/
+            System.out.println("test");
             statement = con.prepareStatement(sqlFil);
             for (CustomFile file : files) {
+                System.out.println("test");
+                System.out.println(file.getName());
+                System.out.println(file.getExtension());
+                System.out.println(poeNo);
                 statement.setString(1, file.getName());
                 statement.setString(2, file.getExtension());
                 statement.setInt(3, poeNo);

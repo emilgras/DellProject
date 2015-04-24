@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads", fileSizeThreshold = 1024 * 1024,
+@MultipartConfig(location = "C:\\Users\\Frederik\\Documents\\NetBeansProjects\\Dell_Projekt_Gruppe5\\Dell_Projekt_Gruppe5\\web\\uploads", fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 
