@@ -42,7 +42,7 @@
         <section class="row">
             <div class="container marginBottom">
                 <h1 class="tileHeader marginBottom">Dashboard</h1>
-                <h4 style="color: indianred">${partnerNotAccepted}</h4>
+                <h4 style="color: indianred">${message}</h4>
                     
                     <!------------ NEWEST CAMPAIGNS ------------>
                     <div class="col-md-0 marginTop">

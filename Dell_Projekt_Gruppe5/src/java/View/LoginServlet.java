@@ -105,11 +105,11 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
-                        case "partner":
-
-                            request.setAttribute("partnerNotAccepted", "You are not able to create any campaigns before Dell has accpeted your partnership");
+                        case "partner":      
                             
                             session.setAttribute("PNO", control.getPno(username)); 
+                            
+                            session.setAttribute("message", control.isPartnerAccepted((Integer)session.getAttribute("PNO")));
                             
                             session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
                             

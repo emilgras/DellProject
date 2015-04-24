@@ -136,55 +136,32 @@ public class DBFacade {
     /**
      * * Dashboard button interaction **
      */
-    public boolean acceptPartner(int id) {
-        boolean success = true;
-
-        String cvr = pendingPartners.get(id).getCvr();
-        // hent fra db i stedet fra array
-
-        if (pm.acceptPartner(cvr, con)) {
-        } else {
-            success = false;
-        }
-        return success;
+    public boolean acceptPartner(String cvr) {
+        return pm.acceptPartner(cvr, con);
     }
 
-    public boolean acceptCampaign(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();
-
-        if (cm.getCampaignStatus(kno, con).equals("Pending")) {
-            if (cm.acceptCampaign(kno, con)) {
-                cm.updateCampaign(kno, con);
-            } else {
-                success = false;
-            }
-        } else {
-            cm.updateCampaign(kno, con);
-            pendingCampaigns.remove(id);
-        }
-
-        return success;
+    public boolean acceptCampaign(int kno) {
+        return cm.acceptCampaign(kno, con);
     }
     
-    public boolean deleteOldPoe(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();      
-        if (!poem.deleteOldPoe(kno, con)) success = false;
-        return success;
-    }
-
-    public boolean rollBackCampaign(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();
-        if (!cm.rollBackCampaign(kno, con)) success = false;    
-        return success;
-    }
-    
-
     public boolean updateCampaign(int kno) {
-        return cm.updateCampaign(kno, dbcon.getConnection());
+        return cm.updateCampaign(kno, con);
     }
+    
+    public String getCampaignStatus(int kno) {
+        return cm.getCampaignStatus(kno, con);
+    }
+    
+    public boolean deleteOldPoe(int kno) {
+        return poem.deleteOldPoe(kno, con);
+    }
+
+    public boolean rollBackCampaign(int kno) {
+        return cm.rollBackCampaign(kno, con);
+    }
+    
+
+    
 
     /**
      * * POE **
@@ -224,7 +201,8 @@ public class DBFacade {
         return poem.getPoe(pno, con);
     }
     
-    public String isPartnerAccepted(int pno) {
+    public boolean isPartnerAccepted(int pno) {
+        System.out.println("TÅÅÅST: " + pm.isPartnerAccepted(pno, con));
         return pm.isPartnerAccepted(pno, con);
     }
 

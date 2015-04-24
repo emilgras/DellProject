@@ -37,4 +37,6 @@ public interface LoginIF {
     
     public int getNuvaerendeBelob();
     
+    String isPartnerAccepted(int pno);
+    
 }
