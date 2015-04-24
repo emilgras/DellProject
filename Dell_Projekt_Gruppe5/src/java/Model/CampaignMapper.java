@@ -71,11 +71,10 @@ public class CampaignMapper {
 
         try {
             PreparedStatement statement = null;
-            java.util.Date date = new java.util.Date();
-            java.sql.Date sqldate = new java.sql.Date(date.getTime());
+            String date = "" + new java.util.Date().getTime();
             statement = con.prepareStatement(sqlString2);
             statement.setInt(2, kno);
-            statement.setDate(1, sqldate);
+            statement.setString(1, date);
 
             statement.executeUpdate();
             //statement.close();
