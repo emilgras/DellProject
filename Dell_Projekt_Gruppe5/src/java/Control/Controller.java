@@ -57,6 +57,14 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
     
     @Override
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
+        return getInstance().getAllOwnPartnerCampaigns(pno);
+    }
+    
+    
+    
+    
+    @Override
     public ArrayList<Partner> getPendingPartners() {
         return facade.getPendingPartners();
     }
@@ -188,12 +196,15 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     
     /************** Partner Dashboard **************/
     
-    @Override
-    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
-        return getInstance().getAllOwnPartnerCampaigns(pno);
-    }
-
     
+
+    @Override
+    public boolean isPartnerAccepted(int pno) {
+        boolean accepted = true;
+        String dato = facade.isPartnerAccepted(pno);
+        if (dato.equals("NULL")) accepted = false;
+        return accepted;
+    }
 
     
 

@@ -110,22 +110,22 @@ public class DBFacade {
      */
     public ArrayList<Partner> getAllPendingPartners() {
         pendingPartners = pm.getAllPendingPartners(con);
-        return pendingPartners;
+        return pm.getAllPendingPartners(con);
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns() {
         pendingCampaigns = cm.getAllPendingCampaigns(con);
-        return pendingCampaigns;
+        return cm.getAllPendingCampaigns(con);
     }
 
     public ArrayList<Campaign> getAllNewestCampaigns() {
         newestCampaigns = cm.getAllNewestCampaigns(con);
-        return newestCampaigns;
+        return cm.getAllNewestCampaigns(con);
     }
 
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
         partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno, con);
-        return partnersCampaigns;
+        return cm.getAllOwnPartnerCampaigns(pno, con);
     }
 
     public ArrayList<Budget> getAllPrices() {
@@ -140,6 +140,7 @@ public class DBFacade {
         boolean success = true;
 
         String cvr = pendingPartners.get(id).getCvr();
+        // hent fra db i stedet fra array
 
         if (pm.acceptPartner(cvr, con)) {
         } else {
@@ -221,6 +222,10 @@ public class DBFacade {
     public Poe getPoeFromPendingCampaigns(int id) {
         int pno = pendingCampaigns.get(id).getPno();
         return poem.getPoe(pno, con);
+    }
+    
+    public String isPartnerAccepted(int pno) {
+        return pm.isPartnerAccepted(pno, con);
     }
 
 }

@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.sql.Connection;
@@ -172,36 +166,6 @@ public class PartnerMapper {
         
     }
 
-//    public String showPartnerCVR(Connection con){
-//        String partnerCVR = "";
-//        String sqlString = "select CVR from partner where dato is NULL";
-//        PreparedStatement statement =null;
-//        
-//        try{
-//            statement = con.prepareStatement(sqlString);
-//            ResultSet rs  = statement.executeQuery();
-//            while (rs.next())
-//          {
-//            
-//                partnerCVR = rs.getString(1);
-//                  System.out.println(partnerCVR);
-//                //return partnerCVR;   
-//       
-////                partnerCVR = rs.getString(1);
-////                return partnerCVR;
-//         }   
-//           
-//            
-//           
-//            
-//        }catch(SQLException ex){
-//            System.err.println(ex.getMessage());
-//        }
-//        
-//        return partnerCVR;
-//    
-//   
-//    }
     public int getPno(String username, Connection con) {
         int pno = 0;
         String sqlString = "select pno from partner where brugernavn = ?";
@@ -220,6 +184,26 @@ public class PartnerMapper {
             System.out.println("ups");
         }
         return pno;
+    }
+    
+    public String isPartnerAccepted(int pno, Connection con) {
+        String status = "";
+        String sqlString = "select dato from partner where pno = ?";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        
+        try {
+            statement = con.prepareStatement(sqlString);
+            statement.setInt(1, pno);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                status = rs.getString(1);
+            }
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
     }
 }
 

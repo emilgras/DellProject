@@ -14,7 +14,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
-
     </head>
     <body>
         <!------------------- NAV ------------------ -->
@@ -43,7 +42,7 @@
         <section class="row">
             <div class="container marginBottom">
                 <h1 class="tileHeader marginBottom">Dashboard</h1>
-                
+                <h4 style="color: indianred">${partnerNotAccepted}</h4>
                     
                     <!------------ NEWEST CAMPAIGNS ------------>
                     <div class="col-md-0 marginTop">
