@@ -45,11 +45,11 @@ public class PartnerServlet extends HttpServlet {
 
         switch (action) {
 
-            case "dashboard":   
+            case "dashboard": // Tjek  
                 request.setAttribute("message", control.isPartnerAccepted((Integer)session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);        
                 break;
-            case "newcampaign":
+            case "newcampaign": // Mangler: Fejl
                 String error = control.isPartnerAccepted((Integer) session.getAttribute("PNO"));
                 if (!error.equals("")) {
                     request.setAttribute("message", error);                 
@@ -59,21 +59,18 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 }
                 break;
-            case "signup":
-                request.setAttribute("username", "");
-                request.setAttribute("company", "");
-                request.setAttribute("cvr", "");
-                request.setAttribute("country", "");
+            case "signup": // Tjek
+                request.setAttribute("partner", new Partner("", "", "", "", null, ""));
                 request.setAttribute("signupErrorMessage", "");
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup_partner.jsp").forward(request, response);
                 break;
 
             case "upload":
-                String stringId = request.getParameter("id");
-                int intId = Integer.parseInt(stringId);
-                control.updateCampaign(intId - 1);
-                updateSessions();
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                //control.updateCampaign(tableRowSelected);
+                //session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                request.setAttribute("partnerUploadRowSelected", tableRowSelected);
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
 
@@ -118,10 +115,7 @@ public class PartnerServlet extends HttpServlet {
 
                 Partner partner = new Partner(user, pass, name, cvr, null, country);
 
-                request.setAttribute("username", user);
-                request.setAttribute("company", name);
-                request.setAttribute("cvr", cvr);
-                request.setAttribute("country", country);
+                request.setAttribute("partner", partner);
 
                 if (!(validationErrorMessage = Validate.signupErrorMessage(partner, confirmPass)).equals("")) {
                     // Fejl i signup formular
@@ -176,10 +170,8 @@ public class PartnerServlet extends HttpServlet {
                 }
                 break;
 
-            case "sendPoe":
-                updateSessions();
-                //String savePath = request.getServletContext().getRealPath("");
-                //System.out.println("PATH: " + savePath);
+            case "sendPoe": // Igangværende
+
                 ArrayList<CustomFile> fileNames = new ArrayList();
 
                 // Checks if upload folder excists. If will create one.
@@ -191,7 +183,6 @@ public class PartnerServlet extends HttpServlet {
 
                 for (Part part : request.getParts()) {
                     String fileName = part.getSubmittedFileName();
-                    // Save the file on the server in the specified folder
                     part.write(fileName);
 
                     // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"

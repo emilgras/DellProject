@@ -45,6 +45,13 @@ public class Partner {
         this.date = date;
     }
 
+    public Partner(String name, String cvr, String country, String username) {
+        this.name = name;
+        this.cvr = cvr;
+        this.country = country;
+        this.username = username;
+    }
+
     
     
     
