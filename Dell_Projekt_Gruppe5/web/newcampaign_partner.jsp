@@ -15,7 +15,7 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <!------------------- NAV ------------------ -->
+        <!------------------- NAV -------------------->
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">

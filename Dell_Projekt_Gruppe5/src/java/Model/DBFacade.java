@@ -82,7 +82,7 @@ public class DBFacade {
         return pm.getPno(username);
     }
 
-    public String createPartner(Partner partner) {
+    public boolean createPartner(Partner partner) {
         return pm.createPartner(partner);
     }
 
@@ -170,13 +170,7 @@ public class DBFacade {
      * * POE **
      */
     public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
-        return poem.uploadPoe(kno, files, con);
-//        boolean success = false;
-//        if (poem.uploadPoe(kno, files, con)) {
-//            cm.updateCampaign(kno, con);
-//            success = true;
-//        }
-//        return success;
+        return poem.uploadPoe(kno, files);
     }
 
     public int getKnoForCampaign(int id) {
