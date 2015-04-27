@@ -127,6 +127,9 @@ public class DBFacade {
         partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno, con);
         return partnersCampaigns;
     }
+    public ArrayList<Partner> getAllPartners(){
+        return pm.getAllPartners(con);
+    }
 
     public ArrayList<Budget> getAllPrices() {
         prices = bm.getAllPrices(con);

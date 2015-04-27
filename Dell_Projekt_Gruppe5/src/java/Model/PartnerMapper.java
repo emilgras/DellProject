@@ -171,37 +171,41 @@ public class PartnerMapper {
         return pArray;
         
     }
+    public ArrayList<Partner> getAllPartners(Connection con) {
+       
+        String sqlString = "select navn,cvr,land from partner where dato is not null";
+        ArrayList<Partner> pArray = new ArrayList<>();
+        
+        try {
+            PreparedStatement statement = con.prepareStatement(sqlString);
+            ResultSet rs = statement.executeQuery();
+            int count = 0;
+            while (rs.next()) {
 
-//    public String showPartnerCVR(Connection con){
-//        String partnerCVR = "";
-//        String sqlString = "select CVR from partner where dato is NULL";
-//        PreparedStatement statement =null;
-//        
-//        try{
-//            statement = con.prepareStatement(sqlString);
-//            ResultSet rs  = statement.executeQuery();
-//            while (rs.next())
-//          {
-//            
-//                partnerCVR = rs.getString(1);
-//                  System.out.println(partnerCVR);
-//                //return partnerCVR;   
-//       
-////                partnerCVR = rs.getString(1);
-////                return partnerCVR;
-//         }   
-//           
-//            
-//           
-//            
-//        }catch(SQLException ex){
-//            System.err.println(ex.getMessage());
-//        }
-//        
-//        return partnerCVR;
-//    
-//   
-//    }
+                String partnerName = rs.getString(1);
+                String partnerCVR = rs.getString(2);
+                String partnerCountry = rs.getString(3);
+                
+                Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
+                
+                pArray.add(p); 
+                System.out.println(pArray.get(count).getName());
+                count++;
+                System.out.println(count);
+               
+                
+            }
+             //statement.close();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return pArray;
+        
+    }
+
+
     public int getPno(String username, Connection con) {
         int pno = 0;
         String sqlString = "select pno from partner where brugernavn = ?";
