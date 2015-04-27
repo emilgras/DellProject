@@ -73,7 +73,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "viewPendingCampaignsDetail": //(Tjek)
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                Campaign pendCampaign = control.getAllNewestCampaigns().get(tableRowSelected - 1);
+                Campaign pendCampaign = control.getAllPendingCampaigns().get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", pendCampaign);
                 session.setAttribute("poe", control.getPoe(pendCampaign.getKno()));
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
