@@ -40,7 +40,9 @@ public class AdminServlet extends HttpServlet {
             case "campaigns": //(Tjek)
                 request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
-            case "partners": //(Tjek)
+            case "partners":
+                session.setAttribute("AllPartners", control.getAllPartners());
+                
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
             case "acceptpartner": //(Tjek)
