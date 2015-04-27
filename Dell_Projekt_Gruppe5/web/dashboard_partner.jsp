@@ -80,7 +80,7 @@
             $("table tr #viewDetail").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 alert(row);
-                location.href = "PartnerServlet?action=viewDeatil&id=" + row;
+                location.href = "PartnerServlet?action=viewDetail&id=" + row;
             });
         </script>
     </body>
