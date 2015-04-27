@@ -204,7 +204,7 @@
 
                 var options = {
                     backgroundColor: 'transparent',
-                    title: 'My Daily Activities',
+                    title: 'Campaigns',
                     is3D: true,
                 };
 
