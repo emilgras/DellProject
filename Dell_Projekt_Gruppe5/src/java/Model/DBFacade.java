@@ -79,15 +79,15 @@ public class DBFacade {
     }
 
     public int getPno(String username) {
-        return pm.getPno(username, dbcon.getConnection());
+        return pm.getPno(username, con);
     }
 
-    public String createPartner(Partner partner) {
-        return pm.createPartner(partner, dbcon.getConnection());
+    public boolean createPartner(Partner partner) {
+        return pm.createPartner(partner, con);
     }
 
     public boolean createCampaign(Campaign campaign) {
-        return cm.insertCampaign(campaign, dbcon.getConnection());
+        return cm.insertCampaign(campaign, con);
     }
 
     /**
@@ -166,13 +166,14 @@ public class DBFacade {
     /**
      * * POE **
      */
-    public boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files) {
-        boolean success = false;
-        if (poem.uploadPoe(kno, files, con)) {
-            cm.updateCampaign(kno, con);
-            success = true;
-        }
-        return success;
+    public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
+        return poem.uploadPoe(kno, files, con);
+//        boolean success = false;
+//        if (poem.uploadPoe(kno, files, con)) {
+//            cm.updateCampaign(kno, con);
+//            success = true;
+//        }
+//        return success;
     }
 
     public int getKnoForCampaign(int id) {

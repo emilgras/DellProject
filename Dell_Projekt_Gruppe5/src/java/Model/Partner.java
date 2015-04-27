@@ -26,14 +26,9 @@ public class Partner {
     private int pno;
 
 
-    public Partner(String username, String password, String name, String cvr, Date date, String country) {
-
-        
-        //this.pno = pno;
-
+    public Partner(String username, String password, String name, String cvr, String country) {
         this.name = name;
         this.cvr = cvr;
-        this.date = date;
         this.username = username;
         this.password = password;
         this.country = country;

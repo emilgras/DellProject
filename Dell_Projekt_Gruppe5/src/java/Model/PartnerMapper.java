@@ -57,9 +57,9 @@ public class PartnerMapper {
 
     }
 
-    public String createPartner(Partner partner, Connection con) {
+    public boolean createPartner(Partner partner, Connection con) {
 
-        String errorMessage = "";
+        boolean success = true;
         
         String sql1 = "INSERT INTO bruger values (?,?,?)";
         String sql2 = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn) VALUES (?,?,?,?,?,?)";
@@ -98,16 +98,11 @@ public class PartnerMapper {
             insertStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            errorMessage = "Not able to create user at the moment, please try again.";
+            success = false;
+            System.err.println(ex.getMessage());          
         }
-//        try {
-//            conn.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
-        return errorMessage;
+        return success;
     }
 
     public boolean acceptPartner(String cvr, Connection con) {
