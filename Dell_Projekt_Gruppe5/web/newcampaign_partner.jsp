@@ -15,7 +15,7 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <!------------------- NAV ------------------ -->
+        <!------------------- NAV -------------------->
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                         <label for="price" class="left-align">Price estimate DKK:</label>
-                        <input type="number" name="price" value="${campaign.pris}" class="form-control"/>
+                        <input type="number" name="price" value="" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label for="comment">Description:</label>

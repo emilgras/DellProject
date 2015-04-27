@@ -98,6 +98,7 @@ public class LoginServlet extends HttpServlet {
                             
                             //getBudget stuff
                             session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                            
                             session.setAttribute("startsBelob", control.getStartsBelob());
                             
                             

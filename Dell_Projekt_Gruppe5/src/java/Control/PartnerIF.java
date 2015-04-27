@@ -23,7 +23,7 @@ public interface PartnerIF {
 
     String createPartner(Partner partner);
 
-    boolean createCampaign(Campaign campaign);
+    String createCampaign(Campaign campaign);
     
     boolean updateCampaign(int id);
     
@@ -35,7 +35,7 @@ public interface PartnerIF {
     
     ArrayList<Partner> getAllPendingPartners();
     
-    boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files);
+    String uploadPoe(int kno, ArrayList<CustomFile> files);
     
     public Poe getPoe(int kno);
     
@@ -44,7 +44,6 @@ public interface PartnerIF {
     int getKnoForCampaign(int id);
     
     boolean updateCampaignWithKno(int kno);
-
  
     ArrayList getPendingCampaigns();
     

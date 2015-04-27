@@ -25,13 +25,13 @@
     <!-- Middle content -->
     <div class="container" id="header">
         <h1 class="tileHeader">Signup</h1>
-        <h3 style="color: indianred"><%= request.getAttribute("signupErrorMessage")%></h3>
+        <h3 style="color: indianred">${signupErrorMessage}</h3>
     </div>
     <div id ="wrapper">
         <form role="form" action="PartnerServlet" method="post">
             <div class="form-group">
                 <label for="text">Username:</label>
-                <input type="text" name="username" value="<%= request.getAttribute("username") %>" class="form-control" id="usertxt">
+                <input type="text" name="username" value="${username}" class="form-control" id="usertxt">
             </div>
             
             <div class="form-group">
@@ -46,21 +46,23 @@
 
             <div class="form-group">
                 <label for="text">Company:</label>
-                <input type="text" name="company" value="<%= request.getAttribute("company") %>" class="form-control" id="partnerName" placeholder="Enter your company name">
+                <input type="text" name="company" value="${name}" class="form-control" id="partnerName" placeholder="Enter your company name">
             </div>
 
             <div class="form-group">
                 <label for="cvr">CVR:</label>
-                <input type="text" name="cvr" value="<%= request.getAttribute("cvr") %>" class="form-control" id="cvr" placeholder="Enter your CVR number">
+                <input type="text" name="cvr" value="${cvr}" class="form-control" id="cvr" placeholder="Enter your CVR number">
             </div>
             
             <div class="form-group">
                 <label for="country">Country:</label>
-                <input type="text" name="country" value="<%= request.getAttribute("country") %>" class="form-control" id="country" placeholder="Enter your country here">
+                <input type="text" name="country" value="${country}" class="form-control" id="country" placeholder="Enter your country here">
             </div>
             
-            <input type="hidden" name="action" value="partnerSignup">
-            <button type="submit" id="submitBtn" class="btn btn-default">Submit</button>
+            <div class="form-group">
+                <input type="hidden" name="action" value="partnerSignup">
+                <input type="submit" id="submitBtn" class="btn btn-default">
+            </div>
         </form>
     </div>
 
