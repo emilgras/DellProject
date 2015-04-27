@@ -158,7 +158,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public Campaign getNewestCampaignDetail(int id) {
         return facade.getNewestCampaignDetail(id);
     }
-
+    @Override
+    public ArrayList<Partner> getAllPartners(){
+        return facade.getAllPartners();
+    }
+    
     @Override
     public ArrayList<Budget> getAllPrices() {
         return facade.getAllPrices();

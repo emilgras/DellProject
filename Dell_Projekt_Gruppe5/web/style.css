@@ -49,6 +49,21 @@ body {
     margin-top: 8px;
 }
 
+.trackbox{
+    background-color: #ffa500;
+    color: #fff;
+    border: 10px;
+    width: 200px;
+    height: 100px;   
+    padding-left: 5px;
+    float: right;
+    margin-right: 100px;
+}
+
+.fleft {
+    float: left;
+    
+}
 
 /**************** Index.jsp ****************/
 
@@ -111,9 +126,6 @@ body {
     color: #fff;
 }
 
-.fright {
-    float: left;
-}
 
 #list {     
     list-style:none;
@@ -123,4 +135,5 @@ body {
 #image {
     cursor: pointer;
 }
+
 

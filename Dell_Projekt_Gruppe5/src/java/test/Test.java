@@ -6,10 +6,10 @@
 package test;
 import Control.Controller;
 import Model.BudgetMapper;
-import Model.Campaign;
+
 import Model.CampaignMapper;
 import Model.DBConnector;
-import Model.Partner;
+
 import Model.DBFacade;
 import Model.PartnerMapper;
 import java.sql.Connection;
@@ -67,15 +67,8 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        System.out.println(bm.getStartsBelob(con));
-        System.out.println(bm.getNuvaerendeBelob(con));
-        bm.updateMoneyUsed(500, con);
-        System.out.println(bm.getNuvaerendeBelob(con));
-        try {
-            con.close();
-        } catch (Exception e) {
-            System.out.println("ups");
-        }
+        
+      
         
         
     }

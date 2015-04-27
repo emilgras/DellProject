@@ -27,6 +27,8 @@ public interface AdminIF {
 
     ArrayList<Partner> getAllPendingPartners();
     
+    ArrayList<Partner> getAllPartners();
+    
     ArrayList<Budget> getAllPrices();
     
     Campaign getNewestCampaignDetail(int id);
