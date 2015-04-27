@@ -138,9 +138,9 @@
         <section class="row">
             <div class="container marginBottom">
                 <div class="col-md-3">
-                    <h3>Starts beløb:  ${startsBelob} EUR</h3>
+                    <h3>Kvartals beløb:  ${startsBelob} EUR</h3>
                     
-                    <h3>Ca. penge brugt:  ${nuvaerendeBelob} EUR</h3>
+                    <h3>Estimeret forbrug:  ${nuvaerendeBelob} EUR</h3>
                     
                 </div>
                 <div class="col-md-9" id="piechart_3d" style="width: 675px; height: 375px;"></div> 

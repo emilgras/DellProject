@@ -28,7 +28,7 @@ public class AdminServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         session.setAttribute("control",  control);
-        
+        String errorMessage = "";
         int tableRowSelected = 0;
         String action = request.getParameter("action");
 
@@ -59,7 +59,6 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "declinecampaign": //(Tjek)
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("errorMessage", control.deleteOldPoe(tableRowSelected - 1)); 
                 request.setAttribute("errorMessage", control.rollBackCampaign(tableRowSelected - 1)); 
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                 session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());

@@ -78,21 +78,16 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
-    public String deleteOldPoe(int tableRowSelected) { //(Tjek)
-        String message = "";
-        int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
-        if (!facade.deleteOldPoe(kno)) {
-            message = "Could not decline cmapaign at the moment du to a techical problem. Please, try again";
-        }
-        return message;
-    }
-
-    @Override
     public String rollBackCampaign(int tableRowSelected) { //(Tjek) 
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
-        if (!facade.rollBackCampaign(kno)) {
-            message = "Could not decline campaign at the moment du to a techical problem. Please, try again";
+
+        if (facade.deleteOldPoe(kno)) {           
+            if (!facade.rollBackCampaign(kno)) {
+                message = "Could not decline campaign at the moment du to a techical problems. Please, try again";
+            }
+        } else {
+            message = "Could not decline campaign at the moment du to a techical problems. Please, try again";
         }
         return message;
     }
@@ -109,8 +104,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         }
         return poe;
     }
-    
-       @Override
+
+    @Override
     public int getPno(String username) {
         return facade.getPno(username);
     }
@@ -136,8 +131,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
 //////////// SLET FRA IF ////////////
-
-
     @Override
     public Campaign getPendingCampaignDetail(int tableRowSelected) {
         return facade.getAllPendingCampaigns().get(tableRowSelected);
@@ -148,8 +141,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return facade.getAllNewestCampaigns().get(tableRowSelected);
     }
 
-    
-
     @Override
     public ArrayList<Budget> getAllPrices() {
         return facade.getAllPrices();
@@ -158,12 +149,10 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     /**
      * ************* Campaign **************
      */
-    
     /*@Override
-    public int getKnoForCampaign(int id) {
-        return facade.getKnoForCampaign(id);
-    }*/
-
+     public int getKnoForCampaign(int id) {
+     return facade.getKnoForCampaign(id);
+     }*/
     @Override
     public boolean updateCampaignWithKno(int kno) {
         boolean success = false;
@@ -254,11 +243,10 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         System.out.println("MESSAGE: " + message);
         return message;
     }
-    
+
     @Override
     public ArrayList<Partner> getAllPartners() {
         return facade.getAllPartners();
     }
-
 
 }
