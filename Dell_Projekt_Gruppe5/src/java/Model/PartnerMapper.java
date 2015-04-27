@@ -119,7 +119,7 @@ public class PartnerMapper {
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
-            statement.setString(2,cvr );
+            statement.setString(2, cvr );
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
@@ -156,7 +156,7 @@ public class PartnerMapper {
                
                 
             }
-             //statement.close();
+            //statement.close();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -186,8 +186,9 @@ public class PartnerMapper {
         return pno;
     }
     
-    public String isPartnerAccepted(int pno, Connection con) {
+    public boolean isPartnerAccepted(int pno, Connection con) {
         String status = "";
+        boolean accepted = true;
         String sqlString = "select dato from partner where pno = ?";
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -203,7 +204,10 @@ public class PartnerMapper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return status;
+        
+        if (status.equals("NULL")) accepted = false;
+        
+        return accepted;
     }
 }
 

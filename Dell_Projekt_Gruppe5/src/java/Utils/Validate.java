@@ -41,7 +41,7 @@ public class Validate {
         
         if (campaign.getStart_dato().equals("")) errorMessage = "Please, remember to enter the estimated start date";
         if (campaign.getSlut_dato().equals("")) errorMessage = "Please, remember to enter the estimated end date";
-        if (campaign.getPris() == 0.0) errorMessage = "Please, remember to enter the estimated price";
+        if (campaign.getPris() < 1) errorMessage = "Please, remember to enter an estimated price";
         if (campaign.getBeskrivelse().equals("")) errorMessage = "Please, remember to enter a full campaign description";
         
         return errorMessage;

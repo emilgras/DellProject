@@ -54,6 +54,6 @@ public interface PartnerIF {
     
     ArrayList getPartnersCampaigns();
     
-    boolean isPartnerAccepted(int pno);
+    String isPartnerAccepted(int pno);
         
 }
