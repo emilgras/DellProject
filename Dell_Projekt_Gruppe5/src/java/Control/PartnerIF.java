@@ -44,16 +44,16 @@ public interface PartnerIF {
     int getKnoForCampaign(int id);
     
     boolean updateCampaignWithKno(int kno);
+
+ 
+    ArrayList getPendingCampaigns();
     
-    ArrayList<Partner> getPendingPartners();
-        
-
-    ArrayList<Campaign> getPendingCampaigns();
-        
-
-    ArrayList<Campaign> getNewestCampaigns();
-        
-
-    ArrayList<Campaign> getPartnersCampaigns();
+    ArrayList getPendingPartners();
+    
+    ArrayList getNewestCampaigns();
+    
+    ArrayList getPartnersCampaigns();
+    
+    String isPartnerAccepted(int pno);
         
 }

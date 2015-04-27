@@ -110,22 +110,22 @@ public class DBFacade {
      */
     public ArrayList<Partner> getAllPendingPartners() {
         pendingPartners = pm.getAllPendingPartners(con);
-        return pendingPartners;
+        return pm.getAllPendingPartners(con);
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns() {
         pendingCampaigns = cm.getAllPendingCampaigns(con);
-        return pendingCampaigns;
+        return cm.getAllPendingCampaigns(con);
     }
 
     public ArrayList<Campaign> getAllNewestCampaigns() {
         newestCampaigns = cm.getAllNewestCampaigns(con);
-        return newestCampaigns;
+        return cm.getAllNewestCampaigns(con);
     }
 
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
         partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno, con);
-        return partnersCampaigns;
+        return cm.getAllOwnPartnerCampaigns(pno, con);
     }
     public ArrayList<Partner> getAllPartners(){
         return pm.getAllPartners(con);
@@ -139,54 +139,32 @@ public class DBFacade {
     /**
      * * Dashboard button interaction **
      */
-    public boolean acceptPartner(int id) {
-        boolean success = true;
-
-        String cvr = pendingPartners.get(id).getCvr();
-
-        if (pm.acceptPartner(cvr, con)) {
-        } else {
-            success = false;
-        }
-        return success;
+    public boolean acceptPartner(String cvr) {
+        return pm.acceptPartner(cvr, con);
     }
 
-    public boolean acceptCampaign(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();
-
-        if (cm.getCampaignStatus(kno, con).equals("Pending")) {
-            if (cm.acceptCampaign(kno, con)) {
-                cm.updateCampaign(kno, con);
-            } else {
-                success = false;
-            }
-        } else {
-            cm.updateCampaign(kno, con);
-            pendingCampaigns.remove(id);
-        }
-
-        return success;
+    public boolean acceptCampaign(int kno) {
+        return cm.acceptCampaign(kno, con);
     }
     
-    public boolean deleteOldPoe(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();      
-        if (!poem.deleteOldPoe(kno, con)) success = false;
-        return success;
-    }
-
-    public boolean rollBackCampaign(int id) {
-        boolean success = true;
-        int kno = pendingCampaigns.get(id).getKno();
-        if (!cm.rollBackCampaign(kno, con)) success = false;    
-        return success;
-    }
-    
-
     public boolean updateCampaign(int kno) {
-        return cm.updateCampaign(kno, dbcon.getConnection());
+        return cm.updateCampaign(kno, con);
     }
+    
+    public String getCampaignStatus(int kno) {
+        return cm.getCampaignStatus(kno, con);
+    }
+    
+    public boolean deleteOldPoe(int kno) {
+        return poem.deleteOldPoe(kno, con);
+    }
+
+    public boolean rollBackCampaign(int kno) {
+        return cm.rollBackCampaign(kno, con);
+    }
+    
+
+    
 
     /**
      * * POE **
@@ -224,6 +202,11 @@ public class DBFacade {
     public Poe getPoeFromPendingCampaigns(int id) {
         int pno = pendingCampaigns.get(id).getPno();
         return poem.getPoe(pno, con);
+    }
+    
+    public boolean isPartnerAccepted(int pno) {
+        System.out.println("TÅÅÅST: " + pm.isPartnerAccepted(pno, con));
+        return pm.isPartnerAccepted(pno, con);
     }
 
 }

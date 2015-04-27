@@ -45,7 +45,7 @@
         <section class="row">
             <div class="container  marginBottom"> 
                 <h1 class="tileHeader">Dashboard</h1>
-
+                <h4 style="color: indianred">${errorMessage}</h4>
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
 

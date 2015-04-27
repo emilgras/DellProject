@@ -33,13 +33,13 @@ public interface AdminIF {
     
     Campaign getNewestCampaignDetail(int id);
     
-    boolean acceptCampaign(int id);
+    String acceptCampaign(int id);
     
     boolean updateCampaign(int id);
     
-    boolean acceptPartner(int id);
+    String acceptPartner(int id);
     
-    boolean rollBackCampaign(int id);
+    String rollBackCampaign(int id);
     
     Campaign getPendingCampaignDetail(int id);
     
@@ -47,7 +47,8 @@ public interface AdminIF {
     
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    boolean deleteOldPoe(int id);
+    String deleteOldPoe(int id);
+    
     public int getStartsBelob();
     
     public int getNuvaerendeBelob();

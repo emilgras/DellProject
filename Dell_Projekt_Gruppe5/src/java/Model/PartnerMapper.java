@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.sql.Connection;
@@ -125,7 +119,7 @@ public class PartnerMapper {
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
             statement = con.prepareStatement(sqlString2);
-            statement.setString(2,cvr );
+            statement.setString(2, cvr );
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
@@ -162,7 +156,7 @@ public class PartnerMapper {
                
                 
             }
-             //statement.close();
+            //statement.close();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -224,6 +218,30 @@ public class PartnerMapper {
             System.out.println("ups");
         }
         return pno;
+    }
+    
+    public boolean isPartnerAccepted(int pno, Connection con) {
+        String status = "";
+        boolean accepted = true;
+        String sqlString = "select dato from partner where pno = ?";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        
+        try {
+            statement = con.prepareStatement(sqlString);
+            statement.setInt(1, pno);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                status = rs.getString(1);
+            }
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        if (status.equals("NULL")) accepted = false;
+        
+        return accepted;
     }
 }
 

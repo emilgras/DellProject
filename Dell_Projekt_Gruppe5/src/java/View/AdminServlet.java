@@ -19,73 +19,64 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
-    HttpSession session;
-    //DBFacade partnerFacade = DBFacade.getInstance();
     AdminIF control = new Controller();
+    // Skal controlleren oprettes her???
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        session = request.getSession();
-
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("control",  control);
+        
+        int tableRowSelected = 0;
         String action = request.getParameter("action");
 
         switch (action) {
 
-            case "dashboard":
+            case "dashboard": //(Tjek)
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "campaigns":
+            case "campaigns": //(Tjek)
                 request.getRequestDispatcher("campaigns_admin.jsp").forward(request, response);
                 break;
             case "partners":
                 session.setAttribute("AllPartners", control.getAllPartners());
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
-            case "acceptpartner":
-                String stringId = request.getParameter("id");
-                int intId = Integer.parseInt(stringId);
-                control.acceptPartner(intId - 1);
-                updateSessions();
+            case "acceptpartner": //(Tjek)
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("errorMessage", control.acceptPartner(tableRowSelected - 1));
+                session.setAttribute("pendingPartners", control.getAllPendingPartners()); 
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "acceptcampaign":
-                String cId = request.getParameter("id");
-                int intcId = Integer.parseInt(cId) - 1;
-                control.acceptCampaign(intcId);
-                updateSessions();
+            case "acceptcampaign": //(Tjek)
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("errorMessage", control.acceptCampaign(tableRowSelected - 1));           
+                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "declinecampaign":
-                String dId = request.getParameter("id");
-                int intdId = Integer.parseInt(dId) - 1;
-                control.deleteOldPoe(intdId);
-                control.rollBackCampaign(intdId);
-                updateSessions();
+            case "declinecampaign": //(Tjek)
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("errorMessage", control.deleteOldPoe(tableRowSelected - 1)); 
+                request.setAttribute("errorMessage", control.rollBackCampaign(tableRowSelected - 1)); 
+                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-
-            case "viewNewestCampaignDetail":
-                String vId = request.getParameter("id");
-                int intvId = Integer.parseInt(vId) - 1;
-                Campaign campaign = control.getNewestCampaignDetail(intvId);
-                session.setAttribute("campaignDetail", campaign);
-                if (!campaign.getStatus().equals("Pending") || !campaign.getStatus().equals("In Progress")) {
-                    session.setAttribute("poe", control.getPoe(campaign.getKno()));
-                }
-
+            case "viewNewestCampaignDetail":  //(Tjek)
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                Campaign newCampaign = control.getAllNewestCampaigns().get(tableRowSelected - 1);
+                session.setAttribute("campaignDetail", newCampaign);
+                session.setAttribute("poe", control.getPoe(newCampaign.getKno()));
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
-            case "viewPendingCampaignsDetail":
-                String pendCamId = request.getParameter("id");
-                int pendCamIdInd = Integer.parseInt(pendCamId) - 1;
-                Campaign pendCampaign = control.getPendingCampaignDetail(pendCamIdInd);
+            case "viewPendingCampaignsDetail": //(Tjek)
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                Campaign pendCampaign = control.getAllNewestCampaigns().get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", pendCampaign);
-                if (!pendCampaign.getStatus().equals("Pending") || !pendCampaign.getStatus().equals("In Progress")) {
-                    session.setAttribute("poe", control.getPoe(pendCampaign.getKno()));
-                }
-
+                session.setAttribute("poe", control.getPoe(pendCampaign.getKno()));
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
         }
@@ -94,15 +85,5 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-    }
-
-    private void updateSessions() {
-        session.setAttribute("pendingPartners", control.getAllPendingPartners());
-
-        session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
-
-        session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
-        
     }
 }

@@ -105,9 +105,11 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
-                        case "partner":
-
+                        case "partner":      
+                            
                             session.setAttribute("PNO", control.getPno(username)); 
+                            
+                            session.setAttribute("message", control.isPartnerAccepted((Integer)session.getAttribute("PNO")));
                             
                             session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
                             

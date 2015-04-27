@@ -13,14 +13,101 @@ import Model.DBFacade;
 import Model.CustomFile;
 import Model.Poe;
 
-/**
- *
- * @author AndersBjergfelt
- */
 public class Controller implements LoginIF, PartnerIF, AdminIF {
  
     DBFacade facade = DBFacade.getInstance();
+       
+    /*
+     *
+     *  Admin Interface
+     * 
+     */
+    
+    @Override
+    public ArrayList<Partner> getAllPendingPartners() {
+        return facade.getAllPendingPartners();
+    }
+    
+    @Override
+    public ArrayList<Campaign> getAllPendingCampaigns() {  
+        return facade.getAllPendingCampaigns();
+    }
+    
+    @Override
+    public ArrayList<Campaign> getAllNewestCampaigns() {
+        return facade.getAllNewestCampaigns();
+    }
+    
+    @Override
+    public String acceptPartner(int tableRowSelected) { //(Tjek)
+        String message = "";
+        String cvr = facade.getAllPendingPartners().get(tableRowSelected).getCvr();
+        if (!facade.acceptPartner(cvr)) message = "Something went wrong, could not accept partner right now. Please try again later";
+        return message;
+    }
+    
+    @Override
+    public String acceptCampaign(int tableRowSelected) { //(Tjek)
+        String message = "";
+        int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();   
+        if (facade.getCampaignStatus(kno).equals("Pending")) {
+            // Her accepteres kampagnen ved at oprettelsesdato initialisere
+            // og kampagne status opdateres til 'In-Progess'.
+            if (!facade.acceptCampaign(kno)) {
+                message = "Something went wrong, could not accept partner right now. Please try again later";       
+            }
+            if (!facade.updateCampaign(kno)) {
+                message = "Something went wrong, could not accept partner right now. Please try again later";
+            }
 
+        } else {
+            // Her opdateres kampagnens status til 'In-Progess'.
+            if (!facade.updateCampaign(kno)) {
+                message = "Something went wrong, could not accept partner right now. Please try again later";
+            }
+        }
+        return message;
+    }
+    
+     @Override
+    public String deleteOldPoe(int tableRowSelected) { //(Tjek)
+        String message = "";
+        int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();  
+        if (!facade.deleteOldPoe(kno)) message = "Could not decline cmapaign at the moment du to a techical problem. Please, try again";
+        return message;
+    }
+
+    @Override
+    public String rollBackCampaign(int tableRowSelected) { //(Tjek) 
+        String message = "";
+        int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();  
+        if (!facade.rollBackCampaign(kno)) message = "Could not decline campaign at the moment du to a techical problem. Please, try again";
+        return message;
+    }
+    
+    public Poe getPoe(int kno) { //(Tjek)
+        Poe poe = null;
+        if (!facade.getCampaignStatus(kno).equals("Pending") || !facade.getCampaignStatus(kno).equals("In Progress")) poe = facade.getPoe(kno);
+        return poe;
+    }
+    
+    /*
+     *
+     *  Partner Interface
+     *    
+     */
+    
+    @Override
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
+        return getInstance().getAllOwnPartnerCampaigns(pno);
+    }
+    
+    /*
+     *
+     *    Login Interface
+     *
+     */
+    
     @Override
     public String getLogin(String username, String password) {
         return getInstance().getLogin(username, password);
@@ -39,22 +126,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
     
     
-    /*************** Dashboard view ***************/
     
-    @Override
-    public ArrayList<Partner> getAllPendingPartners() {
-        return facade.getAllPendingPartners();
-    }
     
-    @Override
-    public ArrayList<Campaign> getAllPendingCampaigns() {  
-        return facade.getAllPendingCampaigns();
-    }
-    
-    @Override
-    public ArrayList<Campaign> getAllNewestCampaigns() {
-        return facade.getAllNewestCampaigns();
-    }
     
     @Override
     public ArrayList<Partner> getPendingPartners() {
@@ -127,20 +200,14 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     
     /*************** Admin Dashboard button interaction ***************/
     
-    @Override
-    public boolean acceptPartner(int id) {
-        return facade.acceptPartner(id);
-    }
     
+    
+    // Ændringer i Interface så den returnerer en streng
+    // Hvilken metode skal den hente kno fra ? pending, newest eller... ? 
     @Override
-    public boolean acceptCampaign(int id) {
-        return facade.acceptCampaign(id);
-    }
-
-    @Override
-    public boolean updateCampaign(int id) {
+    public boolean updateCampaign(int tableRowSelected) {
         boolean succes = true;
-        int kno = getInstance().getAllNewestCampaigns().get(id).getKno();
+        int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
         System.out.println("KNO: " + kno);
         if (getInstance().updateCampaign(kno)) {
             
@@ -152,17 +219,9 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
       
     }
 
-
-    @Override
-
-    public boolean rollBackCampaign(int id) {  
-        return facade.rollBackCampaign(id);
-    }
     
-    @Override
-    public boolean deleteOldPoe(int id) {
-        return facade.deleteOldPoe(id);
-    }
+   
+    
     
     
     /****************** POE ********************/
@@ -172,9 +231,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return facade.uploadPoe(kno, id,  files);
     }
     
-    public Poe getPoe(int kno) {
-        return facade.getPoe(kno);
-    }
+    
     
     
     /****************** Partner ********************/
@@ -192,13 +249,14 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     
     /************** Partner Dashboard **************/
     
+    
+
     @Override
-    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno){
-        return getInstance().getAllOwnPartnerCampaigns(pno);
+    public String isPartnerAccepted(int pno) {
+        String message = "";
+        if (!facade.isPartnerAccepted(pno)) message = "You are not able to create campaigns before Dell accepts your partnership.";
+        System.out.println("MESSAGE: " + message);
+        return message;
     }
-
     
-
-    
-
 }
