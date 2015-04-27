@@ -22,7 +22,7 @@ public class PoeMapper {
     public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
         boolean success = true;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-
+            System.out.println("POEM KNO: " + kno);
             String sqlPrimary = "select poeNo_increment.nextval from dual";
             String sqlPoe = "insert into poe values (?, ?)";
             String sqlFil = "insert into filer values(?, ?, ?)";
@@ -39,10 +39,6 @@ public class PoeMapper {
             int poeNo = rs.getInt(1);
 
             /**
-             * *** OBS OBS OBS Skal første statement lukkes -->
-             * statement.close(); ****
-             */
-            /**
              * * Creates POE tuple and inserts data **
              */
             statement = con.prepareStatement(sqlPoe);
@@ -53,13 +49,11 @@ public class PoeMapper {
             /**
              * * Creates multiple FILE tuples and inserts data **
              */
-            System.out.println("test");
+            System.out.println("POEM FILE SIZE: " + files.size());
+            System.out.println("POEM FILE #1 : " + files.get(0).getName());
+            System.out.println("POEM FILE #1 : " + files.get(0).getExtension());
             statement = con.prepareStatement(sqlFil);
             for (CustomFile file : files) {
-                System.out.println("test");
-                System.out.println(file.getName());
-                System.out.println(file.getExtension());
-                System.out.println(poeNo);
                 statement.setString(1, file.getName());
                 statement.setString(2, file.getExtension());
                 statement.setInt(3, poeNo);

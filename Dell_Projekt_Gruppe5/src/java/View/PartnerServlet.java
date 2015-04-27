@@ -48,7 +48,7 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("message", control.isPartnerAccepted((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
-            case "newcampaign": // Mangler: Fejl
+            case "newcampaign": // Tjek
                 String error = control.isPartnerAccepted((Integer) session.getAttribute("PNO"));
                 if (!error.equals("")) {
                     request.setAttribute("message", error);
@@ -59,11 +59,7 @@ public class PartnerServlet extends HttpServlet {
                 }
                 break;
             case "signup": // Tjek
-                //request.setAttribute("partner", new Partner("", "", "", ""));
-                request.setAttribute("username", "");
-                request.setAttribute("name", "");
-                request.setAttribute("cvr", "");
-                request.setAttribute("country", "");
+                request.setAttribute("partner", new Partner("", "", "", ""));
                 request.setAttribute("signupErrorMessage", "");
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
@@ -71,18 +67,17 @@ public class PartnerServlet extends HttpServlet {
 
             /*case "upload": // Tjek
              tableRowSelected = Integer.parseInt(request.getParameter("id"));
-             request.setAttribute("partnerUploadRowSelected", tableRowSelected);
-             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+             request.setAttribute("partnerUploadRowSelected", tableRowSelected - 1);
+             request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
              break;*/
             case "viewDetail": // Mangler implementation
 
                 break;
 
-            case "selectedCampaignForPoeUpload":
+            case "selectedCampaignForPoeUpload": // Tjek
                 //updateSessions();
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                session.setAttribute("partnersCampaignsID", tableRowSelected);
-                session.setAttribute("campaignKno", control.getKnoForCampaign(tableRowSelected));
+                session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
                 break;
         }
@@ -98,7 +93,7 @@ public class PartnerServlet extends HttpServlet {
         String errorMessage = "";
 
         String action = request.getParameter("action");
-        
+
         switch (action) {
 
             case "partnerSignup": // Tjek
@@ -134,11 +129,16 @@ public class PartnerServlet extends HttpServlet {
                 break;
 
             case "sendcampaign": // Tjek
+                float price;
                 int pno = (Integer) (request.getSession().getAttribute("PNO"));
                 String campaignStart = request.getParameter("campaignstart");
                 String campaignEnd = request.getParameter("campaignend");
-                float price = Float.parseFloat(request.getParameter("price"));
                 String description = request.getParameter("description");
+                if (!request.getParameter("price").equals("")) {
+                    price = Float.parseFloat(request.getParameter("price"));
+                } else {
+                    price = 0;
+                }
 
                 Campaign campaign = new Campaign(campaignStart, campaignEnd, price, description, pno);
 
@@ -164,27 +164,24 @@ public class PartnerServlet extends HttpServlet {
 
             case "sendPoe": // Tjek
                 ArrayList<CustomFile> fileNames = new ArrayList();
-       
-                String error = "";
-                if ((error = control.uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
+                for (Part part : request.getParts()) {
+                    String fileName = part.getSubmittedFileName();
+                    System.out.println("FILE NAME : " + fileName);
+                    part.write(fileName);
 
-                    for (Part part : request.getParts()) {
-                        String fileName = part.getSubmittedFileName();
-                        part.write(fileName);
-
-                        // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"
-                        if (fileName != null && fileName.contains(".")) {
-                            String filename = fileName.substring(0, fileName.lastIndexOf('.'));
-                            String fileextension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
-                            CustomFile customFile = new CustomFile(filename, fileextension);
-                            fileNames.add(customFile);
-                        }
+                    // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"
+                    if (fileName != null && fileName.contains(".")) {
+                        String filename = fileName.substring(0, fileName.lastIndexOf('.'));
+                        String fileextension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
+                        CustomFile customFile = new CustomFile(filename, fileextension);
+                        fileNames.add(customFile);
                     }
-
+                }
+                if ((errorMessage = control.uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
                     session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
-                } else {   
-                    session.setAttribute("uploadErrorMessage", error);
+                } else {
+                    session.setAttribute("uploadErrorMessage", errorMessage);
                     request.getRequestDispatcher("upload.jsp").forward(request, response);
                 }
                 break;

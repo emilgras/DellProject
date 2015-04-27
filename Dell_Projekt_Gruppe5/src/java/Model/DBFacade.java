@@ -17,24 +17,6 @@ public class DBFacade {
     private PoeMapper poem;
     private BudgetMapper bm;
 
-    /**
-     * * Admin **
-     */
-    ArrayList<Partner> pendingPartners = new ArrayList<>();
-    ArrayList<Campaign> pendingCampaigns = new ArrayList<>();
-    ArrayList<Campaign> newestCampaigns = new ArrayList<>();
-    ArrayList<Budget> prices = new ArrayList<>();
-    //ArrayList<Partner> allPartners = new ArrayList<>();
-
-    /**
-     * * Partner **
-     */
-    ArrayList<Campaign> partnersCampaigns = new ArrayList<>();
-
-    private DBConnector dbcon = new DBConnector();
-
-    private Connection con = null;
-
     //== Singleton start
     private static DBFacade instance = null;
 
@@ -44,26 +26,7 @@ public class DBFacade {
         lm = new LoginMapper();
         poem = new PoeMapper();
         bm = new BudgetMapper();
-        con = dbcon.getConnection();
-    }
 
-    /**
-     * * ArrayList Getters **
-     */
-    public ArrayList<Partner> getPendingPartners() {
-        return pendingPartners;
-    }
-
-    public ArrayList<Campaign> getPendingCampaigns() {
-        return pendingCampaigns;
-    }
-
-    public ArrayList<Campaign> getNewestCampaigns() {
-        return newestCampaigns;
-    }
-
-    public ArrayList<Campaign> getPartnersCampaigns() {
-        return partnersCampaigns;
     }
 
     public static DBFacade getInstance() {
@@ -109,22 +72,18 @@ public class DBFacade {
      * * Dashboard view **
      */
     public ArrayList<Partner> getAllPendingPartners() {
-        pendingPartners = pm.getAllPendingPartners();
         return pm.getAllPendingPartners();
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns() {
-        pendingCampaigns = cm.getAllPendingCampaigns();
         return cm.getAllPendingCampaigns();
     }
 
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        newestCampaigns = cm.getAllNewestCampaigns();
         return cm.getAllNewestCampaigns();
     }
 
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
-        partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno);
         return cm.getAllOwnPartnerCampaigns(pno);
     }
     public ArrayList<Partner> getAllPartners(){
@@ -132,8 +91,7 @@ public class DBFacade {
     }
 
     public ArrayList<Budget> getAllPrices() {
-        prices = bm.getAllPrices();
-        return prices;
+        return bm.getAllPrices();
     }
 
     /**
@@ -173,34 +131,11 @@ public class DBFacade {
         return poem.uploadPoe(kno, files);
     }
 
-    public int getKnoForCampaign(int id) {
-        return partnersCampaigns.get(id).getKno();
-    }
-
-    public Campaign getNewestCampaignDetail(int id) {
-        return newestCampaigns.get(id);
-    }
-
-    public Campaign getPendingCampaignDetail(int id) {
-        return pendingCampaigns.get(id);
-    }
-
     public Poe getPoe(int kno) {
         return poem.getPoe(kno);
     }
-
-    public Poe getPoeFromNewestCampaigns(int id) {
-        int pno = newestCampaigns.get(id).getPno();
-        return poem.getPoe(pno);
-    }
-
-    public Poe getPoeFromPendingCampaigns(int id) {
-        int pno = pendingCampaigns.get(id).getPno();
-        return poem.getPoe(pno);
-    }
     
     public boolean isPartnerAccepted(int pno) {
-        System.out.println("TÅÅÅST: " + pm.isPartnerAccepted(pno));
         return pm.isPartnerAccepted(pno);
     }
 

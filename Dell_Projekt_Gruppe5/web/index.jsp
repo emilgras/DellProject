@@ -19,7 +19,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a>
+                    <a href="LoginServlet?action=loginPage" class="navbar-brand">Dell Business</a>
                 </div>
                 </div>
             </div>

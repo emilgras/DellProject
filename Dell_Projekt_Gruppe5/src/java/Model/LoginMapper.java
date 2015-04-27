@@ -21,7 +21,10 @@ import java.util.logging.Logger;
  */
 public class LoginMapper {
 
-    DBConnector db = new DBConnector();
+    private DBConnector conn = new DBConnector();
+
+    
+    
 
     public String getLogin(String username, String password) {
         String message = "";
@@ -29,7 +32,7 @@ public class LoginMapper {
         int i = 2;
         int j = 2;
         String k = null;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(conn.getURL(), conn.getId(), conn.getPw())) {
             String SQLString1
                     = "select count(brugernavn), count(password),rolle from bruger where brugernavn = ? and password = ? group by rolle";
 

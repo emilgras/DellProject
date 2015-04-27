@@ -12,10 +12,17 @@ import java.util.ArrayList;
 import Model.DBFacade;
 import Model.CustomFile;
 import Model.Poe;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class Controller implements LoginIF, PartnerIF, AdminIF {
 
-    DBFacade facade = DBFacade.getInstance();
+    private DBFacade facade;
+
+    public Controller() {
+        facade = DBFacade.getInstance();
+    }
+
 
     /*
      *
@@ -90,12 +97,22 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return message;
     }
 
+    /*
+     *
+     *  Used in Login, Partner and Admin Interface
+     *    
+     */
     public Poe getPoe(int kno) { //(Tjek)
         Poe poe = null;
         if (!facade.getCampaignStatus(kno).equals("Pending") || !facade.getCampaignStatus(kno).equals("In Progress")) {
             poe = facade.getPoe(kno);
         }
         return poe;
+    }
+    
+       @Override
+    public int getPno(String username) {
+        return facade.getPno(username);
     }
 
     /*
@@ -105,7 +122,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      */
     @Override
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
-        return getInstance().getAllOwnPartnerCampaigns(pno);
+        return facade.getAllOwnPartnerCampaigns(pno);
     }
 
     /*
@@ -115,54 +132,24 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      */
     @Override
     public String getLogin(String username, String password) {
-        return getInstance().getLogin(username, password);
+        return facade.getLogin(username, password);
+    }
+
+//////////// SLET FRA IF ////////////
+
+
+    @Override
+    public Campaign getPendingCampaignDetail(int tableRowSelected) {
+        return facade.getAllPendingCampaigns().get(tableRowSelected);
     }
 
     @Override
-    public int getPno(String username) {
-        return getInstance().getPno(username);
+    public Campaign getNewestCampaignDetail(int tableRowSelected) {
+        return facade.getAllNewestCampaigns().get(tableRowSelected);
     }
 
-    @Override
-    public DBFacade getInstance() {
-        DBFacade dbf = DBFacade.getInstance();
-        return dbf;
-    }
-
-    @Override
-    public ArrayList<Partner> getPendingPartners() {
-        return facade.getPendingPartners();
-    }
-
-    @Override
-    public ArrayList<Campaign> getPendingCampaigns() {
-        return facade.getPendingCampaigns();
-    }
-
-    @Override
-    public ArrayList<Campaign> getNewestCampaigns() {
-        return facade.getNewestCampaigns();
-    }
-
-    @Override
-    public ArrayList<Campaign> getPartnersCampaigns() {
-        return facade.getPartnersCampaigns();
-    }
-
-    @Override
-    public Campaign getPendingCampaignDetail(int id) {
-        return facade.getPendingCampaignDetail(id);
-    }
-
-    @Override
-    public Campaign getNewestCampaignDetail(int id) {
-        return facade.getNewestCampaignDetail(id);
-    }
-    @Override
-    public ArrayList<Partner> getAllPartners(){
-        return facade.getAllPartners();
-    }
     
+
     @Override
     public ArrayList<Budget> getAllPrices() {
         return facade.getAllPrices();
@@ -171,15 +158,16 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     /**
      * ************* Campaign **************
      */
-    @Override
+    
+    /*@Override
     public int getKnoForCampaign(int id) {
         return facade.getKnoForCampaign(id);
-    }
+    }*/
 
     @Override
     public boolean updateCampaignWithKno(int kno) {
         boolean success = false;
-        if (getInstance().updateCampaign(kno)) {
+        if (facade.updateCampaign(kno)) {
             success = true;
         }
         return success;
@@ -208,7 +196,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         boolean succes = true;
         int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
         System.out.println("KNO: " + kno);
-        if (getInstance().updateCampaign(kno)) {
+        if (facade.updateCampaign(kno)) {
 
         } else {
             succes = false;
@@ -266,5 +254,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         System.out.println("MESSAGE: " + message);
         return message;
     }
+    
+    @Override
+    public ArrayList<Partner> getAllPartners() {
+        return facade.getAllPartners();
+    }
+
 
 }

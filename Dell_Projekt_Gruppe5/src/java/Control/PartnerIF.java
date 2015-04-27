@@ -18,8 +18,6 @@ import java.util.ArrayList;
  * @author EmilGras
  */
 public interface PartnerIF {
-    
-    DBFacade getInstance();
 
     String createPartner(Partner partner);
 
@@ -41,17 +39,7 @@ public interface PartnerIF {
     
     ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    int getKnoForCampaign(int id);
-    
     boolean updateCampaignWithKno(int kno);
- 
-    ArrayList getPendingCampaigns();
-    
-    ArrayList getPendingPartners();
-    
-    ArrayList getNewestCampaigns();
-    
-    ArrayList getPartnersCampaigns();
     
     String isPartnerAccepted(int pno);
         

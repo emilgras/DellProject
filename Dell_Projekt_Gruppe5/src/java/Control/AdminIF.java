@@ -18,8 +18,6 @@ import java.util.ArrayList;
  * @author EmilGras
  */
 public interface AdminIF {
-    
-    DBFacade getInstance();   
 
     ArrayList<Campaign> getAllPendingCampaigns();
 

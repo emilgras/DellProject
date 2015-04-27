@@ -7,17 +7,17 @@ package Control;
 
 import Model.Budget;
 import Model.Campaign;
-import Model.DBFacade;
 import Model.Partner;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author EmilGras
  */
 public interface LoginIF {
-    
-    DBFacade getInstance();
     
     ArrayList<Campaign> getAllPendingCampaigns();
 
@@ -31,12 +31,14 @@ public interface LoginIF {
     
     String getLogin(String username, String password);
     
-    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+    ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno);
     
-    public int getStartsBelob();
+    int getStartsBelob();
     
-    public int getNuvaerendeBelob();
+    int getNuvaerendeBelob();
     
     String isPartnerAccepted(int pno);
+    
+    ArrayList<Partner> getAllPartners();
     
 }
