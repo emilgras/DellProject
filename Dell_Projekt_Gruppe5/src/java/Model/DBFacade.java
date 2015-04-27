@@ -75,64 +75,64 @@ public class DBFacade {
     //== Singleton end
 
     public String getLogin(String username, String password) {
-        return lm.getLogin(username, password, dbcon.getConnection());
+        return lm.getLogin(username, password);
     }
 
     public int getPno(String username) {
-        return pm.getPno(username, dbcon.getConnection());
+        return pm.getPno(username);
     }
 
     public String createPartner(Partner partner) {
-        return pm.createPartner(partner, dbcon.getConnection());
+        return pm.createPartner(partner);
     }
 
     public boolean createCampaign(Campaign campaign) {
-        return cm.insertCampaign(campaign, dbcon.getConnection());
+        return cm.insertCampaign(campaign);
     }
 
     /**
      * * Budget **
      */
     public int getNuvaerendeBelob() {
-        return bm.getNuvaerendeBelob(con);
+        return bm.getNuvaerendeBelob();
     }
 
     public int getStartsBelob() {
-        return bm.getStartsBelob(con);
+        return bm.getStartsBelob();
     }
 
     private boolean updateMoneyUsed(int i) {
-        return bm.updateMoneyUsed(i, con);
+        return bm.updateMoneyUsed(i);
     }
 
     /**
      * * Dashboard view **
      */
     public ArrayList<Partner> getAllPendingPartners() {
-        pendingPartners = pm.getAllPendingPartners(con);
-        return pm.getAllPendingPartners(con);
+        pendingPartners = pm.getAllPendingPartners();
+        return pm.getAllPendingPartners();
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns() {
-        pendingCampaigns = cm.getAllPendingCampaigns(con);
-        return cm.getAllPendingCampaigns(con);
+        pendingCampaigns = cm.getAllPendingCampaigns();
+        return cm.getAllPendingCampaigns();
     }
 
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        newestCampaigns = cm.getAllNewestCampaigns(con);
-        return cm.getAllNewestCampaigns(con);
+        newestCampaigns = cm.getAllNewestCampaigns();
+        return cm.getAllNewestCampaigns();
     }
 
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
-        partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno, con);
-        return cm.getAllOwnPartnerCampaigns(pno, con);
+        partnersCampaigns = cm.getAllOwnPartnerCampaigns(pno);
+        return cm.getAllOwnPartnerCampaigns(pno);
     }
     public ArrayList<Partner> getAllPartners(){
-        return pm.getAllPartners(con);
+        return pm.getAllPartners();
     }
 
     public ArrayList<Budget> getAllPrices() {
-        prices = bm.getAllPrices(con);
+        prices = bm.getAllPrices();
         return prices;
     }
 
@@ -140,27 +140,27 @@ public class DBFacade {
      * * Dashboard button interaction **
      */
     public boolean acceptPartner(String cvr) {
-        return pm.acceptPartner(cvr, con);
+        return pm.acceptPartner(cvr);
     }
 
     public boolean acceptCampaign(int kno) {
-        return cm.acceptCampaign(kno, con);
+        return cm.acceptCampaign(kno);
     }
     
     public boolean updateCampaign(int kno) {
-        return cm.updateCampaign(kno, con);
+        return cm.updateCampaign(kno);
     }
     
     public String getCampaignStatus(int kno) {
-        return cm.getCampaignStatus(kno, con);
+        return cm.getCampaignStatus(kno);
     }
     
     public boolean deleteOldPoe(int kno) {
-        return poem.deleteOldPoe(kno, con);
+        return poem.deleteOldPoe(kno);
     }
 
     public boolean rollBackCampaign(int kno) {
-        return cm.rollBackCampaign(kno, con);
+        return cm.rollBackCampaign(kno);
     }
     
 
@@ -171,8 +171,8 @@ public class DBFacade {
      */
     public boolean uploadPoe(int kno, int id, ArrayList<CustomFile> files) {
         boolean success = false;
-        if (poem.uploadPoe(kno, files, con)) {
-            cm.updateCampaign(kno, con);
+        if (poem.uploadPoe(kno, files)) {
+            cm.updateCampaign(kno);
             success = true;
         }
         return success;
@@ -191,22 +191,22 @@ public class DBFacade {
     }
 
     public Poe getPoe(int kno) {
-        return poem.getPoe(kno, con);
+        return poem.getPoe(kno);
     }
 
     public Poe getPoeFromNewestCampaigns(int id) {
         int pno = newestCampaigns.get(id).getPno();
-        return poem.getPoe(pno, con);
+        return poem.getPoe(pno);
     }
 
     public Poe getPoeFromPendingCampaigns(int id) {
         int pno = pendingCampaigns.get(id).getPno();
-        return poem.getPoe(pno, con);
+        return poem.getPoe(pno);
     }
     
     public boolean isPartnerAccepted(int pno) {
-        System.out.println("TÅÅÅST: " + pm.isPartnerAccepted(pno, con));
-        return pm.isPartnerAccepted(pno, con);
+        System.out.println("TÅÅÅST: " + pm.isPartnerAccepted(pno));
+        return pm.isPartnerAccepted(pno);
     }
 
 }

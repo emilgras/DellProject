@@ -1,12 +1,11 @@
 package Model;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,18 +14,19 @@ import java.util.logging.Logger;
  * @author ABjergfelt
  */
 public class PartnerMapper {
-
+    DBConnector db = new DBConnector();
     int count = 0;
     private String message = "";
 
-    public String getLogin(String username, String password, Connection con) {
+    public String getLogin(String username, String password) {
         Partner p = null;
+        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String SQLString1
                 = "select count(*) as count from partner where brugernavn = ? and password = ?";
 
         PreparedStatement statement = null;
 
-        try {
+        
             // get login
             statement = con.prepareStatement(SQLString1);
 
@@ -39,15 +39,7 @@ public class PartnerMapper {
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally														// must close statement
-      {
-    	  try {
-			statement.close();
-		} catch (SQLException e) {
-			System.out.println("Fail");
-			System.out.println(e.getMessage());
-		}  
-      }
+      
         if (count == 0) {
             message = "Invalid username or password";
 
@@ -57,10 +49,10 @@ public class PartnerMapper {
 
     }
 
-    public String createPartner(Partner partner, Connection con) {
+    public String createPartner(Partner partner) {
 
         String errorMessage = "";
-        
+        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sql1 = "INSERT INTO bruger values (?,?,?)";
         String sql2 = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn) VALUES (?,?,?,?,?,?)";
         String SQLString1
@@ -74,7 +66,7 @@ public class PartnerMapper {
         String country = partner.getCountry();
         String date = "NULL";
 
-        try {
+        
 
             PreparedStatement insertStatement = con.prepareStatement(SQLString1);
             ResultSet rs = insertStatement.executeQuery();
@@ -110,11 +102,11 @@ public class PartnerMapper {
         return errorMessage;
     }
 
-    public boolean acceptPartner(String cvr, Connection con) {
-
+    public boolean acceptPartner(String cvr) {
+ try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sqlString2 = "update partner set dato = ? where cvr = ?";
 
-        try {
+      
             PreparedStatement statement = con.prepareStatement(sqlString2);
             java.util.Date date = new java.util.Date();
             java.sql.Date sqldate = new java.sql.Date(date.getTime());
@@ -132,12 +124,13 @@ public class PartnerMapper {
         return true;
     }
     
-    public ArrayList<Partner> getAllPendingPartners(Connection con) {
-       
+    public ArrayList<Partner> getAllPendingPartners() {
+       ArrayList<Partner> pArray = new ArrayList<>();
+        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sqlString = "select navn,cvr,land from partner where dato = 'NULL'";
-        ArrayList<Partner> pArray = new ArrayList<>();
         
-        try {
+        
+        
             PreparedStatement statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
             int count = 0;
@@ -156,7 +149,7 @@ public class PartnerMapper {
                
                 
             }
-            //statement.close();
+           
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -165,12 +158,13 @@ public class PartnerMapper {
         return pArray;
         
     }
-    public ArrayList<Partner> getAllPartners(Connection con) {
-       
+    public ArrayList<Partner> getAllPartners() {
+       ArrayList<Partner> pArray = new ArrayList<>();
+        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sqlString = "select navn,cvr,land from partner where dato is not null";
-        ArrayList<Partner> pArray = new ArrayList<>();
         
-        try {
+        
+        
             PreparedStatement statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
             int count = 0;
@@ -200,11 +194,12 @@ public class PartnerMapper {
     }
 
 
-    public int getPno(String username, Connection con) {
+    public int getPno(String username) {
         int pno = 0;
+         try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sqlString = "select pno from partner where brugernavn = ?";
         PreparedStatement statement = null;
-        try {
+        
             statement = con.prepareStatement(sqlString);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
@@ -220,21 +215,22 @@ public class PartnerMapper {
         return pno;
     }
     
-    public boolean isPartnerAccepted(int pno, Connection con) {
+    public boolean isPartnerAccepted(int pno) {
         String status = "";
         boolean accepted = true;
+         try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
         String sqlString = "select dato from partner where pno = ?";
         PreparedStatement statement = null;
         ResultSet rs = null;
         
-        try {
+        
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, pno);
             rs = statement.executeQuery();
             if (rs.next()) {
                 status = rs.getString(1);
             }
-            statement.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

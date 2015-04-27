@@ -42,6 +42,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "partners":
                 session.setAttribute("AllPartners", control.getAllPartners());
+                
                 request.getRequestDispatcher("partners_admin.jsp").forward(request, response);
                 break;
             case "acceptpartner": //(Tjek)
