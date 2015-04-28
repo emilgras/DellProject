@@ -5,12 +5,12 @@
  */
 package Control;
 
-import Model.Budget;
-import Model.Campaign;
+import Entities.Budget;
+import Entities.Campaign;
 import Model.DBFacade;
-import Model.CustomFile;
-import Model.Partner;
-import Model.Poe;
+import Entities.CustomFile;
+import Entities.Partner;
+import Entities.Poe;
 import java.util.ArrayList;
 
 /**

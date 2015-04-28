@@ -5,11 +5,11 @@
  */
 package Control;
 
-import Model.Campaign;
-import Model.CustomFile;
+import Entities.Campaign;
+import Entities.CustomFile;
 import Model.DBFacade;
-import Model.Partner;
-import Model.Poe;
+import Entities.Partner;
+import Entities.Poe;
 import java.nio.file.Files;
 import java.util.ArrayList;
 

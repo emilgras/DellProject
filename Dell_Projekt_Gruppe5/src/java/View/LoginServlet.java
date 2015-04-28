@@ -2,7 +2,7 @@ package View;
 
 import Control.Controller;
 import Control.LoginIF;
-import Model.Partner;
+import Entities.Partner;
 import Utils.Validate;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,8 +22,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
-        
+        session.setAttribute("control", control);      
         String action = request.getParameter("action");
 
         switch (action) {

@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Entities.CustomFile;
+import Entities.Poe;
 import static Model.CampaignMapper.testRun;
 import java.sql.Connection;
 import java.sql.DriverManager;

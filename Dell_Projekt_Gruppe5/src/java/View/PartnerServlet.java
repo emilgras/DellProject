@@ -7,9 +7,9 @@ package View;
 
 import Control.Controller;
 import Control.PartnerIF;
-import Model.Campaign;
-import Model.CustomFile;
-import Model.Partner;
+import Entities.Campaign;
+import Entities.CustomFile;
+import Entities.Partner;
 import Utils.Validate;
 import java.io.File;
 import java.io.IOException;

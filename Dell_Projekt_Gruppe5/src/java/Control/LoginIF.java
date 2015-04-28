@@ -5,9 +5,9 @@
  */
 package Control;
 
-import Model.Budget;
-import Model.Campaign;
-import Model.Partner;
+import Entities.Budget;
+import Entities.Campaign;
+import Entities.Partner;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

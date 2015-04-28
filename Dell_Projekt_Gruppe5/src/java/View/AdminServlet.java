@@ -7,7 +7,7 @@ package View;
 
 import Control.AdminIF;
 import Control.Controller;
-import Model.Campaign;
+import Entities.Campaign;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

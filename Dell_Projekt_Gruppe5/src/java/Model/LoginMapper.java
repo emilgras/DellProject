@@ -5,7 +5,7 @@
  */
 package Model;
 
-import Model.Partner;
+import Entities.Partner;
 import Model.PartnerMapper;
 import java.sql.Connection;
 import java.sql.DriverManager;

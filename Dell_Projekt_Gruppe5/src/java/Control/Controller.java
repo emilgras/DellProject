@@ -5,13 +5,13 @@
  */
 package Control;
 
-import Model.Budget;
-import Model.Campaign;
-import Model.Partner;
+import Entities.Budget;
+import Entities.Campaign;
+import Entities.Partner;
 import java.util.ArrayList;
 import Model.DBFacade;
-import Model.CustomFile;
-import Model.Poe;
+import Entities.CustomFile;
+import Entities.Poe;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

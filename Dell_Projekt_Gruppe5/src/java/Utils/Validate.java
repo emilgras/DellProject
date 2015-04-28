@@ -1,7 +1,7 @@
 package Utils;
 
-import Model.Campaign;
-import Model.Partner;
+import Entities.Campaign;
+import Entities.Partner;
 
 public class Validate {
     

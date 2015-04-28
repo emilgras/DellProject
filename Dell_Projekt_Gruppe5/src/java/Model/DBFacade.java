@@ -5,6 +5,11 @@
  */
 package Model;
 
+import Entities.Budget;
+import Entities.Partner;
+import Entities.CustomFile;
+import Entities.Campaign;
+import Entities.Poe;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
