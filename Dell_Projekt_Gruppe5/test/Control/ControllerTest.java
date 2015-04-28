@@ -22,6 +22,6 @@ public class ControllerTest {
         
         String message = controller.acceptPartner(1);
         
-        assertThat(message, is("Hello"));
+        assertThat(message, is(""));
     }
 }

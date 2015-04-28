@@ -43,7 +43,7 @@
 
             <!-------- Details --------> 
             <div class="row marginBottom">
-                <div><a href="AdminServlet?action=dashboard"><< Tilbage</a></div>
+                <div><a href="PartnerServlet?action=dashboard"><< Tilbage</a></div>
                 <div><h1 class="tileHeader">Campaign detail</h1></div>     
                 <div class="col-md-0 marginTop">           
                     <div class="col-md-8">

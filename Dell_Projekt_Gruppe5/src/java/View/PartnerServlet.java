@@ -48,7 +48,7 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "newcampaign": // Tjek
-                String error = control.isPartnerAccepted((Integer) session.getAttribute("PNO"));
+                String error = ((Controller) session.getAttribute("control")).isPartnerAccepted((Integer) session.getAttribute("PNO"));
                 if (!error.equals("")) {
                     request.setAttribute("message", error);
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
@@ -63,32 +63,24 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;
-
-            /*case "upload": // Tjek
-             tableRowSelected = Integer.parseInt(request.getParameter("id"));
-             request.setAttribute("partnerUploadRowSelected", tableRowSelected - 1);
-             request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
-             break;*/
             case "viewDetail": // Mangler implementation
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
+                Campaign ownCampaign = ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", ownCampaign);
-                session.setAttribute("poe", control.getPoe(ownCampaign.getKno()));
+                session.setAttribute("poe", ((Controller) session.getAttribute("control")).getPoe(ownCampaign.getKno()));
                 request.getRequestDispatcher("detailCampaign_partner.jsp").forward(request, response);
                 break;
-
             case "selectedCampaignForPoeUpload": // Tjek
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
+                session.setAttribute("campaignKno", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
                 break;
-
             case "selectedCampaignForInvoiceUpload":
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                int kno = control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
+                int kno = ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
                 session.setAttribute("campaignKno", kno);
-                session.setAttribute("message", control.updateCampaignWithKno(kno));
-                session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                session.setAttribute("message", ((Controller) session.getAttribute("control")).updateCampaignWithKno(kno));
+                session.setAttribute("pCam", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
         }
@@ -115,7 +107,6 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 String country = request.getParameter("country");
-                System.out.println("COUNTRY: " + country);
                 Partner partner = new Partner(user, pass, name, cvr, country);
 
                 request.setAttribute("partner", partner);
@@ -126,7 +117,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("signup.jsp").forward(request, response);
                 } else {
 
-                    if (!((errorMessage = control.createPartner(partner)).equals(""))) {
+                    if (!((errorMessage = ((Controller) session.getAttribute("control")).createPartner(partner)).equals(""))) {
                         // Kunne ikke oprettes i DB
                         request.setAttribute("signupErrorMessage", errorMessage);
                         request.getRequestDispatcher("signup.jsp").forward(request, response);
@@ -162,13 +153,13 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 } else {
 
-                    if (!(errorMessage = control.createCampaign(campaign)).equals("")) {
+                    if (!(errorMessage = ((Controller) session.getAttribute("control")).createCampaign(campaign)).equals("")) {
                         // Kunne ikke oprette kampagne i database
                         request.setAttribute("campaignErrorMessage", errorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
                         // Success
-                        session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                        session.setAttribute("pCam", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -178,7 +169,6 @@ public class PartnerServlet extends HttpServlet {
                 ArrayList<CustomFile> fileNames = new ArrayList();
                 for (Part part : request.getParts()) {
                     String fileName = part.getSubmittedFileName();
-                    System.out.println("FILE NAME : " + fileName);
                     part.write(fileName);
 
                     // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"
@@ -189,7 +179,7 @@ public class PartnerServlet extends HttpServlet {
                         fileNames.add(customFile);
                     }
                 }
-                if ((errorMessage = control.uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
+                if ((errorMessage = ((Controller) session.getAttribute("control")).uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
                     session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 } else {
