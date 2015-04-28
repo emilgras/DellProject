@@ -74,7 +74,7 @@ public class PartnerServlet extends HttpServlet {
                 Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", ownCampaign);
                 session.setAttribute("poe", control.getPoe(ownCampaign.getKno()));
-                request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
+                request.getRequestDispatcher("detailCampaign_partner.jsp").forward(request, response);
                 break;
 
             case "selectedCampaignForPoeUpload": // Tjek
