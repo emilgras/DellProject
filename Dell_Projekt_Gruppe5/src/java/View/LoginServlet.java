@@ -109,6 +109,15 @@ public class LoginServlet extends HttpServlet {
                             
                             session.setAttribute("startsBelob", control.getStartsBelob());
                             
+                            
+                            session.setAttribute("countPartners", control.countPartners());
+                            
+                            
+                            session.setAttribute("countCampaigns", control.countCampaigns());
+                            
+                            
+                            session.setAttribute("countCountries", control.countCountries());
+                            
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
@@ -123,7 +132,7 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;
 
-                        case "invalid login":
+                        case "Invalid username or password":
                             request.setAttribute("loginErrorMessage", userCheck);
                             
                             request.getRequestDispatcher("index.jsp").forward(request, response);

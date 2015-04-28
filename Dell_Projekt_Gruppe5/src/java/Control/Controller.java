@@ -248,5 +248,24 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public ArrayList<Partner> getAllPartners() {
         return facade.getAllPartners();
     }
+    
+    /**
+     * ************ STATS *************
+     */
+    
+    @Override
+    public int countPartners() {
+        return facade.countPartners();
+    }
+    
+    @Override
+    public int countCampaigns() {
+        return facade.countCampaigns();
+    }
+    
+    @Override
+    public int countCountries() {
+        return facade.countCountries();
+    }
 
 }

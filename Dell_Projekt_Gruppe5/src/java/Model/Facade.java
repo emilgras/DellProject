@@ -72,4 +72,15 @@ public interface Facade {
      */
     boolean uploadPoe(int kno, ArrayList<CustomFile> files);
     
+    /**
+     * * STATS **
+     */
+    
+    int countPartners();
+
+    int countCampaigns();
+    
+    int countCountries();
+    
+    
 }

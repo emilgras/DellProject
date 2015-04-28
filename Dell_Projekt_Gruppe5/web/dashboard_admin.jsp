@@ -115,21 +115,17 @@
             <div class="container marginBottom">
                 <div class="col-md-12 stats">
 
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total budget:</h3>
-                        <h1 class="whiteText">455.879 dkk</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Totel Partners</h3>
+                        <h1 class="whiteText">${countPartners}</h1>
                     </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total campaigns:</h3>
-                        <h1 class="whiteText">121.110 dkk</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Total campaigns</h3>
+                        <h1 class="whiteText">${countCampaigns}</h1>
                     </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total partners:</h3>
-                        <h1 class="whiteText">32</h1>
-                    </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Operating countries:</h3>
-                        <h1 class="whiteText">6</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Operating countries</h3>
+                        <h1 class="whiteText">${countCountries}</h1>
                     </div>
                 </div>
             </div>
