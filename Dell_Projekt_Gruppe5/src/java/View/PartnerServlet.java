@@ -70,8 +70,9 @@ public class PartnerServlet extends HttpServlet {
              request.setAttribute("partnerUploadRowSelected", tableRowSelected - 1);
              request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
              break;*/
+                
             case "viewDetail": // Mangler implementation
-
+                
                 break;
 
             case "selectedCampaignForPoeUpload": // Tjek
