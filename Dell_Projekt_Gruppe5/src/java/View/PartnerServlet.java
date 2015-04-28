@@ -70,7 +70,11 @@ public class PartnerServlet extends HttpServlet {
              request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
              break;*/
             case "viewDetail": // Mangler implementation
-
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
+                session.setAttribute("campaignDetail", ownCampaign);
+                session.setAttribute("poe", control.getPoe(ownCampaign.getKno()));
+                request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
 
             case "selectedCampaignForPoeUpload": // Tjek
