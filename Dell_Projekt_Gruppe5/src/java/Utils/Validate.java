@@ -14,7 +14,6 @@ public class Validate {
         if (confirmPass.equals("")) errorMessage = "Please, remember to fill out the confirm password field";
         if (partner.getName().equals("")) errorMessage = "Please, remember to fill out the company name field";
         if (partner.getCvr().equals("")) errorMessage = "Please, remember to fill out the cvr field";
-        if (partner.getCountry().equals("")) errorMessage = "Please, remember to fill out the country field";
         if (partner.getUsername().length() < 6) errorMessage = "Username must be more at least 6 characters";
         if (!partner.getPassword().equals(confirmPass)) errorMessage = "Confirm password does not match password";
         if (partner.getPassword().length() < 8) errorMessage = "Password must be at least 8 characters";

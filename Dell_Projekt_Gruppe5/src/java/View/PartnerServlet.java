@@ -103,7 +103,7 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 String country = request.getParameter("country");
-
+                System.out.println("COUNTRY: " + country);
                 Partner partner = new Partner(user, pass, name, cvr, country);
 
                 request.setAttribute("partner", partner);

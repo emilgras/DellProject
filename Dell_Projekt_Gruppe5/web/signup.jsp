@@ -12,6 +12,8 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        
         <title>JSP Page</title>
     </head>
     <!-- Nav bar -->
@@ -33,12 +35,12 @@
                 <label for="text">Username:</label>
                 <input type="text" name="username" value="${username}" class="form-control" id="usertxt">
             </div>
-            
+
             <div class="form-group">
                 <label for="pwd">Password:</label>
                 <input type="password" name="password" class="form-control" id="pwd">
             </div> 
-            
+
             <div class="form-group">
                 <label for="conpwd">Confirm Password:</label>
                 <input type="password" name="confirmpassword" class="form-control" id="conpwd">
@@ -53,12 +55,19 @@
                 <label for="cvr">CVR:</label>
                 <input type="text" name="cvr" value="${cvr}" class="form-control" id="cvr" placeholder="Enter your CVR number">
             </div>
-            
+
             <div class="form-group">
                 <label for="country">Country:</label>
-                <input type="text" name="country" value="${country}" class="form-control" id="country" placeholder="Enter your country here">
+                <select class="selectpicker" name="country">
+                    <option>Denmark</option>
+                    <option>Norway</option>
+                    <option>Sweden</option>
+                    <option>Finland</option>
+                    <option>Germany</option>
+                    <option>England</option>
+                </select>
             </div>
-            
+
             <div class="form-group">
                 <input type="hidden" name="action" value="partnerSignup">
                 <input type="submit" id="submitBtn" class="btn btn-default">
@@ -66,6 +75,8 @@
         </form>
     </div>
 
-    <script src="https://ajax.googleapis.com/…/l…/jquery/1.11.2/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js"/>
 </html>

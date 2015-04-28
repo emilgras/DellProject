@@ -30,8 +30,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="AdminServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>
-                        <li class="active"><a href=""><img src="img/campaigns24.png"> Campaigns</a></li>
-                        <!-- <li><a href="AdminServlet?action=statistics"><img src="img/money24.png"> Statistics</a></li> -->
+                        <li class="active"><a href=""><img src="img/campaigns24.png"> Campaigns</a></li>                        
                         <li><a href="AdminServlet?action=partners"><img src="img/partners24.png"> All partners</a></li>
                     </ul>
                     <a href="LoginServlet?action=logout">
@@ -47,7 +46,14 @@
                 <table class="table table-striped table-bordered" id="campaigns">
                     <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                             <c:forEach var="campaign" items="${newestCampaigns}">
-                        <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="campaign" type="button" class="btn btn-info" value="View campaign"></td></tr>
+                        <tr class="tablerow">
+                            <td></td>
+                            <td>${campaign.navn}</td>
+                            <td>${campaign.pris}</td>
+                            <td>${campaign.oprettelse_dato}</td>
+                            <td>${campaign.status}</td>
+                            <td><input id="campaignDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                        </tr>
                             </c:forEach>
                 </table> 
 
@@ -63,9 +69,9 @@
             });
 
             // PendingPartners
-            $("table tr #campaign").on('click', function () {
+            $("table tr #campaignDetail").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                location.href = "AdminServlet?action=viewcampaign&id=" + row;
+                location.href = "AdminServlet?action=viewAllCampaignsDetail&id=" + row;
             });
         </script>
     </body>
