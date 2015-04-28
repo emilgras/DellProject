@@ -12,17 +12,21 @@ $(document).ready(function(){
                 $("td:first", this).html(i + 1);
             });
             
-             
+             $("table tr #viewDetail").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
+                location.href = "PartnerServlet?action=viewDetail&id=" + row;
+            });
        
 
-            // NewestCampaigns
-          $("table tr #uploadPoe").on('click', function () {
-               //$('#poe').prop( "disabled", true );  
-               row = $(this).closest('td').parent()[0].sectionRowIndex;
-               
-                location.href = "PartnerServlet?action=upload&id=" + row;
-                 
+          
+         $("table tr #uploadPoe").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
+                location.href = "PartnerServlet?action=selectedCampaignForPoeUpload&id=" + row;
             });
+            
+            
             
                 
           

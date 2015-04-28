@@ -29,12 +29,11 @@ import javax.servlet.http.Part;
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
-    PartnerIF control = new Controller();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
         session.setAttribute("control", control);
 
@@ -45,7 +44,7 @@ public class PartnerServlet extends HttpServlet {
         switch (action) {
 
             case "dashboard": // Tjek  
-                request.setAttribute("message", control.isPartnerAccepted((Integer) session.getAttribute("PNO")));
+                request.setAttribute("message", ((Controller) session.getAttribute("control")).isPartnerAccepted((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "newcampaign": // Tjek
@@ -78,6 +77,15 @@ public class PartnerServlet extends HttpServlet {
                 session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
                 break;
+
+            case "selectedCampaignForInvoiceUpload":
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                int kno = control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
+                session.setAttribute("campaignKno", kno);
+                session.setAttribute("message", control.updateCampaignWithKno(kno));
+                session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
+                break;
         }
     }
 
@@ -85,6 +93,7 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
         session.setAttribute("control", control);
 
