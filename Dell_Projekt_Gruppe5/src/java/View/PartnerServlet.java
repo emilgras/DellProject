@@ -65,11 +65,6 @@ public class PartnerServlet extends HttpServlet {
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;
 
-            /*case "upload": // Tjek
-             tableRowSelected = Integer.parseInt(request.getParameter("id"));
-             request.setAttribute("partnerUploadRowSelected", tableRowSelected - 1);
-             request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
-             break;*/
             case "viewDetail": // Mangler implementation
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
@@ -79,7 +74,6 @@ public class PartnerServlet extends HttpServlet {
                 break;
 
             case "selectedCampaignForPoeUpload": // Tjek
-                //updateSessions();
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
@@ -107,7 +101,6 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 String country = request.getParameter("country");
-                System.out.println("COUNTRY: " + country);
                 Partner partner = new Partner(user, pass, name, cvr, country);
 
                 request.setAttribute("partner", partner);
@@ -170,7 +163,6 @@ public class PartnerServlet extends HttpServlet {
                 ArrayList<CustomFile> fileNames = new ArrayList();
                 for (Part part : request.getParts()) {
                     String fileName = part.getSubmittedFileName();
-                    System.out.println("FILE NAME : " + fileName);
                     part.write(fileName);
 
                     // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"

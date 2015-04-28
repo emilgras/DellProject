@@ -139,9 +139,6 @@ public class PoeMapper {
             rs = statement.executeQuery();
             if (rs.next()) {         
                 poeNo = rs.getInt(1);
-                System.out.println("DELETEOLDPOE RESULTSET: " + poeNo);
-            } else {
-                System.out.println("FEJL I RS.NEXT");
             }
 
             /**
