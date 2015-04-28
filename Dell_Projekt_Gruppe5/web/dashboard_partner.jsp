@@ -43,39 +43,40 @@
             <div class="container marginBottom">
                 <h1 class="tileHeader marginBottom">Dashboard</h1>
                 <h4 style="color: indianred">${message}</h4>
-                    
-                    <!------------ NEWEST CAMPAIGNS ------------>
-                    <div class="col-md-0 marginTop">
-                        <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
-                        <div class="tile">                    
-                            <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+
+                <!------------ NEWEST CAMPAIGNS ------------>
+                <div class="col-md-0 marginTop">
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
+                    <div class="tile">                    
+                        <table class="table table-striped table-bordered">
+                            <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
                                     <c:forEach var="campaign" items="${pCam}">
-                                    <tr class="tablerow">
-                                        <td></td>
-                                        <td>${campaign.navn}</td>
-                                        <td>${campaign.pris}</td>
-                                        <td>${campaign.oprettelse_dato}</td>
-                                        <td>${campaign.status}</td>
-                                        <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
-                                        <td><c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload poe"></c:if>
-                                            <c:if test="${campaign.status == 'POE Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for poe accept"></c:if>
-                                            <c:if test="${campaign.status == 'POE Accepted'}"><input id="uploadInvoice" type="button" class="btn btn-info" value="Send invoice"></c:if>
-                                            <c:if test="${campaign.status == 'Complete'}"><input disabled='disabled' type="button" class="btn btn-info" value="Complete"></c:if>
+                                <tr class="tablerow">
+                                    <td></td>
+                                    <td>${campaign.navn}</td>
+                                    <td>${campaign.pris}</td>
+                                    <td>${campaign.oprettelse_dato}</td>
+                                    <td>${campaign.status}</td>
+                                    <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                                    <td><c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="Send poe"></c:if>
+                                        <c:if test="${campaign.status == 'POE Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Poe sent"></c:if>
+                                        <c:if test="${campaign.status == 'POE Accepted'}"><input id="uploadInvoice" type="button" class="btn btn-info" value="Send invoice"></c:if>
+                                        <c:if test="${campaign.status == 'Invoice Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Invoice sent"></c:if>
+                                        <c:if test="${campaign.status == 'Complete'}"><input disabled='disabled' type="button" class="btn btn-info" value="Complete"></c:if>
                                         </td>
                                     </tr>                                       
-                                    </c:forEach>  
-                            </table>  
-                        </div>
+                            </c:forEach>  
+                        </table>  
                     </div>
                 </div>
-            
+            </div>
+
         </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="scriptPartner.js"></script>
-        
+
     </body>
 </html>
 

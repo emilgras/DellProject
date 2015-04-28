@@ -29,7 +29,7 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="AdminServlet?action=dashboard" class="navbar-brand">Admin Website</a>
+                    <a href="PartnerServlet?action=dashboard" class="navbar-brand">User Website</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -38,11 +38,12 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="AdminServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>
-                        <li><a href="AdminServlet?action=campaigns"><img src="img/campaigns24.png"> Campaigns</a></li>                     
-                        <li><a href=""><img src="img/partners24.png"> All partners</a></li>
+                        <li><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
+                        <li><a href="PartnerServlet?action=newcampaign"><img src="img/newcampaign24.png"> New campaign</a></li>
                     </ul>
-                    <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button>          
+                    <a href="LoginServlet?action=logout">
+                        <button id="logoutBtn" type="submit" class="btn btn-warning navbar-right">Log out</button> 
+                    </a>
                 </div>
             </div>
         </div>  
@@ -50,7 +51,7 @@
         <div class="container contentContainer marginBottom">
             <h1 class="tileHeader marginBottom">Upload POE</h1>
             <h4>This is the place you upload all of your pictures bla bla bla...</h4>
-            <h3 style="color: indianred">${uploadErrorMessage}</h3>
+            <h3 style="color: #ffa500">${uploadErrorMessage}</h3>
             <!------------ Upload file content ------------>
             <div class="row">
                 <div class="col-md-0 marginTop">
@@ -61,6 +62,7 @@
                             <div id="errorBlock" class="help-block"></div>
                         </div>
                     </form>
+                    <h3 style="color: indianred">OBS: When you press upload, the Poe is final and can therefor not be changed at a later time.</h3>
                 </div>
             </div>
 
