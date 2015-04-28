@@ -87,8 +87,9 @@ public class PartnerServlet extends HttpServlet {
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 int kno = control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
                 session.setAttribute("campaignKno", kno);
-                control.updateCampaignWithKno(kno);
-                request.getRequestDispatcher("upload.jsp").forward(request, response);
+                session.setAttribute("message", control.updateCampaignWithKno(kno));
+                session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
         }
     }

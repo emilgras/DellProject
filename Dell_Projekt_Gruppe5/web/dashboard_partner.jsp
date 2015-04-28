@@ -60,7 +60,7 @@
                                         <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                         <td><c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="upload poe"></c:if>
                                             <c:if test="${campaign.status == 'POE Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Waiting for poe accept"></c:if>
-                                            <c:if test="${campaign.status == 'POE Accepted'}"><input id="uploadPoe" type="button" class="btn btn-info" value="Send invoice"></c:if>
+                                            <c:if test="${campaign.status == 'POE Accepted'}"><input id="uploadInvoice" type="button" class="btn btn-info" value="Send invoice"></c:if>
                                             <c:if test="${campaign.status == 'Complete'}"><input disabled='disabled' type="button" class="btn btn-info" value="Complete"></c:if>
                                         </td>
                                     </tr>                                       
