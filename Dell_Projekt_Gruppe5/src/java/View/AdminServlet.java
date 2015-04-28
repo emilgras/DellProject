@@ -28,6 +28,7 @@ public class AdminServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("control", control);
+        
         String errorMessage = "";
         int tableRowSelected = 0;
         String action = request.getParameter("action");

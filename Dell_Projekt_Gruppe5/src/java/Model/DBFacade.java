@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBFacade {
+public class DBFacade implements Facade {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
@@ -42,18 +42,22 @@ public class DBFacade {
     }
     //== Singleton end
 
+    @Override
     public String getLogin(String username, String password) {
         return lm.getLogin(username, password);
     }
 
+    @Override
     public int getPno(String username) {
         return pm.getPno(username);
     }
 
+    @Override
     public boolean createPartner(Partner partner) {
         return pm.createPartner(partner);
     }
 
+    @Override
     public boolean createCampaign(Campaign campaign) {
         return cm.insertCampaign(campaign);
     }
@@ -61,10 +65,12 @@ public class DBFacade {
     /**
      * * Budget **
      */
+    @Override
     public int getNuvaerendeBelob() {
         return bm.getNuvaerendeBelob();
     }
 
+    @Override
     public int getStartsBelob() {
         return bm.getStartsBelob();
     }
@@ -76,25 +82,31 @@ public class DBFacade {
     /**
      * * Dashboard view **
      */
+    @Override
     public ArrayList<Partner> getAllPendingPartners() {
         return pm.getAllPendingPartners();
     }
 
+    @Override
     public ArrayList<Campaign> getAllPendingCampaigns() {
         return cm.getAllPendingCampaigns();
     }
 
+    @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
         return cm.getAllNewestCampaigns();
     }
 
+    @Override
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
         return cm.getAllOwnPartnerCampaigns(pno);
     }
+    @Override
     public ArrayList<Partner> getAllPartners(){
         return pm.getAllPartners();
     }
 
+    @Override
     public ArrayList<Budget> getAllPrices() {
         return bm.getAllPrices();
     }
@@ -102,26 +114,32 @@ public class DBFacade {
     /**
      * * Dashboard button interaction **
      */
+    @Override
     public boolean acceptPartner(String cvr) {
         return pm.acceptPartner(cvr);
     }
 
+    @Override
     public boolean acceptCampaign(int kno) {
         return cm.acceptCampaign(kno);
     }
     
+    @Override
     public boolean updateCampaign(int kno) {
         return cm.updateCampaign(kno);
     }
     
+    @Override
     public String getCampaignStatus(int kno) {
         return cm.getCampaignStatus(kno);
     }
     
+    @Override
     public boolean deleteOldPoe(int kno) {
         return poem.deleteOldPoe(kno);
     }
 
+    @Override
     public boolean rollBackCampaign(int kno) {
         return cm.rollBackCampaign(kno);
     }
@@ -132,14 +150,17 @@ public class DBFacade {
     /**
      * * POE **
      */
+    @Override
     public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
         return poem.uploadPoe(kno, files);
     }
 
+    @Override
     public Poe getPoe(int kno) {
         return poem.getPoe(kno);
     }
     
+    @Override
     public boolean isPartnerAccepted(int pno) {
         return pm.isPartnerAccepted(pno);
     }

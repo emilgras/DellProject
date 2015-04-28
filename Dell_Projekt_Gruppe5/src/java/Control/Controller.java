@@ -12,18 +12,23 @@ import java.util.ArrayList;
 import Model.DBFacade;
 import Entities.CustomFile;
 import Entities.Poe;
+import Model.Facade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class Controller implements LoginIF, PartnerIF, AdminIF {
 
-    private DBFacade facade;
+    private Facade facade;
 
     public Controller() {
         facade = DBFacade.getInstance();
     }
 
+    public Controller(Facade facade) {
+        this.facade = facade;
+        }
 
+    
     /*
      *
      *  Admin Interface
