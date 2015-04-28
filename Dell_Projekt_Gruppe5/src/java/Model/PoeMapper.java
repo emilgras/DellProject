@@ -7,7 +7,6 @@ package Model;
 
 import Entities.CustomFile;
 import Entities.Poe;
-import static Model.CampaignMapper.testRun;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -139,9 +138,6 @@ public class PoeMapper {
             rs = statement.executeQuery();
             if (rs.next()) {         
                 poeNo = rs.getInt(1);
-                System.out.println("DELETEOLDPOE RESULTSET: " + poeNo);
-            } else {
-                System.out.println("FEJL I RS.NEXT");
             }
 
             /**

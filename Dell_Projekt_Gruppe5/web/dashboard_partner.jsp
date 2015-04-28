@@ -69,30 +69,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $("table tr #uploadPoe").on('click', function () {
-                row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
-                location.href = "PartnerServlet?action=selectedCampaignForPoeUpload&id=" + row;
-            });
-            
-            $("table tr #uploadInvoice").on('click', function () {
-                row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
-                location.href = "PartnerServlet?action=selectedCampaignForInvoiceUpload&id=" + row;
-            });
-
-            $("table tr #viewDetail").on('click', function () {
-                row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
-                location.href = "PartnerServlet?action=viewDetail&id=" + row;
-            });
-        </script>
+        <script src="scriptPartner.js"></script>
+        
     </body>
 </html>
 

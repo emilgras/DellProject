@@ -54,6 +54,7 @@ public class BudgetMapper {
             rs.next();
             i = rs.getInt(1);
         } catch (Exception e) {
+            System.out.println("Fejl i getStartsBelob");
         }
         return i;
     }
@@ -71,6 +72,7 @@ public class BudgetMapper {
             rs.next();
             i = rs.getInt(1);
         } catch (Exception e) {
+            System.out.println("Fejl i getNuavaerendeBelob()");
         }
         return i;
     }
@@ -85,6 +87,7 @@ public class BudgetMapper {
             rs.next();
             
         } catch (Exception e) {
+             System.out.println("Fejl i updateMoneyUsed()");
         }
         return true;
     }

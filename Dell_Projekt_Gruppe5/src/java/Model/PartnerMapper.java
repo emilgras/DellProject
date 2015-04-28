@@ -108,7 +108,6 @@ public class PartnerMapper {
             statement.setDate(1, sqldate);
 
             statement.executeUpdate();
-            //statement.close();
             return true;
 
         } catch (SQLException ex) {
@@ -134,10 +133,7 @@ public class PartnerMapper {
                 Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
 
                 pArray.add(p);
-                System.out.println(pArray.get(count).getName());
                 count++;
-                System.out.println(count);
-
             }
 
         } catch (SQLException ex) {
@@ -165,10 +161,7 @@ public class PartnerMapper {
                 Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
 
                 pArray.add(p);
-                System.out.println(pArray.get(count).getName());
                 count++;
-                System.out.println(count);
-
             }
             //statement.close();
 
@@ -196,7 +189,6 @@ public class PartnerMapper {
             statement.close();
         } catch (SQLException | NumberFormatException e) {
             System.out.println(e);
-            System.out.println("ups");
         }
         return pno;
     }

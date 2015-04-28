@@ -27,19 +27,15 @@ import java.util.logging.Logger;
  * @author Frederik
  */
 public class CampaignMapper {
+
     DBConnector db = new DBConnector();
-    static boolean testRun = true;
 
     public boolean insertCampaign(Campaign camp) {
         int rowsInserted = 0;
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
-        String primary = "select kno_increment.nextval from dual";
-
-        System.out.println("CM: " + camp.getPno());
-        PreparedStatement statement = null;
-
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
+            String primary = "select kno_increment.nextval from dual";
+            PreparedStatement statement = null;
 
             PreparedStatement stmt = con.prepareStatement(primary);
             ResultSet rs = stmt.executeQuery();
@@ -59,13 +55,9 @@ public class CampaignMapper {
             statement.setInt(8, camp.getPno());
 
             rowsInserted += statement.executeUpdate();
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (testRun) {
-            System.out.println("insertCampaign(): " + (rowsInserted == 1)); // for test
         }
 
         return (rowsInserted == 1);
@@ -73,20 +65,18 @@ public class CampaignMapper {
 
     public boolean acceptCampaign(int kno) {
         boolean status = true;
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
 
-        
             DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
             PreparedStatement statement = null;
             Date date = new Date();
-            String sdate = (dateFormat.format(date)); 
+            String sdate = (dateFormat.format(date));
             statement = con.prepareStatement(sqlString2);
             statement.setInt(2, kno);
             statement.setString(1, sdate);
 
             statement.executeUpdate();
-           
 
         } catch (SQLException ex) {
             status = false;
@@ -98,16 +88,13 @@ public class CampaignMapper {
     public boolean updateCampaign(int kno) {
         int rowsUpdated = 0;
         String status = getCampaignStatus(kno);
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "update kampagne set status = ? where kno = ?";
-        
-        PreparedStatement statement = null;
-        
-            statement = con.prepareStatement(sqlString);
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "update kampagne set status = ? where kno = ?";
 
+            PreparedStatement statement = null;
+            statement = con.prepareStatement(sqlString);
             status = status.toLowerCase();
-            System.out.println("HVAD ER STATUS VED UPDATE: " + status);
-            System.out.println("HVAD ER UPDATE KNO: " + kno);
+            
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -150,7 +137,6 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,15 +149,12 @@ public class CampaignMapper {
     public boolean rollBackCampaign(int kno) {
         int rowsUpdated = 0;
         String status = getCampaignStatus(kno);
-       try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "update kampagne set status = ? where kno = ?";
-       
-        PreparedStatement statement = null;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "update kampagne set status = ? where kno = ?";
+            PreparedStatement statement = null;
             statement = con.prepareStatement(sqlString);
-
             status = status.toLowerCase();
-            System.out.println("HVAD ER STATUS VED ROLLBACK: " + status);
+            
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -214,21 +197,20 @@ public class CampaignMapper {
                     break;
             }
             statement.executeUpdate();
-           
 
         } catch (SQLException ex) {
             Logger.getLogger(CampaignMapper.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
-    return !status.equals(getCampaignStatus(kno));
-        
+        return !status.equals(getCampaignStatus(kno));
+
     }
 
     public String getCampaignStatus(int kno) {
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select status from kampagne where kno = ?";
-        PreparedStatement statement = null;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select status from kampagne where kno = ?";
+            PreparedStatement statement = null;
+
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, kno);
             ResultSet rs = statement.executeQuery();
@@ -237,21 +219,20 @@ public class CampaignMapper {
             if (rs.next()) {
                 status = rs.getString(1);
             }
-            
+
             return status;
 
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("ups");
         }
-        return "noget gik galt";
+        return "Something Went Wrong";
     }
-    
-    public int getPris(int kno){
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select pris from kampagne where kno = ?";
-        PreparedStatement statement = null;
-        
+
+    public int getPris(int kno) {
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select pris from kampagne where kno = ?";
+            PreparedStatement statement = null;
+
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, kno);
             ResultSet rs = statement.executeQuery();
@@ -260,22 +241,21 @@ public class CampaignMapper {
             if (rs.next()) {
                 i = rs.getInt(1);
             }
-             
+
             return i;
-           
+
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("ups");
         }
         return 0;
     }
 
     public ArrayList<Campaign> getAllPendingCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
-        PreparedStatement statement = null;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
+            PreparedStatement statement = null;
+
             statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -283,11 +263,10 @@ public class CampaignMapper {
 
                 tmp.setKno(rs.getInt(1));
                 if (tmp.getStatus().equals("Pending") || tmp.getStatus().equals("POE Pending") || tmp.getStatus().equals("Invoice Pending")) {
-                    System.out.println("ADDED TO PENDING CAMPIAGNS: " + tmp.getStatus());
                     list.add(tmp);
                 }
             }
-           
+
         } catch (SQLException e) {
         }
         return list;
@@ -298,11 +277,11 @@ public class CampaignMapper {
      */
     public ArrayList<Campaign> getAllNewestCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato";
-        PreparedStatement statement = null;
-        int count = 0;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato";
+            PreparedStatement statement = null;
+            int count = 0;
+
             statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -313,8 +292,6 @@ public class CampaignMapper {
                     count++;
                 }
             }
-            
-            System.out.println("COUNT: " + count);
 
         } catch (SQLException e) {
         }
@@ -324,11 +301,11 @@ public class CampaignMapper {
 
     public ArrayList<Campaign> getAllPartnerAcceptedCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
-        PreparedStatement statement = null;
-        int count = 0;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
+            PreparedStatement statement = null;
+            int count = 0;
+
             statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -338,9 +315,8 @@ public class CampaignMapper {
                     list.add(tmp);
                     count++;
                 }
-                
+
             }
-            System.out.println("COUNT: " + count);
 
         } catch (SQLException e) {
         }
@@ -351,10 +327,9 @@ public class CampaignMapper {
 
     public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
         ArrayList<Campaign> list = new ArrayList<>();
-        try(Connection con = DriverManager.getConnection(db.getURL(), db.getId(),db.getPw())){
-        String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO where kampagne.PNO = ?";
-        PreparedStatement statement = null;
-        
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO where kampagne.PNO = ?";
+            PreparedStatement statement = null;
 
             statement = con.prepareStatement(sqlString);
             statement.setInt(1, pno);
@@ -365,7 +340,7 @@ public class CampaignMapper {
                 tmp.setKno(rs.getInt(1));
                 list.add(tmp);
             }
-            
+
         } catch (SQLException e) {
         }
         return list;
