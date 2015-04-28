@@ -17,15 +17,18 @@ import java.util.ArrayList;
  * @author EmilGras
  */
 public class FacadeStub implements Facade {
+    public boolean acceptPartner = true;
 
     @Override
     public boolean acceptCampaign(int kno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int acceptPartnerCount = 0;
     @Override
     public boolean acceptPartner(String cvr) {
-        return true;
+        acceptPartnerCount++;
+        return acceptPartner;
     }
 
     @Override
@@ -65,7 +68,6 @@ public class FacadeStub implements Facade {
 
     @Override
     public ArrayList<Partner> getAllPendingPartners() {
-        // liste med min to partners
         ArrayList<Partner> partners = new ArrayList();
         partners.add(new Partner("hans", "grethe", "Hans A/S", "12233445", "Denmark"));
         partners.add(new Partner("lars", "larsen", "Jysk A/S", "88997766", "Denmark"));
@@ -80,7 +82,7 @@ public class FacadeStub implements Facade {
 
     @Override
     public String getCampaignStatus(int kno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pending";
     }
 
     @Override

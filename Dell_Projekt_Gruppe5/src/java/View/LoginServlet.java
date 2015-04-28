@@ -20,9 +20,14 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        LoginIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);      
+        LoginIF control = (LoginIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
+        
+        
         String action = request.getParameter("action");
 
         switch (action) {
@@ -83,41 +88,37 @@ public class LoginServlet extends HttpServlet {
                     switch (userCheck) {
                         
                         case "admin":
-                            // Register a new admin user
-
-                            // Set arraylist containing all current partners campiagns as attribute
                             //getPendingPartners
-                            session.setAttribute("pendingPartners", ((Controller)session.getAttribute("control")).getAllPendingPartners());
+                            session.setAttribute("pendingPartners", control.getAllPendingPartners());
 
                             //getPendingCampaigns
-                            session.setAttribute("pendingCampaigns", ((Controller)session.getAttribute("control")).getAllPendingCampaigns());
+                            session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
 
                             //getNewestPartners
-                            session.setAttribute("newestCampaigns", ((Controller)session.getAttribute("control")).getAllNewestCampaigns());
+                            session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                             
                             // All Dell Partners
-                            session.setAttribute("AllPartners", ((Controller)session.getAttribute("control")).getAllPartners());
+                            session.setAttribute("AllPartners", control.getAllPartners());
                             
                             //getAllPrices
-                            session.setAttribute("prices", ((Controller)session.getAttribute("control")).getAllPrices());
+                            session.setAttribute("prices", control.getAllPrices());
                             
                             //getBudget stuff
-                            session.setAttribute("nuvaerendeBelob", ((Controller)session.getAttribute("control")).getNuvaerendeBelob());
-                            
-                            session.setAttribute("startsBelob", ((Controller)session.getAttribute("control")).getStartsBelob());
+                            session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
                             
                             
+                            session.setAttribute("startsBelob", control.getStartsBelob());
                             
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
 
                         case "partner":      
                             
-                            session.setAttribute("PNO", ((Controller)session.getAttribute("control")).getPno(username)); 
+                            session.setAttribute("PNO", control.getPno(username)); 
                             
-                            session.setAttribute("message", ((Controller)session.getAttribute("control")).isPartnerAccepted((Integer)session.getAttribute("PNO")));
+                            session.setAttribute("message", control.isPartnerAccepted((Integer)session.getAttribute("PNO")));
                             
-                            session.setAttribute("pCam", ((Controller)session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
+                            session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer)session.getAttribute("PNO")));
                             
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;

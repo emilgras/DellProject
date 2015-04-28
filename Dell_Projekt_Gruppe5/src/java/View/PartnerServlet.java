@@ -23,9 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads",
-        fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+//@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads",
+//        fileSizeThreshold = 1024 * 1024,
+//        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
@@ -33,9 +34,13 @@ public class PartnerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+
+        PartnerIF control = (PartnerIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
 
         int tableRowSelected = 0;
 
@@ -44,11 +49,11 @@ public class PartnerServlet extends HttpServlet {
         switch (action) {
 
             case "dashboard": // Tjek  
-                request.setAttribute("message", ((Controller) session.getAttribute("control")).isPartnerAccepted((Integer) session.getAttribute("PNO")));
+                request.setAttribute("message", control.isPartnerAccepted((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "newcampaign": // Tjek
-                String error = ((Controller) session.getAttribute("control")).isPartnerAccepted((Integer) session.getAttribute("PNO"));
+                String error = control.isPartnerAccepted((Integer) session.getAttribute("PNO"));
                 if (!error.equals("")) {
                     request.setAttribute("message", error);
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
@@ -65,22 +70,22 @@ public class PartnerServlet extends HttpServlet {
                 break;
             case "viewDetail": // Mangler implementation
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                Campaign ownCampaign = ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
+                Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", ownCampaign);
-                session.setAttribute("poe", ((Controller) session.getAttribute("control")).getPoe(ownCampaign.getKno()));
+                session.setAttribute("poe", control.getPoe(ownCampaign.getKno()));
                 request.getRequestDispatcher("detailCampaign_partner.jsp").forward(request, response);
                 break;
             case "selectedCampaignForPoeUpload": // Tjek
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                session.setAttribute("campaignKno", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
+                session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
                 break;
             case "selectedCampaignForInvoiceUpload":
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
-                int kno = ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
+                int kno = control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
                 session.setAttribute("campaignKno", kno);
-                session.setAttribute("message", ((Controller) session.getAttribute("control")).updateCampaignWithKno(kno));
-                session.setAttribute("pCam", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                session.setAttribute("message", control.updateCampaignWithKno(kno));
+                session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
         }
@@ -90,9 +95,13 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+
+        PartnerIF control = (PartnerIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
 
         String errorMessage = "";
 
@@ -117,7 +126,7 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("signup.jsp").forward(request, response);
                 } else {
 
-                    if (!((errorMessage = ((Controller) session.getAttribute("control")).createPartner(partner)).equals(""))) {
+                    if (!((errorMessage = control.createPartner(partner)).equals(""))) {
                         // Kunne ikke oprettes i DB
                         request.setAttribute("signupErrorMessage", errorMessage);
                         request.getRequestDispatcher("signup.jsp").forward(request, response);
@@ -153,13 +162,13 @@ public class PartnerServlet extends HttpServlet {
                     request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                 } else {
 
-                    if (!(errorMessage = ((Controller) session.getAttribute("control")).createCampaign(campaign)).equals("")) {
+                    if (!(errorMessage = control.createCampaign(campaign)).equals("")) {
                         // Kunne ikke oprette kampagne i database
                         request.setAttribute("campaignErrorMessage", errorMessage);
                         request.getRequestDispatcher("newcampaign_partner.jsp").forward(request, response);
                     } else {
                         // Success
-                        session.setAttribute("pCam", ((Controller) session.getAttribute("control")).getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
+                        session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                         request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                     }
                 }
@@ -179,7 +188,7 @@ public class PartnerServlet extends HttpServlet {
                         fileNames.add(customFile);
                     }
                 }
-                if ((errorMessage = ((Controller) session.getAttribute("control")).uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
+                if ((errorMessage = control.uploadPoe((Integer) session.getAttribute("campaignKno"), fileNames)).equals("")) {
                     session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                     request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 } else {
