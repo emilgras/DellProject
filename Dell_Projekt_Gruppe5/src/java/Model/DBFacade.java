@@ -120,6 +120,11 @@ public class DBFacade implements Facade {
     public boolean acceptPartner(String cvr) {
         return pm.acceptPartner(cvr);
     }
+    
+    @Override
+    public boolean deletePartner(int pno) {
+        return pm.deletePartner(pno);
+    }
 
     @Override
     public boolean acceptCampaign(int kno) {

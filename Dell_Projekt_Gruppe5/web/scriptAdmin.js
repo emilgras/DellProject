@@ -9,11 +9,18 @@ $(document).ready(function(){
                 $("td:first", this).html(i + 1);
             });
 
-            // PendingPartners
+            // PendingPartnerAccept
             $("table tr #pendingPartners").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 alert(row);
                 location.href = "AdminServlet?action=acceptpartner&id=" + row;
+            });
+            
+            // PendingPartnersDecline
+            $("table tr #declinePartner").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
+                location.href = "AdminServlet?action=declinepartner&id=" + row;
             });
 
             // NewestCampaigns

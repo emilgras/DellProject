@@ -60,6 +60,16 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
 
     @Override
+    public String deletePartner(int tableRowSelected) {
+        String message = "";
+        int pno = facade.getAllPendingPartners().get(tableRowSelected).getPno();
+        if(!facade.deletePartner(pno)){
+            message = "Something went wrong, could not decline partner right now. Please try agian later?";
+        }
+        return message;
+    }
+    
+    @Override
     public String acceptCampaign(int tableRowSelected) { //(Tjek)
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();

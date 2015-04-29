@@ -56,6 +56,14 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("countCountries", control.countCountries());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
+            case "declinepartner":
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("errorMessage", control.deletePartner(tableRowSelected - 1));
+                session.setAttribute("pendingPartners", control.getAllPendingPartners());
+                session.setAttribute("countPartners", control.countPartners());
+                session.setAttribute("countCountries", control.countCountries());
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
+                break;
             case "acceptcampaign": //(Tjek)
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("errorMessage", control.acceptCampaign(tableRowSelected - 1));

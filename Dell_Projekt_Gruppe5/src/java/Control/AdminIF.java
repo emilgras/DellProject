@@ -37,6 +37,8 @@ public interface AdminIF {
     
     String acceptPartner(int id);
     
+    String deletePartner(int id);
+    
     String rollBackCampaign(int id);
     
     Campaign getPendingCampaignDetail(int id);

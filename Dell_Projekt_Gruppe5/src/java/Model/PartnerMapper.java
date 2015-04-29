@@ -217,7 +217,6 @@ public class PartnerMapper {
     }
 
     public boolean deletePartner(int pno){
-        boolean b = false;
         int i = 0;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String brugernavn = "";
@@ -228,16 +227,13 @@ public class PartnerMapper {
             statement.setInt(1, pno);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) brugernavn = rs.getString(1);
-            System.out.println(brugernavn);
             
             statement = con.prepareStatement(sql2);
             statement.setInt(1, pno);
-            System.out.println(statement.executeUpdate());
             
             String sql3 = "delete from bruger where brugernavn = ?";
             statement = con.prepareStatement(sql3);
             statement.setString(1, brugernavn);
-            System.out.println(statement.executeUpdate());
             
         }catch (Exception e){
             e.printStackTrace();

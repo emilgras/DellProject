@@ -24,6 +24,8 @@ public interface Facade {
      * * Dashboard button interaction **
      */
     boolean acceptPartner(String cvr);
+    
+    boolean deletePartner(int pno);
 
     boolean createCampaign(Campaign campaign);
 

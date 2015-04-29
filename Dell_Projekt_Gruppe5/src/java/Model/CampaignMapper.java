@@ -355,6 +355,6 @@ public class CampaignMapper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return i == 2;
+        return i == 1;
     }
 }
