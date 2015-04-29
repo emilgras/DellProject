@@ -49,7 +49,7 @@
                     <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
                     <div class="tile">                    
                         <table class="table table-striped table-bordered">
-                            <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th><th>Upload POE</th></tr>
+                            <tr class="active"><th>Nr.</th><th>Company</th><th>Price EUR</th><th>Created</th><th>Status</th><th>Detail</th><th>Next step</th></tr>
                                     <c:forEach var="campaign" items="${pCam}">
                                 <tr class="tablerow">
                                     <td></td>

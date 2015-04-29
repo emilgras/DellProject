@@ -177,16 +177,13 @@ public class PartnerMapper {
         int pno = 0;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String sqlString = "select pno from partner where brugernavn = ?";
-            PreparedStatement statement = null;
-
-            statement = con.prepareStatement(sqlString);
+            PreparedStatement statement = con.prepareStatement(sqlString);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             String status = "noget gik galt";
             if (rs.next()) {
                 pno = Integer.parseInt(rs.getString(1));
             }
-            statement.close();
         } catch (SQLException | NumberFormatException e) {
             System.out.println(e);
         }
@@ -217,5 +214,29 @@ public class PartnerMapper {
         }
 
         return accepted;
+    }
+
+    public boolean deletePartner(int pno){
+        boolean b = false;
+        int i = 0;
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String brugernavn = "";
+            String sql1 = "select brugernavn from partner where pno = " + pno;
+            String sql2 = "delete from partner where pno = " + pno;
+            
+            PreparedStatement statement = null;
+            ResultSet rs = null;
+            statement = con.prepareStatement(sql1);
+            rs = statement.executeQuery();
+            if(rs.next()) brugernavn = rs.getString(1);
+            String sql3 = "delete from bruger where brugernavn = " + brugernavn;
+            statement = con.prepareStatement(sql2);
+            i += statement.executeUpdate();
+            statement = con.prepareStatement(sql3);
+            i += statement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return i == 4;
     }
 }

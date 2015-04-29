@@ -278,7 +278,7 @@ public class CampaignMapper {
     public ArrayList<Campaign> getAllNewestCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato";
+            String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato desc";
             PreparedStatement statement = null;
             int count = 0;
 
@@ -344,5 +344,17 @@ public class CampaignMapper {
         } catch (SQLException e) {
         }
         return list;
+    }
+    
+    public boolean deleteCampaign(int kno){
+        int i = 0;
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sql = "delete from campaign where kno = " + kno;
+            PreparedStatement statement = con.prepareStatement(sql);
+            i = statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i == 2;
     }
 }
