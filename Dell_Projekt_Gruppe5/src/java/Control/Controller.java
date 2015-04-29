@@ -21,7 +21,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     private Facade facade;
 
     public Controller() {
-        facade = DBFacade.getInstance();
+        facade = DBFacade.getDBFacadeInstance();
     }
 
     public Controller(Facade facade) {

@@ -44,9 +44,9 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
-        //PartnerFacade.getInstance().test();
+        //PartnerFacade.getDBFacadeInstance().test();
         
-        //PartnerFacade facade = PartnerFacade.getInstance();
+        //PartnerFacade facade = PartnerFacade.getDBFacadeInstance();
         //System.out.println("Test: " + facade.getLogin("hans", "hans"));
 
         
