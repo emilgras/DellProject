@@ -221,22 +221,27 @@ public class PartnerMapper {
         int i = 0;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String brugernavn = "";
-            String sql1 = "select brugernavn from partner where pno = " + pno;
-            String sql2 = "delete from partner where pno = " + pno;
+            String sql1 = "select brugernavn from partner where pno = ?";
+            String sql2 = "delete from partner where pno = ?";
             
-            PreparedStatement statement = null;
-            ResultSet rs = null;
-            statement = con.prepareStatement(sql1);
-            rs = statement.executeQuery();
+            PreparedStatement statement = con.prepareStatement(sql1);
+            statement.setInt(1, pno);
+            ResultSet rs = statement.executeQuery();
             if(rs.next()) brugernavn = rs.getString(1);
-            String sql3 = "delete from bruger where brugernavn = " + brugernavn;
+            System.out.println(brugernavn);
+            
             statement = con.prepareStatement(sql2);
-            i += statement.executeUpdate();
+            statement.setInt(1, pno);
+            System.out.println(statement.executeUpdate());
+            
+            String sql3 = "delete from bruger where brugernavn = ?";
             statement = con.prepareStatement(sql3);
-            i += statement.executeUpdate();
+            statement.setString(1, brugernavn);
+            System.out.println(statement.executeUpdate());
+            
         }catch (Exception e){
             e.printStackTrace();
         }
-        return i == 4;
+        return i == 2;
     }
 }
