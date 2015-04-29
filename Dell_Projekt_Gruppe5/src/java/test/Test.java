@@ -26,9 +26,6 @@ public class Test {
         //Connection con = db.getConnection();
         CampaignMapper cm = new CampaignMapper();
         PartnerMapper pm = new PartnerMapper();
-        java.util.Date date = new java.util.Date();
-        java.sql.Date sqldate = new java.sql.Date(date.getTime());
-        DBFacade pf = DBFacade.getInstance();
         BudgetMapper bm = new BudgetMapper();
         //pf.getPartnerName();
        // cm.getAllPartnerAcceptedCampaigns(con);
@@ -49,9 +46,9 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
-        //PartnerFacade.getInstance().test();
+        //PartnerFacade.getDBFacadeInstance().test();
         
-        //PartnerFacade facade = PartnerFacade.getInstance();
+        //PartnerFacade facade = PartnerFacade.getDBFacadeInstance();
         //System.out.println("Test: " + facade.getLogin("hans", "hans"));
 
         
@@ -67,8 +64,8 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        
-      
+        System.out.println(pm.getPno("ok"));
+        System.out.println(pm.deletePartner(999));
         
         StatsMapper sm = new StatsMapper();
         System.out.println("PARTNERS: " + sm.countPartners());
