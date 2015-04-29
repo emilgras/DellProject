@@ -12,7 +12,7 @@ import Model.DBConnector;
 
 import Model.DBFacade;
 import Model.PartnerMapper;
-import java.sql.Connection;
+import Model.StatsMapper;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class Test {
     
     public static void main(String[] args) throws SQLException {
+        DBConnector db = new DBConnector();
+        //Connection con = db.getConnection();
         CampaignMapper cm = new CampaignMapper();
         PartnerMapper pm = new PartnerMapper();
         BudgetMapper bm = new BudgetMapper();
@@ -65,6 +67,9 @@ public class Test {
         System.out.println(pm.getPno("ok"));
         System.out.println(pm.deletePartner(999));
         
-        
+        StatsMapper sm = new StatsMapper();
+        System.out.println("PARTNERS: " + sm.countPartners());
+        System.out.println("CAMPAIGNS: " + sm.countCampaigns());
+        System.out.println("COUNTRIES: " + sm.countCountries());
     }
 }
