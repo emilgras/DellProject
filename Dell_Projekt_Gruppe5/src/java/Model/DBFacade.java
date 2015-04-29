@@ -21,6 +21,7 @@ public class DBFacade implements Facade {
     private LoginMapper lm;
     private PoeMapper poem;
     private BudgetMapper bm;
+    private StatsMapper sm;
 
     //== Singleton start
     private static DBFacade instance = null;
@@ -31,6 +32,7 @@ public class DBFacade implements Facade {
         lm = new LoginMapper();
         poem = new PoeMapper();
         bm = new BudgetMapper();
+        sm = new StatsMapper();
 
     }
 
@@ -163,6 +165,21 @@ public class DBFacade implements Facade {
     @Override
     public boolean isPartnerAccepted(int pno) {
         return pm.isPartnerAccepted(pno);
+    }
+    
+    /**
+     * * STATS **
+     */
+    public int countPartners() {
+        return sm.countPartners();
+    }
+    
+    public int countCampaigns() {
+        return sm.countCampaigns();
+    }
+    
+    public int countCountries() {
+        return sm.countCountries();
     }
 
 }

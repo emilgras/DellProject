@@ -33,7 +33,7 @@
         <form role="form" action="PartnerServlet" method="post">
             <div class="form-group">
                 <label for="text">Username:</label>
-                <input type="text" name="username" value="${username}" class="form-control" id="usertxt">
+                <input type="text" name="username" value="${partner.username}" class="form-control" id="usertxt">
             </div>
 
             <div class="form-group">
@@ -48,12 +48,12 @@
 
             <div class="form-group">
                 <label for="text">Company:</label>
-                <input type="text" name="company" value="${name}" class="form-control" id="partnerName" placeholder="Enter your company name">
+                <input type="text" name="company" value="${partner.name}" class="form-control" id="partnerName" placeholder="Enter your company name">
             </div>
 
             <div class="form-group">
                 <label for="cvr">CVR:</label>
-                <input type="text" name="cvr" value="${cvr}" class="form-control" id="cvr" placeholder="Enter your CVR number">
+                <input type="text" name="cvr" value="${partner.cvr}" class="form-control" id="cvr" placeholder="Enter your CVR number">
             </div>
 
             <div class="form-group">

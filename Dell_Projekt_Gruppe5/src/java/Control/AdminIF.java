@@ -49,4 +49,11 @@ public interface AdminIF {
     
     public int getNuvaerendeBelob();
     
+    // Stats
+    int countPartners();
+
+    int countCampaigns();
+    
+    int countCountries();
+    
 }

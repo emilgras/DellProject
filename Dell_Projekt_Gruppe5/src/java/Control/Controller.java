@@ -154,10 +154,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     /**
      * ************* Campaign **************
      */
-    /*@Override
-     public int getKnoForCampaign(int id) {
-     return facade.getKnoForCampaign(id);
-     }*/
+    
     @Override
     public boolean updateCampaignWithKno(int kno) {
         boolean success = false;
@@ -189,7 +186,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public boolean updateCampaign(int tableRowSelected) {
         boolean succes = true;
         int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
-        System.out.println("KNO: " + kno);
         if (facade.updateCampaign(kno)) {
 
         } else {
@@ -245,13 +241,31 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         if (!facade.isPartnerAccepted(pno)) {
             message = "You are not able to create campaigns before Dell accepts your partnership.";
         }
-        System.out.println("MESSAGE: " + message);
         return message;
     }
 
     @Override
     public ArrayList<Partner> getAllPartners() {
         return facade.getAllPartners();
+    }
+    
+    /**
+     * ************ STATS *************
+     */
+    
+    @Override
+    public int countPartners() {
+        return facade.countPartners();
+    }
+    
+    @Override
+    public int countCampaigns() {
+        return facade.countCampaigns();
+    }
+    
+    @Override
+    public int countCountries() {
+        return facade.countCountries();
     }
 
 }

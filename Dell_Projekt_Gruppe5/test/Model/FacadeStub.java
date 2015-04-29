@@ -17,15 +17,18 @@ import java.util.ArrayList;
  * @author EmilGras
  */
 public class FacadeStub implements Facade {
+    public boolean acceptPartner = true;
 
     @Override
     public boolean acceptCampaign(int kno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int acceptPartnerCount = 0;
     @Override
     public boolean acceptPartner(String cvr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        acceptPartnerCount++;
+        return acceptPartner;
     }
 
     @Override
@@ -65,8 +68,11 @@ public class FacadeStub implements Facade {
 
     @Override
     public ArrayList<Partner> getAllPendingPartners() {
-        // liste med min to partners
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Partner> partners = new ArrayList();
+        partners.add(new Partner("hans", "grethe", "Hans A/S", "12233445", "Denmark"));
+        partners.add(new Partner("lars", "larsen", "Jysk A/S", "88997766", "Denmark"));
+        partners.add(new Partner("billy", "jean", "RoCK A/S", "12131415", "Denmark"));
+        return partners;
     }
 
     @Override
@@ -76,7 +82,7 @@ public class FacadeStub implements Facade {
 
     @Override
     public String getCampaignStatus(int kno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pending";
     }
 
     @Override
@@ -121,6 +127,21 @@ public class FacadeStub implements Facade {
 
     @Override
     public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int countPartners() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int countCampaigns() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int countCountries() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

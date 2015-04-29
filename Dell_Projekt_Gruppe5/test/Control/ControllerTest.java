@@ -18,10 +18,19 @@ public class ControllerTest {
     
     @Test
     public void testAcceptPartner() throws Exception {
-        Controller controller = new Controller(new FacadeStub());
+        FacadeStub stub = new FacadeStub();
+        stub.acceptPartner = false;
+        Controller controller = new Controller(stub);
         
         String message = controller.acceptPartner(1);
         
-        assertThat(message, is("Hello"));
+        assertThat(stub.acceptPartnerCount, is(1));
+        
+        assertThat(message, is(""));
+    }
+    
+    @Test
+    public void getPoe() throws Exception {
+        Controller controller = new Controller(new FacadeStub());
     }
 }

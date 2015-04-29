@@ -23,9 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads",
-        fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+//@MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads",
+//        fileSizeThreshold = 1024 * 1024,
+//        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig
 @WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
 public class PartnerServlet extends HttpServlet {
 
@@ -33,9 +34,13 @@ public class PartnerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+
+        PartnerIF control = (PartnerIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
 
         int tableRowSelected = 0;
 
@@ -44,7 +49,7 @@ public class PartnerServlet extends HttpServlet {
         switch (action) {
 
             case "dashboard": // Tjek  
-                request.setAttribute("message", ((Controller) session.getAttribute("control")).isPartnerAccepted((Integer) session.getAttribute("PNO")));
+                request.setAttribute("message", control.isPartnerAccepted((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
             case "newcampaign": // Tjek
@@ -63,31 +68,23 @@ public class PartnerServlet extends HttpServlet {
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;
-
-            /*case "upload": // Tjek
-             tableRowSelected = Integer.parseInt(request.getParameter("id"));
-             request.setAttribute("partnerUploadRowSelected", tableRowSelected - 1);
-             request.getRequestDispatcher("newcampaign.jsp").forward(request, response);
-             break;*/
             case "viewDetail": // Mangler implementation
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 Campaign ownCampaign = control.getAllOwnPartnerCampaigns((int) session.getAttribute("PNO")).get(tableRowSelected - 1);
                 session.setAttribute("campaignDetail", ownCampaign);
                 session.setAttribute("poe", control.getPoe(ownCampaign.getKno()));
-                request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
+                request.getRequestDispatcher("detailCampaign_partner.jsp").forward(request, response);
                 break;
-
             case "selectedCampaignForPoeUpload": // Tjek
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 session.setAttribute("campaignKno", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno());
                 request.getRequestDispatcher("upload.jsp").forward(request, response);
                 break;
-
             case "selectedCampaignForInvoiceUpload":
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 int kno = control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")).get(tableRowSelected - 1).getKno();
                 session.setAttribute("campaignKno", kno);
-                session.setAttribute("message", control.updateCampaignWithKno(kno));
+                control.updateCampaignWithKno(kno);
                 session.setAttribute("pCam", control.getAllOwnPartnerCampaigns((Integer) session.getAttribute("PNO")));
                 request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                 break;
@@ -98,9 +95,13 @@ public class PartnerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PartnerIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+
+        PartnerIF control = (PartnerIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
 
         String errorMessage = "";
 
@@ -115,7 +116,6 @@ public class PartnerServlet extends HttpServlet {
                 String name = request.getParameter("company");
                 String cvr = request.getParameter("cvr");
                 String country = request.getParameter("country");
-                System.out.println("COUNTRY: " + country);
                 Partner partner = new Partner(user, pass, name, cvr, country);
 
                 request.setAttribute("partner", partner);
@@ -178,7 +178,6 @@ public class PartnerServlet extends HttpServlet {
                 ArrayList<CustomFile> fileNames = new ArrayList();
                 for (Part part : request.getParts()) {
                     String fileName = part.getSubmittedFileName();
-                    System.out.println("FILE NAME : " + fileName);
                     part.write(fileName);
 
                     // Splits the file into a name and an extension. ex: test.png --> name="test" extension="png"

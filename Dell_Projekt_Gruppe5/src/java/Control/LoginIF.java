@@ -41,4 +41,11 @@ public interface LoginIF {
     
     ArrayList<Partner> getAllPartners();
     
+    // Stats
+    int countPartners();
+
+    int countCampaigns();
+    
+    int countCountries();
+    
 }

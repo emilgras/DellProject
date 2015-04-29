@@ -75,12 +75,13 @@
                                             <td>${campaign.navn} </td>
                                             <td>${campaign.status} </td>
                                             <td><button type="button"  id="pendingCampaignsAccept" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
-                                            <td><button type="button" id="pendingCampaignsDecline" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                            <td><c:if test="${campaign.status != 'Invoice Pending'}"><button type="button" id="pendingCampaignsDecline" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></c:if>
+                                                <c:if test="${campaign.status == 'Invoice Pending'}"><button disabled="disabled" type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"</span></button></c:if>
+                                                </td>
                                             <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                         </tr>
                                     </c:forEach>
                                 </table> 
-
                             </div>
                         </div>
                     </div>
@@ -93,7 +94,7 @@
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">
-                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
+                                <tr class="active"><th>Nr.</th><th>Company</th><th>Price Eur</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                                         <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
                                     <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
 
@@ -115,21 +116,17 @@
             <div class="container marginBottom">
                 <div class="col-md-12 stats">
 
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total budget:</h3>
-                        <h1 class="whiteText">455.879 dkk</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Totel Partners</h3>
+                        <h1 class="whiteText">${countPartners}</h1>
                     </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total campaigns:</h3>
-                        <h1 class="whiteText">121.110 dkk</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Total campaigns</h3>
+                        <h1 class="whiteText">${countCampaigns}</h1>
                     </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Total partners:</h3>
-                        <h1 class="whiteText">32</h1>
-                    </div>
-                    <div class="col-md-3 tile center">
-                        <h3 class="whiteText">Operating countries:</h3>
-                        <h1 class="whiteText">6</h1>
+                    <div class="col-md-4 center">
+                        <h3 class="whiteText">Operating countries</h3>
+                        <h1 class="whiteText">${countCountries}</h1>
                     </div>
                 </div>
             </div>
@@ -139,13 +136,13 @@
             <div class="container marginBottom">
                 <div class="col-md-3">
                     <h3>Kvartals beløb:  ${startsBelob} EUR</h3>
-                    
+
                     <h3>Estimeret forbrug:  ${nuvaerendeBelob} EUR</h3>
-                    
+
                 </div>
                 <div class="col-md-9" id="piechart_3d" style="width: 675px; height: 375px;"></div> 
             </div>
-            
+
         </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>

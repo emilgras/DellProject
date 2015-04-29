@@ -53,7 +53,7 @@
                         <input type="date" name="campaignend" value="${campaign.slut_dato}" class="form-control" id="date">
                     </div>
                     <div class="form-group">
-                        <label for="price" class="left-align">Price estimate DKK:</label>
+                        <label for="price" class="left-align">Price estimate EUR:</label>
                         <input type="number" name="price" value="" class="form-control"/>
                     </div>
                     <div class="form-group">

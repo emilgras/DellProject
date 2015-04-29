@@ -19,15 +19,18 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
-    AdminIF control = new Controller();
-    // Skal controlleren oprettes her???
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+        
+        AdminIF control = (AdminIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
         
         String errorMessage = "";
         int tableRowSelected = 0;
@@ -49,6 +52,8 @@ public class AdminServlet extends HttpServlet {
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("errorMessage", control.acceptPartner(tableRowSelected - 1));
                 session.setAttribute("pendingPartners", control.getAllPendingPartners());
+                session.setAttribute("countPartners", control.countPartners());
+                session.setAttribute("countCountries", control.countCountries());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "acceptcampaign": //(Tjek)
@@ -56,6 +61,7 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("errorMessage", control.acceptCampaign(tableRowSelected - 1));
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                 session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                session.setAttribute("countCampaigns", control.countCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "declinecampaign": //(Tjek)

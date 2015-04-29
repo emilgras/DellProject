@@ -15,14 +15,19 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    private LoginIF control = new Controller();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);      
+        LoginIF control = (LoginIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
+        
+        
         String action = request.getParameter("action");
 
         switch (action) {
@@ -50,7 +55,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        LoginIF control = new Controller();
         HttpSession session = request.getSession();
         session.setAttribute("control", control);
 
@@ -82,9 +88,6 @@ public class LoginServlet extends HttpServlet {
                     switch (userCheck) {
                         
                         case "admin":
-                            // Register a new admin user
-
-                            // Set arraylist containing all current partners campiagns as attribute
                             //getPendingPartners
                             session.setAttribute("pendingPartners", control.getAllPendingPartners());
 
@@ -103,9 +106,17 @@ public class LoginServlet extends HttpServlet {
                             //getBudget stuff
                             session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
                             
+                            
                             session.setAttribute("startsBelob", control.getStartsBelob());
                             
                             
+                            session.setAttribute("countPartners", control.countPartners());
+                            
+                            
+                            session.setAttribute("countCampaigns", control.countCampaigns());
+                            
+                            
+                            session.setAttribute("countCountries", control.countCountries());
                             
                             request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                             break;
@@ -121,7 +132,7 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("dashboard_partner.jsp").forward(request, response);
                             break;
 
-                        case "invalid login":
+                        case "Invalid username or password":
                             request.setAttribute("loginErrorMessage", userCheck);
                             
                             request.getRequestDispatcher("index.jsp").forward(request, response);
