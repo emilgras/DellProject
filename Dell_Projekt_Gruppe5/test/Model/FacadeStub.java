@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author EmilGras
  */
 public class FacadeStub implements Facade {
-    public boolean acceptPartner = true;
+    
 
     @Override
     public boolean acceptCampaign(int kno) {
@@ -25,6 +25,7 @@ public class FacadeStub implements Facade {
     }
 
     public int acceptPartnerCount = 0;
+    public boolean acceptPartner;
     @Override
     public boolean acceptPartner(String cvr) {
         acceptPartnerCount++;
@@ -48,7 +49,12 @@ public class FacadeStub implements Facade {
 
     @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Campaign> campaigns = new ArrayList();
+        campaigns.add(new Campaign(234, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 3000, 34));
+        campaigns.add(new Campaign(235, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 4000, 35));
+        campaigns.add(new Campaign(236, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 5000, 36));
+        campaigns.add(new Campaign(237, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 6000, 37));
+        return campaigns;
     }
 
     @Override
@@ -80,9 +86,12 @@ public class FacadeStub implements Facade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int getCampaignStatusCount = 0;
+    public String status;
     @Override
     public String getCampaignStatus(int kno) {
-        return "Pending";
+        getCampaignStatusCount++;
+        return status;
     }
 
     @Override
@@ -100,9 +109,12 @@ public class FacadeStub implements Facade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int getPoeCount = 0;
+    public Poe poe = null;
     @Override
     public Poe getPoe(int kno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getPoeCount++;
+        return poe;
     }
 
     @Override
@@ -120,14 +132,20 @@ public class FacadeStub implements Facade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int updateCampaignCount = 0;
+    public boolean updateCampaign = true;
     @Override
     public boolean updateCampaign(int kno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        updateCampaignCount++;
+        return updateCampaign;
     }
 
+    public int uploadPoeCount = 0;
+    public boolean uploadPoe = true;
     @Override
     public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        uploadPoeCount++;
+        return uploadPoe;
     }
 
     @Override

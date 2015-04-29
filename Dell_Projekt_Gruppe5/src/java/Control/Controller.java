@@ -26,7 +26,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
 
     public Controller(Facade facade) {
         this.facade = facade;
-        }
+    }
 
     
     /*
@@ -104,7 +104,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      */
     public Poe getPoe(int kno) { //(Tjek)
         Poe poe = null;
-        if (!facade.getCampaignStatus(kno).equals("Pending") || !facade.getCampaignStatus(kno).equals("In Progress")) {
+        if (!facade.getCampaignStatus(kno).equals("Pending") && !facade.getCampaignStatus(kno).equals("In Progress")) {
             poe = facade.getPoe(kno);
         }
         return poe;
@@ -186,14 +186,8 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public boolean updateCampaign(int tableRowSelected) {
         boolean succes = true;
         int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
-        if (facade.updateCampaign(kno)) {
-
-        } else {
-            succes = false;
-        }
-
+        if (!facade.updateCampaign(kno)) succes = false;
         return succes;
-
     }
 
     /**

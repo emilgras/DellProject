@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
 //        fileSizeThreshold = 1024 * 1024,
 //        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @MultipartConfig
-@WebServlet(name = "PartnerServlet", urlPatterns = {"/PartnerServlet"})
+@WebServlet(name = "PartnerServlet", urlPatterns = {"/Login"})
 public class PartnerServlet extends HttpServlet {
 
     @Override
