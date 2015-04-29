@@ -34,7 +34,7 @@ public class DBFacade implements Facade {
 
     }
 
-    public static DBFacade getInstance() {
+    public static DBFacade getDBFacadeInstance() {
         if (instance == null) {
             instance = new DBFacade();
         }

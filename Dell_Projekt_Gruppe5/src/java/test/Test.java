@@ -28,7 +28,7 @@ public class Test {
         PartnerMapper pm = new PartnerMapper();
         java.util.Date date = new java.util.Date();
         java.sql.Date sqldate = new java.sql.Date(date.getTime());
-        DBFacade pf = DBFacade.getInstance();
+        DBFacade pf = DBFacade.getDBFacadeInstance();
         BudgetMapper bm = new BudgetMapper();
         //pf.getPartnerName();
        // cm.getAllPartnerAcceptedCampaigns(con);
@@ -49,9 +49,9 @@ public class Test {
 //        } catch (Exception e) {
 //            
 //        }
-        //PartnerFacade.getInstance().test();
+        //PartnerFacade.getDBFacadeInstance().test();
         
-        //PartnerFacade facade = PartnerFacade.getInstance();
+        //PartnerFacade facade = PartnerFacade.getDBFacadeInstance();
         //System.out.println("Test: " + facade.getLogin("hans", "hans"));
 
         
