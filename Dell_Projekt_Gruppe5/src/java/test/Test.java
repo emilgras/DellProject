@@ -12,7 +12,7 @@ import Model.DBConnector;
 
 import Model.DBFacade;
 import Model.PartnerMapper;
-import java.sql.Connection;
+import Model.StatsMapper;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
@@ -23,7 +23,7 @@ public class Test {
     
     public static void main(String[] args) throws SQLException {
         DBConnector db = new DBConnector();
-        Connection con = db.getConnection();
+        //Connection con = db.getConnection();
         CampaignMapper cm = new CampaignMapper();
         PartnerMapper pm = new PartnerMapper();
         java.util.Date date = new java.util.Date();
@@ -70,6 +70,9 @@ public class Test {
         
       
         
-        
+        StatsMapper sm = new StatsMapper();
+        System.out.println("PARTNERS: " + sm.countPartners());
+        System.out.println("CAMPAIGNS: " + sm.countCampaigns());
+        System.out.println("COUNTRIES: " + sm.countCountries());
     }
 }
