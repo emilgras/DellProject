@@ -149,10 +149,80 @@ public class ControllerTest {
         assertThat(message, is("Not able to upload files at the moment. Please, try again."));
     }
     
+    /************** METODE: createPartner **************/
+    @Test
+    public void testCreatePartnerReturnsEmptyErrorMessage() throws Exception {
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        
+        String message = control.createPartner(null);
+        
+        assertThat(stub.createPartnerCount, is(1));
+        
+        assertThat(message, is(""));
+    }
     
-    // createPartner
+    @Test
+    public void testCreatePartnerReturnsErrorMessage() throws Exception {
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        
+        stub.createPartner = false;
+        String message = control.createPartner(null);
+        
+        assertThat(stub.createPartnerCount, is(1));
+        
+        assertThat(message, is("Due to technical problems, we cannot register you as a partner right now. Please, try again later"));
+    }
     
-    // createCampaign
+    /************** METODE: createCampaign **************/
+    @Test
+    public void testCreateCampaignReturnsEmptyErrorMessage() throws Exception {
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        
+        String message = control.createCampaign(null);
+        
+        assertThat(stub.createCampaignCount, is(1));
+        
+        assertThat(message, is(""));
+    }
     
-    // isPartnerAccepted
+    @Test
+    public void testCreateCampaignReturnsErrorMessage() throws Exception {
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        
+        stub.createCampaign = false;
+        String message = control.createCampaign(null);
+        
+        assertThat(stub.createCampaignCount, is(1));
+        
+        assertThat(message, is("Due to technical problems, we cannot create your campaign right now. Please try again later or contact our support for further help."));
+    }
+    
+
+    @Test
+    public void isPartnerAcceptedReturnsErrorMessage() throws Exception{
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        stub.accepted = true;
+        String message = control.isPartnerAccepted(3);
+        
+        assertThat(stub.isPartnerAcceptedCount, is(1));
+        
+        assertThat(message,is(""));      
+    }
+    
+    @Test
+    public void isPartnerAcceptedReturnsEmptyErrorMessage() throws Exception{
+        FacadeStub stub = new FacadeStub();
+        Controller control = new Controller(stub);
+        stub.accepted = false;
+        String message = control.isPartnerAccepted(3);
+        
+        assertThat(stub.isPartnerAcceptedCount, is(1));
+        
+        assertThat(message,is("You are not able to create campaigns before Dell accepts your partnership."));
+    }
 }

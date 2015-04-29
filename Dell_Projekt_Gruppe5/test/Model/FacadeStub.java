@@ -32,14 +32,20 @@ public class FacadeStub implements Facade {
         return acceptPartner;
     }
 
+    public int createCampaignCount = 0;
+    public boolean createCampaign = true;
     @Override
     public boolean createCampaign(Campaign campaign) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createCampaignCount++;
+        return createCampaign;
     }
 
+    public int createPartnerCount = 0;
+    public boolean createPartner = true;
     @Override
     public boolean createPartner(Partner partner) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createPartnerCount++;
+        return createPartner;
     }
 
     @Override
@@ -122,9 +128,12 @@ public class FacadeStub implements Facade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int isPartnerAcceptedCount = 0;
+    public boolean accepted = true;
     @Override
     public boolean isPartnerAccepted(int pno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        isPartnerAcceptedCount++;
+        return accepted;
     }
 
     @Override
@@ -152,17 +161,17 @@ public class FacadeStub implements Facade {
     public int countPartners() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public int countCampaigns() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public int countCountries() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public boolean deletePartner(int pno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
