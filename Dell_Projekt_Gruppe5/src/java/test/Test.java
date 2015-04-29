@@ -63,7 +63,7 @@ public class Test {
 //            System.out.println("første ups");
 //        }
         System.out.println(pm.getPno("ok"));
-        //pm.deletePartner(999);
+        System.out.println(pm.deletePartner(999));
         
         
     }
