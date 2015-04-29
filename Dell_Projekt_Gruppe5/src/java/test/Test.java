@@ -22,13 +22,8 @@ import java.util.ArrayList;
 public class Test {
     
     public static void main(String[] args) throws SQLException {
-        DBConnector db = new DBConnector();
-        Connection con = db.getConnection();
         CampaignMapper cm = new CampaignMapper();
         PartnerMapper pm = new PartnerMapper();
-        java.util.Date date = new java.util.Date();
-        java.sql.Date sqldate = new java.sql.Date(date.getTime());
-        DBFacade pf = DBFacade.getInstance();
         BudgetMapper bm = new BudgetMapper();
         //pf.getPartnerName();
        // cm.getAllPartnerAcceptedCampaigns(con);
@@ -67,8 +62,8 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        
-      
+        System.out.println(pm.getPno("ok"));
+        //pm.deletePartner(999);
         
         
     }
