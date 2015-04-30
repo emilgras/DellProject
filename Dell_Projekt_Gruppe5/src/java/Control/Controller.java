@@ -192,8 +192,10 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     }
     
     @Override
-    public boolean updateMoneyUsed(int i) {
-        return facade.updateMoneyUsed(i);
+    public boolean updateMoneyUsed(int tableRowSelected) {
+        float pris = getAllPendingCampaigns().get(tableRowSelected).getPris();
+        int rundetPris = Math.round(pris);
+        return facade.updateMoneyUsed(rundetPris);
     }
 
     /**
