@@ -57,10 +57,10 @@ public class FacadeStub implements Facade {
     @Override
     public ArrayList<Campaign> getAllNewestCampaigns() {
         ArrayList<Campaign> campaigns = new ArrayList();
-        campaigns.add(new Campaign(234, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 3000, 34));
-        campaigns.add(new Campaign(235, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 4000, 35));
-        campaigns.add(new Campaign(236, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 5000, 36));
-        campaigns.add(new Campaign(237, "Dette er en beskrivelse", "test_dato_slut", "test_dato_start", 6000, 37));
+        campaigns.add(new Campaign("Dette er en beskrivelse", "test_dato_slut", 3000, "test_dato_start", 34));
+        campaigns.add(new Campaign("Dette er en beskrivelse", "test_dato_slut", 4000, "test_dato_start", 35));
+        campaigns.add(new Campaign("Dette er en beskrivelse", "test_dato_slut", 5000, "test_dato_start", 36));
+        campaigns.add(new Campaign("Dette er en beskrivelse", "test_dato_slut", 6000, "test_dato_start", 37));
         return campaigns;
     }
 
