@@ -16,7 +16,7 @@
     </head>
     <body>
         <!------------------- NAV ------------------ -->
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <a href="AdminServlet?action=dashboard" class="navbar-brand">Admin Website</a>

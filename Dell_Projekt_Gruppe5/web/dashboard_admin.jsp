@@ -17,7 +17,7 @@
 
         <!------------------- NAV ------------------ -->
         <section>
-            <div class="navbar navbar-inverse">
+            <div class="navbar navbar-inverse navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
                         <a href="AdminServlet?action=dashboard" class="navbar-brand">Admin Website</a>
@@ -50,7 +50,7 @@
                 <div class="col-md-6 marginTop">
 
                     <div>
-                        <h3 class="tileHeader"><span class="glyphicon glyphicon-"></span> Pending Applicants</h3>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-info-sign"></span> Pending Applicants</h3>
                         <div class="tile">
                             <div>
                                 <table class="table table-striped table-bordered">
@@ -65,7 +65,7 @@
 
                     <!------------ PENDING CAMPAIGNS ------------>
                     <div class="topMargin">                  
-                        <h3 class="tileHeader"><span class="glyphicon glyphicon-check"></span> Pending Campaigns</h3>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-info-sign"></span> Pending Campaigns</h3>
                         <div class="tile">
                             <div>                     
                                 <table class="table table-striped table-bordered">
@@ -92,7 +92,7 @@
 
                 <!------------ NEWEST CAMPAIGNS ------------>
                 <div class="col-md-6 marginTop">
-                    <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest Campaigns</h3> </a>
+                    <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-list"></span> Newest Campaigns</h3> </a>
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">

@@ -17,10 +17,10 @@
         <title>JSP Page</title>
     </head>
     <!-- Nav bar -->
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="PartnerServlet?action=index" class="navbar-brand">Dell Business</a>
+                <a href="LoginServlet?action=loginPage" class="navbar-brand">Dell Business</a>
             </div>
         </div>
     </div>
