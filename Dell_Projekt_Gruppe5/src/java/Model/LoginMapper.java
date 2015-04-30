@@ -57,7 +57,7 @@ public class LoginMapper {
             message = "admin";
         } else if (user == 1 && pass == 1 && role.equals("partner")) {
             message = "partner";
-        } else if (user == 0 || pass == 0) {
+        } else if (user == 2 || pass == 2) {
             message = "Invalid username or password";
         } else {
             message = "Ups, something went wrong. Please, try again.";
