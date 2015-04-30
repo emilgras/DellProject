@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Dell | Dashboard</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,12 +45,12 @@
         <section class="row">
             <div class="container  marginBottom"> 
                 <h1 class="tileHeader">Dashboard</h1>
-                <h4 style="color: indianred">${errorMessage}</h4>
+                <h4 style="color: ffa500">${errorMessage}</h4>
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
 
                     <div>
-                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending applicants</h3>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-"></span> Pending Applicants</h3>
                         <div class="tile">
                             <div>
                                 <table class="table table-striped table-bordered">
@@ -65,7 +65,7 @@
 
                     <!------------ PENDING CAMPAIGNS ------------>
                     <div class="topMargin">                  
-                        <h3 class="tileHeader"><span class="glyphicon glyphicon-off"></span> Pending campaigns</h3>
+                        <h3 class="tileHeader"><span class="glyphicon glyphicon-check"></span> Pending Campaigns</h3>
                         <div class="tile">
                             <div>                     
                                 <table class="table table-striped table-bordered">
@@ -92,7 +92,7 @@
 
                 <!------------ NEWEST CAMPAIGNS ------------>
                 <div class="col-md-6 marginTop">
-                    <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest campaigns</h3> </a>
+                    <a href="AdminServlet?action=campaigns" id="textDecorationNone"><h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> Newest Campaigns</h3> </a>
                     <div class="tile">
                         <div>
                             <table class="table table-striped table-bordered">
