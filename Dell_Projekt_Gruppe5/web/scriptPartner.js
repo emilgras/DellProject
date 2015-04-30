@@ -14,19 +14,16 @@ $(document).ready(function () {
 
     $("table tr #viewDetail").on('click', function () {
         row = $(this).closest('td').parent()[0].sectionRowIndex;
-        alert(row);
         location.href = "PartnerServlet?action=viewDetail&id=" + row;
     });
 
     $("table tr #uploadPoe").on('click', function () {
         row = $(this).closest('td').parent()[0].sectionRowIndex;
-        alert(row);
         location.href = "PartnerServlet?action=selectedCampaignForPoeUpload&id=" + row;
     });
 
     $("table tr #uploadInvoice").on('click', function () {
         row = $(this).closest('td').parent()[0].sectionRowIndex;
-        alert(row);
         location.href = "PartnerServlet?action=selectedCampaignForInvoiceUpload&id=" + row;
     });
 
