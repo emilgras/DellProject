@@ -34,10 +34,10 @@ public class Partner {
         this.country = country;
     }
     
-    public Partner(String name, String CVR, Date date){
+    public Partner(String name, String CVR, String country){
         this.name = name;
         this.cvr = CVR;
-        this.date = date;
+        this.country = country;
     }
 
     public Partner(String name, String cvr, String country, String username) {
@@ -54,10 +54,11 @@ public class Partner {
     public Partner() {
     }
     
-    public Partner(String name, String cvr, String country){
+    public Partner(String name, String cvr, String country, int pno){
         this.name = name;
         this.cvr = cvr;
         this.country = country;
+        this.pno = pno;
     }
 
     public String getUsername() {

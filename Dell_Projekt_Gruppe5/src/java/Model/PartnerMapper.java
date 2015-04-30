@@ -119,7 +119,7 @@ public class PartnerMapper {
     public ArrayList<Partner> getAllPendingPartners() {
         ArrayList<Partner> pArray = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sqlString = "select navn,cvr,land from partner where dato = 'NULL'";
+            String sqlString = "select navn,cvr,land,pno from partner where dato = 'NULL'";
 
             PreparedStatement statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
@@ -129,8 +129,9 @@ public class PartnerMapper {
                 String partnerName = rs.getString(1);
                 String partnerCVR = rs.getString(2);
                 String partnerCountry = rs.getString(3);
+                int partnerPno = rs.getInt(4);
 
-                Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
+                Partner p = new Partner(partnerName, partnerCVR, partnerCountry, partnerPno);
 
                 pArray.add(p);
                 count++;
@@ -230,10 +231,12 @@ public class PartnerMapper {
             
             statement = con.prepareStatement(sql2);
             statement.setInt(1, pno);
+            i += statement.executeUpdate();
             
             String sql3 = "delete from bruger where brugernavn = ?";
             statement = con.prepareStatement(sql3);
             statement.setString(1, brugernavn);
+            i += statement.executeUpdate();
             
         }catch (Exception e){
             e.printStackTrace();
