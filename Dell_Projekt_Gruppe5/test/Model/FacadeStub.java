@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Interfaces.Facade;
 import Entities.Budget;
 import Entities.Campaign;
 import Entities.CustomFile;
@@ -174,6 +175,11 @@ public class FacadeStub implements Facade {
     
     @Override
     public boolean deletePartner(int pno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deleteCampaign(int kno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

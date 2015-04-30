@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Control;
+package Interfaces;
 
 import Entities.Budget;
 import Entities.Campaign;
@@ -43,13 +43,15 @@ public interface AdminIF {
     
     Campaign getPendingCampaignDetail(int id);
     
-    public Poe getPoe(int kno);
+    Poe getPoe(int kno);
     
-    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+    ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    public int getStartsBelob();
+    int getStartsBelob();
     
-    public int getNuvaerendeBelob();
+    int getNuvaerendeBelob();
+    
+    String deleteCampaign(int tableRowSelected);
     
     // Stats
     int countPartners();

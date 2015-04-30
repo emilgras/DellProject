@@ -29,16 +29,24 @@ $(document).ready(function(){
                 location.href = "AdminServlet?action=viewNewestCampaignDetail&id=" + row;
             });
 
-            // PendingCampaigns
+            // PendingCampaignsAccept
             $("table tr #pendingCampaignsAccept").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
                 location.href = "AdminServlet?action=acceptcampaign&id=" + row;
             });
             
-            // PendingCampaigns
-            $("table tr #pendingCampaignsDecline").on('click', function () {
+            // PendingCampaignsDeclineCampaign
+            $("table tr #pendingCampaignsDeclineCampaign").on('click', function () {              
+                alert("BLABLABLA");
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
+                alert(row);
                 location.href = "AdminServlet?action=declinecampaign&id=" + row;
+            });
+            
+            // PendingCampaignsDeclinePoe
+            $("table tr #pendingCampaignsDeclinePoe").on('click', function () {
+                row = $(this).closest('td').parent()[0].sectionRowIndex;
+                location.href = "AdminServlet?action=declinecampaignpoe&id=" + row;
             });
             
             // PendingCampaignsDetail

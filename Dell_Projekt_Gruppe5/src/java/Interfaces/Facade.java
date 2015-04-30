@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Interfaces;
 
 import Entities.Budget;
 import Entities.Campaign;
@@ -40,6 +40,8 @@ public interface Facade {
     ArrayList<Partner> getAllPartners();
 
     ArrayList<Campaign> getAllPendingCampaigns();
+    
+    boolean deleteCampaign(int kno);
 
     /**
      * * Dashboard view **

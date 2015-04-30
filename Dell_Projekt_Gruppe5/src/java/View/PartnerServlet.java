@@ -6,7 +6,7 @@
 package View;
 
 import Control.Controller;
-import Control.PartnerIF;
+import Interfaces.PartnerIF;
 import Entities.Campaign;
 import Entities.CustomFile;
 import Entities.Partner;

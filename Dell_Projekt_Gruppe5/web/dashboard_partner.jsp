@@ -58,7 +58,8 @@
                                     <td>${campaign.oprettelse_dato}</td>
                                     <td>${campaign.status}</td>
                                     <td><input id="viewDetail" type="button" class="btn btn-info" value="View campaign"></td>
-                                    <td><c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="Send poe"></c:if>
+                                    <td><c:if test="${campaign.status == 'Pending'}"><input type="button" class="btn btn-info" value="Campaign sent"></c:if>
+                                        <c:if test="${campaign.status == 'In-Progress' || campaign.status == 'POE Declined'}" ><input id="uploadPoe" type="button" class="btn btn-info" value="Send poe"></c:if>
                                         <c:if test="${campaign.status == 'POE Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Poe sent"></c:if>
                                         <c:if test="${campaign.status == 'POE Accepted'}"><input id="uploadInvoice" type="button" class="btn btn-info" value="Send invoice"></c:if>
                                         <c:if test="${campaign.status == 'Invoice Pending'}"><input disabled='disabled' type="button" class="btn btn-info" value="Invoice sent"></c:if>

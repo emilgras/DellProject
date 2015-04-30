@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Interfaces.Facade;
 import Entities.Budget;
 import Entities.Partner;
 import Entities.CustomFile;
@@ -149,6 +150,11 @@ public class DBFacade implements Facade {
     @Override
     public boolean rollBackCampaign(int kno) {
         return cm.rollBackCampaign(kno);
+    }
+    
+    @Override
+    public boolean deleteCampaign(int kno) {
+        return cm.deleteCampaign(kno);
     }
     
 

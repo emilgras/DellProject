@@ -1,7 +1,7 @@
 package View;
 
 import Control.Controller;
-import Control.LoginIF;
+import Interfaces.LoginIF;
 import Entities.Partner;
 import Utils.Validate;
 import java.io.IOException;

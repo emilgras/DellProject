@@ -71,7 +71,7 @@
 
             <!-------- POE -------->        
             <div class="row marginTop marginBottom">
-                <c:if test="${campaignDetail.status == 'POE Pending' || campaignDetail.status == 'POE Accepted'}">
+                <c:if test="${campaignDetail.status == 'POE Pending' || campaignDetail.status == 'POE Accepted' || campaignDetail.status == 'Invoice Pending' || campaignDetail.status == 'Complete'}">
                     <div class="col-lg-12">
                         <div class="col-lg-12">
                             <h3 class="tileHeader">Campaign Pictures</h3>

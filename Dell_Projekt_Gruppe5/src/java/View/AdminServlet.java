@@ -5,7 +5,7 @@
  */
 package View;
 
-import Control.AdminIF;
+import Interfaces.AdminIF;
 import Control.Controller;
 import Entities.Campaign;
 import java.io.IOException;
@@ -19,19 +19,18 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        
-        AdminIF control = (AdminIF)session.getAttribute("control");
+
+        AdminIF control = (AdminIF) session.getAttribute("control");
         if (control == null) {
             control = new Controller();
             session.setAttribute("control", control);
         }
-        
+
         String errorMessage = "";
         int tableRowSelected = 0;
         String action = request.getParameter("action");
@@ -72,7 +71,15 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("countCampaigns", control.countCampaigns());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
-            case "declinecampaign": //(Tjek)
+            case "declinecampaign": 
+                System.out.println("TESTTEST");
+                tableRowSelected = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("errorMessage", control.deleteCampaign(tableRowSelected - 1));
+                session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
+                session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
+                request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
+                break;
+            case "declinecampaignpoe": //(Tjek)
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("errorMessage", control.rollBackCampaign(tableRowSelected - 1));
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());

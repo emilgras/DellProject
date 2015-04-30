@@ -5,6 +5,9 @@
  */
 package Control;
 
+import Interfaces.PartnerIF;
+import Interfaces.LoginIF;
+import Interfaces.AdminIF;
 import Entities.Budget;
 import Entities.Campaign;
 import Entities.Partner;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 import Model.DBFacade;
 import Entities.CustomFile;
 import Entities.Poe;
-import Model.Facade;
+import Interfaces.Facade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -195,10 +198,16 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     // Hvilken metode skal den hente kno fra ? pending, newest eller... ? 
     @Override
     public boolean updateCampaign(int tableRowSelected) {
-        boolean succes = true;
         int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
-        if (!facade.updateCampaign(kno)) succes = false;
-        return succes;
+        return facade.updateCampaign(kno);
+    }
+    
+    @Override
+    public String deleteCampaign(int tableRowSelected) {
+        String message = "";
+        int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
+        if(!facade.deleteCampaign(kno)) message = "The campaign has been succesfully deleted, and a notification has been sent to the partner with further details.";
+        return message;
     }
 
     /**

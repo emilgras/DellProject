@@ -75,12 +75,14 @@
                                             <td>${campaign.navn} </td>
                                             <td>${campaign.status} </td>
                                             <td><button type="button"  id="pendingCampaignsAccept" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
-                                            <td><c:if test="${campaign.status != 'Invoice Pending'}"><button type="button" id="pendingCampaignsDecline" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></c:if>
+                                            <td>
+                                                <c:if test="${campaign.status == 'Pending'}"><button type="button" id="pendingCampaignsDeclineCampaign" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></c:if>
+                                                <c:if test="${campaign.status == 'POE Pending'}"><button type="button" id="pendingCampaignsDeclinePoe" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></c:if>
                                                 <c:if test="${campaign.status == 'Invoice Pending'}"><button disabled="disabled" type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"</span></button></c:if>
                                                 </td>
                                             <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
                                         </tr>
-                                    </c:forEach>
+                                    </c:forEach>                                 
                                 </table> 
                             </div>
                         </div>
