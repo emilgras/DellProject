@@ -127,6 +127,11 @@ public class FacadeStub implements Facade {
     public int getStartsBelob() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public boolean updateMoneyUsed(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int isPartnerAcceptedCount = 0;
     public boolean accepted = true;

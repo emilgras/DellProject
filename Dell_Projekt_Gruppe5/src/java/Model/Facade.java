@@ -62,6 +62,9 @@ public interface Facade {
     Poe getPoe(int kno);
 
     int getStartsBelob();
+    
+    boolean updateMoneyUsed(int i);
+    
 
     boolean isPartnerAccepted(int pno);
 
