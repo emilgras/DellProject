@@ -14,10 +14,8 @@ import java.sql.Date;
 public class Partner {
 
     private String name;
-    private String role;
     private String cvr;
     private String country;
-    private Date date;
     private String username;
     private String password;
     private int pno;
@@ -45,10 +43,6 @@ public class Partner {
         return password;
         }
 
-    public String getRole() {
-        return role;
-        }
-
     public int getPno() {
         return pno;
         }
@@ -63,10 +57,6 @@ public class Partner {
 
     public String getCvr() {
         return cvr;
-        }
-
-    public Date getDate() {
-        return date;
         }
 
     public String getCountry() {
