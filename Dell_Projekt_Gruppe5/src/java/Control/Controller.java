@@ -190,6 +190,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public int getNuvaerendeBelob() {
         return facade.getNuvaerendeBelob();
     }
+    
+    @Override
+    public boolean updateMoneyUsed(int i) {
+        return facade.updateMoneyUsed(i);
+    }
 
     /**
      * ************* Admin Dashboard button interaction **************

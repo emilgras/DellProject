@@ -78,7 +78,8 @@ public class DBFacade implements Facade {
         return bm.getStartsBelob();
     }
 
-    private boolean updateMoneyUsed(int i) {
+    @Override
+    public boolean updateMoneyUsed(int i) {
         return bm.updateMoneyUsed(i);
     }
 

@@ -76,10 +76,12 @@ public class BudgetMapper {
 
     public boolean updateMoneyUsed(int i) {
         try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sql = "update budget set nuvaernde_belob = " + (getNuvaerendeBelob() + i + " where starts_belob = " + getStartsBelob());
+            String sql = "update budget set nuvaernde_belob = ? where starts_belob = ?";
             PreparedStatement statement = null;
 
             statement = connection.prepareStatement(sql);
+            statement.setInt(1, getNuvaerendeBelob() + i);
+            statement.setInt(2, getStartsBelob());
             ResultSet rs = statement.executeQuery();
             rs.next();
 
