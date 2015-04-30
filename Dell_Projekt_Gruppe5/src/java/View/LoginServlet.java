@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "signupPage":
-                request.setAttribute("partner", new Partner("", "", "", ""));
+                request.setAttribute("partner", new Partner("", "", "", "", ""));
                 request.setAttribute("signupErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;

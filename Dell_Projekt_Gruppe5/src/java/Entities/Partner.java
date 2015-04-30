@@ -26,6 +26,7 @@ public class Partner {
     private int pno;
 
 
+    // OK
     public Partner(String username, String password, String name, String cvr, String country) {
         this.name = name;
         this.cvr = cvr;
@@ -34,12 +35,14 @@ public class Partner {
         this.country = country;
     }
     
+    // IKKE OK
     public Partner(String name, String CVR, String country){
         this.name = name;
         this.cvr = CVR;
         this.country = country;
     }
 
+    // IKKE OK
     public Partner(String name, String cvr, String country, String username) {
         this.name = name;
         this.cvr = cvr;
@@ -54,6 +57,7 @@ public class Partner {
     public Partner() {
     }
     
+    // OK
     public Partner(String name, String cvr, String country, int pno){
         this.name = name;
         this.cvr = cvr;

@@ -159,7 +159,7 @@ public class PartnerMapper {
                 String partnerCVR = rs.getString(2);
                 String partnerCountry = rs.getString(3);
 
-                Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
+                Partner p = new Partner(partnerName, partnerCVR, partnerCountry, 0);
 
                 pArray.add(p);
                 count++;
