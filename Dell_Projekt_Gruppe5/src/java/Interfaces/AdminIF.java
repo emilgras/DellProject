@@ -53,8 +53,6 @@ public interface AdminIF {
     
     public int getNuvaerendeBelob();
     
-    public boolean updateMoneyUsed(int i);
-    
     // Stats
     int countPartners();
 

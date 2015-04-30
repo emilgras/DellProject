@@ -75,6 +75,7 @@ public class BudgetMapper {
     }
 
     public boolean updateMoneyUsed(int i) {
+        int j = 0;
         try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String sql = "update budget set nuvaernde_belob = ? where starts_belob = ?";
             PreparedStatement statement = null;
@@ -82,12 +83,11 @@ public class BudgetMapper {
             statement = connection.prepareStatement(sql);
             statement.setInt(1, getNuvaerendeBelob() + i);
             statement.setInt(2, getStartsBelob());
-            ResultSet rs = statement.executeQuery();
-            rs.next();
+            j = statement.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Fejl i updateMoneyUsed()");
         }
-        return true;
+        return j == 1;
     }
 }
