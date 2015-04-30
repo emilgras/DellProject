@@ -70,6 +70,7 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 session.setAttribute("countCampaigns", control.countCampaigns());
                 session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                session.setAttribute("prices", control.getAllPrices());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "declinecampaign": 

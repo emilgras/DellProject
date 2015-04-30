@@ -24,7 +24,7 @@ public class BudgetMapper {
         ArrayList<Budget> list = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
 
-            String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno";
+            String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno where status != 'Pending'";
             PreparedStatement statement = null;
 
             statement = connection.prepareStatement(sql);
