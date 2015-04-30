@@ -26,7 +26,7 @@
     </head>
     <body>
         <!------------------- NAV ------------------ -->
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <a href="PartnerServlet?action=dashboard" class="navbar-brand">User Website</a>
@@ -50,8 +50,8 @@
 
         <div class="container contentContainer marginBottom">
             <h1 class="tileHeader marginBottom">Upload POE</h1>
-            <h4>This is the place you upload all of your pictures bla bla bla...</h4>
-            <h3 style="color: #ffa500">${uploadErrorMessage}</h3>
+            <h4>Create your Proof of Execution</h4>
+            <h3 style="color: indianred">${uploadErrorMessage}</h3>
             <!------------ Upload file content ------------>
             <div class="row">
                 <div class="col-md-0 marginTop">
@@ -62,23 +62,23 @@
                             <div id="errorBlock" class="help-block"></div>
                         </div>
                     </form>
-                    <h3 style="color: indianred">OBS: When you press upload, the Poe is final and can therefor not be changed at a later time.</h3>
+                    <h3 style="color: #ffa500">OBS: Once you press upload, you can't add or remove files to the Poe.</h3>
                 </div>
             </div>
 
             <!------------ Description content ------------>
             <div class="row center marginTop">
                 <div class="col-md-4 marginTop">
-                    <div><h2>1. upload</h2></div>
-                    <div><p>Lorum ipson</p></div>
+                    <div><h2>1. Upload</h2></div>
+                    <div><p>Choose the relevant campaign proof of execution files from your computer.</p></div>
                 </div>
                 <div class="col-md-4 marginTop">
-                    <div><h2>2. send</h2></div>
-                    <div><p>Lorum ipson</p></div>
+                    <div><h2>2. Send</h2></div>
+                    <div><p>When all your files are chosen, press the Upload button to send them to Dell</p></div>
                 </div>
                 <div class="col-md-4 marginTop">
-                    <div><h2>3. wait</h2></div>
-                    <div><p>Lorum ipson</p></div>
+                    <div><h2>3. Wait</h2></div>
+                    <div><p>Within 72 hours Dell will review your work and send back a response to your POE</p></div>
                 </div>
             </div>
 

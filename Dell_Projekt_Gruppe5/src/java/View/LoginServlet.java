@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "signupPage":
-                request.setAttribute("partner", new Partner("", "", "", ""));
+                request.setAttribute("partner", new Partner("", "", "", "", ""));
                 request.setAttribute("signupErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
                 break;
@@ -138,8 +138,13 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("index.jsp").forward(request, response);
                             break;
 
+                        case "Ups, something went wrong. Please, try again.":
+                            request.setAttribute("loginErrorMessage", userCheck);
+                            
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            break;
                         default:
-                            request.setAttribute("loginErrorMessage", "Ups! Something went wrong, please try again.");
+                            request.setAttribute("loginErrorMessage", userCheck);
                             
                             request.getRequestDispatcher("index.jsp").forward(request, response);
                             break;

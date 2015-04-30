@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Dell | Dashboard</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     </head>
     <body>
         <!------------------- NAV ------------------ -->
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <a href="PartnerServlet?action=dashboard" class="navbar-brand">User Website</a>
@@ -46,7 +46,7 @@
 
                 <!------------ NEWEST CAMPAIGNS ------------>
                 <div class="col-md-0 marginTop">
-                    <h3 class="tileHeader"><span class="glyphicon glyphicon-export"></span> My campaigns</h3>
+                    <h3 class="tileHeader"><span class="glyphicon glyphicon-list"></span> My campaigns</h3>
                     <div class="tile">                    
                         <table class="table table-striped table-bordered">
                             <tr class="active"><th>Nr.</th><th>Company</th><th>Price EUR</th><th>Created</th><th>Status</th><th>Detail</th><th>Next step</th></tr>

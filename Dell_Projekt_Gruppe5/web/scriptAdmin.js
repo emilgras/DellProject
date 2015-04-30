@@ -12,14 +12,12 @@ $(document).ready(function(){
             // PendingPartnerAccept
             $("table tr #pendingPartners").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
                 location.href = "AdminServlet?action=acceptpartner&id=" + row;
             });
             
             // PendingPartnersDecline
             $("table tr #declinePartner").on('click', function () {
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
                 location.href = "AdminServlet?action=declinepartner&id=" + row;
             });
 
@@ -37,9 +35,7 @@ $(document).ready(function(){
             
             // PendingCampaignsDeclineCampaign
             $("table tr #pendingCampaignsDeclineCampaign").on('click', function () {              
-                alert("BLABLABLA");
                 row = $(this).closest('td').parent()[0].sectionRowIndex;
-                alert(row);
                 location.href = "AdminServlet?action=declinecampaign&id=" + row;
             });
             

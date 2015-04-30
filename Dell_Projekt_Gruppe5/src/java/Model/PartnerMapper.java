@@ -148,7 +148,7 @@ public class PartnerMapper {
     public ArrayList<Partner> getAllPartners() {
         ArrayList<Partner> pArray = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sqlString = "select navn,cvr,land from partner where dato is not null";
+            String sqlString = "select navn,cvr,land from partner where dato != 'NULL'";
 
             PreparedStatement statement = con.prepareStatement(sqlString);
             ResultSet rs = statement.executeQuery();
@@ -159,7 +159,7 @@ public class PartnerMapper {
                 String partnerCVR = rs.getString(2);
                 String partnerCountry = rs.getString(3);
 
-                Partner p = new Partner(partnerName, partnerCVR, partnerCountry);
+                Partner p = new Partner(partnerName, partnerCVR, partnerCountry, 0);
 
                 pArray.add(p);
                 count++;

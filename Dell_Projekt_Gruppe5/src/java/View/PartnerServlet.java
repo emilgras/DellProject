@@ -62,7 +62,7 @@ public class PartnerServlet extends HttpServlet {
                 }
                 break;
             case "signup": // Tjek
-                request.setAttribute("partner", new Partner("", "", "", ""));
+                request.setAttribute("partner", new Partner("", "", "", "", ""));
                 request.setAttribute("signupErrorMessage", "");
                 request.setAttribute("dbErrorMessage", "");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
