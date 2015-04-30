@@ -39,19 +39,21 @@ public interface AdminIF {
     
     String deletePartner(int id);
     
+    String deleteCampaign(int id);
+    
     String rollBackCampaign(int id);
     
     Campaign getPendingCampaignDetail(int id);
     
-    Poe getPoe(int kno);
+    public Poe getPoe(int kno);
     
-    ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
+    public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    int getStartsBelob();
+    public int getStartsBelob();
     
-    int getNuvaerendeBelob();
+    public int getNuvaerendeBelob();
     
-    String deleteCampaign(int tableRowSelected);
+    public boolean updateMoneyUsed(int i);
     
     // Stats
     int countPartners();

@@ -64,12 +64,17 @@ public interface Facade {
     Poe getPoe(int kno);
 
     int getStartsBelob();
+    
+    boolean updateMoneyUsed(int i);
+    
 
     boolean isPartnerAccepted(int pno);
 
     boolean rollBackCampaign(int kno);
 
     boolean updateCampaign(int kno);
+    
+    
 
     /**
      * * POE **
