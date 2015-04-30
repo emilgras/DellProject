@@ -77,6 +77,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public String acceptCampaign(int tableRowSelected) { //(Tjek)
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
+        int pris = Math.round(facade.getAllPendingCampaigns().get(tableRowSelected).getPris());
         if (facade.getCampaignStatus(kno).equals("Pending")) {
             // Her accepteres kampagnen ved at oprettelsesdato initialisere
             // og kampagne status opdateres til 'In-Progess'.
@@ -84,6 +85,9 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
                 message = "Something went wrong, could not accept partner right now. Please try again later";
             }
             if (!facade.updateCampaign(kno)) {
+                message = "Something went wrong, could not accept partner right now. Please try again later";
+            }
+            if (!facade.updateMoneyUsed(pris)) {
                 message = "Something went wrong, could not accept partner right now. Please try again later";
             }
 
@@ -189,13 +193,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     @Override
     public int getNuvaerendeBelob() {
         return facade.getNuvaerendeBelob();
-    }
-    
-    @Override
-    public boolean updateMoneyUsed(int tableRowSelected) {
-        float pris = getAllPendingCampaigns().get(tableRowSelected).getPris();
-        int rundetPris = Math.round(pris);
-        return facade.updateMoneyUsed(rundetPris);
     }
 
     /**
