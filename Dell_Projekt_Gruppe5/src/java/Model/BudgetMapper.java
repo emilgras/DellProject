@@ -40,7 +40,7 @@ public class BudgetMapper {
         return list;
     }
 
-    public int getStartsBelob() {
+    public int getStartingFund() {
         int i = 0;
         try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String sql = "select starts_belob from budget";
@@ -57,7 +57,7 @@ public class BudgetMapper {
         return i;
     }
 
-    public int getNuvaerendeBelob() {
+    public int getCurrentFund() {
         int i = 0;
         try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
             String sql = "select nuvaernde_belob from budget";
@@ -81,8 +81,8 @@ public class BudgetMapper {
             PreparedStatement statement = null;
 
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, getNuvaerendeBelob() + i);
-            statement.setInt(2, getStartsBelob());
+            statement.setInt(1, getCurrentFund() + i);
+            statement.setInt(2, getStartingFund());
             j = statement.executeUpdate();
 
         } catch (Exception e) {

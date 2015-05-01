@@ -107,7 +107,7 @@ public class FacadeStub implements Facade {
     }
 
     @Override
-    public int getNuvaerendeBelob() {
+    public int getCurrentFund() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -125,7 +125,7 @@ public class FacadeStub implements Facade {
     }
 
     @Override
-    public int getStartsBelob() {
+    public int getStartingFund() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

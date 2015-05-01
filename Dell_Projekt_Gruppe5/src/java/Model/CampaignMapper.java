@@ -46,12 +46,12 @@ public class CampaignMapper {
             statement = con.prepareStatement(sqlString);
 
             statement.setInt(1, camp.getKno());
-            statement.setString(2, camp.getBeskrivelse());
+            statement.setString(2, camp.getDescription());
             statement.setString(3, "Pending");
             statement.setString(4, "Pending");
-            statement.setString(5, camp.getStart_dato());
-            statement.setString(6, camp.getSlut_dato());
-            statement.setFloat(7, camp.getPris());
+            statement.setString(5, camp.getStart_date());
+            statement.setString(6, camp.getEnd_date());
+            statement.setFloat(7, camp.getPrice());
             statement.setInt(8, camp.getPno());
 
             rowsInserted += statement.executeUpdate();
@@ -287,7 +287,7 @@ public class CampaignMapper {
             while (rs.next()) {
                 Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
                 tmp.setKno(rs.getInt(1));
-                if (!tmp.getOprettelse_dato().equals("Pending")) {
+                if (!tmp.getCreated_date().equals("Pending")) {
                     list.add(tmp);
                     count++;
                 }
@@ -311,7 +311,7 @@ public class CampaignMapper {
             while (rs.next()) {
                 Campaign tmp = new Campaign(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getFloat(7), rs.getInt(8), rs.getString(9), rs.getString(10));
                 tmp.setKno(rs.getInt(1));
-                if (!tmp.getOprettelse_dato().equals("Pending")) {
+                if (!tmp.getCreated_date().equals("Pending")) {
                     list.add(tmp);
                     count++;
                 }

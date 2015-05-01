@@ -15,8 +15,8 @@ public class DBConnector
 
     private static final String driver = "oracle.jdbc.driver.OracleDriver";
     private static final String URL = "jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:dat";
-    private static final String id = "cphfl66";	
-    private static final String pw = "cphfl66";
+    private static final String id = "cphab207";	
+    private static final String pw = "cphab207";
     
     private Connection con;
     
@@ -35,15 +35,15 @@ public class DBConnector
         }
     }
 
-    public static String getURL() {
+    public  String getURL() {
         return URL;
     }
 
-    public static String getId() {
+    public  String getId() {
         return id;
     }
 
-    public static String getPw() {
+    public  String getPw() {
         return pw;
     }
     

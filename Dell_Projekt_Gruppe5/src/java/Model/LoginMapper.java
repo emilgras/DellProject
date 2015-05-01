@@ -6,7 +6,7 @@
 package Model;
 
 import Entities.Partner;
-import Model.PartnerMapper;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
