@@ -11,13 +11,13 @@ package Entities;
  */
 public class Budget {
     int kno;
-    String partnerNavn;
-    float pris;
+    String partnerName;
+    float price;
     
-    public Budget(int kno, String pn, float pris){
+    public Budget(int kno, String pn, float price){
         this.kno = kno;
-        this.partnerNavn = pn;
-        this.pris = pris;
+        this.partnerName = pn;
+        this.price = price;
     }
 
     public int getKno() {
@@ -28,25 +28,25 @@ public class Budget {
         this.kno = kno;
     }
 
-    public String getPartnerNavn() {
-        return partnerNavn;
+    public String getPartnerName() {
+        return partnerName;
     }
 
-    public void setPartnerNavn(String PartnerNavn) {
-        this.partnerNavn = PartnerNavn;
+    public void setPartnerName(String PartnerNavn) {
+        this.partnerName = PartnerNavn;
     }
 
-    public float getPris() {
-        return pris;
+    public float getPrice() {
+        return price;
     }
 
-    public void setPris(float pris) {
-        this.pris = pris;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Budget{" + "kno=" + kno + ", partnerNavn=" + partnerNavn + ", pris=" + pris + '}';
+        return "Budget{" + "kno=" + kno + ", partnerName=" + partnerName + ", price=" + price + '}';
     }
     
     

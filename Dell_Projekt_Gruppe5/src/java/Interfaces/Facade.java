@@ -57,13 +57,13 @@ public interface Facade {
     /**
      * * Budget **
      */
-    int getNuvaerendeBelob();
+    int getCurrentFund();
 
     int getPno(String username);
 
     Poe getPoe(int kno);
 
-    int getStartsBelob();
+    int getStartingFund();
     
     boolean updateMoneyUsed(int i);
     

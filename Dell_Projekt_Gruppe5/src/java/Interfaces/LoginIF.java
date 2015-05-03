@@ -33,9 +33,9 @@ public interface LoginIF {
     
     ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno);
     
-    int getStartsBelob();
+    int getStartingFund();
     
-    int getNuvaerendeBelob();
+    int getCurrentFund();
     
     String isPartnerAccepted(int pno);
     

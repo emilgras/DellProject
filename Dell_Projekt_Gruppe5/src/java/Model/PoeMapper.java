@@ -28,14 +28,11 @@ public class PoeMapper {
             String sqlPoe = "insert into poe values (?, ?)";
             String sqlFil = "insert into filer values(?, ?, ?)";
 
-            ResultSet rs = null;
-            PreparedStatement statement = null;
-
             /**
              * * Makes POE primary number **
              */
-            statement = con.prepareStatement(sqlPrimary);
-            rs = statement.executeQuery();
+            PreparedStatement statement = con.prepareStatement(sqlPrimary);
+            ResultSet rs = statement.executeQuery();
             rs.next();
             int poeNo = rs.getInt(1);
 
@@ -123,8 +120,8 @@ public class PoeMapper {
         int result = 0;
         int poeNo = 0;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            PreparedStatement statement = null;
-            ResultSet rs = null;
+            
+            
 
             String sql1 = "select POENO from POE join KAMPAGNE on kampagne.kno = poe.KNO where kampagne.kno = ?";
             String sql2 = "delete from FILER where POENO = ?";
@@ -133,10 +130,10 @@ public class PoeMapper {
             /**
              * * Get PoeNo **
              */
-            statement = con.prepareStatement(sql1);
-            statement.setInt(1, kno);
-            rs = statement.executeQuery();
-            if (rs.next()) {         
+      PreparedStatement statement = con.prepareStatement(sql1);
+          statement.setInt(1, kno);
+      ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
                 poeNo = rs.getInt(1);
             }
 

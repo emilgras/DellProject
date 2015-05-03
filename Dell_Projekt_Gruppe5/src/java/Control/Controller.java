@@ -77,7 +77,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public String acceptCampaign(int tableRowSelected) { //(Tjek)
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
-        int pris = Math.round(facade.getAllPendingCampaigns().get(tableRowSelected).getPris());
+        int pris = Math.round(facade.getAllPendingCampaigns().get(tableRowSelected).getPrice());
         if (facade.getCampaignStatus(kno).equals("Pending")) {
             // Her accepteres kampagnen ved at oprettelsesdato initialisere
             // og kampagne status opdateres til 'In-Progess'.
@@ -186,13 +186,13 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      * ************* Budget **************
      */
     @Override
-    public int getStartsBelob() {
-        return facade.getStartsBelob();
+    public int getStartingFund() {
+        return facade.getStartingFund();
     }
 
     @Override
-    public int getNuvaerendeBelob() {
-        return facade.getNuvaerendeBelob();
+    public int getCurrentFund() {
+        return facade.getCurrentFund();
     }
 
     /**

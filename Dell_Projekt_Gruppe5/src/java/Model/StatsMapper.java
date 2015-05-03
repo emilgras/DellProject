@@ -1,6 +1,6 @@
 package Model;
 
-import static java.nio.file.Files.list;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

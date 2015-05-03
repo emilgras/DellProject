@@ -104,10 +104,10 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("prices", control.getAllPrices());
                             
                             //getBudget stuff
-                            session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                            session.setAttribute("nuvaerendeBelob", control.getCurrentFund());
                             
                             
-                            session.setAttribute("startsBelob", control.getStartsBelob());
+                            session.setAttribute("startsBelob", control.getStartingFund());
                             
                             
                             session.setAttribute("countPartners", control.countPartners());

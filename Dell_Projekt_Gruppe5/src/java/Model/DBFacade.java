@@ -69,13 +69,13 @@ public class DBFacade implements Facade {
      * * Budget **
      */
     @Override
-    public int getNuvaerendeBelob() {
-        return bm.getNuvaerendeBelob();
+    public int getCurrentFund() {
+        return bm.getCurrentFund();
     }
 
     @Override
-    public int getStartsBelob() {
-        return bm.getStartsBelob();
+    public int getStartingFund() {
+        return bm.getStartingFund();
     }
 
     @Override

@@ -49,9 +49,9 @@ public interface AdminIF {
     
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    public int getStartsBelob();
+    public int getStartingFund();
     
-    public int getNuvaerendeBelob();
+    public int getCurrentFund();
     
     // Stats
     int countPartners();

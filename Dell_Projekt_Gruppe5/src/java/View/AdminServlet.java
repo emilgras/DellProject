@@ -69,7 +69,7 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                 session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 session.setAttribute("countCampaigns", control.countCampaigns());
-                session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                session.setAttribute("nuvaerendeBelob", control.getCurrentFund());
                 session.setAttribute("prices", control.getAllPrices());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
