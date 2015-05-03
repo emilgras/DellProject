@@ -161,4 +161,23 @@ public class PoeMapper {
 
         return success;
     }
+    
+    public void newQuarterPoe(){
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())){
+            String sql1 = "drop table filer cascade constraints";
+            String sql2 = "drop table poe cascade constraints";
+            String sql3 = "Create table poe(poeno integer primary key, kno integer, constraints poe_fk foreign key(kno) references kampagne(kno))";
+            String sql4 = "Create table filer(navn varchar2(100), extension varchar2(100), poeno integer, constraints filer_fk foreign key(poeno) references poe(poeno))";
+            PreparedStatement statement = con.prepareStatement(sql1);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql2);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql3);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql4);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

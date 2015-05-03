@@ -73,8 +73,15 @@ public interface Facade {
     boolean rollBackCampaign(int kno);
 
     boolean updateCampaign(int kno);
+    /**
+     * * New Quater**
+     */
     
+    boolean newQuarterBudget(int i);
     
+    void newQuarterCampaign();
+    
+    void newQuarterPoe(); 
 
     /**
      * * POE **

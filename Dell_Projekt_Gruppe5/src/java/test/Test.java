@@ -12,6 +12,7 @@ import Model.DBConnector;
 
 import Model.DBFacade;
 import Model.PartnerMapper;
+import Model.PoeMapper;
 import Model.StatsMapper;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class Test {
         CampaignMapper cm = new CampaignMapper();
         PartnerMapper pm = new PartnerMapper();
         BudgetMapper bm = new BudgetMapper();
+        Controller con = new Controller();
+        PoeMapper poem = new PoeMapper();
         //pf.getPartnerName();
        // cm.getAllPartnerAcceptedCampaigns(con);
        //pf.showPartnerName();
@@ -64,12 +67,9 @@ public class Test {
 //        } catch (Exception e) {
 //            System.out.println("første ups");
 //        }
-        System.out.println(pm.getPno("ok"));
-        System.out.println(pm.deletePartner(999));
+        System.out.println(bm.newQuatar(55000));
+        cm.newQuatar();
+        poem.newQuatar();
         
-        StatsMapper sm = new StatsMapper();
-        System.out.println("PARTNERS: " + sm.countPartners());
-        System.out.println("CAMPAIGNS: " + sm.countCampaigns());
-        System.out.println("COUNTRIES: " + sm.countCountries());
     }
 }

@@ -194,4 +194,23 @@ public class DBFacade implements Facade {
         return sm.countCountries();
     }
 
+    /**
+     * * New Quater **
+     */
+    
+    @Override
+    public boolean newQuarterBudget(int i) {
+        return bm.newQuarterBudget(i);
+    }
+
+    @Override
+    public void newQuarterCampaign() {
+        cm.newQuarterCampaign();
+    }
+
+    @Override
+    public void newQuarterPoe() {
+        poem.newQuarterPoe();
+    }
+
 }

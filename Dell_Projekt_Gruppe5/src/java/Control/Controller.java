@@ -286,4 +286,15 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         return facade.countCountries();
     }
 
+    /**
+     * ************ New Quarter *************
+     */
+    
+    @Override
+    public boolean newQuarter(int i) {
+        facade.newQuarterCampaign();
+        facade.newQuarterPoe();
+        return facade.newQuarterBudget(i);
+    }
+
 }

@@ -90,4 +90,24 @@ public class BudgetMapper {
         }
         return j == 1;
     }
+
+    public boolean newQuarterBudget(int i) {
+        int j = 0;
+        try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+            String sql1 = "DROP table budget cascade constraints";
+            String sql2 = "Create table budget(starts_belob float, nuvaernde_belob float)";
+            String sql3 = "insert into budget values (?,0)";
+            PreparedStatement statement = connection.prepareStatement(sql1);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(sql2);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(sql3);
+            statement.setInt(1, i);
+            j += statement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return j == 1;
+    }
 }

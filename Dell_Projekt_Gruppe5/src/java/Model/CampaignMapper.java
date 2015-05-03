@@ -357,4 +357,17 @@ public class CampaignMapper {
         }
         return i == 1;
     }
+    
+    public void newQuarterCampaign(){
+        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())){
+            String sql1 = "drop table kampagne cascade constraints";
+            String sql2 = "Create table kampagne(kno integer primary key, beskrivelse varchar2(750), status varchar2(30), oprettelse_dato Varchar2(20), start_dato Varchar2(20), slut_dato Varchar2(20), pris float, pno integer, constraints kampagne_fk foreign key(pno) references partner(pno))";
+            PreparedStatement statement = con.prepareStatement(sql1);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql2);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

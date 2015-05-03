@@ -60,4 +60,7 @@ public interface AdminIF {
     
     int countCountries();
     
+    // New Quarter
+    boolean newQuarter(int i);
+    
 }
