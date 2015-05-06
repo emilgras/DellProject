@@ -173,7 +173,7 @@ public class PartnerServlet extends HttpServlet {
                 }
                 break;
 
-            case "sendPoe": // Tjek
+            case "sendPoe": 
                 ArrayList<CustomFile> fileNames = new ArrayList();
                 for (Part part : request.getParts()) {
                     String fileName = part.getSubmittedFileName();

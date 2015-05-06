@@ -25,8 +25,18 @@ public class DBFacade implements Facade {
     private StatsMapper sm;
 
     //== Singleton start
+    
     private static DBFacade instance = null;
-
+    
+    public static DBFacade getDBFacadeInstance() {
+        if (instance == null) {
+            instance = new DBFacade();
+        }
+        return instance;
+    }
+    
+    
+     //== Singleton end
     private DBFacade() {
         pm = new PartnerMapper();
         cm = new CampaignMapper();
@@ -37,13 +47,8 @@ public class DBFacade implements Facade {
 
     }
 
-    public static DBFacade getDBFacadeInstance() {
-        if (instance == null) {
-            instance = new DBFacade();
-        }
-        return instance;
-    }
-    //== Singleton end
+    
+   
 
     @Override
     public String getLogin(String username, String password) {

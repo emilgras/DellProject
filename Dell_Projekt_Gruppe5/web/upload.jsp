@@ -38,7 +38,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href=""><img src="img/home24.png"> Dashboard</a></li>                   
+                        <li><a href="PartnerServlet?action=dashboard"><img src="img/home24.png"> Dashboard</a></li>                   
                         <li><a href="PartnerServlet?action=newcampaign"><img src="img/newcampaign24.png"> New campaign</a></li>
                     </ul>
                     <a href="LoginServlet?action=logout">

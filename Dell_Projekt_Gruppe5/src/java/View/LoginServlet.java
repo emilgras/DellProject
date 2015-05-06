@@ -138,7 +138,7 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("index.jsp").forward(request, response);
                             break;
 
-                        case "Ups, something went wrong. Please, try again.":
+                        case "Ups, something went wrong. Please, try again":
                             request.setAttribute("loginErrorMessage", userCheck);
                             
                             request.getRequestDispatcher("index.jsp").forward(request, response);

@@ -44,7 +44,10 @@
 
         <section class="row">
             <div class="container  marginBottom"> 
-                <h1 class="tileHeader">Dashboard</h1>
+                <div class="row">
+                <div class="col-md-4"><h1 class="tileHeader">Dashboard</h1></div>
+                <div class="col-md-3  col-md-offset-5"><input type="number" class="btn bnt-default tileHeader"></div>
+                </div>
                 <h4 style="color: ffa500">${errorMessage}</h4>
                 <!------------ PENDING PARTNERS ------------>
                 <div class="col-md-6 marginTop">
@@ -119,15 +122,15 @@
                 <div class="col-md-12 stats">
 
                     <div class="col-md-4 center">
-                        <h3 class="whiteText">Totel Partners</h3>
+                        <h2 class="whiteText">Totel Partners</h2>
                         <h1 class="whiteText">${countPartners}</h1>
                     </div>
                     <div class="col-md-4 center">
-                        <h3 class="whiteText">Total campaigns</h3>
+                        <h2 class="whiteText">Total Campaigns</h2>
                         <h1 class="whiteText">${countCampaigns}</h1>
                     </div>
                     <div class="col-md-4 center">
-                        <h3 class="whiteText">Operating countries</h3>
+                        <h2 class="whiteText">Total Countries</h2>
                         <h1 class="whiteText">${countCountries}</h1>
                     </div>
                 </div>

@@ -1,15 +1,5 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 31-03-2015, 23:25:55
-    Author     : EmilGras
-*/
 
 /**************** Dashboard + menu's ****************/
-
 
 body {
     background-color: whitesmoke;
@@ -19,7 +9,6 @@ body {
     -moz-box-shadow: 0 0 20px #ccc; 
     -webkit-box-shadow: 0 0 20px #ccc; 
     box-shadow: 0 0 20px #ccc;
-    //opacity: .8;
 }
 
 .logo {

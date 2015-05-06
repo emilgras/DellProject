@@ -349,8 +349,9 @@ public class CampaignMapper {
     public boolean deleteCampaign(int kno){
         int i = 0;
         try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sql = "delete from kampagne where kno = " + kno;
+            String sql = "delete from kampagne where kno = ?";
             PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, kno);
             i = statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

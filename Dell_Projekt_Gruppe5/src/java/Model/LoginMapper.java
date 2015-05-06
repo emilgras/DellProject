@@ -28,13 +28,12 @@ public class LoginMapper {
 
     public String getLogin(String username, String password) {
         String message = "";
-        Partner p = null;
-        int user = 2;
-        int pass = 2;
+        int user = 0;
         String role = null;
         try (Connection con = DriverManager.getConnection(conn.getURL(), conn.getId(), conn.getPw())) {
             String SQLString1
-                    = "select count(brugernavn), count(password),rolle from bruger where brugernavn = ? and password = ? group by rolle";
+                    = "select count(brugernavn),rolle from bruger where brugernavn = ? "
+                    + "and password = ? group by rolle";
 
             PreparedStatement statement = null;
             ResultSet rs = null;
@@ -46,21 +45,19 @@ public class LoginMapper {
             rs = statement.executeQuery();
             rs.next();
             user = rs.getInt(1);
-            pass = rs.getInt(2);
-            role = rs.getString(3);
-            //statement.close();
+            role = rs.getString(2);
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (user == 1 && pass == 1 && role.equals("admin")) {
+        if (user == 1 && role.equals("admin")) {
             message = "admin";
-        } else if (user == 1 && pass == 1 && role.equals("partner")) {
+        } else if (user == 1 && role.equals("partner")) {
             message = "partner";
-        } else if (user == 2 || pass == 2) {
+        } else if (user == 2) {
             message = "Invalid username or password";
-        } else {
-            message = "Ups, something went wrong. Please, try again.";
+        } else if (user == 0) {
+            message = "Ups, something went wrong. Please, try again";
         }
         return message;
     }
