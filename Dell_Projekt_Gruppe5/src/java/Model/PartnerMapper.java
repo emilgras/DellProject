@@ -1,3 +1,6 @@
+/*
+* Frederik og Anders har arbejdet i denne klasse
+*/
 package Model;
 
 import Entities.Partner;

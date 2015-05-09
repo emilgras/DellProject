@@ -1,3 +1,6 @@
+/*
+* Frederik, Emil og Anders har arbejdet i denne klasse
+*/
 package View;
 
 import Control.Controller;
