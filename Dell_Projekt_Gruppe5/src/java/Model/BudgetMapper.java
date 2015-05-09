@@ -19,7 +19,7 @@ public class BudgetMapper {
         ArrayList<Budget> list = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
 
-            String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno";
+            String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno where status != 'Pending'";
             PreparedStatement statement = null;
 
             statement = connection.prepareStatement(sql);
@@ -35,7 +35,8 @@ public class BudgetMapper {
         return list;
     }
 
-    protected int getStartsBelob() {
+
+    protected int getStartingFund() {
         int i = 0;
         try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "select starts_belob from budget";
@@ -52,7 +53,8 @@ public class BudgetMapper {
         return i;
     }
 
-    protected int getNuvaerendeBelob() {
+
+    protected int getCurrentFund() {
         int i = 0;
         try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "select nuvaernde_belob from budget";
@@ -76,12 +78,32 @@ public class BudgetMapper {
             PreparedStatement statement = null;
 
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, getNuvaerendeBelob() + i);
-            statement.setInt(2, getStartsBelob());
+            statement.setInt(1, getCurrentFund() + i);
+            statement.setInt(2, getStartingFund());
             j = statement.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Fejl i updateMoneyUsed()");
+        }
+        return j == 1;
+    }
+
+    protected boolean newQuarterBudget(int i) {
+        int j = 0;
+        try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
+            String sql1 = "DROP table budget cascade constraints";
+            String sql2 = "Create table budget(starts_belob float, nuvaernde_belob float)";
+            String sql3 = "insert into budget values (?,0)";
+            PreparedStatement statement = connection.prepareStatement(sql1);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(sql2);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(sql3);
+            statement.setInt(1, i);
+            j += statement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return j == 1;
     }

@@ -44,13 +44,13 @@
             <h1 class="tileHeader">All campaigns</h1>  
             <div class="col-md-0 marginTop">
                 <table class="table table-striped table-bordered" id="campaigns">
-                    <tr class="active"><th>Nr.</th><th>Company</th><th>Price DKK</th><th>Created</th><th>Status</th><th>Detail</th></tr>
+                    <tr class="active"><th>Nr.</th><th>Company</th><th>Price EUR</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                             <c:forEach var="campaign" items="${newestCampaigns}">
                         <tr class="tablerow">
                             <td></td>
-                            <td>${campaign.navn}</td>
-                            <td>${campaign.pris}</td>
-                            <td>${campaign.oprettelse_dato}</td>
+                            <td>${campaign.name}</td>
+                            <td>${campaign.price}</td>
+                            <td>${campaign.created_date}</td>
                             <td>${campaign.status}</td>
                             <td><input id="campaignDetail" type="button" class="btn btn-info" value="View campaign"></td>
                         </tr>

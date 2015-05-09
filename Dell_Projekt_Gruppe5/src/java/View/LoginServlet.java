@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/*** author Ander, Emil, Fredrik **
+ */
+
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
@@ -56,15 +59,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        LoginIF control = new Controller();
         HttpSession session = request.getSession();
-        session.setAttribute("control", control);
+        LoginIF control = (LoginIF)session.getAttribute("control");
+        if (control == null) {
+            control = new Controller();
+            session.setAttribute("control", control);
+        }
 
         String errorMessage = "";
-
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
+        String password = request.getParameter("password");       
         String action = request.getParameter("action");
 
         switch (action) {
@@ -104,10 +108,10 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("prices", control.getAllPrices());
                             
                             //getBudget stuff
-                            session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                            session.setAttribute("nuvaerendeBelob", control.getCurrentFund());
                             
                             
-                            session.setAttribute("startsBelob", control.getStartsBelob());
+                            session.setAttribute("startsBelob", control.getStartingFund());
                             
                             
                             session.setAttribute("countPartners", control.countPartners());

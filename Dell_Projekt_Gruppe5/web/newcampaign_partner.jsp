@@ -46,11 +46,11 @@
                 <form class="form-group marginTop" action="PartnerServlet" method="post">
                     <div class="form-group">
                         <label for="date" >Campaign start:</label>
-                        <input type="date" name="campaignstart" value="${campaign.start_dato}" class="form-control" id="date">
+                        <input type="date" name="campaignstart" value="${campaign.start_date}" class="form-control" id="date">
                     </div>
                     <div class="form-group">
                         <label for="date" >Campaign end:</label>
-                        <input type="date" name="campaignend" value="${campaign.slut_dato}" class="form-control" id="date">
+                        <input type="date" name="campaignend" value="${campaign.end_date}" class="form-control" id="date">
                     </div>
                     <div class="form-group">
                         <label for="price" class="left-align">Price estimate EUR:</label>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group">
                         <label for="comment">Description:</label>
-                        <textarea name="description" value="${campaign.beskrivelse}" class="form-control" rows="5" id="comment"></textarea>
+                        <textarea name="description" value="${campaign.description}" class="form-control" rows="5" id="comment"></textarea>
                     </div>
                     <div class="form-group marginTop">
                         <input type="submit" value="Send" class="btn btn-info btn-block">

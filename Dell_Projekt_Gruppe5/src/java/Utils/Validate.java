@@ -3,6 +3,8 @@ package Utils;
 import Entities.Campaign;
 import Entities.Partner;
 
+/*** @author Emil ***/
+
 public class Validate {
     
     public static String signupErrorMessage(Partner partner, String confirmPass) {
@@ -38,10 +40,10 @@ public class Validate {
         
         String errorMessage = "";
         
-        if (campaign.getStart_dato().equals("")) errorMessage = "Please, remember to enter the estimated start date";
-        if (campaign.getSlut_dato().equals("")) errorMessage = "Please, remember to enter the estimated end date";
-        if (campaign.getPris() < 1) errorMessage = "Please, remember to enter an estimated price";
-        if (campaign.getBeskrivelse().equals("")) errorMessage = "Please, remember to enter a full campaign description";
+        if (campaign.getStart_date().equals("")) errorMessage = "Please, remember to enter the estimated start date";
+        if (campaign.getEnd_date().equals("")) errorMessage = "Please, remember to enter the estimated end date";
+        if (campaign.getPrice() < 1) errorMessage = "Please, remember to enter an estimated price";
+        if (campaign.getDescription().equals("")) errorMessage = "Please, remember to enter a full campaign description";
         
         return errorMessage;
         

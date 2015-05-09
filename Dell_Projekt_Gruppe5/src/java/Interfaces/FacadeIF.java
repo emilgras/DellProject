@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
 import Entities.Budget;
@@ -12,17 +7,12 @@ import Entities.Partner;
 import Entities.Poe;
 import java.util.ArrayList;
 
-/**
- *
- * @author EmilGras
- */
+/*** @author EmilGras ***/
+
 public interface FacadeIF {
 
     boolean acceptCampaign(int kno);
 
-    /**
-     * * Dashboard button interaction **
-     */
     boolean acceptPartner(String cvr);
     
     boolean deletePartner(int pno);
@@ -43,9 +33,6 @@ public interface FacadeIF {
     
     boolean deleteCampaign(int kno);
 
-    /**
-     * * Dashboard view **
-     */
     ArrayList<Partner> getAllPendingPartners();
 
     ArrayList<Budget> getAllPrices();
@@ -54,42 +41,34 @@ public interface FacadeIF {
 
     String getLogin(String username, String password);
 
-    /**
-     * * Budget **
-     */
-    int getNuvaerendeBelob();
-
     int getPno(String username);
 
     Poe getPoe(int kno);
-
-    int getStartsBelob();
     
     boolean updateMoneyUsed(int i);
     
-
     boolean isPartnerAccepted(int pno);
 
     boolean rollBackCampaign(int kno);
 
     boolean updateCampaign(int kno);
-    
-    
 
-    /**
-     * * POE **
-     */
     boolean uploadPoe(int kno, ArrayList<CustomFile> files);
-    
-    /**
-     * * STATS **
-     */
-    
+
     int countPartners();
 
     int countCampaigns();
     
     int countCountries();
     
+    int getStartingFund();
+    
+    int getCurrentFund();
+    
+    boolean newQuarterBudget(int i);
+    
+    void newQuarterCampaign();
+    
+    void newQuarterPoe();
     
 }

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Frederik, Emil og Anders har arbejdet i denne klasse
  */
 package Interfaces;
 
@@ -49,9 +47,9 @@ public interface AdminIF {
     
     public ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     
-    public int getStartsBelob();
+    public int getStartingFund();
     
-    public int getNuvaerendeBelob();
+    public int getCurrentFund();
     
     // Stats
     int countPartners();
@@ -59,5 +57,8 @@ public interface AdminIF {
     int countCampaigns();
     
     int countCountries();
+    
+    // New Quarter
+    boolean newQuarter(int i);
     
 }

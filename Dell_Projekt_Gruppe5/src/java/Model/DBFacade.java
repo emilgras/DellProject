@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Interfaces.FacadeIF;
@@ -11,9 +6,9 @@ import Entities.Partner;
 import Entities.CustomFile;
 import Entities.Campaign;
 import Entities.Poe;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+/*** @author Ander, Emil, Frederik ***/
 
 public class DBFacade implements FacadeIF {
 
@@ -68,13 +63,13 @@ public class DBFacade implements FacadeIF {
      * * Budget **
      */
     @Override
-    public int getNuvaerendeBelob() {
-        return bm.getNuvaerendeBelob();
+    public int getCurrentFund() {
+        return bm.getCurrentFund();
     }
 
     @Override
-    public int getStartsBelob() {
-        return bm.getStartsBelob();
+    public int getStartingFund() {
+        return bm.getStartingFund();
     }
 
     @Override
@@ -193,4 +188,22 @@ public class DBFacade implements FacadeIF {
         return sm.countCountries();
     }
 
+    /**
+     * * New Quater **
+     */
+    
+    @Override
+    public boolean newQuarterBudget(int i) {
+        return bm.newQuarterBudget(i);
+    }
+
+    @Override
+    public void newQuarterCampaign() {
+        cm.newQuarterCampaign();
+    }
+
+    @Override
+    public void newQuarterPoe() {
+        poem.newQuarterPoe();
+    }
 }

@@ -107,7 +107,7 @@ public class FacadeStub implements FacadeIF {
     }
 
     @Override
-    public int getNuvaerendeBelob() {
+    public int getCurrentFund() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -125,7 +125,7 @@ public class FacadeStub implements FacadeIF {
     }
 
     @Override
-    public int getStartsBelob() {
+    public int getStartingFund() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -185,6 +185,21 @@ public class FacadeStub implements FacadeIF {
 
     @Override
     public boolean deleteCampaign(int kno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean newQuarterBudget(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void newQuarterCampaign() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void newQuarterPoe() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -25,7 +25,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         this.facade = facade;
     }
 
-    
     /*
      *
      *  Admin Interface
@@ -61,17 +60,17 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         String message = "";
         int pno = facade.getAllPendingPartners().get(tableRowSelected).getPno();
         System.out.println("pno: " + pno);
-        if(!facade.deletePartner(pno)){
+        if (!facade.deletePartner(pno)) {
             message = "Something went wrong, could not decline partner right now. Please try agian later?";
         }
         return message;
     }
-    
+
     @Override
     public String acceptCampaign(int tableRowSelected) { //(Tjek)
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
-        int pris = Math.round(facade.getAllPendingCampaigns().get(tableRowSelected).getPris());
+        int pris = Math.round(facade.getAllPendingCampaigns().get(tableRowSelected).getPrice());
         if (facade.getCampaignStatus(kno).equals("Pending")) {
             // Her accepteres kampagnen ved at oprettelsesdato initialisere
             // og kampagne status opdateres til 'In-Progess'.
@@ -99,7 +98,7 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
 
-        if (facade.deleteOldPoe(kno)) {           
+        if (facade.deleteOldPoe(kno)) {
             if (!facade.rollBackCampaign(kno)) {
                 message = "Could not decline campaign at the moment du to a techical problems. Please, try again";
             }
@@ -114,11 +113,10 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      *  Used in Login, Partner and Admin Interface
      *    
      */
-    public Poe getPoe(int kno) { 
+    public Poe getPoe(int kno) {
         Poe poe = null;
         String status = facade.getCampaignStatus(kno);
-        if (!status.equals("Pending") && !status.equals("In Progress")) 
-        {
+        if (!status.equals("Pending") && !status.equals("In Progress")) {
             poe = facade.getPoe(kno);
         }
         return poe;
@@ -168,7 +166,6 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     /**
      * ************* Campaign **************
      */
-    
     @Override
     public boolean updateCampaignWithKno(int kno) {
         boolean success = false;
@@ -182,13 +179,13 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      * ************* Budget **************
      */
     @Override
-    public int getStartsBelob() {
-        return facade.getStartsBelob();
+    public int getStartingFund() {
+        return facade.getStartingFund();
     }
 
     @Override
-    public int getNuvaerendeBelob() {
-        return facade.getNuvaerendeBelob();
+    public int getCurrentFund() {
+        return facade.getCurrentFund();
     }
 
     /**
@@ -201,12 +198,14 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
         int kno = facade.getAllNewestCampaigns().get(tableRowSelected).getKno();
         return facade.updateCampaign(kno);
     }
-    
+
     @Override
     public String deleteCampaign(int tableRowSelected) {
         String message = "";
         int kno = facade.getAllPendingCampaigns().get(tableRowSelected).getKno();
-        if(!facade.deleteCampaign(kno)) message = "The campaign has been succesfully deleted, and a notification has been sent to the partner with further details.";
+        if (!facade.deleteCampaign(kno)) {
+            message = "The campaign has been succesfully deleted, and a notification has been sent to the partner with further details.";
+        }
         return message;
     }
 
@@ -262,24 +261,37 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     public ArrayList<Partner> getAllPartners() {
         return facade.getAllPartners();
     }
-    
+
     /**
      * ************ STATS *************
      */
-    
     @Override
     public int countPartners() {
         return facade.countPartners();
     }
-    
+
     @Override
     public int countCampaigns() {
         return facade.countCampaigns();
     }
-    
+
     @Override
     public int countCountries() {
         return facade.countCountries();
+    }
+
+    /**
+     * ************ New Quarter *************
+     */
+    @Override
+    public boolean newQuarter(int i) {
+        boolean status = false;
+        if (facade.newQuarterBudget(i)) {
+            facade.newQuarterCampaign();
+            facade.newQuarterPoe();
+            status = true;
+        }
+        return status;
     }
 
 }

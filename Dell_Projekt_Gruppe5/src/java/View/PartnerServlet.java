@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Control.Controller;
@@ -11,7 +6,6 @@ import Entities.Campaign;
 import Entities.CustomFile;
 import Entities.Partner;
 import Utils.Validate;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -22,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+/*** author Ander, Emil, Fredrik **
+ */
 
 @MultipartConfig(location = "/Users/EmilGras/Desktop/Dell_Projekt_Gruppe5/Dell_Projekt_Gruppe5/web/uploads",
         fileSizeThreshold = 1024 * 1024,
@@ -34,7 +31,6 @@ public class PartnerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         PartnerIF control = (PartnerIF)session.getAttribute("control");
         if (control == null) {
             control = new Controller();
@@ -42,7 +38,6 @@ public class PartnerServlet extends HttpServlet {
         }
 
         int tableRowSelected = 0;
-
         String action = request.getParameter("action");
 
         switch (action) {
@@ -95,7 +90,6 @@ public class PartnerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         PartnerIF control = (PartnerIF)session.getAttribute("control");
         if (control == null) {
             control = new Controller();
@@ -103,7 +97,6 @@ public class PartnerServlet extends HttpServlet {
         }
 
         String errorMessage = "";
-
         String action = request.getParameter("action");
 
         switch (action) {

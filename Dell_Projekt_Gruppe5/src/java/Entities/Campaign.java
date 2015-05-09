@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entities;
-
-import java.sql.Date;
 
 /**
  *
@@ -14,34 +7,34 @@ import java.sql.Date;
 public class Campaign {
 
     private int kno;
-    private String beskrivelse;
+    private String description;
     private String status;
-    private String oprettelse_dato;
-    private String start_dato;
-    private String slut_dato;
-    private float pris;
+    private String created_date;
+    private String start_date;
+    private String end_date;
+    private float price;
     private int pno;
-    private String navn;
+    private String name;
     private String cvr;
 
-    public Campaign(String start_dato, String slut_dato, float pris, String beskrivelse, int pno) {
-        this.beskrivelse = beskrivelse;
-        this.start_dato = start_dato;
-        this.slut_dato = slut_dato;
-        this.pris = pris;
+    public Campaign(String start_date, String end_date, float price, String description, int pno) {
+        this.description = description;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price = price;
         this.pno = pno;
         }
 
-    public Campaign(int kno, String beskrivelse, String status, String oprettelse_dato, String start_dato, String slut_dato, float pris, int pno, String navn, String cvr) {
+    public Campaign(int kno, String description, String status, String created_date, String start_date, String end_date, float price, int pno, String name, String cvr) {
         this.kno = kno;
-        this.beskrivelse = beskrivelse;
+        this.description = description;
         this.status = status;
-        this.oprettelse_dato = oprettelse_dato;
-        this.start_dato = start_dato;
-        this.slut_dato = slut_dato;
-        this.pris = pris;
+        this.created_date = created_date;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price = price;
         this.pno = pno;
-        this.navn = navn;
+        this.name = name;
         this.cvr = cvr;
         }
 
@@ -53,36 +46,36 @@ public class Campaign {
         this.kno = kno;
         }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public String getDescription() {
+        return description;
         }
 
     public String getStatus() {
         return status;
         }
 
-    public String getOprettelse_dato() {
-        return oprettelse_dato;
+    public String getCreated_date() {
+        return created_date;
         }
 
-    public String getStart_dato() {
-        return start_dato;
+    public String getStart_date() {
+        return start_date;
         }
 
-    public String getSlut_dato() {
-        return slut_dato;
+    public String getEnd_date() {
+        return end_date;
         }
 
-    public float getPris() {
-        return pris;
+    public float getPrice() {
+        return price;
         }
 
     public int getPno() {
         return pno;
         }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
         }
 
     public String getCvr() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Interfaces.AdminIF;
@@ -15,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+/**
+ * * author Ander, Emil, Fredrik **
+ */
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
@@ -69,7 +68,8 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());
                 session.setAttribute("newestCampaigns", control.getAllNewestCampaigns());
                 session.setAttribute("countCampaigns", control.countCampaigns());
-                session.setAttribute("nuvaerendeBelob", control.getNuvaerendeBelob());
+                session.setAttribute("nuvaerendeBelob", control.getCurrentFund());
+                session.setAttribute("prices", control.getAllPrices());
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "declinecampaign": 
@@ -109,10 +109,5 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("detailCampaign_admin.jsp").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
     }
 }

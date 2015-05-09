@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entities;
 
 /**
@@ -10,44 +5,25 @@ package Entities;
  * @author Frederik
  */
 public class Budget {
-    int kno;
-    String partnerNavn;
-    float pris;
+    private int kno;
+    private String partnerName;
+    private float price;
     
-    public Budget(int kno, String pn, float pris){
+    public Budget(int kno, String pn, float price){
         this.kno = kno;
-        this.partnerNavn = pn;
-        this.pris = pris;
+        this.partnerName = pn;
+        this.price = price;
     }
 
     public int getKno() {
         return kno;
     }
 
-    public void setKno(int kno) {
-        this.kno = kno;
+    public String getPartnerName() {
+        return partnerName;
     }
 
-    public String getPartnerNavn() {
-        return partnerNavn;
+    public float getPrice() {
+        return price;
     }
-
-    public void setPartnerNavn(String PartnerNavn) {
-        this.partnerNavn = PartnerNavn;
-    }
-
-    public float getPris() {
-        return pris;
-    }
-
-    public void setPris(float pris) {
-        this.pris = pris;
-    }
-
-    @Override
-    public String toString() {
-        return "Budget{" + "kno=" + kno + ", partnerNavn=" + partnerNavn + ", pris=" + pris + '}';
-    }
-    
-    
 }

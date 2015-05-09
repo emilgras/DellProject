@@ -1,4 +1,5 @@
-
+<%-- Frederik, Emil og Anders har arbejdet på denne jsp. 
+--%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,10 +44,11 @@
 
 
         <section class="row">
-            <div class="container  marginBottom"> 
+            <div class="container  marginBottom">
                 <div class="row">
                 <div class="col-md-4"><h1 class="tileHeader">Dashboard</h1></div>
-                <div class="col-md-3  col-md-offset-5"><input type="number" class="btn bnt-default tileHeader"></div>
+                <div class="col-md-3  col-md-offset-5"><label for="nqtr">New quarter budget:</label>
+                    <input type="number" name="newQuarter" class="form-control" id="nqtr"> </div>
                 </div>
                 <h4 style="color: ffa500">${errorMessage}</h4>
                 <!------------ PENDING PARTNERS ------------>
@@ -75,7 +77,7 @@
                                     <tr class="active"><th>Company</th><th>Status</th><th>Accept</th><th>Decline</th><th>Detail</th></tr>
                                             <c:forEach var="campaign" items="${pendingCampaigns}">
                                         <tr>
-                                            <td>${campaign.navn} </td>
+                                            <td>${campaign.name} </td>
                                             <td>${campaign.status} </td>
                                             <td><button type="button"  id="pendingCampaignsAccept" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span></button></td>
                                             <td>
@@ -83,8 +85,8 @@
                                                 <c:if test="${campaign.status == 'POE Pending'}"><button type="button" id="pendingCampaignsDeclinePoe" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"></span></button></c:if>
                                                 <c:if test="${campaign.status == 'Invoice Pending'}"><button disabled="disabled" type="button" class="btn btn-danger btn-danger"><span class="glyphicon glyphicon-remove"</span></button></c:if>
                                                 </td>
-                                            <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
-                                        </tr>
+                                                <td><input id="pendingCampaignsDetail" type="button" class="btn btn-info" value="View campaign"></td>
+                                            </tr>
                                     </c:forEach>                                 
                                 </table> 
                             </div>
@@ -101,7 +103,7 @@
                             <table class="table table-striped table-bordered">
                                 <tr class="active"><th>Nr.</th><th>Company</th><th>Price Eur</th><th>Created</th><th>Status</th><th>Detail</th></tr>
                                         <c:forEach var="campaign" items="${newestCampaigns}" begin="0" end="4">
-                                    <tr class="tablerow"><td></td><td>${campaign.navn}</td><td>${campaign.pris}</td><td>${campaign.oprettelse_dato}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
+                                    <tr class="tablerow"><td></td><td>${campaign.name}</td><td>${campaign.price}</td><td>${campaign.created_date}</td><td>${campaign.status}</td><td><input id="newestCampaigns" type="button" class="btn btn-info" value="View campaign"></td></tr>
 
                                 </c:forEach>
                             </table> 
@@ -161,7 +163,7 @@
                 var data = google.visualization.arrayToDataTable([
                     ['Task', 'Hours per Day']
             <c:forEach var="item" items="${prices}">
-                    , ['${item.partnerNavn} ${item.pris} EUR', ${item.pris}]
+                    , ['${item.partnerName} ${item.price} EUR', ${item.price}]
             </c:forEach>
                 ]);
 

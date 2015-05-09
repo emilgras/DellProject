@@ -27,14 +27,11 @@ public class PoeMapper {
             String sqlPoe = "insert into poe values (?, ?)";
             String sqlFil = "insert into filer values(?, ?, ?)";
 
-            ResultSet rs = null;
-            PreparedStatement statement = null;
-
             /**
              * * Makes POE primary number **
              */
-            statement = con.prepareStatement(sqlPrimary);
-            rs = statement.executeQuery();
+            PreparedStatement statement = con.prepareStatement(sqlPrimary);
+            ResultSet rs = statement.executeQuery();
             rs.next();
             int poeNo = rs.getInt(1);
 
@@ -117,10 +114,10 @@ public class PoeMapper {
     }
 
     protected boolean deleteOldPoe(int kno) {
-
         boolean success = true;
         int result = 0;
         int poeNo = 0;
+        
         try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             PreparedStatement statement = null;
             ResultSet rs = null;
@@ -135,6 +132,7 @@ public class PoeMapper {
             statement = con.prepareStatement(sql1);
             statement.setInt(1, kno);
             rs = statement.executeQuery();
+
             if (rs.next()) {
                 poeNo = rs.getInt(1);
             }
@@ -159,5 +157,24 @@ public class PoeMapper {
         }
 
         return success;
+    }
+    
+    protected void newQuarterPoe(){
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)){
+            String sql1 = "drop table filer cascade constraints";
+            String sql2 = "drop table poe cascade constraints";
+            String sql3 = "Create table poe(poeno integer primary key, kno integer, constraints poe_fk foreign key(kno) references kampagne(kno))";
+            String sql4 = "Create table filer(navn varchar2(100), extension varchar2(100), poeno integer, constraints filer_fk foreign key(poeno) references poe(poeno))";
+            PreparedStatement statement = con.prepareStatement(sql1);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql2);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql3);
+            statement.executeUpdate();
+            statement = con.prepareStatement(sql4);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

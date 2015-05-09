@@ -2,6 +2,7 @@
     Document   : campaigns
     Created on : 04-04-2015, 16:33:25
     Author     : EmilGras
+    Frederik og Emil har arbejdet på den jsp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -44,12 +45,12 @@
 
             <!-------- Details --------> 
             <div class="row marginBottom">
-                <div><a href="AdminServlet?action=dashboard"><< Tilbage</a></div>
+                <div><a href="AdminServlet?action=dashboard"><< back</a></div>
                 <div><h1 class="tileHeader">Campaign detail</h1></div>     
                 <div class="col-md-0 marginTop">           
                     <div class="col-md-8">
-                        <h3>Company: ${campaignDetail.navn}</h3>
-                        <h3>cvr: ${campaignDetail.cvr}</h3>
+                        <h3>Company: ${campaignDetail.name}</h3>
+                        <h5>cvr: ${campaignDetail.cvr}</h5>
                     </div>
                     <div class="trackbox">
                         <div class="center">
@@ -58,11 +59,11 @@
                         <h4>Status: ${campaignDetail.status}</h4>
                     </div>
                     <div class="fleft col-md-8">
-                        <h3>Describtion: ${campaignDetail.beskrivelse}</h3>
-                        <h3>Pris: ${campaignDetail.pris}</h3>
-                        <h3>Expected start: ${campaignDetail.start_dato}</h3>
-                        <h3>Expected end: ${campaignDetail.slut_dato}</h3>
-                        <h3>Created: ${campaignDetail.oprettelse_dato}</h3>
+                        <h3>Describtion: ${campaignDetail.description}</h3>
+                        <h3>Price: ${campaignDetail.price}</h3>
+                        <h3>Expected start: ${campaignDetail.start_date}</h3>
+                        <h3>Expected end: ${campaignDetail.end_date}</h3>
+                        <h3>Created: ${campaignDetail.created_date}</h3>
                         <h3>Id: ${campaignDetail.kno}</h3>
                     </div>
 

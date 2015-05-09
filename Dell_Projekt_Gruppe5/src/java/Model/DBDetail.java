@@ -1,6 +1,6 @@
 package Model;
 
-/*** @author AndersBjergfelt ***/
+/*** @author Anders ***/
 
 public class DBDetail {
     protected static final String URL = "jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:dat";
