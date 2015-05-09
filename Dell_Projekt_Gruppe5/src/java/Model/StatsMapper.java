@@ -16,6 +16,11 @@ import java.util.logging.Logger;
 public class StatsMapper {
 
     protected StatsMapper() {
+        try {
+            Class.forName(DBDetail.DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected int countPartners() {

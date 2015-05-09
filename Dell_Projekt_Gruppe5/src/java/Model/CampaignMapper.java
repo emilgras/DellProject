@@ -19,6 +19,11 @@ import java.util.logging.Logger;
 public class CampaignMapper {
 
     protected CampaignMapper() {
+        try {
+            Class.forName(DBDetail.DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected boolean insertCampaign(Campaign camp) {

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * * @author Anders **
@@ -17,6 +19,11 @@ import java.util.ArrayList;
 public class PartnerMapper {
 
     protected PartnerMapper() {
+        try {
+            Class.forName(DBDetail.DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected boolean createPartner(Partner partner) {

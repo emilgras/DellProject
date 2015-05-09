@@ -17,6 +17,11 @@ import java.util.logging.Logger;
 public class PoeMapper {
 
     protected PoeMapper() {
+        try {
+            Class.forName(DBDetail.DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected boolean uploadPoe(int kno, ArrayList<CustomFile> files) {

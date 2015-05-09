@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * * @author Frederik **
@@ -13,6 +15,11 @@ import java.util.ArrayList;
 public class BudgetMapper {
 
     protected BudgetMapper() {
+        try {
+            Class.forName(DBDetail.DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     protected ArrayList<Budget> getAllPrices() {
