@@ -2,6 +2,7 @@
     Document   : campaigns
     Created on : 04-04-2015, 16:33:25
     Author     : EmilGras
+    Frederik og Emil har arbejdet på den jsp
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

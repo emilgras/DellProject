@@ -1,4 +1,5 @@
-
+<%-- Frederik, Emil og Anders har arbejdet på denne jsp. 
+--%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
