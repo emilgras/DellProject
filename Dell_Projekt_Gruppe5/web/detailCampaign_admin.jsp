@@ -49,7 +49,7 @@
                 <div class="col-md-0 marginTop">           
                     <div class="col-md-8">
                         <h3>Company: ${campaignDetail.navn}</h3>
-                        <h5>cvr: ${campaignDetail.cvr}</h5>
+                        <h3>cvr: ${campaignDetail.cvr}</h3>
                     </div>
                     <div class="trackbox">
                         <div class="center">

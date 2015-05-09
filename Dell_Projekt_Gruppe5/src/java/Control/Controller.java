@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
 import Interfaces.PartnerIF;
@@ -15,19 +10,18 @@ import java.util.ArrayList;
 import Model.DBFacade;
 import Entities.CustomFile;
 import Entities.Poe;
-import Interfaces.Facade;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import Interfaces.FacadeIF;
 
 public class Controller implements LoginIF, PartnerIF, AdminIF {
 
-    private Facade facade;
+    private FacadeIF facade;
 
     public Controller() {
-        facade = DBFacade.getDBFacadeInstance();
+        this.facade = DBFacade.getDBFacadeInstance();
     }
 
-    public Controller(Facade facade) {
+    /* Hjælpe konstruktør anvendes til jUnit test */
+    public Controller(FacadeIF facade) {
         this.facade = facade;
     }
 
@@ -120,9 +114,11 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
      *  Used in Login, Partner and Admin Interface
      *    
      */
-    public Poe getPoe(int kno) { //(Tjek)
+    public Poe getPoe(int kno) { 
         Poe poe = null;
-        if (!facade.getCampaignStatus(kno).equals("Pending") && !facade.getCampaignStatus(kno).equals("In Progress")) {
+        String status = facade.getCampaignStatus(kno);
+        if (!status.equals("Pending") && !status.equals("In Progress")) 
+        {
             poe = facade.getPoe(kno);
         }
         return poe;

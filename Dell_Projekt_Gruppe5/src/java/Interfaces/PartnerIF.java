@@ -27,15 +27,9 @@ public interface PartnerIF {
     
     int getPno(String username);
     
-    ArrayList<Campaign> getAllPendingCampaigns();
-    
-    ArrayList<Campaign> getAllNewestCampaigns();
-    
-    ArrayList<Partner> getAllPendingPartners();
-    
     String uploadPoe(int kno, ArrayList<CustomFile> files);
     
-    public Poe getPoe(int kno);
+    Poe getPoe(int kno);
     
     ArrayList<Campaign>getAllOwnPartnerCampaigns(int pno);
     

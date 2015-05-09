@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-import Entities.Partner;
-import Model.PartnerMapper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,21 +9,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Frederik
+ * * @author Anders, Emil, Frederik **
  */
 public class LoginMapper {
 
-    private DBConnector conn = new DBConnector();
+    protected LoginMapper() {
+    }
 
-    
-    
-
-    public String getLogin(String username, String password) {
-        String message = "";
+    protected String getLogin(String username, String password) {
         int user = 0;
         String role = null;
-        try (Connection con = DriverManager.getConnection(conn.getURL(), conn.getId(), conn.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String SQLString1
                     = "select count(brugernavn),rolle from bruger where brugernavn = ? "
                     + "and password = ? group by rolle";
@@ -49,6 +38,8 @@ public class LoginMapper {
         } catch (SQLException ex) {
             Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        String message = "";
 
         if (user == 1 && role.equals("admin")) {
             message = "admin";

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Entities.CustomFile;
@@ -16,13 +11,17 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * * @author Emil **
+ */
 public class PoeMapper {
 
-    DBConnector db = new DBConnector();
+    protected PoeMapper() {
+    }
 
-    public boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
+    protected boolean uploadPoe(int kno, ArrayList<CustomFile> files) {
         boolean success = true;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             System.out.println("POEM KNO: " + kno);
             String sqlPrimary = "select poeNo_increment.nextval from dual";
             String sqlPoe = "insert into poe values (?, ?)";
@@ -69,9 +68,9 @@ public class PoeMapper {
         return success;
     }
 
-    public Poe getPoe(int kno) {
+    protected Poe getPoe(int kno) {
         Poe poe = new Poe();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
 
             String sql = "select navn, extension from filer join poe on filer.poeno = poe.poeno where kno = ?";
 
@@ -117,12 +116,12 @@ public class PoeMapper {
         return poe;
     }
 
-    public boolean deleteOldPoe(int kno) {
+    protected boolean deleteOldPoe(int kno) {
 
         boolean success = true;
         int result = 0;
         int poeNo = 0;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             PreparedStatement statement = null;
             ResultSet rs = null;
 
@@ -136,7 +135,7 @@ public class PoeMapper {
             statement = con.prepareStatement(sql1);
             statement.setInt(1, kno);
             rs = statement.executeQuery();
-            if (rs.next()) {         
+            if (rs.next()) {
                 poeNo = rs.getInt(1);
             }
 

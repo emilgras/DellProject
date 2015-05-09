@@ -5,7 +5,7 @@
  */
 package Model;
 
-import Interfaces.Facade;
+import Interfaces.FacadeIF;
 import Entities.Budget;
 import Entities.Partner;
 import Entities.CustomFile;
@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBFacade implements Facade {
+public class DBFacade implements FacadeIF {
 
     private PartnerMapper pm;
     private CampaignMapper cm;
@@ -24,19 +24,9 @@ public class DBFacade implements Facade {
     private BudgetMapper bm;
     private StatsMapper sm;
 
-    //== Singleton start
-    
+    //== Singleton start 
     private static DBFacade instance = null;
     
-    public static DBFacade getDBFacadeInstance() {
-        if (instance == null) {
-            instance = new DBFacade();
-        }
-        return instance;
-    }
-    
-    
-     //== Singleton end
     private DBFacade() {
         pm = new PartnerMapper();
         cm = new CampaignMapper();
@@ -44,12 +34,16 @@ public class DBFacade implements Facade {
         poem = new PoeMapper();
         bm = new BudgetMapper();
         sm = new StatsMapper();
-
     }
-
     
-   
-
+    public static DBFacade getDBFacadeInstance() {
+        if (instance == null) {
+            instance = new DBFacade();
+        }
+        return instance;
+    }
+     //== Singleton end
+    
     @Override
     public String getLogin(String username, String password) {
         return lm.getLogin(username, password);

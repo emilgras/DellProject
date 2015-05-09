@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-// Denne metode giver hver række et unikt id startende med 1
+    
+            // Denne metode giver hver række et unikt id startende med 1
             $('.tablerow').each(function (i) {
                 $("td:first", this).html(i + 1);
             });

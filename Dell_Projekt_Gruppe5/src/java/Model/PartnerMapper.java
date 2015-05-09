@@ -7,58 +7,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author ABjergfelt
+ * * @author Anders **
  */
 public class PartnerMapper {
 
-    DBConnector db = new DBConnector();
-    int count = 0;
-    private String message = "";
-
-    public String getLogin(String username, String password) {
-        Partner p = null;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String SQLString1
-                    = "select count(*) as count from partner where brugernavn = ? and password = ?";
-
-            PreparedStatement statement = null;
-
-            // get login
-            statement = con.prepareStatement(SQLString1);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet rs = statement.executeQuery();
-            rs.next();
-
-            count = rs.getInt(1);
-        } catch (SQLException ex) {
-            Logger.getLogger(PartnerMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (count == 0) {
-            message = "Invalid username or password";
-
-        }
-        System.out.println(count);
-        return message;
-
+    protected PartnerMapper() {
     }
 
-    public boolean createPartner(Partner partner) {
+    protected boolean createPartner(Partner partner) {
 
         boolean success = true;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
-            String sql1 = "INSERT INTO bruger values (?,?,?)";
-            String sql2 = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn) VALUES (?,?,?,?,?,?)";
-            String SQLString1
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
+            String sql1
                     = "select pno_increment.nextval  "
                     + "from dual";
+            String sql2 = "INSERT INTO bruger values (?,?,?)";
+            String sql3 = "INSERT INTO partner (pno, cvr, land, navn, dato, brugernavn) VALUES (?,?,?,?,?,?)";
 
             String user = partner.getUsername();
             String pass = partner.getPassword();
@@ -67,19 +33,19 @@ public class PartnerMapper {
             String country = partner.getCountry();
             String date = "NULL";
 
-            PreparedStatement insertStatement = con.prepareStatement(SQLString1);
+            PreparedStatement insertStatement = con.prepareStatement(sql1);
             ResultSet rs = insertStatement.executeQuery();
             if (rs.next()) {
                 partner.setPno(rs.getInt(1));
             }
 
-            insertStatement = con.prepareStatement(sql1);
+            insertStatement = con.prepareStatement(sql2);
             insertStatement.setString(1, user);
             insertStatement.setString(2, pass);
             insertStatement.setString(3, "partner");
             insertStatement.executeUpdate();
 
-            insertStatement = con.prepareStatement(sql2);
+            insertStatement = con.prepareStatement(sql3);
             insertStatement.setInt(1, partner.getPno());
             insertStatement.setString(2, cvr);
             insertStatement.setString(3, country);
@@ -96,8 +62,8 @@ public class PartnerMapper {
         return success;
     }
 
-    public boolean acceptPartner(String cvr) {
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+    protected boolean acceptPartner(String cvr) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString2 = "update partner set dato = ? where cvr = ?";
 
             PreparedStatement statement = con.prepareStatement(sqlString2);
@@ -116,9 +82,9 @@ public class PartnerMapper {
         return true;
     }
 
-    public ArrayList<Partner> getAllPendingPartners() {
+    protected ArrayList<Partner> getAllPendingPartners() {
         ArrayList<Partner> pArray = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select navn,cvr,land,pno from partner where dato = 'NULL'";
 
             PreparedStatement statement = con.prepareStatement(sqlString);
@@ -145,9 +111,9 @@ public class PartnerMapper {
 
     }
 
-    public ArrayList<Partner> getAllPartners() {
+    protected ArrayList<Partner> getAllPartners() {
         ArrayList<Partner> pArray = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select navn,cvr,land from partner where dato != 'NULL'";
 
             PreparedStatement statement = con.prepareStatement(sqlString);
@@ -174,9 +140,9 @@ public class PartnerMapper {
 
     }
 
-    public int getPno(String username) {
+    protected int getPno(String username) {
         int pno = 0;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select pno from partner where brugernavn = ?";
             PreparedStatement statement = con.prepareStatement(sqlString);
             statement.setString(1, username);
@@ -191,10 +157,10 @@ public class PartnerMapper {
         return pno;
     }
 
-    public boolean isPartnerAccepted(int pno) {
+    protected boolean isPartnerAccepted(int pno) {
         String status = "";
         boolean accepted = true;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select dato from partner where pno = ?";
             PreparedStatement statement = null;
             ResultSet rs = null;
@@ -217,28 +183,30 @@ public class PartnerMapper {
         return accepted;
     }
 
-    public boolean deletePartner(int pno){
+    protected boolean deletePartner(int pno) {
         int i = 0;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String brugernavn = "";
             String sql1 = "select brugernavn from partner where pno = ?";
             String sql2 = "delete from partner where pno = ?";
-            
+
             PreparedStatement statement = con.prepareStatement(sql1);
             statement.setInt(1, pno);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) brugernavn = rs.getString(1);
-            
+            if (rs.next()) {
+                brugernavn = rs.getString(1);
+            }
+
             statement = con.prepareStatement(sql2);
             statement.setInt(1, pno);
             i += statement.executeUpdate();
-            
+
             String sql3 = "delete from bruger where brugernavn = ?";
             statement = con.prepareStatement(sql3);
             statement.setString(1, brugernavn);
             i += statement.executeUpdate();
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return i == 2;

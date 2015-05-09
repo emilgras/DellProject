@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Entities.Budget;
@@ -13,16 +8,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- *
- * @author Frederik
+ * * @author Frederik **
  */
 public class BudgetMapper {
 
-    DBConnector db = new DBConnector();
+    protected BudgetMapper() {
+    }
 
-    public ArrayList<Budget> getAllPrices() {
+    protected ArrayList<Budget> getAllPrices() {
         ArrayList<Budget> list = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
 
             String sql = "select kno, navn, pris from partner join kampagne on partner.pno = kampagne.pno";
             PreparedStatement statement = null;
@@ -40,9 +35,9 @@ public class BudgetMapper {
         return list;
     }
 
-    public int getStartsBelob() {
+    protected int getStartsBelob() {
         int i = 0;
-        try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "select starts_belob from budget";
             PreparedStatement statement = null;
             ResultSet rs = null;
@@ -57,9 +52,9 @@ public class BudgetMapper {
         return i;
     }
 
-    public int getNuvaerendeBelob() {
+    protected int getNuvaerendeBelob() {
         int i = 0;
-        try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "select nuvaernde_belob from budget";
             PreparedStatement statement = null;
             ResultSet rs = null;
@@ -74,9 +69,9 @@ public class BudgetMapper {
         return i;
     }
 
-    public boolean updateMoneyUsed(int i) {
+    protected boolean updateMoneyUsed(int i) {
         int j = 0;
-        try (Connection connection = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection connection = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "update budget set nuvaernde_belob = ? where starts_belob = ?";
             PreparedStatement statement = null;
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author EmilGras
  */
-public interface Facade {
+public interface FacadeIF {
 
     boolean acceptCampaign(int kno);
 

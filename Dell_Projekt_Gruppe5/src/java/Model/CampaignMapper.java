@@ -1,12 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Entities.Campaign;
@@ -23,16 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Frederik
+ * * @author Frederik **
  */
 public class CampaignMapper {
 
-    DBConnector db = new DBConnector();
+    protected CampaignMapper() {
+    }
 
-    public boolean insertCampaign(Campaign camp) {
+    protected boolean insertCampaign(Campaign camp) {
         int rowsInserted = 0;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "insert into kampagne values (?,?,?,?,?,?,?,?)";
             String primary = "select kno_increment.nextval from dual";
             PreparedStatement statement = null;
@@ -63,9 +54,9 @@ public class CampaignMapper {
         return (rowsInserted == 1);
     }
 
-    public boolean acceptCampaign(int kno) {
+    protected boolean acceptCampaign(int kno) {
         boolean status = true;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString2 = "update kampagne set oprettelse_dato = ? where kno = ?";
 
             DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
@@ -85,16 +76,16 @@ public class CampaignMapper {
         return status;
     }
 
-    public boolean updateCampaign(int kno) {
+    protected boolean updateCampaign(int kno) {
         int rowsUpdated = 0;
         String status = getCampaignStatus(kno);
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "update kampagne set status = ? where kno = ?";
 
             PreparedStatement statement = null;
             statement = con.prepareStatement(sqlString);
             status = status.toLowerCase();
-            
+
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -146,15 +137,15 @@ public class CampaignMapper {
         return !status.equals(getCampaignStatus(kno));
     }
 
-    public boolean rollBackCampaign(int kno) {
+    protected boolean rollBackCampaign(int kno) {
         int rowsUpdated = 0;
         String status = getCampaignStatus(kno);
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "update kampagne set status = ? where kno = ?";
             PreparedStatement statement = null;
             statement = con.prepareStatement(sqlString);
             status = status.toLowerCase();
-            
+
             switch (status) {
                 case "pending":
                     statement.setInt(2, kno);
@@ -206,8 +197,8 @@ public class CampaignMapper {
 
     }
 
-    public String getCampaignStatus(int kno) {
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+    protected String getCampaignStatus(int kno) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select status from kampagne where kno = ?";
             PreparedStatement statement = null;
 
@@ -228,8 +219,8 @@ public class CampaignMapper {
         return "Something Went Wrong";
     }
 
-    public int getPris(int kno) {
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+    protected int getPris(int kno) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select pris from kampagne where kno = ?";
             PreparedStatement statement = null;
 
@@ -250,9 +241,9 @@ public class CampaignMapper {
         return 0;
     }
 
-    public ArrayList<Campaign> getAllPendingCampaigns() {
+    protected ArrayList<Campaign> getAllPendingCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO";
             PreparedStatement statement = null;
 
@@ -275,9 +266,9 @@ public class CampaignMapper {
     /**
      * * Returnerer alle kampagner sorteret med den nyest oprettet først **
      */
-    public ArrayList<Campaign> getAllNewestCampaigns() {
+    protected ArrayList<Campaign> getAllNewestCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO order by oprettelse_dato desc";
             PreparedStatement statement = null;
             int count = 0;
@@ -299,9 +290,9 @@ public class CampaignMapper {
         return list;
     }
 
-    public ArrayList<Campaign> getAllPartnerAcceptedCampaigns() {
+    protected ArrayList<Campaign> getAllPartnerAcceptedCampaigns() {
         ArrayList<Campaign> list = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne where kampagne.PNO = PARTNER.PNO AND cvr = ?";
             PreparedStatement statement = null;
             int count = 0;
@@ -325,9 +316,9 @@ public class CampaignMapper {
 
     }
 
-    public ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
+    protected ArrayList<Campaign> getAllOwnPartnerCampaigns(int pno) {
         ArrayList<Campaign> list = new ArrayList<>();
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sqlString = "select kno,beskrivelse,status,oprettelse_dato,start_dato,slut_dato,pris,kampagne.pno,navn,cvr from kampagne join partner on kampagne.PNO = PARTNER.PNO where kampagne.PNO = ?";
             PreparedStatement statement = null;
 
@@ -345,10 +336,10 @@ public class CampaignMapper {
         }
         return list;
     }
-    
-    public boolean deleteCampaign(int kno){
+
+    protected boolean deleteCampaign(int kno) {
         int i = 0;
-        try (Connection con = DriverManager.getConnection(db.getURL(), db.getId(), db.getPw())) {
+        try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)) {
             String sql = "delete from kampagne where kno = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, kno);

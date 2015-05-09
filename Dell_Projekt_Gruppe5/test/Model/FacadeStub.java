@@ -5,7 +5,7 @@
  */
 package Model;
 
-import Interfaces.Facade;
+import Interfaces.FacadeIF;
 import Entities.Budget;
 import Entities.Campaign;
 import Entities.CustomFile;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author EmilGras
  */
-public class FacadeStub implements Facade {
+public class FacadeStub implements FacadeIF {
     
 
     @Override
