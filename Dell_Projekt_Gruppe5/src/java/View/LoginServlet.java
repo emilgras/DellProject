@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
                      * ******** Check DB for user excistence *********
                      */
                     String userCheck = control.getLogin(username, password);
-                    System.out.println("CHECK: " + userCheck);
+                    
                     switch (userCheck) {
                         
                         case "admin":

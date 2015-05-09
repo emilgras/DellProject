@@ -76,7 +76,7 @@ public class CampaignMapper {
 
         } catch (SQLException ex) {
             status = false;
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return status;
     }
@@ -219,7 +219,7 @@ public class CampaignMapper {
             return status;
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return "Something Went Wrong";
     }
@@ -241,7 +241,7 @@ public class CampaignMapper {
             return i;
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return 0;
     }

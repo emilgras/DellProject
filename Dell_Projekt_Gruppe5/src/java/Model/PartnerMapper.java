@@ -65,7 +65,7 @@ public class PartnerMapper {
             insertStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
             success = false;
         }
 
@@ -87,7 +87,7 @@ public class PartnerMapper {
             return true;
 
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return true;
     }
@@ -114,7 +114,7 @@ public class PartnerMapper {
             }
 
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
 
         return pArray;
@@ -143,7 +143,7 @@ public class PartnerMapper {
             //statement.close();
 
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
 
         return pArray;
@@ -162,7 +162,7 @@ public class PartnerMapper {
                 pno = Integer.parseInt(rs.getString(1));
             }
         } catch (SQLException | NumberFormatException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return pno;
     }

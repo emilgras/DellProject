@@ -73,7 +73,6 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard_admin.jsp").forward(request, response);
                 break;
             case "declinecampaign": 
-                System.out.println("TESTTEST");
                 tableRowSelected = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("errorMessage", control.deleteCampaign(tableRowSelected - 1));
                 session.setAttribute("pendingCampaigns", control.getAllPendingCampaigns());

@@ -38,7 +38,7 @@ public class BudgetMapper {
             }
 
         } catch (Exception e) {
-            System.out.println("Fejl i getAllPrices()");
+            e.printStackTrace();
         }
         return list;
     }
@@ -56,7 +56,7 @@ public class BudgetMapper {
             rs.next();
             i = rs.getInt(1);
         } catch (Exception e) {
-            System.out.println("Fejl i getStartsBelob");
+            e.printStackTrace();
         }
         return i;
     }
@@ -74,7 +74,7 @@ public class BudgetMapper {
             rs.next();
             i = rs.getInt(1);
         } catch (Exception e) {
-            System.out.println("Fejl i getNuavaerendeBelob()");
+            e.printStackTrace();
         }
         return i;
     }
@@ -91,7 +91,7 @@ public class BudgetMapper {
             j = statement.executeUpdate();
 
         } catch (Exception e) {
-            System.out.println("Fejl i updateMoneyUsed()");
+            e.printStackTrace();
         }
         return j == 1;
     }
