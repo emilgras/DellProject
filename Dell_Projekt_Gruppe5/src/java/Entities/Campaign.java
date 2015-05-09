@@ -1,5 +1,4 @@
 package Entities;
-
 /**
  *
  * @author Frederik

@@ -283,15 +283,13 @@ public class Controller implements LoginIF, PartnerIF, AdminIF {
     /**
      * ************ New Quarter *************
      */
+
     @Override
     public boolean newQuarter(int i) {
-        boolean status = false;
-        if (facade.newQuarterBudget(i)) {
-            facade.newQuarterCampaign();
-            facade.newQuarterPoe();
-            status = true;
-        }
-        return status;
+        facade.newQuarterCampaign();
+        facade.newQuarterPoe();
+        return facade.newQuarterBudget(i);
+
     }
 
 }

@@ -134,6 +134,7 @@ public class PoeMapper {
             /**
              * * Get PoeNo **
              */
+
             statement = con.prepareStatement(sql1);
             statement.setInt(1, kno);
             rs = statement.executeQuery();
@@ -163,9 +164,10 @@ public class PoeMapper {
 
         return success;
     }
-    
+   
     protected void newQuarterPoe(){
         try (Connection con = DriverManager.getConnection(DBDetail.URL, DBDetail.ID, DBDetail.PW)){
+
             String sql1 = "drop table filer cascade constraints";
             String sql2 = "drop table poe cascade constraints";
             String sql3 = "Create table poe(poeno integer primary key, kno integer, constraints poe_fk foreign key(kno) references kampagne(kno))";
