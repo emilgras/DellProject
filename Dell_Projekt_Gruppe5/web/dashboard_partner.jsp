@@ -2,6 +2,7 @@
     Document   : dashboard_partner
     Created on : 06-04-2015, 19:58:50
     Author     : EmilGras
+    Emil & Anders har arbejdet på denne jsp
 --%>
 <%@page import="Model.DBFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

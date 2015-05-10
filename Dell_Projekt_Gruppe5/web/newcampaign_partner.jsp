@@ -2,6 +2,7 @@
     Document   : campaigns_partner
     Created on : 06-04-2015, 20:00:13
     Author     : EmilGras
+Emil & Anders har arbejdet på denne JSP
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

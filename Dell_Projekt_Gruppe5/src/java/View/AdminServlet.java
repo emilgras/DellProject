@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * * author Ander, Emil, Fredrik **
+ * * author Anders, Emil, Fredrik **
  */
 
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})

@@ -2,6 +2,7 @@
     Document   : partners
     Created on : 04-04-2015, 16:33:40
     Author     : EmilGras
+Anders har arbejdet på denne JSP
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

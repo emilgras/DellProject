@@ -2,10 +2,11 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * Anders og Emil har arbejdet med dette Script
  */
 $(document).ready(function () {
     // Denne metode giver hver række et unikt id startende med 1
-    //alert('Er der hul igennem?');
+    
 
 
     $('.tablerow').each(function (i) {

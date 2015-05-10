@@ -8,7 +8,7 @@ import Entities.Campaign;
 import Entities.Poe;
 import java.util.ArrayList;
 
-/*** @author Ander, Emil, Frederik ***/
+/*** @author Anders, Emil, Frederik ***/
 
 public class DBFacade implements FacadeIF {
 

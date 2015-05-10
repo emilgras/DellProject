@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * * @author Ander, Emil, Fredrik **
+ * * @author Anders, Emil, Fredrik **
  */
 public class ControllerTest {
 
